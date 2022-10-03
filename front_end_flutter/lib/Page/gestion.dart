@@ -30,17 +30,17 @@ class _GestionPage extends State<GestionPage> {
      BottomNavigationBarItem(
       icon: Icon(Icons.query_stats_sharp),
       label: 'Statistique',
-      backgroundColor: background,
+      backgroundColor: blueclaire,
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.home),
         label: 'Home',
-        backgroundColor: background,
+        backgroundColor: blueclaire,
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.people),
         label: 'Profile',
-        backgroundColor: background,
+        backgroundColor: blueclaire,
       ),
     ];
   }
@@ -74,11 +74,11 @@ class _GestionPage extends State<GestionPage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,
-        backgroundColor: background,
+        backgroundColor: blueclaire,
         type: BottomNavigationBarType.fixed,
         iconSize: MediaQuery.of(context).size.height * 0.03,
-        selectedItemColor: iconSelectNav,
-        unselectedItemColor: iconUnselectNav,
+        selectedItemColor: grisfoncer,
+        unselectedItemColor: soustitregris,
         selectedFontSize: MediaQuery.of(context).size.height * 0.0175,
         unselectedFontSize: MediaQuery.of(context).size.height * 0.016,
         selectedLabelStyle: const TextStyle(
