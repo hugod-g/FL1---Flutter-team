@@ -21,6 +21,7 @@ class _LoginPage extends State<LoginPage> {
   void _onConnectPress() async {
     setState(() {
       isLoading = true;
+      error = null;
     });
 
     try {

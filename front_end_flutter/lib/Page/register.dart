@@ -17,6 +17,7 @@ class _RegisterPage extends State<RegisterPage> {
   String firstname = "";
   String lastname = "";
   bool isLoading = false;
+  String? error;
 
   void _onBackPress() {
     Navigator.pop(context);
@@ -46,14 +47,21 @@ class _RegisterPage extends State<RegisterPage> {
     });
   }
 
-  void _registerPress() {
+  void _registerPress() async {
     setState(() {
       isLoading = true;
+      error = null;
     });
 
     try {
-      registerCall(email, password, firstname, lastname);
-    } catch (error) {
+      final int response =
+          await registerCall(email, password, firstname, lastname);
+
+      if (response == 200) {}
+    } catch (e) {
+      setState(() {
+        error = e.toString();
+      });
       print(error.toString());
     } finally {
       setState(() {
@@ -163,6 +171,18 @@ class _RegisterPage extends State<RegisterPage> {
                       placeholder: "Mot de passe",
                       onChangeText: _onPasswordChange,
                       secure: true,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, bottom: 16),
+                    child: Text(
+                      error ?? "",
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Colors.red,
+                        fontSize: 16,
+                        fontFamily: "regular",
+                      ),
                     ),
                   ),
                 ],

@@ -27,11 +27,14 @@ Future<int> loginCall(String email, String password) async {
   return response.statusCode;
 }
 
-void registerCall(
-    String email, String password, String firstname, String lastname) async {
-  print("$email $password $firstname $lastname");
+Future<int> registerCall(
+  String email,
+  String password,
+  String firstname,
+  String lastname,
+) async {
   final http.Response response = await http.post(
-    Uri.parse(loginEndpoint),
+    Uri.parse(registerEndpoint),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -39,16 +42,18 @@ void registerCall(
       'username': email,
       'password': password,
       'firstname': firstname,
-      'lastname': lastname
+      'lastname': lastname,
     }),
   );
 
-  print(jsonDecode(response.body));
+  if (response.statusCode == 200) {
+    final payload = jsonDecode(response.body);
 
-  // print(response.);
+    // String token = payload["token"];
+    // String refreshToken = payload["refresh"];
+  } else {
+    throw "Une erreur est survenu lors de votre inscription. Merci de réessayer";
+  }
 
-  // if (response.statusCode == 200) {
-  // } else {
-  //   throw Exception("Email ou mot de passe incorrect");
-  // }
+  return response.statusCode;
 }
