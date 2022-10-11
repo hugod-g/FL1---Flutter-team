@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_end_flutter/Components/button.dart';
 import 'package:front_end_flutter/Components/text_input.dart';
+import 'package:front_end_flutter/Services/api/auth.dart';
 import '../Style/colors.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -15,6 +16,7 @@ class _RegisterPage extends State<RegisterPage> {
   String password = "";
   String firstname = "";
   String lastname = "";
+  bool isLoading = false;
 
   void _onBackPress() {
     Navigator.pop(context);
@@ -44,7 +46,21 @@ class _RegisterPage extends State<RegisterPage> {
     });
   }
 
-  void _registerPress() {}
+  void _registerPress() {
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      registerCall(email, password, firstname, lastname);
+    } catch (error) {
+      print(error.toString());
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

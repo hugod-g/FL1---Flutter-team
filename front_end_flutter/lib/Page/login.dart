@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:front_end_flutter/Components/button.dart';
 import 'package:front_end_flutter/Components/text_input.dart';
 import 'package:front_end_flutter/Page/register.dart';
+import 'package:front_end_flutter/Services/api/auth.dart';
 import '../Style/colors.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,9 +15,34 @@ class LoginPage extends StatefulWidget {
 class _LoginPage extends State<LoginPage> {
   String email = "";
   String password = "";
+  String? error;
+  bool isLoading = false;
 
-  void _onConnectPress() {
-    print("ON connect press");
+  void _onConnectPress() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      final int responseStatus = await loginCall(email, password);
+
+      if (responseStatus == 200) {
+        await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => const RegisterPage(),
+          ),
+        );
+      }
+    } catch (e) {
+      setState(() {
+        error = e.toString();
+      });
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   void _onEmailChange(String newValue) {
@@ -110,6 +136,17 @@ class _LoginPage extends State<LoginPage> {
                       placeholder: "Mot de passe",
                       secure: true,
                       onChangeText: _onPasswordChange,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, bottom: 16),
+                    child: Text(
+                      error ?? "",
+                      style: const TextStyle(
+                        color: Colors.red,
+                        fontSize: 16,
+                        fontFamily: "regular",
+                      ),
                     ),
                   ),
                 ],
