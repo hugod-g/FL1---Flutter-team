@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_end_flutter/Components/button.dart';
 import 'package:front_end_flutter/Components/text_input.dart';
+import 'package:front_end_flutter/Page/gestion.dart';
 import 'package:front_end_flutter/Services/api/auth.dart';
 import '../Style/colors.dart';
 
@@ -57,12 +58,18 @@ class _RegisterPage extends State<RegisterPage> {
       final int response =
           await registerCall(email, password, firstname, lastname);
 
-      if (response == 200) {}
+      if (response == 200) {
+        await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => const GestionPage(),
+          ),
+        );
+      }
     } catch (e) {
       setState(() {
         error = e.toString();
       });
-      print(error.toString());
     } finally {
       setState(() {
         isLoading = false;
@@ -192,6 +199,7 @@ class _RegisterPage extends State<RegisterPage> {
                 child: Button(
                   text: "S'inscrire",
                   onPress: _registerPress,
+                  isLoading: isLoading,
                 ),
               )
             ],

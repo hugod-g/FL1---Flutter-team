@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_end_flutter/Components/button.dart';
 import 'package:front_end_flutter/Components/text_input.dart';
+import 'package:front_end_flutter/Page/gestion.dart';
 import 'package:front_end_flutter/Page/register.dart';
 import 'package:front_end_flutter/Services/api/auth.dart';
 import '../Style/colors.dart';
@@ -31,7 +32,7 @@ class _LoginPage extends State<LoginPage> {
         await Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (BuildContext context) => const RegisterPage(),
+            builder: (BuildContext context) => const GestionPage(),
           ),
         );
       }
@@ -161,6 +162,7 @@ class _LoginPage extends State<LoginPage> {
                       child: Button(
                         text: "Se Connecter",
                         onPress: _onConnectPress,
+                        isLoading: isLoading,
                       ),
                     ),
                     Padding(
