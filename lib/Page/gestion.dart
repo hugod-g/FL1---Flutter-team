@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:front_end_flutter/Page/home.dart';
-import 'package:front_end_flutter/Page/profile.dart';
-import 'package:front_end_flutter/Page/statistique.dart';
+import 'package:mon_petit_entretien/Page/home.dart';
+import 'package:mon_petit_entretien/Page/profile.dart';
+import 'package:mon_petit_entretien/Page/statistique.dart';
 import '../Style/colors.dart';
 
 class GestionPage extends StatefulWidget {
-
   const GestionPage({Key? key}) : super(key: key);
 
   @override
   _GestionPage createState() => _GestionPage();
 }
-class _GestionPage extends State<GestionPage> {
 
+class _GestionPage extends State<GestionPage> {
   int index = 1;
 
   @override
@@ -27,10 +26,10 @@ class _GestionPage extends State<GestionPage> {
 
   List<BottomNavigationBarItem> buildBottomNavBarItems() {
     return const [
-     BottomNavigationBarItem(
-      icon: Icon(Icons.query_stats_sharp),
-      label: 'Statistique',
-      backgroundColor: blueclaire,
+      BottomNavigationBarItem(
+        icon: Icon(Icons.query_stats_sharp),
+        label: 'Statistique',
+        backgroundColor: blueclaire,
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.home),
