@@ -21,14 +21,6 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0.0'
 }
 
-def getMyVersionCode = { ->
-    return project.hasProperty('versionCode') ? versionCode.toInteger() : -1
-}
-// get version name from the specified property argument `-PversionName` during the build call
-def getMyVersionName = { ->
-    return project.hasProperty('versionName') ? versionName : "1.0.0"
-}
-
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
@@ -57,8 +49,8 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
-        versionCode getMyVersionCode()
-        versionName getMyVersionName()
+        versionCode flutterVersionCode.toInteger() + 1
+        versionName "1.0.3"
     }
 
     signingConfigs {
