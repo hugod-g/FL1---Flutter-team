@@ -2,6 +2,7 @@ name: Flutter Workflow
 
 on: pull_request
 jobs:
+  name: Build and Tests
   build:
     name: Build and Tests
     runs-on: macos-latest
