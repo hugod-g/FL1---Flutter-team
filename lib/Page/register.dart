@@ -80,10 +80,10 @@ class _RegisterPage extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: blueclaire,
+      color: lightBlue,
       child: SafeArea(
         child: Container(
-          color: blueclaire,
+          color: lightBlue,
           padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -104,7 +104,7 @@ class _RegisterPage extends State<RegisterPage> {
                       ),
                       const Text(
                         "Inscription",
-                        style: TextStyle(color: grisfoncer, fontSize: 24),
+                        style: TextStyle(color: navy, fontSize: 24),
                       ),
                       const SizedBox(
                         width: 30,
@@ -117,7 +117,7 @@ class _RegisterPage extends State<RegisterPage> {
                     child: Text(
                       "Prénom",
                       style: TextStyle(
-                        color: grisfoncer,
+                        color: navy,
                         fontSize: 16,
                         fontFamily: "regular",
                       ),
@@ -134,7 +134,7 @@ class _RegisterPage extends State<RegisterPage> {
                   const Text(
                     "Nom",
                     style: TextStyle(
-                      color: grisfoncer,
+                      color: navy,
                       fontSize: 16,
                       fontFamily: "regular",
                     ),
@@ -150,7 +150,7 @@ class _RegisterPage extends State<RegisterPage> {
                   const Text(
                     "Email",
                     style: TextStyle(
-                      color: grisfoncer,
+                      color: navy,
                       fontSize: 16,
                       fontFamily: "regular",
                     ),
@@ -166,7 +166,7 @@ class _RegisterPage extends State<RegisterPage> {
                   const Text(
                     "Mot de passe",
                     style: TextStyle(
-                      color: grisfoncer,
+                      color: navy,
                       fontSize: 16,
                       fontFamily: "regular",
                     ),

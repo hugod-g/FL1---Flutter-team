@@ -71,10 +71,10 @@ class _LoginPage extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: blueclaire,
+      color: lightBlue,
       child: SafeArea(
         child: Container(
-          color: blueclaire,
+          color: lightBlue,
           padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,7 +88,7 @@ class _LoginPage extends State<LoginPage> {
                     Text(
                       "Mon Petit",
                       style: TextStyle(
-                        color: grisfoncer,
+                        color: navy,
                         fontSize: 30,
                         fontFamily: "regular",
                       ),
@@ -96,7 +96,7 @@ class _LoginPage extends State<LoginPage> {
                     Text(
                       "Garage",
                       style: TextStyle(
-                        color: grisfoncer,
+                        color: navy,
                         fontSize: 50,
                         fontFamily: "bold",
                       ),
@@ -110,7 +110,7 @@ class _LoginPage extends State<LoginPage> {
                   const Text(
                     "Email",
                     style: TextStyle(
-                      color: grisfoncer,
+                      color: navy,
                       fontSize: 16,
                       fontFamily: "regular",
                     ),
@@ -126,7 +126,7 @@ class _LoginPage extends State<LoginPage> {
                   const Text(
                     "Mot de passe",
                     style: TextStyle(
-                      color: grisfoncer,
+                      color: navy,
                       fontSize: 16,
                       fontFamily: "regulat",
                     ),

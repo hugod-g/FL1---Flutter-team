@@ -36,9 +36,9 @@ class ButtonState extends State<Button> {
         height: 54,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(16)),
-          color: widget.secondary == true ? white : grisfoncer,
+          color: widget.secondary == true ? white : navy,
           boxShadow: const <BoxShadow>[
-            BoxShadow(blurRadius: 16, color: grisclairetextfield)
+            BoxShadow(blurRadius: 16, color: lightGray)
           ],
         ),
         child: TextButton(
@@ -48,13 +48,13 @@ class ButtonState extends State<Button> {
                   width: 20,
                   height: 20,
                   child: CircularProgressIndicator(
-                    color: widget.secondary == true ? grisfoncer : white,
+                    color: widget.secondary == true ? navy : white,
                   ),
                 )
               : Text(
                   widget.text,
                   style: TextStyle(
-                    color: widget.secondary != null ? grisfoncer : white,
+                    color: widget.secondary != null ? navy : white,
                     fontFamily: "bold",
                     fontSize: 16,
                   ),

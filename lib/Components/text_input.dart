@@ -26,9 +26,7 @@ class TextInputState extends State<TextInput> {
       height: 54,
       width: double.infinity,
       decoration: const BoxDecoration(
-        boxShadow: <BoxShadow>[
-          BoxShadow(blurRadius: 16, color: grisclairetextfield)
-        ],
+        boxShadow: <BoxShadow>[BoxShadow(blurRadius: 16, color: lightGray)],
         borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
       child: Container(
