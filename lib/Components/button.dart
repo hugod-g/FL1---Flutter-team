@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Style/colors.dart';
+import 'package:mon_petit_entretien/Style/colors.dart';
 
 class Button extends StatefulWidget {
   const Button({

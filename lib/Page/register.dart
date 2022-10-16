@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:front_end_flutter/Components/button.dart';
-import 'package:front_end_flutter/Components/text_input.dart';
-import 'package:front_end_flutter/Page/gestion.dart';
-import 'package:front_end_flutter/Services/api/auth.dart';
+import 'package:mon_petit_entretien/Components/button.dart';
+import 'package:mon_petit_entretien/Components/text_input.dart';
+import 'package:mon_petit_entretien/Page/gestion.dart';
+import 'package:mon_petit_entretien/Services/api/auth.dart';
 import '../Style/colors.dart';
 
 class RegisterPage extends StatefulWidget {

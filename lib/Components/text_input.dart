@@ -1,7 +1,5 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import '../Style/colors.dart';
+import 'package:mon_petit_entretien/Style/colors.dart';
 
 class TextInput extends StatefulWidget {
   const TextInput({

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:front_end_flutter/Config/endpoint.dart';
+import 'package:mon_petit_entretien/Config/endpoint.dart';
 import 'package:http/http.dart' as http;
 
 Future<int> loginCall(String email, String password) async {
