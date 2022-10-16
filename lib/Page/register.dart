@@ -196,7 +196,7 @@ class _RegisterPage extends State<RegisterPage> {
                       error ?? "",
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                        color: Colors.red,
+                        color: errorColor,
                         fontSize: 16,
                         fontFamily: appFont,
                         fontWeight: fontLight,

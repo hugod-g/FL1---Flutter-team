@@ -6,3 +6,4 @@ const Color lightGray = Color(0xFFBFBFBF);
 const Color lightBlue = Color(0xFFE2F5F5);
 const Color black = Color(0xFF000000);
 const Color white = Color(0xFFFFFFFF);
+const Color errorColor = Colors.red;

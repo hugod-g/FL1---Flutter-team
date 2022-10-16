@@ -5,6 +5,7 @@ import 'package:mon_petit_entretien/Page/gestion.dart';
 import 'package:mon_petit_entretien/Page/register.dart';
 import 'package:mon_petit_entretien/Services/api/auth.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Style/colors.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,10 +16,30 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage> {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
   String email = "";
   String password = "";
   String? error;
   bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _prefs.then((SharedPreferences prefs) {
+      final String token = prefs.getString('token') ?? '';
+
+      if (token.isNotEmpty) {
+        Navigator.push(
+          context,
+          // ignore: always_specify_types
+          MaterialPageRoute(
+            builder: (BuildContext context) => const GestionPage(),
+          ),
+        );
+      }
+    });
+  }
 
   void _onConnectPress() async {
     setState(() {
@@ -30,8 +51,10 @@ class _LoginPage extends State<LoginPage> {
       final int responseStatus = await loginCall(email, password);
 
       if (responseStatus == 200) {
+        // ignore: use_build_context_synchronously
         await Navigator.push(
           context,
+          // ignore: always_specify_types
           MaterialPageRoute(
             builder: (BuildContext context) => const GestionPage(),
           ),
@@ -150,9 +173,10 @@ class _LoginPage extends State<LoginPage> {
                     child: Text(
                       error ?? "",
                       style: const TextStyle(
-                        color: Colors.red,
+                        color: errorColor,
                         fontSize: 16,
-                        fontFamily: "regular",
+                        fontFamily: appFont,
+                        fontWeight: fontLight,
                       ),
                     ),
                   ),

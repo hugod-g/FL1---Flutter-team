@@ -2,8 +2,13 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:mon_petit_entretien/Config/endpoint.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
 Future<int> loginCall(String email, String password) async {
+  final SharedPreferences prefs = await _prefs;
+
   final http.Response response = await http.post(
     Uri.parse(loginEndpoint),
     headers: <String, String>{
@@ -18,8 +23,8 @@ Future<int> loginCall(String email, String password) async {
   if (response.statusCode == 200) {
     final payload = jsonDecode(response.body);
 
-    // String token = payload["token"];
-    // String refreshToken = payload["refresh"];
+    final String token = payload["token"];
+    await prefs.setString('token', token);
   } else {
     throw "Email ou mot de passe incorrect";
   }
