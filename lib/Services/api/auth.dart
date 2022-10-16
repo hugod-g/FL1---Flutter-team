@@ -21,6 +21,7 @@ Future<int> loginCall(String email, String password) async {
   );
 
   if (response.statusCode == 200) {
+    // ignore: always_specify_types
     final payload = jsonDecode(response.body);
 
     final String token = payload["token"];
@@ -52,10 +53,7 @@ Future<int> registerCall(
   );
 
   if (response.statusCode == 200) {
-    final payload = jsonDecode(response.body);
-
-    // String token = payload["token"];
-    // String refreshToken = payload["refresh"];
+    await loginCall(email, password);
   } else {
     throw "Une erreur est survenu lors de votre inscription. Merci de réessayer";
   }
