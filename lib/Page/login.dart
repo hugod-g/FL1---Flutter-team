@@ -4,13 +4,14 @@ import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Page/gestion.dart';
 import 'package:mon_petit_entretien/Page/register.dart';
 import 'package:mon_petit_entretien/Services/api/auth.dart';
+import 'package:mon_petit_entretien/Style/fonts.dart';
 import '../Style/colors.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPage createState() => _LoginPage();
+  State<LoginPage> createState() => _LoginPage();
 }
 
 class _LoginPage extends State<LoginPage> {
@@ -90,7 +91,8 @@ class _LoginPage extends State<LoginPage> {
                       style: TextStyle(
                         color: navy,
                         fontSize: 30,
-                        fontFamily: "regular",
+                        fontFamily: appFont,
+                        fontWeight: fontLight,
                       ),
                     ),
                     Text(
@@ -98,7 +100,8 @@ class _LoginPage extends State<LoginPage> {
                       style: TextStyle(
                         color: navy,
                         fontSize: 50,
-                        fontFamily: "bold",
+                        fontFamily: appFont,
+                        fontWeight: fontMedium,
                       ),
                     ),
                   ],
@@ -112,7 +115,8 @@ class _LoginPage extends State<LoginPage> {
                     style: TextStyle(
                       color: navy,
                       fontSize: 16,
-                      fontFamily: "regular",
+                      fontFamily: appFont,
+                      fontWeight: fontLight,
                     ),
                   ),
                   Padding(
@@ -128,7 +132,8 @@ class _LoginPage extends State<LoginPage> {
                     style: TextStyle(
                       color: navy,
                       fontSize: 16,
-                      fontFamily: "regulat",
+                      fontFamily: appFont,
+                      fontWeight: fontLight,
                     ),
                   ),
                   Padding(

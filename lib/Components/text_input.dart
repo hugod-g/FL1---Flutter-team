@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
+import 'package:mon_petit_entretien/Style/fonts.dart';
 
 class TextInput extends StatefulWidget {
   const TextInput({
@@ -42,6 +43,10 @@ class TextInputState extends State<TextInput> {
               border: InputBorder.none,
               fillColor: black,
               hintText: widget.placeholder,
+            ),
+            style: const TextStyle(
+              fontFamily: appFont,
+              fontWeight: fontRegular,
             ),
             onChanged: widget.onChangeText,
           ),

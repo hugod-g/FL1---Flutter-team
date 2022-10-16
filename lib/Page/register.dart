@@ -3,13 +3,14 @@ import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Page/gestion.dart';
 import 'package:mon_petit_entretien/Services/api/auth.dart';
+import 'package:mon_petit_entretien/Style/fonts.dart';
 import '../Style/colors.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  _RegisterPage createState() => _RegisterPage();
+  State<RegisterPage> createState() => _RegisterPage();
 }
 
 class _RegisterPage extends State<RegisterPage> {
@@ -104,7 +105,12 @@ class _RegisterPage extends State<RegisterPage> {
                       ),
                       const Text(
                         "Inscription",
-                        style: TextStyle(color: navy, fontSize: 24),
+                        style: TextStyle(
+                          color: navy,
+                          fontSize: 24,
+                          fontFamily: appFont,
+                          fontWeight: fontMedium,
+                        ),
                       ),
                       const SizedBox(
                         width: 30,
@@ -119,7 +125,8 @@ class _RegisterPage extends State<RegisterPage> {
                       style: TextStyle(
                         color: navy,
                         fontSize: 16,
-                        fontFamily: "regular",
+                        fontFamily: appFont,
+                        fontWeight: fontLight,
                       ),
                     ),
                   ),
@@ -136,7 +143,8 @@ class _RegisterPage extends State<RegisterPage> {
                     style: TextStyle(
                       color: navy,
                       fontSize: 16,
-                      fontFamily: "regular",
+                      fontFamily: appFont,
+                      fontWeight: fontLight,
                     ),
                   ),
                   Padding(
@@ -152,7 +160,8 @@ class _RegisterPage extends State<RegisterPage> {
                     style: TextStyle(
                       color: navy,
                       fontSize: 16,
-                      fontFamily: "regular",
+                      fontFamily: appFont,
+                      fontWeight: fontLight,
                     ),
                   ),
                   Padding(
@@ -168,7 +177,8 @@ class _RegisterPage extends State<RegisterPage> {
                     style: TextStyle(
                       color: navy,
                       fontSize: 16,
-                      fontFamily: "regular",
+                      fontFamily: appFont,
+                      fontWeight: fontLight,
                     ),
                   ),
                   Padding(
@@ -188,7 +198,8 @@ class _RegisterPage extends State<RegisterPage> {
                       style: const TextStyle(
                         color: Colors.red,
                         fontSize: 16,
-                        fontFamily: "regular",
+                        fontFamily: appFont,
+                        fontWeight: fontLight,
                       ),
                     ),
                   ),

@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Page/home.dart';
 import 'package:mon_petit_entretien/Page/profile.dart';
 import 'package:mon_petit_entretien/Page/statistique.dart';
+import 'package:mon_petit_entretien/Style/fonts.dart';
 import '../Style/colors.dart';
 
 class GestionPage extends StatefulWidget {
   const GestionPage({Key? key}) : super(key: key);
 
   @override
-  _GestionPage createState() => _GestionPage();
+  State<GestionPage> createState() => _GestionPage();
 }
 
 class _GestionPage extends State<GestionPage> {
@@ -75,14 +76,14 @@ class _GestionPage extends State<GestionPage> {
         elevation: 0,
         backgroundColor: lightBlue,
         type: BottomNavigationBarType.fixed,
-        iconSize: MediaQuery.of(context).size.height * 0.03,
+        iconSize: 32,
         selectedItemColor: navy,
         unselectedItemColor: gray,
-        selectedFontSize: MediaQuery.of(context).size.height * 0.0175,
-        unselectedFontSize: MediaQuery.of(context).size.height * 0.016,
+        selectedFontSize: 12,
+        unselectedFontSize: 10,
         selectedLabelStyle: const TextStyle(
-          fontFamily: "Arial",
-          fontWeight: FontWeight.bold,
+          fontFamily: appFont,
+          fontWeight: fontRegular,
         ),
         currentIndex: index,
         onTap: (index) {

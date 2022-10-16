@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
+import 'package:mon_petit_entretien/Style/fonts.dart';
 
 class Button extends StatefulWidget {
   const Button({
@@ -55,7 +56,8 @@ class ButtonState extends State<Button> {
                   widget.text,
                   style: TextStyle(
                     color: widget.secondary != null ? navy : white,
-                    fontFamily: "bold",
+                    fontFamily: appFont,
+                    fontWeight: fontMedium,
                     fontSize: 16,
                   ),
                 ),
