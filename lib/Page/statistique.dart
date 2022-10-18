@@ -5,11 +5,10 @@ class Statistique extends StatefulWidget {
   const Statistique({Key? key}) : super(key: key);
 
   @override
-  _Statistique createState() => _Statistique();
+  State<Statistique> createState() => _Statistique();
 }
 
 class _Statistique extends State<Statistique> {
-  
   @override
   Widget build(BuildContext context) {
     return SafeArea(

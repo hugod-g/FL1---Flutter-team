@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-const grisfoncer = Color(0xFF272642);
-const soustitregris = Color(0xFF919191);
-const grisclairetextfield = Color(0xFFBFBFBF);
-const blueclaire = Color(0xFFE2F5F5);
-const black = Color(0xFF000000);
-const white = Color(0xFFFFFFFF);
+const Color navy = Color(0xFF272642);
+const Color gray = Color(0xFF919191);
+const Color lightGray = Color(0xFFBFBFBF);
+const Color lightBlue = Color(0xFFE2F5F5);
+const Color black = Color(0xFF000000);
+const Color white = Color(0xFFFFFFFF);
+const Color errorColor = Colors.red;
