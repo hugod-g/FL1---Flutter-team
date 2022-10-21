@@ -52,13 +52,7 @@ class _LoginPage extends State<LoginPage> {
 
       if (responseStatus == 200) {
         // ignore: use_build_context_synchronously
-        await Navigator.push(
-          context,
-          // ignore: always_specify_types
-          MaterialPageRoute(
-            builder: (BuildContext context) => const GestionPage(),
-          ),
-        );
+        await Navigator.popAndPushNamed(context,'/home');
       }
     } catch (e) {
       setState(() {

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
-class TextInput extends StatefulWidget {
-  const TextInput({
+class PhotoInput extends StatefulWidget {
+  const PhotoInput({
     super.key,
     required this.value,
     required this.placeholder,
@@ -17,15 +17,15 @@ class TextInput extends StatefulWidget {
   final void Function(String)? onChangeText;
 
   @override
-  TextInputState createState() => TextInputState();
+  PhotoInputState createState() => PhotoInputState();
 }
 
-class TextInputState extends State<TextInput> {
+class PhotoInputState extends State<PhotoInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 54,
-      width: double.infinity,
+      width: 130,
       decoration: const BoxDecoration(
         boxShadow: <BoxShadow>[BoxShadow(blurRadius: 16, color: lightGray)],
         borderRadius: BorderRadius.all(Radius.circular(16)),
@@ -37,22 +37,21 @@ class TextInputState extends State<TextInput> {
         ),
         child: Padding(
           padding: const EdgeInsets.only(left: 16, right: 16, top: 2),
-          child: TextField(
-            obscureText: widget.secure,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              fillColor: black,
-              hintText: widget.placeholder,
-              hintStyle: const TextStyle(
-                color: lightGray,
-              )
-            ),
-            style: const TextStyle(
-              
-              fontFamily: appFont,
-              fontWeight: fontRegular,
-            ),
-            onChanged: widget.onChangeText,
+          child: Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.camera_alt),
+                onPressed: () {
+                  print("camera");
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.photo),
+                onPressed: () {
+                  print("photo");
+                },
+              ),
+            ],
           ),
         ),
       ),
