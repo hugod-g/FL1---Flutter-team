@@ -1,6 +1,11 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Style/colors.dart';
-import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:mon_petit_entretien/Class/appClass.dart';
+import 'package:mon_petit_entretien/Components/commentText.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+
+import '../Page/cameraPage.dart';
 
 class PhotoInput extends StatefulWidget {
   const PhotoInput({
@@ -23,36 +28,89 @@ class PhotoInput extends StatefulWidget {
 class PhotoInputState extends State<PhotoInput> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 54,
-      width: 130,
-      decoration: const BoxDecoration(
-        boxShadow: <BoxShadow>[BoxShadow(blurRadius: 16, color: lightGray)],
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-      ),
-      child: Container(
-        decoration: const BoxDecoration(
-          color: white,
-          borderRadius: BorderRadius.all(Radius.circular(16)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16, top: 2),
-          child: Row(
-            children: [
-              IconButton(
-                icon: const Icon(Icons.camera_alt),
-                onPressed: () {
-                  print("camera");
+    return SizedBox(
+      height: 100,
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16, right: 16),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10, top: 13),
+              child: InkWell(
+                onTap: () async {
+                  await availableCameras().then(
+                    (List<CameraDescription> value) => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => CameraPage(cameras: value),
+                      ),
+                    ),
+                  );
                 },
+                child: Ink(
+                  child: Row(
+                    children: const <Widget>[
+                      Icon(
+                        Icons.camera_alt,
+                        size: 30,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: CommonText(
+                          text: "Camera",
+                          fontSizeText: 20,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
-              IconButton(
-                icon: const Icon(Icons.photo),
-                onPressed: () {
-                  print("photo");
-                },
+            ),
+            InkWell(
+              onTap: () async {
+                String newPath = '/assets/car.jpg';
+                final XFile? file =
+                    await ImagePicker().pickImage(source: ImageSource.gallery);
+                if (file == null) {
+                  Provider.of<appData>(context, listen: false).addDataVehicle(
+                    "tmp",
+                    0,
+                    newPath,
+                    DateTime.now().toString(),
+                  );
+                } else {
+                  newPath = file.path;
+                  Provider.of<appData>(context, listen: false).addDataVehicle(
+                    "tmp",
+                    0,
+                    newPath,
+                    DateTime.now().toString(),
+                  );
+                }
+                print("galerie");
+              },
+              child: Ink(
+                child: Row(
+                  children: const <Widget>[
+                    Icon(
+                      Icons.photo,
+                      size: 30,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 10),
+                      child: CommonText(
+                        text: "Galerie",
+                        fontSizeText: 20,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -31,10 +31,11 @@ class CommonTextState extends State<CommonText> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-          top: widget.paddingTop,
-          bottom: widget.paddingBot,
-          right: widget.paddingRight,
-          left: widget.paddingLeft),
+        top: widget.paddingTop,
+        bottom: widget.paddingBot,
+        right: widget.paddingRight,
+        left: widget.paddingLeft,
+      ),
       child: Text(
         widget.text,
         style: TextStyle(

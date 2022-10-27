@@ -3,10 +3,13 @@ import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/buttonSelect.dart';
 import 'package:mon_petit_entretien/Components/commentText.dart';
 import 'package:mon_petit_entretien/Page/addVehicule.dart';
+import 'package:provider/provider.dart';
 import '../Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
 import 'package:mon_petit_entretien/Components/text_input.dart';
+
+import '../main.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -167,6 +170,12 @@ class _Home extends State<Home> {
       padding: const EdgeInsets.only(right: 20),
       child: InkWell(
         onTap: () {
+          Map data = {
+            'name': 'marie',
+            'email': 'example@example.com',
+            'age': 42
+          };
+
           Navigator.push(
             context,
             // ignore: always_specify_types
