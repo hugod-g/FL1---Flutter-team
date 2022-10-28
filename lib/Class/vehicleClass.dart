@@ -1,37 +1,48 @@
 import 'package:flutter/cupertino.dart';
+import 'package:mon_petit_entretien/Class/maintenanceClass.dart';
 
-class vehicleData extends ChangeNotifier {
-  Map data = {
-    'name': 'Lambor',
-    'kilometrage': 90250,
-    'picturePath': '/assets/car.jpg',
-    'date': '01/10/2022'
-  };
+class vehiculeModel extends ChangeNotifier {
+  String name = "";
+  int kilometrage = 0;
+  String picturePath = "";
+  String id = "";
+  String date = "";
+  List<maintenanceModel> maintenances = [];
 
-  vehicleData(this.data);
+  vehiculeModel(
+    this.name,
+    this.kilometrage,
+    this.picturePath,
+    this.date,
+    this.id,
+  );
 
   void updateName(newVar) {
-    data['name'] = newVar;
+    name = newVar;
     notifyListeners();
   }
 
   void updateKilometrage(newVar) {
-    data['kilometrage'] = newVar;
+    kilometrage = newVar;
     notifyListeners();
   }
 
   void updatePicturePath(newVar) {
-    data['picturePath'] = newVar;
+    picturePath = newVar;
     notifyListeners();
   }
 
   void updateDate(newVar) {
-    data['date'] = newVar;
+    date = newVar;
     notifyListeners();
   }
 
-  void updateAccount(input) {
-    data = input;
-    notifyListeners();
+  factory vehiculeModel.fromJson(Map<String, dynamic> data) {
+    final name = data['name'] as String;
+    final kilometrage = data['mileage'] as int;
+    final picturePath = data['image'] as String;
+    final date = data['buyDate'] as String;
+    final id = data['_id'] as String;
+    return vehiculeModel(name, kilometrage, picturePath, date, id);
   }
 }

@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<appData>(
-      create: (context) => appData(),
+    return ChangeNotifierProvider<AppData>(
+      create: (context) => AppData(),
       child: MaterialApp(
         routes: {
           '/login': (BuildContext context) => const LoginPage(),

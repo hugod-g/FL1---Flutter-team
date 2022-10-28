@@ -1,25 +1,28 @@
 import 'package:flutter/cupertino.dart';
 
-class maintenanceData extends ChangeNotifier {
-  Map data = {'name': 'Courrois', 'prix': 120, 'date': '01/10/2022'};
+class maintenanceModel extends ChangeNotifier {
+  String name = "";
+  String prix = "";
+  String center = "";
+  String kilometrage = "";
+  String date = "";
+  String id = "";
+
+  maintenanceModel(
+      this.name, this.kilometrage, this.center, this.date, this.id);
 
   void updateName(newVar) {
-    data['name'] = newVar;
+    name = newVar;
     notifyListeners();
   }
 
   void updatePrix(newVar) {
-    data['prix'] = newVar;
+    prix = newVar;
     notifyListeners();
   }
 
   void updateDate(newVar) {
-    data['date'] = newVar;
-    notifyListeners();
-  }
-
-  void updateAccount(input) {
-    data = input;
+    date = newVar;
     notifyListeners();
   }
 }

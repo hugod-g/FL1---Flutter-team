@@ -9,6 +9,7 @@ import 'package:mon_petit_entretien/Components/commentText.dart';
 import 'package:mon_petit_entretien/Components/photoInput.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Page/home.dart';
+import 'package:mon_petit_entretien/Services/api/vehicule.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -41,12 +42,6 @@ class _AddVehicule extends State<AddVehicule> {
     });
   }
 
-  void _onImageChange(String newValue) async {
-    setState(() {
-      image = newValue;
-    });
-  }
-
   void _onDateChange(String newValue) async {
     setState(() {
       date = newValue;
@@ -54,6 +49,15 @@ class _AddVehicule extends State<AddVehicule> {
   }
 
   void _onAddVehicule() async {
+    await createVehicle(
+      Provider.of<AppData>(context, listen: false).token,
+      name,
+      date,
+      kilometer,
+      File(
+        Provider.of<AppData>(context, listen: false).vehicles.last.picturePath,
+      ),
+    );
     print("addvehicule)");
     await Navigator.pushAndRemoveUntil(
       context,
@@ -66,16 +70,16 @@ class _AddVehicule extends State<AddVehicule> {
   }
 
   void isThereImage() {
-    if (Provider.of<appData>(context, listen: false).vehicles.isNotEmpty) {
-      if (Provider.of<appData>(context, listen: false)
+    if (Provider.of<AppData>(context, listen: false).vehicles.isNotEmpty) {
+      if (Provider.of<AppData>(context, listen: false)
                   .vehicles
-                  .first
-                  .data['picturePath'] !=
+                  .last
+                  .picturePath !=
               '/assets/car.jpg' ||
-          Provider.of<appData>(context, listen: false)
+          Provider.of<AppData>(context, listen: false)
                   .vehicles
-                  .first
-                  .data['picturePath'] !=
+                  .last
+                  .picturePath !=
               '') {
         setState(() {
           isThereAnImage = true;
@@ -136,7 +140,6 @@ class _AddVehicule extends State<AddVehicule> {
                               PhotoInput(
                                 value: image,
                                 placeholder: "Image",
-                                onChangeText: _onImageChange,
                               ),
                             ],
                           ),
@@ -152,10 +155,10 @@ class _AddVehicule extends State<AddVehicule> {
                           height: 200,
                           child: Image.file(
                             File(
-                              Provider.of<appData>(context, listen: false)
+                              Provider.of<AppData>(context, listen: false)
                                   .vehicles
-                                  .first
-                                  .data['picturePath'],
+                                  .last
+                                  .picturePath,
                             ),
                             fit: BoxFit.cover,
                           ),

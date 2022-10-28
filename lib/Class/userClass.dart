@@ -1,20 +1,22 @@
 import 'package:flutter/cupertino.dart';
 
-class userData extends ChangeNotifier {
-  Map data = {'name': 'Marie True', 'email': "email@gmail.com"};
+class userModel extends ChangeNotifier {
+  String lastName = "";
+  String firstName = "";
+  String userName = ""; // email
 
-  void updateName(newVar) {
-    data['name'] = newVar;
+  void updateLastName(newVar) {
+    lastName = newVar;
+    notifyListeners();
+  }
+
+  void updateFirstName(newVar) {
+    firstName = newVar;
     notifyListeners();
   }
 
   void updateEmail(newVar) {
-    data['email'] = newVar;
-    notifyListeners();
-  }
-
-  void updateAccount(input) {
-    data = input;
+    userName = newVar;
     notifyListeners();
   }
 }

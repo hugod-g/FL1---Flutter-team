@@ -57,7 +57,7 @@ class _RegisterPage extends State<RegisterPage> {
 
     try {
       final int response =
-          await registerCall(email, password, firstname, lastname);
+          await registerCall(email, password, firstname, lastname, context);
 
       if (response == 200) {
         await Navigator.push(

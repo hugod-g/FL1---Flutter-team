@@ -1,16 +1,20 @@
+import 'package:mon_petit_entretien/Class/userClass.dart';
 import 'package:mon_petit_entretien/Class/vehicleClass.dart';
 import 'package:flutter/cupertino.dart';
 
-class appData extends ChangeNotifier {
-  List<vehicleData> vehicles = [];
+class AppData extends ChangeNotifier {
+  List<vehiculeModel> vehicles = [];
+  String token = "";
+  userModel user = userModel();
 
-  void addDataVehicle(String newName, int km, String picturePath, String date) {
-    vehicles.add(vehicleData({
-      'name': newName,
-      'kilometrage': km,
-      'picturePath': picturePath,
-      'date': date
-    }));
+  void addDataVehicle(
+    String newName,
+    int km,
+    String picturePath,
+    String date,
+    String id,
+  ) {
+    vehicles.add(vehiculeModel(newName, km, picturePath, date, id));
     notifyListeners();
   }
 }

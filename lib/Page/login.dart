@@ -27,8 +27,8 @@ class _LoginPage extends State<LoginPage> {
   void initState() {
     super.initState();
     _prefs.then((SharedPreferences prefs) {
-      final String token = prefs.getString('token') ?? '';
-
+      /* final*/ String token = prefs.getString('token') ?? '';
+      token = "";
       if (token.isNotEmpty) {
         Navigator.push(
           context,
@@ -48,11 +48,11 @@ class _LoginPage extends State<LoginPage> {
     });
 
     try {
-      final int responseStatus = await loginCall(email, password);
+      final int responseStatus = await loginCall(email, password, context);
 
       if (responseStatus == 200) {
         // ignore: use_build_context_synchronously
-        await Navigator.popAndPushNamed(context,'/home');
+        await Navigator.popAndPushNamed(context, '/home');
       }
     } catch (e) {
       setState(() {

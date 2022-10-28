@@ -1,8 +1,9 @@
-import 'package:camera/camera.dart';
+import 'package:camera/camera.dart'
+    show CameraDescription, XFile, availableCameras;
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mon_petit_entretien/Class/appClass.dart';
 import 'package:mon_petit_entretien/Components/commentText.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../Page/cameraPage.dart';
@@ -12,14 +13,12 @@ class PhotoInput extends StatefulWidget {
     super.key,
     required this.value,
     required this.placeholder,
-    required this.onChangeText,
     this.secure = false,
   });
 
   final String? value;
   final String? placeholder;
   final bool secure;
-  final void Function(String)? onChangeText;
 
   @override
   PhotoInputState createState() => PhotoInputState();
@@ -74,19 +73,21 @@ class PhotoInputState extends State<PhotoInput> {
                 final XFile? file =
                     await ImagePicker().pickImage(source: ImageSource.gallery);
                 if (file == null) {
-                  Provider.of<appData>(context, listen: false).addDataVehicle(
+                  Provider.of<AppData>(context, listen: false).addDataVehicle(
                     "tmp",
                     0,
                     newPath,
                     DateTime.now().toString(),
+                    '0',
                   );
                 } else {
                   newPath = file.path;
-                  Provider.of<appData>(context, listen: false).addDataVehicle(
+                  Provider.of<AppData>(context, listen: false).addDataVehicle(
                     "tmp",
                     0,
                     newPath,
                     DateTime.now().toString(),
+                    '0',
                   );
                 }
                 print("galerie");

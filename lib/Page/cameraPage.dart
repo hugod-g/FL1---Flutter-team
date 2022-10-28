@@ -41,11 +41,12 @@ class _CameraPageState extends State<CameraPage> {
     try {
       await _cameraController.setFlashMode(FlashMode.off);
       XFile picture = await _cameraController.takePicture();
-      Provider.of<appData>(context, listen: false).addDataVehicle(
+      Provider.of<AppData>(context, listen: false).addDataVehicle(
         "tmp",
         0,
         picture.path,
         DateTime.now().toString(),
+        '0',
       );
       Navigator.pushReplacement(
         context,

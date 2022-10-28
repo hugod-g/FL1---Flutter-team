@@ -1,12 +1,16 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:mon_petit_entretien/Class/appClass.dart';
 import 'package:mon_petit_entretien/Config/endpoint.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-Future<int> loginCall(String email, String password) async {
+Future<int> loginCall(
+    String email, String password, BuildContext context) async {
   final SharedPreferences prefs = await _prefs;
 
   final http.Response response = await http.post(
@@ -25,6 +29,7 @@ Future<int> loginCall(String email, String password) async {
     final payload = jsonDecode(response.body);
 
     final String token = payload["token"];
+    Provider.of<AppData>(context, listen: false).token = token;
     await prefs.setString('token', token);
   } else {
     throw "Email ou mot de passe incorrect";
@@ -33,12 +38,8 @@ Future<int> loginCall(String email, String password) async {
   return response.statusCode;
 }
 
-Future<int> registerCall(
-  String email,
-  String password,
-  String firstname,
-  String lastname,
-) async {
+Future<int> registerCall(String email, String password, String firstname,
+    String lastname, BuildContext context) async {
   final http.Response response = await http.post(
     Uri.parse(registerEndpoint),
     headers: <String, String>{
@@ -53,7 +54,7 @@ Future<int> registerCall(
   );
 
   if (response.statusCode == 200) {
-    await loginCall(email, password);
+    await loginCall(email, password, context);
   } else {
     throw "Une erreur est survenu lors de votre inscription. Merci de réessayer";
   }

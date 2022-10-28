@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/appClass.dart';
+import 'package:mon_petit_entretien/Class/vehicleClass.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/buttonSelect.dart';
 import 'package:mon_petit_entretien/Components/commentText.dart';
 import 'package:mon_petit_entretien/Page/addVehicule.dart';
+import 'package:mon_petit_entretien/Services/api/vehicule.dart';
 import 'package:provider/provider.dart';
 import '../Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
@@ -25,6 +28,8 @@ class _Home extends State<Home> {
     'DATE': false,
     'A-Z': false,
   };
+
+  bool isLoaded = false;
 
   void _onSearchChange(String newValue) {
     setState(() {
@@ -64,6 +69,28 @@ class _Home extends State<Home> {
     } else {
       setState(() {
         select["A-Z"] = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    getEveryVehicules();
+    super.initState();
+  }
+
+  void getEveryVehicules() async {
+    AppData data;
+    data = Provider.of<AppData>(context, listen: false);
+    List<vehiculeModel> newVehicules;
+    newVehicules =
+        await getVehicles(Provider.of<AppData>(context, listen: false).token);
+    newVehicules.forEach((newVehicule) {
+      data.vehicles.add(newVehicule);
+    });
+    if (data.vehicles.isNotEmpty) {
+      setState(() {
+        isLoaded = true;
       });
     }
   }
@@ -131,9 +158,10 @@ class _Home extends State<Home> {
         scrollDirection: Axis.horizontal,
         children: <Widget>[
           _addCar(),
-          _showCar(),
-          _showCar(),
-          _showCar(),
+          for (var vehicule
+              in Provider.of<AppData>(context, listen: false).vehicles)
+            _showCar(vehicule.name, vehicule.kilometrage.toString(),
+                vehicule.maintenances.length.toString(), vehicule.picturePath),
         ],
       ),
     );
@@ -239,7 +267,8 @@ class _Home extends State<Home> {
     );
   }
 
-  Widget _showCar() {
+  Widget _showCar(
+      String name, String mileage, String nbMaintenance, String pathImage) {
     return Padding(
       padding: const EdgeInsets.only(right: 20),
       child: InkWell(
@@ -249,23 +278,38 @@ class _Home extends State<Home> {
         child: Ink(
           child: Stack(
             children: [
-              Container(
-                height: 270,
-                width: 230,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
+              if (isLoaded)
+                Container(
+                  height: 270,
+                  width: 230,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: NetworkImage(
+                        "http://152.228.134.93:1339/$pathImage",
+                      ),
+                    ),
+                    /*DecorationImage(
                     image: AssetImage('assets/car.jpg'),
                     fit: BoxFit.fitHeight,
                   ),
-                  /*DecorationImage(
+                  DecorationImage(
                     fit: BoxFit.fill,
                     image:  //NetworkImage(
                       //"https://picsum.photos/250?image=9",
                     ), 
                   ),*/
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                    borderRadius: const BorderRadius.all(Radius.circular(8)),
+                  ),
+                )
+              else
+                const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    color: navy,
+                  ),
                 ),
-              ),
               Row(
                 children: <Widget>[
                   Align(
@@ -275,9 +319,9 @@ class _Home extends State<Home> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const <Widget>[
+                        children: <Widget>[
                           Text(
-                            "Véhicule",
+                            name,
                             style: TextStyle(
                               color: white,
                               fontSize: 30,
@@ -285,7 +329,7 @@ class _Home extends State<Home> {
                             ),
                           ),
                           Text(
-                            "99 987" + " km",
+                            "$mileage km",
                             style: TextStyle(
                               color: white,
                               fontSize: 20,
@@ -326,10 +370,10 @@ class _Home extends State<Home> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8)),
                             ),
-                            child: const Align(
+                            child: Align(
                               alignment: Alignment.center,
                               child: Text(
-                                "4",
+                                nbMaintenance,
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: fontBold),
                               ),
