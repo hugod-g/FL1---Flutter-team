@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:mon_petit_entretien/Class/centerClass.dart';
 
 class userModel extends ChangeNotifier {
   String lastName = "";
   String firstName = "";
-  String username = ""; // email
+  String username = "";
+  List<centerModel> centers = []; // email
 
   void updateLastName(newVar) {
     lastName = newVar;
