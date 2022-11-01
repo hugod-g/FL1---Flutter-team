@@ -1,9 +1,12 @@
+// ignore_for_file: library_private_types_in_public_api, always_specify_types
+
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
-import 'package:mon_petit_entretien/Page/modifprofil.dart';
 import 'package:mon_petit_entretien/Page/vue_vehicule.dart';
-import '../Components/commentText.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
+
+import '../Components/commentText.dart';
+import '../Style/colors.dart';
 
 class ProfilPage extends StatefulWidget {
 
@@ -19,14 +22,14 @@ class _ProfilPage extends State<ProfilPage> {
   String email = "ea.aunoble@gmail.com";
   String age = "21";
 
-  profil() {
-    return(
+  Widget profil() {
+    return 
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: <Widget>[
           Center(
             child: Column(
-              children: [
+              children: <Widget>[
                 const Padding(
                   padding: EdgeInsets.only(top: 17.5),
                   child: CircleAvatar(
@@ -40,23 +43,22 @@ class _ProfilPage extends State<ProfilPage> {
                     fontSizeText: 22,
                     fontWeight: fontBold,
                     paddingTop: 16,
-                    paddingBot: 0,
+                    color: navy,
                   ),
                 Padding(
                   padding: const EdgeInsets.only(top: 30),
                   child : Column(
-                    children: [
+                    children: <Widget>[
                       Row(
-                        children: const [
+                        children: const <Widget>[
                           Icon(Icons.people),
                           Padding(
                             padding: EdgeInsets.only(left: 12.5),
-                            child: const CommonText(
+                            child: CommonText(
                               text: "Email",
                               fontSizeText: 18,
                               fontWeight: fontBold,
-                              paddingTop: 0,
-                              paddingBot: 0,
+                              color: navy,
                             ),
                           ),
                         ],
@@ -68,27 +70,26 @@ class _ProfilPage extends State<ProfilPage> {
                           fontSizeText: 16,
                           fontWeight: fontLight,
                           paddingTop: 10,
-                          paddingBot: 0,
+                          color: navy,
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 30),
                   child : Column(
-                    children: [
+                    children: <Widget>[
                       Row(
-                        children: const [
+                        children: const <Widget>[
                           Icon(Icons.people),
                           Padding(
                             padding: EdgeInsets.only(left: 12.5),
-                            child: const CommonText(
+                            child: CommonText(
                               text: "Email",
                               fontSizeText: 18,
                               fontWeight: fontBold,
-                              paddingTop: 0,
-                              paddingBot: 0,
+                              color: navy,
                             ),
                           ),
                         ],
@@ -100,27 +101,26 @@ class _ProfilPage extends State<ProfilPage> {
                           fontSizeText: 16,
                           fontWeight: fontLight,
                           paddingTop: 10,
-                          paddingBot: 0,
+                          color: navy,
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 30),
                   child : Column(
-                    children: [
+                    children: <Widget>[
                       Row(
-                        children: const [
+                        children: const <Widget>[
                           Icon(Icons.people),
                           Padding(
                             padding: EdgeInsets.only(left: 12.5),
-                            child: const CommonText(
+                            child: CommonText(
                               text: "Email",
                               fontSizeText: 18,
                               fontWeight: fontBold,
-                              paddingTop: 0,
-                              paddingBot: 0,
+                              color: navy,
                             ),
                           ),
                         ],
@@ -132,11 +132,11 @@ class _ProfilPage extends State<ProfilPage> {
                           fontSizeText: 16,
                           fontWeight: fontLight,
                           paddingTop: 10,
-                          paddingBot: 0,
+                          color: navy,
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ),
                 Padding(
                     padding: const EdgeInsets.only(top: 25),
@@ -156,7 +156,7 @@ class _ProfilPage extends State<ProfilPage> {
           )
         ],
       )
-    );
+    ;
   }
 
   @override

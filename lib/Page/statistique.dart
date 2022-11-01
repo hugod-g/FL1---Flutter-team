@@ -27,18 +27,21 @@ class _Statistique extends State<Statistique> {
                 fontWeight: fontLight,
                 paddingTop: 20,
                 paddingBot: 8,
+                color: navy,
               ),
               const CommonText(
                 text: "Stats",
                 fontSizeText: 30,
                 fontWeight: fontMedium,
                 paddingBot: 15,
+                color: navy,
               ),
               const CommonText(
                 text: "Surveillez vos coûts",
                 fontSizeText: 20,
                 fontWeight: fontLight,
                 paddingBot: 20,
+                color: navy,
               ),
               Align(
                 child: Padding(
@@ -49,6 +52,7 @@ class _Statistique extends State<Statistique> {
                         text: "28 987" " €",
                         fontSizeText: 50,
                         fontWeight: fontBold,
+                        color: navy,
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 20),
@@ -56,6 +60,7 @@ class _Statistique extends State<Statistique> {
                           text: "Total",
                           fontSizeText: 20,
                           fontWeight: fontLight,
+                          color: navy,
                         ),
                       ),
                     ],

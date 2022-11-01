@@ -8,6 +8,7 @@ class CommonText extends StatefulWidget {
     required this.text,
     required this.fontSizeText,
     required this.fontWeight,
+    required this.color,
     this.paddingTop = 0,
     this.paddingBot = 0,
     this.paddingRight = 0,
@@ -17,6 +18,7 @@ class CommonText extends StatefulWidget {
   final String text;
   final double fontSizeText;
   final FontWeight fontWeight;
+  final Color color;
   final double paddingTop;
   final double paddingBot;
   final double paddingRight;
@@ -39,7 +41,7 @@ class CommonTextState extends State<CommonText> {
       child: Text(
         widget.text,
         style: TextStyle(
-          color: navy,
+          color: widget.color,
           fontSize: widget.fontSizeText,
           fontFamily: appFont,
           fontWeight: widget.fontWeight,

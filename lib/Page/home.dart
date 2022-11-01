@@ -111,18 +111,21 @@ class _Home extends State<Home> {
                 fontWeight: fontLight,
                 paddingTop: 20,
                 paddingBot: 8,
+                color: navy,
               ),
               const CommonText(
                 text: "Véhicules",
                 fontSizeText: 30,
                 fontWeight: fontMedium,
                 paddingBot: 15,
+                color: navy,
               ),
               const CommonText(
                 text: "Gérez vos véhicules",
                 fontSizeText: 20,
                 fontWeight: fontLight,
                 paddingBot: 20,
+                color: navy,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 16),
@@ -137,7 +140,9 @@ class _Home extends State<Home> {
                   fontSizeText: 20,
                   fontWeight: fontLight,
                   paddingTop: 10,
-                  paddingBot: 10),
+                  paddingBot: 10,
+                  color: navy,
+                  ),
               _sortCar(),
               Padding(
                 padding: EdgeInsets.only(top: 40),

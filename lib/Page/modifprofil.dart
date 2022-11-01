@@ -1,9 +1,12 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
-import 'package:mon_petit_entretien/Page/profile.dart';
-import '../Components/commentText.dart';
+import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
+
+import '../Components/commentText.dart';
+import '../Style/colors.dart';
 
 class ModifProfilPage extends StatefulWidget {
 
@@ -37,22 +40,22 @@ class _ModifProfilPage extends State<ModifProfilPage> {
     });
   }
 
-  modifprofil() {
-    return(
+  Widget modifprofil() {
+    return 
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: <Widget>[
           Center(
             child: Column(
-              children: [
-                Align(
+              children: <Widget>[
+                const Align(
                   alignment: Alignment.topLeft,
-                  child: const CommonText(
+                  child: CommonText(
                     text: "Modification du Profile",
                     fontSizeText: 25,
                     fontWeight: fontBold,
                     paddingTop: 25,
-                    paddingBot: 0,
+                    color: navy,
                   ),
                 ),
                 Padding(
@@ -60,7 +63,6 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                     child: TextInput(
                       value: name,
                       placeholder: "Name",
-                      secure: false,
                       onChangeText: _onNameChange,
                     ),
                   ),
@@ -69,7 +71,6 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                     child: TextInput(
                       value: name,
                       placeholder: "Email",
-                      secure: false,
                       onChangeText: _onEmailChange,
                     ),
                   ),
@@ -78,7 +79,6 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                     child: TextInput(
                       value: name,
                       placeholder: "Info",
-                      secure: false,
                       onChangeText: _onInfoChange,
                     ),
                   ),
@@ -91,11 +91,11 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                         ),
                   ),
               ],
-            )
+            ),
           )
         ],
       )
-    );
+    ;
   }
 
   @override
