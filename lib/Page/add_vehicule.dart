@@ -1,12 +1,10 @@
 import 'dart:io';
 
-import 'package:camera/camera.dart';
-
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Class/appClass.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
-import 'package:mon_petit_entretien/Components/commentText.dart';
-import 'package:mon_petit_entretien/Components/photoInput.dart';
+import 'package:mon_petit_entretien/Components/comment_text.dart';
+import 'package:mon_petit_entretien/Components/photo_input.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Page/home.dart';
 import 'package:mon_petit_entretien/Services/api/vehicule.dart';
@@ -58,7 +56,7 @@ class _AddVehicule extends State<AddVehicule> {
         Provider.of<AppData>(context, listen: false).vehicles.last.picturePath,
       ),
     );
-    print("addvehicule)");
+
     await Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(

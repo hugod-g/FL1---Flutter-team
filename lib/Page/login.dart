@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Page/gestion.dart';
 import 'package:mon_petit_entretien/Page/register.dart';
 import 'package:mon_petit_entretien/Services/api/auth.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Style/colors.dart';
 
@@ -29,13 +31,9 @@ class _LoginPage extends State<LoginPage> {
     _prefs.then((SharedPreferences prefs) {
       final String token = prefs.getString('token') ?? '';
       if (token.isNotEmpty) {
-        Navigator.push(
-          context,
-          // ignore: always_specify_types
-          MaterialPageRoute(
-            builder: (BuildContext context) => const GestionPage(),
-          ),
-        );
+        final AppData data = Provider.of<AppData>(context, listen: false);
+        data.setToken(token);
+        Navigator.popAndPushNamed(context, '/gestion');
       }
     });
   }
@@ -51,7 +49,7 @@ class _LoginPage extends State<LoginPage> {
 
       if (responseStatus == 200) {
         // ignore: use_build_context_synchronously
-        await Navigator.popAndPushNamed(context, '/home');
+        await Navigator.popAndPushNamed(context, '/gestion');
       }
     } catch (e) {
       setState(() {
@@ -77,12 +75,7 @@ class _LoginPage extends State<LoginPage> {
   }
 
   void _onSignUpPress() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (BuildContext context) => const RegisterPage(),
-      ),
-    );
+    Navigator.popAndPushNamed(context, '/register');
   }
 
   @override

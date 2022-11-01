@@ -3,11 +3,10 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-import 'package:mon_petit_entretien/Class/vehicleClass.dart';
+import 'package:mon_petit_entretien/Class/vehicle_class.dart';
 import 'package:mon_petit_entretien/Config/endpoint.dart';
 
 Future<List<vehiculeModel>> getVehicles(String authorization) async {
-  print("le token est $authorization");
   final http.Response response = await http.get(
     Uri.parse(vehiclesEndPoint),
     headers: <String, String>{
@@ -19,17 +18,13 @@ Future<List<vehiculeModel>> getVehicles(String authorization) async {
   if (response.statusCode == 200) {
     // ignore: always_specify_types
     final payload = jsonDecode(response.body);
-    var rest = payload as List;
-    print("le body est $payload");
-    List<vehiculeModel> tmpListVehicule = rest
+    final List rest = payload as List;
+    final List<vehiculeModel> tmpListVehicule = rest
         .map<vehiculeModel>((json) => vehiculeModel.fromJson(json))
         .toList();
-    print("la liste est $tmpListVehicule");
+
     return tmpListVehicule;
   } else {
-    print(
-      "l'erreur est ${response.body} et le status code ${response.statusCode}",
-    );
     throw "les véhicules ne sont pas chargés";
   }
 }
@@ -41,11 +36,8 @@ Future<int> createVehicle(
   String mileage,
   File upload,
 ) async {
-  print(
-    "les arguments sont naùe $name, la date $buyDate, le km $mileage et l'image $upload",
-  );
-
-  var request = http.MultipartRequest('POST', Uri.parse(vehiclesEndPoint));
+  http.MultipartRequest request =
+      http.MultipartRequest('POST', Uri.parse(vehiclesEndPoint));
   Map<String, String> headers = {
     "Authorization": "Bearer $authorization",
     "Content-type": "multipart/form-data"
@@ -65,8 +57,7 @@ Future<int> createVehicle(
     'buyDate': buyDate,
     'mileage': mileage,
   });
-  print("request: " + request.toString());
-  var res = await request.send();
+  http.StreamedResponse res = await request.send();
   /*final http.Response response = await http.post(
     Uri.parse(vehiclesEndPoint),
     headers: <String, String>{

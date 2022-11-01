@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Class/appClass.dart';
-import 'package:mon_petit_entretien/Class/vehicleClass.dart';
-import 'package:mon_petit_entretien/Components/button.dart';
-import 'package:mon_petit_entretien/Components/buttonSelect.dart';
-import 'package:mon_petit_entretien/Components/commentText.dart';
-import 'package:mon_petit_entretien/Page/addVehicule.dart';
-import 'package:mon_petit_entretien/Services/api/vehicule.dart';
-import 'package:provider/provider.dart';
-import '../Style/colors.dart';
-import 'package:mon_petit_entretien/Style/fonts.dart';
-
+import 'package:mon_petit_entretien/Class/app_class.dart';
+import 'package:mon_petit_entretien/Class/vehicle_class.dart';
+import 'package:mon_petit_entretien/Components/button_select.dart';
+import 'package:mon_petit_entretien/Components/comment_text.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
+import 'package:mon_petit_entretien/Page/add_vehicule.dart';
+import 'package:mon_petit_entretien/Services/api/vehicule.dart';
+import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:provider/provider.dart';
 
-import '../main.dart';
+import '../Style/colors.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -83,9 +80,8 @@ class _Home extends State<Home> {
     AppData data;
     data = Provider.of<AppData>(context, listen: false);
     List<vehiculeModel> newVehicules;
-    newVehicules =
-        await getVehicles(Provider.of<AppData>(context, listen: false).token);
-    newVehicules.forEach((newVehicule) {
+    newVehicules = await getVehicles(data.token);
+    newVehicules.forEach((vehiculeModel newVehicule) {
       data.vehicles.add(newVehicule);
     });
     if (data.vehicles.isNotEmpty) {
@@ -140,7 +136,7 @@ class _Home extends State<Home> {
                   paddingBot: 10),
               _sortCar(),
               Padding(
-                padding: EdgeInsets.only(top: 40),
+                padding: const EdgeInsets.only(top: 40),
                 child: _listCar(),
               ),
             ],
@@ -158,7 +154,7 @@ class _Home extends State<Home> {
         scrollDirection: Axis.horizontal,
         children: <Widget>[
           _addCar(),
-          for (var vehicule
+          for (vehiculeModel vehicule
               in Provider.of<AppData>(context, listen: false).vehicles)
             _showCar(vehicule.name, vehicule.kilometrage.toString(),
                 vehicule.maintenances.length.toString(), vehicule.picturePath),
@@ -315,14 +311,14 @@ class _Home extends State<Home> {
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 10, bottom: 10),
+                      padding: const EdgeInsets.only(left: 10, bottom: 10),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
                             name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: white,
                               fontSize: 30,
                               fontWeight: fontBold,
@@ -330,7 +326,7 @@ class _Home extends State<Home> {
                           ),
                           Text(
                             "$mileage km",
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: white,
                               fontSize: 20,
                               fontWeight: fontMedium,

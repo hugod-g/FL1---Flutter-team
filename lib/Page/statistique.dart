@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Components/commentText.dart';
+import 'package:mon_petit_entretien/Components/comment_text.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 import '../Style/colors.dart';
 
