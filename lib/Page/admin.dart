@@ -24,15 +24,41 @@ class _AdminPage extends State<AdminPage> {
   }
 
   void getUserList() async {
+    setState(() {
+      isLoadingUsers = true;
+    });
+
     final AppData data = Provider.of<AppData>(context, listen: false);
 
     final List<UserModel> userList = await getUserListCall(data.token);
     data.setUsersList(userList);
+    setState(() {
+      isLoadingUsers = false;
+    });
   }
 
-  void onUserPress(String userId) {}
+  void onUserPress(String userId) async {
+    setState(() {
+      isLoadingUsers = true;
+    });
+    final AppData data = Provider.of<AppData>(context, listen: false);
 
-  void onDeleteUserPress(String userId) {}
+    final int responseStatus = await upgradeUserAdminCall(data.token, userId);
+
+    if (responseStatus == 200) {
+      getUserList();
+    }
+  }
+
+  void onDeleteUserPress(String userId) async {
+    final AppData data = Provider.of<AppData>(context, listen: false);
+
+    final int responseStatus = await deleteUserAdminCall(data.token, userId);
+
+    if (responseStatus == 200) {
+      getUserList();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,15 +91,31 @@ class _AdminPage extends State<AdminPage> {
                     fontWeight: fontLight,
                     paddingBot: 20,
                   ),
-                  for (UserModel user
-                      in Provider.of<AppData>(context, listen: false).usersList)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: UserRow(
+                  if (isLoadingUsers)
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      child: const Align(
+                        child: SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            color: navy,
+                          ),
+                        ),
+                      ),
+                    )
+                  else
+                    for (UserModel user
+                        in Provider.of<AppData>(context, listen: false)
+                            .usersList)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: UserRow(
                           user: user,
                           onPress: onUserPress,
-                          onDeletePress: onDeleteUserPress),
-                    )
+                          onDeletePress: onDeleteUserPress,
+                        ),
+                      )
                 ],
               ),
             ),

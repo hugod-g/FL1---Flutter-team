@@ -33,7 +33,7 @@ class _LoginPage extends State<LoginPage> {
       if (token.isNotEmpty) {
         final AppData data = Provider.of<AppData>(context, listen: false);
         data.setToken(token);
-        Navigator.popAndPushNamed(context, '/gestion');
+        // Navigator.popAndPushNamed(context, '/gestion');
       }
     });
   }
@@ -91,7 +91,9 @@ class _LoginPage extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(top: 100),
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.1,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const <Widget>[
@@ -169,7 +171,9 @@ class _LoginPage extends State<LoginPage> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 75),
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.height * 0.1,
+                ),
                 child: Column(
                   children: <Widget>[
                     Padding(

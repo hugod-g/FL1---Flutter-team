@@ -14,15 +14,50 @@ Future<List<UserModel>> getUserListCall(String token) async {
   );
 
   if (response.statusCode == 200) {
-    // ignore: always_specify_types
-    final payload = jsonDecode(response.body);
-    final rest = payload as List;
-    final List<UserModel> userList =
-        rest.map<UserModel>((json) => UserModel.fromJson(json)).toList();
+    final dynamic payload = jsonDecode(response.body);
+    final List<dynamic> rest = payload as List<dynamic>;
+    final List<UserModel> userList = rest
+        .map<UserModel>((dynamic json) => UserModel.fromJson(json))
+        .toList();
 
-    print(payload);
     return userList;
   } else {
     throw "Une erreur est survenu lors la récupération des utilisateurs. Merci de réessayer";
   }
+}
+
+Future<int> upgradeUserAdminCall(
+  String token,
+  String userId,
+) async {
+  final http.Response response = await http.put(
+    Uri.parse(promoteUserEndpoint),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token'
+    },
+    body: jsonEncode(<String, String>{
+      'userId': userId,
+    }),
+  );
+
+  return response.statusCode;
+}
+
+Future<int> deleteUserAdminCall(
+  String token,
+  String userId,
+) async {
+  final http.Response response = await http.delete(
+    Uri.parse(deleteUserEndpoint),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token'
+    },
+    body: jsonEncode(<String, String>{
+      'userId': userId,
+    }),
+  );
+
+  return response.statusCode;
 }

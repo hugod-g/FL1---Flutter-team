@@ -12,3 +12,5 @@ const String vehiclesEndPoint = "$apiUrl/vehicle";
 
 // Admin
 const String getUserListEndPoint = "$apiUrl/admin/users";
+const String promoteUserEndpoint = "$apiUrl/admin/promote";
+const String deleteUserEndpoint = "$apiUrl/admin/user";

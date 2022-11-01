@@ -34,10 +34,7 @@ class _GestionPage extends State<GestionPage> {
     data.user = profile;
   }
 
-  PageController pageController = PageController(
-    initialPage: 0,
-    keepPage: true,
-  );
+  PageController pageController = PageController();
 
   List<BottomNavigationBarItem> buildBottomNavBarItems() {
     return [

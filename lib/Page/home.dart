@@ -81,9 +81,9 @@ class _Home extends State<Home> {
     data = Provider.of<AppData>(context, listen: false);
     List<vehiculeModel> newVehicules;
     newVehicules = await getVehicles(data.token);
-    newVehicules.forEach((vehiculeModel newVehicule) {
+    for (vehiculeModel newVehicule in newVehicules) {
       data.vehicles.add(newVehicule);
-    });
+    }
     if (data.vehicles.isNotEmpty) {
       setState(() {
         isLoaded = true;
