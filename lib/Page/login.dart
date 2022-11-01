@@ -33,7 +33,7 @@ class _LoginPage extends State<LoginPage> {
       if (token.isNotEmpty) {
         final AppData data = Provider.of<AppData>(context, listen: false);
         data.setToken(token);
-        // Navigator.popAndPushNamed(context, '/gestion');
+        Navigator.popAndPushNamed(context, '/gestion');
       }
     });
   }
