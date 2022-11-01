@@ -28,7 +28,6 @@ class _LoginPage extends State<LoginPage> {
     super.initState();
     _prefs.then((SharedPreferences prefs) {
       final String token = prefs.getString('token') ?? '';
-
       if (token.isNotEmpty) {
         Navigator.push(
           context,
@@ -48,17 +47,11 @@ class _LoginPage extends State<LoginPage> {
     });
 
     try {
-      final int responseStatus = await loginCall(email, password);
+      final int responseStatus = await loginCall(email, password, context);
 
       if (responseStatus == 200) {
         // ignore: use_build_context_synchronously
-        await Navigator.push(
-          context,
-          // ignore: always_specify_types
-          MaterialPageRoute(
-            builder: (BuildContext context) => const GestionPage(),
-          ),
-        );
+        await Navigator.popAndPushNamed(context, '/home');
       }
     } catch (e) {
       setState(() {
