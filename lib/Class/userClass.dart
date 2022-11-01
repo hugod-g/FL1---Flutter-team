@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 class userModel extends ChangeNotifier {
   String lastName = "";
   String firstName = "";
-  String userName = ""; // email
+  String username = ""; // email
 
   void updateLastName(newVar) {
     lastName = newVar;
@@ -16,7 +16,7 @@ class userModel extends ChangeNotifier {
   }
 
   void updateEmail(newVar) {
-    userName = newVar;
+    username = newVar;
     notifyListeners();
   }
 }

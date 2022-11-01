@@ -27,8 +27,7 @@ class _LoginPage extends State<LoginPage> {
   void initState() {
     super.initState();
     _prefs.then((SharedPreferences prefs) {
-      /* final*/ String token = prefs.getString('token') ?? '';
-      token = "";
+      final String token = prefs.getString('token') ?? '';
       if (token.isNotEmpty) {
         Navigator.push(
           context,
