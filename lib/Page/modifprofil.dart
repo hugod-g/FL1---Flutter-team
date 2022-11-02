@@ -40,66 +40,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
     });
   }
 
-  Widget modifprofil() {
-    return 
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Center(
-            child: Column(
-              children: <Widget>[
-                const Align(
-                  alignment: Alignment.topLeft,
-                  child: CommonText(
-                    text: "Modification du Profile",
-                    fontSizeText: 25,
-                    fontWeight: fontBold,
-                    paddingTop: 25,
-                    color: navy,
-                  ),
-                ),
-                Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: TextInput(
-                      value: name,
-                      placeholder: "Name",
-                      onChangeText: _onNameChange,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: TextInput(
-                      value: name,
-                      placeholder: "Email",
-                      onChangeText: _onEmailChange,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: TextInput(
-                      value: name,
-                      placeholder: "Info",
-                      onChangeText: _onInfoChange,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: Button(
-                          text: "Sauvegarder",
-                          onPress: () => Navigator.pop(context),
-                          secondary: true,
-                        ),
-                  ),
-              ],
-            ),
-          )
-        ],
-      )
-    ;
-  }
-
   @override
-  //Main of the Login page (Body)
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -107,7 +48,59 @@ class _ModifProfilPage extends State<ModifProfilPage> {
       body :
         Padding(
           padding: const EdgeInsets.all(22.5),
-          child: modifprofil(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Center(
+                child: Column(
+                  children: <Widget>[
+                    const Align(
+                      alignment: Alignment.topLeft,
+                      child: CommonText(
+                        text: "Modification du Profile",
+                        fontSizeText: 25,
+                        fontWeight: fontBold,
+                        paddingTop: 25,
+                        color: navy,
+                      ),
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(top: 40),
+                        child: TextInput(
+                          value: name,
+                          placeholder: "Name",
+                          onChangeText: _onNameChange,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40),
+                        child: TextInput(
+                          value: name,
+                          placeholder: "Email",
+                          onChangeText: _onEmailChange,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40),
+                        child: TextInput(
+                          value: name,
+                          placeholder: "Info",
+                          onChangeText: _onInfoChange,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40),
+                        child: Button(
+                              text: "Sauvegarder",
+                              onPress: () => Navigator.pop(context),
+                              secondary: true,
+                            ),
+                      ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
     );
   }

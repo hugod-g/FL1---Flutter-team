@@ -15,9 +15,12 @@ class VueVehiculePage extends StatefulWidget {
 
 class _VueVehiculePage extends State<VueVehiculePage> {
 
-  Widget vuevehicule() {
-    return 
-      Column(
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
+      body : Column(
         children: <Widget>[
           Stack(
             children: <Widget>[
@@ -84,7 +87,6 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                           fontSizeText: 25,
                           fontWeight: fontBold,
                           paddingTop: 16,
-                          paddingBot: 0,
                           color: navy,
                         ),
                         Padding(
@@ -174,18 +176,7 @@ class _VueVehiculePage extends State<VueVehiculePage> {
             ),
           ),
         ],
-      )
-    ;
-  }
-
-  @override
-  //Main of the Login page (Body)
-  Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
-      body :
-        vuevehicule(),
+      ),
     );
   }
 }
