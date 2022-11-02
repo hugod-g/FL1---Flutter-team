@@ -69,7 +69,7 @@ class _GestionPage extends State<GestionPage> {
         children: const <Widget>[
           Statistique(),
           Home(),
-          Profile(),
+          ProfilPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
