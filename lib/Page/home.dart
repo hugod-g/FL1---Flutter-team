@@ -5,6 +5,7 @@ import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/buttonSelect.dart';
 import 'package:mon_petit_entretien/Components/commentText.dart';
 import 'package:mon_petit_entretien/Page/addVehicule.dart';
+import 'package:mon_petit_entretien/Page/web/home_web.dart';
 import 'package:mon_petit_entretien/Services/api/vehicule.dart';
 import 'package:provider/provider.dart';
 import '../Style/colors.dart';
@@ -97,62 +98,68 @@ class _Home extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: lightBlue,
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const CommonText(
-                text: "Mes",
-                fontSizeText: 30,
-                fontWeight: fontLight,
-                paddingTop: 20,
-                paddingBot: 8,
-                color: navy,
-              ),
-              const CommonText(
-                text: "Véhicules",
-                fontSizeText: 30,
-                fontWeight: fontMedium,
-                paddingBot: 15,
-                color: navy,
-              ),
-              const CommonText(
-                text: "Gérez vos véhicules",
-                fontSizeText: 20,
-                fontWeight: fontLight,
-                paddingBot: 20,
-                color: navy,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8, bottom: 16),
-                child: TextInput(
-                  value: search,
-                  placeholder: "Rechercher",
-                  onChangeText: _onSearchChange,
+
+    final double currentWith = MediaQuery.of(context).size.width;
+
+    if (currentWith < 800)
+      return Material(
+        color: lightBlue,
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const CommonText(
+                  text: "Mes",
+                  fontSizeText: 30,
+                  fontWeight: fontLight,
+                  paddingTop: 20,
+                  paddingBot: 8,
+                  color: navy,
                 ),
-              ),
-              const CommonText(
-                  text: "Triez par :",
+                const CommonText(
+                  text: "Véhicules",
+                  fontSizeText: 30,
+                  fontWeight: fontMedium,
+                  paddingBot: 15,
+                  color: navy,
+                ),
+                const CommonText(
+                  text: "Gérez vos véhicules",
                   fontSizeText: 20,
                   fontWeight: fontLight,
-                  paddingTop: 10,
-                  paddingBot: 10,
+                  paddingBot: 20,
                   color: navy,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8, bottom: 16),
+                  child: TextInput(
+                    value: search,
+                    placeholder: "Rechercher",
+                    onChangeText: _onSearchChange,
                   ),
-              _sortCar(),
-              Padding(
-                padding: EdgeInsets.only(top: 40),
-                child: _listCar(),
-              ),
-            ],
+                ),
+                const CommonText(
+                    text: "Triez par :",
+                    fontSizeText: 20,
+                    fontWeight: fontLight,
+                    paddingTop: 10,
+                    paddingBot: 10,
+                    color: navy,
+                    ),
+                _sortCar(),
+                Padding(
+                  padding: EdgeInsets.only(top: 40),
+                  child: _listCar(),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    else
+      return HomeWebPage();
   }
 
   Widget _listCar() {

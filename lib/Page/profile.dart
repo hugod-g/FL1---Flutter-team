@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Page/vue_vehicule.dart';
+import 'package:mon_petit_entretien/Page/web/profil_web.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
 import '../Components/commentText.dart';
@@ -160,16 +161,23 @@ class _ProfilPage extends State<ProfilPage> {
   }
 
   @override
-  //Main of the Login page (Body)
+
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
-      body :
-        Padding(
-          padding: const EdgeInsets.all(22.5),
-          child: profil(),
-        ),
-    );
+
+    final double currentWith = MediaQuery.of(context).size.width;
+
+    if (currentWith < 800) {
+      return Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.white,
+        body :
+          Padding(
+            padding: const EdgeInsets.all(22.5),
+            child: profil(),
+          ),
+      );
+    } else {
+      return const ProfilWebPage();
+    }
   }
 }
