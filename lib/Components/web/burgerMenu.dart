@@ -17,10 +17,22 @@ class BurgerMenu extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: blue,
+              ),
+              child: CommonText(
+                text: "Bonjour",
+                fontSizeText: 25,
+                fontWeight: fontBold,
+                paddingTop: 100,
+                color: white,
+              ),
+            ),
             ListTile(
               title: const CommonText(
                 text: "Home",
-                fontSizeText: 30,
+                fontSizeText: 25,
                 fontWeight: fontBold,
                 paddingTop: 250,
                 paddingLeft: 50,
@@ -33,7 +45,7 @@ class BurgerMenu extends StatelessWidget {
             ListTile(
               title: const CommonText(
                 text: "Profil",
-                fontSizeText: 30,
+                fontSizeText: 25,
                 fontWeight: fontBold,
                 paddingTop: 75,
                 paddingLeft: 50,
@@ -46,7 +58,7 @@ class BurgerMenu extends StatelessWidget {
             ListTile(
               title: const CommonText(
                 text: "Statistique",
-                fontSizeText: 30,
+                fontSizeText: 25,
                 fontWeight: fontBold,
                 paddingTop: 75,
                 paddingLeft: 50,
