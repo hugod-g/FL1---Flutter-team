@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Class/user_class.dart';
@@ -75,6 +76,9 @@ class _GestionPage extends State<GestionPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (kIsWeb) {
+      return const Home();
+    }
     return Scaffold(
       body: PageView(
         controller: pageController,
