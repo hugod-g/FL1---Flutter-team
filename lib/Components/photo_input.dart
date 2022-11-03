@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/comment_text.dart';
 import 'package:provider/provider.dart';
+import '../Style/colors.dart';
 
 import '../Page/camera_page.dart';
 
@@ -60,6 +61,7 @@ class PhotoInputState extends State<PhotoInput> {
                           text: "Camera",
                           fontSizeText: 20,
                           fontWeight: FontWeight.normal,
+                          color: navy,
                         ),
                       )
                     ],
@@ -105,6 +107,7 @@ class PhotoInputState extends State<PhotoInput> {
                         text: "Galerie",
                         fontSizeText: 20,
                         fontWeight: FontWeight.normal,
+                        color: navy,
                       ),
                     ),
                   ],

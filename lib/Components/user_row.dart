@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_const
-
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Class/user_class.dart';
 import 'package:mon_petit_entretien/Components/comment_text.dart';
@@ -44,7 +42,7 @@ class UserRowState extends State<UserRow> {
         width: double.infinity,
         height: 54,
         decoration: const BoxDecoration(
-          borderRadius: const BorderRadius.all(const Radius.circular(16)),
+          borderRadius: BorderRadius.all(Radius.circular(16)),
           color: white,
           boxShadow: <BoxShadow>[BoxShadow(blurRadius: 16, color: lightGray)],
         ),
@@ -58,12 +56,14 @@ class UserRowState extends State<UserRow> {
                   fontSizeText: 16,
                   fontWeight: fontRegular,
                   paddingLeft: 16,
+                  color: navy,
                 ),
                 if (widget.user.admin)
                   const CommonText(
                     text: " (admin)",
                     fontSizeText: 16,
                     fontWeight: fontLight,
+                    color: navy,
                   ),
               ],
             ),

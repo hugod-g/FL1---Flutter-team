@@ -110,18 +110,21 @@ class _AddVehicule extends State<AddVehicule> {
                 fontWeight: fontLight,
                 paddingTop: 20,
                 paddingBot: 8,
+                color: navy,
               ),
               const CommonText(
                 text: "Véhicule",
                 fontSizeText: 30,
                 fontWeight: fontMedium,
                 paddingBot: 15,
+                color: navy,
               ),
               const CommonText(
                 text: "Ajoutez un véhicule",
                 fontSizeText: 20,
                 fontWeight: fontLight,
                 paddingBot: 20,
+                color: navy,
               ),
               GestureDetector(
                 onTap: () {

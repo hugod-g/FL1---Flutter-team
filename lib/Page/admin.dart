@@ -78,18 +78,21 @@ class _AdminPage extends State<AdminPage> {
                     fontWeight: fontLight,
                     paddingTop: 20,
                     paddingBot: 8,
+                    color: navy,
                   ),
                   const CommonText(
                     text: "Admin",
                     fontSizeText: 30,
                     fontWeight: fontMedium,
                     paddingBot: 15,
+                    color: navy,
                   ),
                   const CommonText(
                     text: "Utilisateurs",
                     fontSizeText: 20,
                     fontWeight: fontLight,
                     paddingBot: 20,
+                    color: navy,
                   ),
                   if (isLoadingUsers)
                     SizedBox(
