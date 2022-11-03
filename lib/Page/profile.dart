@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Page/modifprofil.dart';
-import 'package:mon_petit_entretien/Page/vue_vehicule.dart';
 import 'package:mon_petit_entretien/Page/web/profil_web.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
@@ -25,7 +24,6 @@ class _ProfilPage extends State<ProfilPage> {
   String age = "21";
 
   @override
-
   Widget build(BuildContext context) {
 
     final double currentWith = MediaQuery.of(context).size.width;
@@ -34,142 +32,122 @@ class _ProfilPage extends State<ProfilPage> {
       return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
-        body :
-          Padding(
-            padding: const EdgeInsets.all(22.5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Center(
-                  child: Column(
-                    children: <Widget>[
-                      const Padding(
-                        padding: EdgeInsets.only(top: 17.5),
-                        child: CircleAvatar(
-                          radius: 70,
-                          backgroundColor: Colors.amber,
-                          backgroundImage: AssetImage('assets/image/logo.png'),
+        body : Padding(
+          padding: const EdgeInsets.all(22.5),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Center(
+                child: Column(
+                  children: <Widget>[
+                    const Align(
+                      alignment: Alignment.topLeft,
+                      child: CommonText(
+                        text: 'Mon',
+                        fontSizeText: 30,
+                        fontWeight: fontLight,
+                        paddingTop: 24,
+                        paddingBot: 8,
+                        color: navy,
+                      ),
+                    ),
+                    const Align(
+                      alignment: Alignment.topLeft,
+                      child: CommonText(
+                        text: 'Profile',
+                        fontSizeText: 30,
+                        fontWeight: fontMedium,
+                        paddingBot: 15,
+                        color: navy,
+                      ),
+                    ),
+                    const Align(
+                      alignment: Alignment.topLeft,
+                      child: CommonText(
+                        text: 'Mes informations',
+                        fontSizeText: 20,
+                        fontWeight: fontLight,
+                        paddingBot: 20,
+                        color: navy,
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 17.5),
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundColor: Colors.amber,
+                        backgroundImage: AssetImage('assets/image/logo.png'),
+                      ),
+                    ),
+                    const CommonText(
+                        text: "Eliott Aunoble",
+                        fontSizeText: 22,
+                        fontWeight: fontBold,
+                        paddingTop: 16,
+                        color: navy,
+                      ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30),
+                      child : Column(
+                        children: <Widget>[
+                          Row(
+                            children: const <Widget>[
+                              Icon(Icons.people),
+                              Padding(
+                                padding: EdgeInsets.only(left: 12.5),
+                                child: CommonText(
+                                  text: "Email",
+                                  fontSizeText: 18,
+                                  fontWeight: fontBold,
+                                  color: navy,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: CommonText(
+                              text: email,
+                              fontSizeText: 16,
+                              fontWeight: fontLight,
+                              paddingTop: 10,
+                              color: navy,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 25),
+                      child: Button(
+                        text: "Modifier le profil",
+                        onPress: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => const ModifProfilPage(),
+                          ),
                         ),
                       ),
-                      const CommonText(
-                          text: "Eliott Aunoble",
-                          fontSizeText: 22,
-                          fontWeight: fontBold,
-                          paddingTop: 16,
-                          color: navy,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 25),
+                      child: Button(
+                        text: "Déconnexion",
+                        onPress: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => const ModifProfilPage(),
+                          ),
                         ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30),
-                        child : Column(
-                          children: <Widget>[
-                            Row(
-                              children: const <Widget>[
-                                Icon(Icons.people),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 12.5),
-                                  child: CommonText(
-                                    text: "Email",
-                                    fontSizeText: 18,
-                                    fontWeight: fontBold,
-                                    color: navy,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: CommonText(
-                                text: email,
-                                fontSizeText: 16,
-                                fontWeight: fontLight,
-                                paddingTop: 10,
-                                color: navy,
-                              ),
-                            ),
-                          ],
-                        ),
+                        secondary: true,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30),
-                        child : Column(
-                          children: <Widget>[
-                            Row(
-                              children: const <Widget>[
-                                Icon(Icons.people),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 12.5),
-                                  child: CommonText(
-                                    text: "Email",
-                                    fontSizeText: 18,
-                                    fontWeight: fontBold,
-                                    color: navy,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: CommonText(
-                                text: email,
-                                fontSizeText: 16,
-                                fontWeight: fontLight,
-                                paddingTop: 10,
-                                color: navy,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30),
-                        child : Column(
-                          children: <Widget>[
-                            Row(
-                              children: const <Widget>[
-                                Icon(Icons.people),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 12.5),
-                                  child: CommonText(
-                                    text: "Email",
-                                    fontSizeText: 18,
-                                    fontWeight: fontBold,
-                                    color: navy,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: CommonText(
-                                text: email,
-                                fontSizeText: 16,
-                                fontWeight: fontLight,
-                                paddingTop: 10,
-                                color: navy,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.only(top: 25),
-                          child: Button(
-                                text: "Modif Profil",
-                                onPress: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) => const ModifProfilPage(),
-                                  ),
-                                ),
-                                secondary: true,
-                              ),
-                        ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
+        ),
       );
     } else {
       return const ProfilWebPage();
