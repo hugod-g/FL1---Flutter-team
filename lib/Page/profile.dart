@@ -37,14 +37,14 @@ class _ProfilPage extends State<ProfilPage> {
               Center(
                 child: Column(
                   children: <Widget>[
-                    const Padding(
-                      padding: EdgeInsets.only(top: 17.5),
-                      child: CircleAvatar(
-                        radius: 70,
-                        backgroundColor: Colors.amber,
-                        backgroundImage: AssetImage('assets/image/logo.png'),
-                      ),
-                    ),
+                    // const Padding(
+                    //   padding: EdgeInsets.only(top: 17.5),
+                    //   child: CircleAvatar(
+                    //     radius: 70,
+                    //     backgroundColor: Colors.amber,
+                    //     backgroundImage: AssetImage('assets/image/logo.png'),
+                    //   ),
+                    // ),
                     const CommonText(
                       text: "Eliott Aunoble",
                       fontSizeText: 22,
