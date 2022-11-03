@@ -74,7 +74,7 @@ class _LoginPage extends State<LoginPage> {
   }
 
   void _onSignUpPress() {
-    Navigator.popAndPushNamed(context, '/register');
+    Navigator.pushNamed(context, '/register');
   }
 
   @override
