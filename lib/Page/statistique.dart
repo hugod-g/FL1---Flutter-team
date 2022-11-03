@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Components/commentText.dart';
+import 'package:mon_petit_entretien/Components/comment_text.dart';
 import 'package:mon_petit_entretien/Page/web/stat_web.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 import '../Style/colors.dart';
@@ -14,7 +14,6 @@ class Statistique extends StatefulWidget {
 class _Statistique extends State<Statistique> {
   @override
   Widget build(BuildContext context) {
-
     final double currentWith = MediaQuery.of(context).size.width;
 
     if (currentWith < 800) {

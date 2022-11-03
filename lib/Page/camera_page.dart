@@ -1,8 +1,8 @@
 import 'package:camera/camera.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:mon_petit_entretien/Class/appClass.dart';
-import 'package:mon_petit_entretien/Page/addVehicule.dart';
+import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
+import 'package:mon_petit_entretien/Page/add_vehicule.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:provider/provider.dart';
 

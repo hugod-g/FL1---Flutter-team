@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Class/appClass.dart';
-import 'package:mon_petit_entretien/Class/vehicleClass.dart';
-import 'package:mon_petit_entretien/Components/button.dart';
-import 'package:mon_petit_entretien/Components/buttonSelect.dart';
-import 'package:mon_petit_entretien/Components/commentText.dart';
-import 'package:mon_petit_entretien/Page/addVehicule.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
+import 'package:mon_petit_entretien/Class/vehicle_class.dart';
+import 'package:mon_petit_entretien/Components/button_select.dart';
+import 'package:mon_petit_entretien/Components/comment_text.dart';
+import 'package:mon_petit_entretien/Components/text_input.dart';
+import 'package:mon_petit_entretien/Page/add_vehicule.dart';
 import 'package:mon_petit_entretien/Page/web/home_web.dart';
 import 'package:mon_petit_entretien/Services/api/vehicule.dart';
-import 'package:provider/provider.dart';
-import '../Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:provider/provider.dart';
 
-import 'package:mon_petit_entretien/Components/text_input.dart';
-
-import '../main.dart';
+import '../Style/colors.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -84,11 +81,10 @@ class _Home extends State<Home> {
     AppData data;
     data = Provider.of<AppData>(context, listen: false);
     List<vehiculeModel> newVehicules;
-    newVehicules =
-        await getVehicles(Provider.of<AppData>(context, listen: false).token);
-    newVehicules.forEach((newVehicule) {
+    newVehicules = await getVehicles(data.token);
+    for (vehiculeModel newVehicule in newVehicules) {
       data.vehicles.add(newVehicule);
-    });
+    }
     if (data.vehicles.isNotEmpty) {
       setState(() {
         isLoaded = true;
@@ -98,10 +94,9 @@ class _Home extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-
     final double currentWith = MediaQuery.of(context).size.width;
 
-    if (currentWith < 800)
+    if (currentWith < 800) {
       return Material(
         color: lightBlue,
         child: SafeArea(
@@ -141,16 +136,16 @@ class _Home extends State<Home> {
                   ),
                 ),
                 const CommonText(
-                    text: "Triez par :",
-                    fontSizeText: 20,
-                    fontWeight: fontLight,
-                    paddingTop: 10,
-                    paddingBot: 10,
-                    color: navy,
-                    ),
+                  text: "Triez par :",
+                  fontSizeText: 20,
+                  fontWeight: fontLight,
+                  paddingTop: 10,
+                  paddingBot: 10,
+                  color: navy,
+                ),
                 _sortCar(),
                 Padding(
-                  padding: EdgeInsets.only(top: 40),
+                  padding: const EdgeInsets.only(top: 40),
                   child: _listCar(),
                 ),
               ],
@@ -158,8 +153,9 @@ class _Home extends State<Home> {
           ),
         ),
       );
-    else
-      return HomeWebPage();
+    } else {
+      return const HomeWebPage();
+    }
   }
 
   Widget _listCar() {
@@ -170,7 +166,7 @@ class _Home extends State<Home> {
         scrollDirection: Axis.horizontal,
         children: <Widget>[
           _addCar(),
-          for (var vehicule
+          for (vehiculeModel vehicule
               in Provider.of<AppData>(context, listen: false).vehicles)
             _showCar(vehicule.name, vehicule.kilometrage.toString(),
                 vehicule.maintenances.length.toString(), vehicule.picturePath),
@@ -223,7 +219,6 @@ class _Home extends State<Home> {
               builder: (BuildContext context) => const AddVehicule(),
             ),
           );
-          print("ADD CAR");
         },
         child: Ink(
           child: Stack(
@@ -284,9 +279,6 @@ class _Home extends State<Home> {
     return Padding(
       padding: const EdgeInsets.only(right: 20),
       child: InkWell(
-        onTap: () {
-          print("SHOW CAR");
-        },
         child: Ink(
           child: Stack(
             children: [
@@ -327,14 +319,14 @@ class _Home extends State<Home> {
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 10, bottom: 10),
+                      padding: const EdgeInsets.only(left: 10, bottom: 10),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
                             name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: white,
                               fontSize: 30,
                               fontWeight: fontBold,
@@ -342,7 +334,7 @@ class _Home extends State<Home> {
                           ),
                           Text(
                             "$mileage km",
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: white,
                               fontSize: 20,
                               fontWeight: fontMedium,
@@ -358,7 +350,6 @@ class _Home extends State<Home> {
                       padding: const EdgeInsets.only(left: 30, bottom: 25),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           const Padding(
                             padding: EdgeInsets.only(bottom: 10),
@@ -383,10 +374,9 @@ class _Home extends State<Home> {
                                   BorderRadius.all(Radius.circular(8)),
                             ),
                             child: Align(
-                              alignment: Alignment.center,
                               child: Text(
                                 nbMaintenance,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 20, fontWeight: fontBold),
                               ),
                             ),

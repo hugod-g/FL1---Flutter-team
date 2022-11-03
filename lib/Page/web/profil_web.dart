@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Components/web/burgerMenu.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
-import 'package:mon_petit_entretien/Style/fonts.dart';
-
-import '../../Components/commentText.dart';
 
 class ProfilWebPage extends StatefulWidget {
-
   const ProfilWebPage({Key? key}) : super(key: key);
 
   @override
@@ -15,11 +11,10 @@ class ProfilWebPage extends StatefulWidget {
 }
 
 class _ProfilWebPage extends State<ProfilWebPage> {
-
   Widget body() {
-    return
-      Container(color: gray,)
-    ;
+    return Container(
+      color: gray,
+    );
   }
 
   @override
@@ -28,12 +23,11 @@ class _ProfilWebPage extends State<ProfilWebPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      body :
-        body(),
+      body: body(),
       appBar: AppBar(
         title: const Text('Mon Petit Entretient'),
         backgroundColor: blue,
-        ),
+      ),
       drawer: Theme(
         data: Theme.of(context).copyWith(canvasColor: gray),
         child: const BurgerMenu(),

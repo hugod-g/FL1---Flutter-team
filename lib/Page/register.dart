@@ -60,12 +60,8 @@ class _RegisterPage extends State<RegisterPage> {
           await registerCall(email, password, firstname, lastname, context);
 
       if (response == 200) {
-        await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => const GestionPage(),
-          ),
-        );
+        // ignore: use_build_context_synchronously
+        await Navigator.popAndPushNamed(context, '/gestion');
       }
     } catch (e) {
       setState(() {

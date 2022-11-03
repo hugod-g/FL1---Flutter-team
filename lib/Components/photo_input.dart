@@ -2,12 +2,12 @@ import 'package:camera/camera.dart'
     show CameraDescription, XFile, availableCameras;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mon_petit_entretien/Class/appClass.dart';
-import 'package:mon_petit_entretien/Components/commentText.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
+import 'package:mon_petit_entretien/Components/comment_text.dart';
 import 'package:provider/provider.dart';
 import '../Style/colors.dart';
 
-import '../Page/cameraPage.dart';
+import '../Page/camera_page.dart';
 
 class PhotoInput extends StatefulWidget {
   const PhotoInput({

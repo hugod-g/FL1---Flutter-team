@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Page/addVehicule.dart';
+import 'package:mon_petit_entretien/Page/add_vehicule.dart';
+import 'package:mon_petit_entretien/Page/admin.dart';
+import 'package:mon_petit_entretien/Page/gestion.dart';
 import 'package:mon_petit_entretien/Page/profile.dart';
 import 'package:mon_petit_entretien/Page/statistique.dart';
-import 'package:mon_petit_entretien/Page/web/home_web.dart';
-import 'package:mon_petit_entretien/Page/web/profil_web.dart';
-import 'package:mon_petit_entretien/Page/web/stat_web.dart';
 import 'package:provider/provider.dart';
-import 'Class/appClass.dart';
+
+import 'Class/app_class.dart';
+import 'Page/home.dart';
 import 'Page/login.dart';
 import 'Page/register.dart';
-import 'Page/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<AppData>(
-      create: (context) => AppData(),
+      create: (BuildContext context) => AppData(),
       child: MaterialApp(
         routes: {
           '/login': (BuildContext context) => const LoginPage(),
@@ -29,6 +29,8 @@ class MyApp extends StatelessWidget {
           '/home': (BuildContext context) => const Home(),
           '/addVehicule': (BuildContext context) => const AddVehicule(),
           '/stats': (BuildContext context) => const Statistique(),
+          '/gestion': (BuildContext context) => const GestionPage(),
+          '/admin': (BuildContext context) => const AdminPage(),
           '/profil': (BuildContext context) => const ProfilPage(),
         },
         home: const LoginPage(),

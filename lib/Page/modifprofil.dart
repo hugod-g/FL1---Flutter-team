@@ -5,11 +5,10 @@ import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
-import '../Components/commentText.dart';
+import '../Components/comment_text.dart';
 import '../Style/colors.dart';
 
 class ModifProfilPage extends StatefulWidget {
-
   const ModifProfilPage({Key? key}) : super(key: key);
 
   @override
@@ -17,7 +16,6 @@ class ModifProfilPage extends StatefulWidget {
 }
 
 class _ModifProfilPage extends State<ModifProfilPage> {
-
   String name = "";
   String email = "";
   String info = "";
@@ -45,63 +43,62 @@ class _ModifProfilPage extends State<ModifProfilPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      body :
-        Padding(
-          padding: const EdgeInsets.all(22.5),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Center(
-                child: Column(
-                  children: <Widget>[
-                    const Align(
-                      alignment: Alignment.topLeft,
-                      child: CommonText(
-                        text: "Modification du Profile",
-                        fontSizeText: 25,
-                        fontWeight: fontBold,
-                        paddingTop: 25,
-                        color: navy,
-                      ),
+      body: Padding(
+        padding: const EdgeInsets.all(22.5),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Center(
+              child: Column(
+                children: <Widget>[
+                  const Align(
+                    alignment: Alignment.topLeft,
+                    child: CommonText(
+                      text: "Modification du Profile",
+                      fontSizeText: 25,
+                      fontWeight: fontBold,
+                      paddingTop: 25,
+                      color: navy,
                     ),
-                    Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: TextInput(
-                          value: name,
-                          placeholder: "Name",
-                          onChangeText: _onNameChange,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: TextInput(
-                          value: name,
-                          placeholder: "Email",
-                          onChangeText: _onEmailChange,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: TextInput(
-                          value: name,
-                          placeholder: "Info",
-                          onChangeText: _onInfoChange,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: Button(
-                              text: "Sauvegarder",
-                              onPress: () => Navigator.pop(context),
-                              secondary: true,
-                            ),
-                      ),
-                  ],
-                ),
-              )
-            ],
-          ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: TextInput(
+                      value: name,
+                      placeholder: "Name",
+                      onChangeText: _onNameChange,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: TextInput(
+                      value: name,
+                      placeholder: "Email",
+                      onChangeText: _onEmailChange,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: TextInput(
+                      value: name,
+                      placeholder: "Info",
+                      onChangeText: _onInfoChange,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: Button(
+                      text: "Sauvegarder",
+                      onPress: () => Navigator.pop(context),
+                      secondary: true,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
+      ),
     );
   }
 }

@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
-import '../Components/commentText.dart';
+import '../Components/comment_text.dart';
 
 class VueVehiculePage extends StatefulWidget {
-
   const VueVehiculePage({Key? key}) : super(key: key);
 
   @override
@@ -14,13 +13,12 @@ class VueVehiculePage extends StatefulWidget {
 }
 
 class _VueVehiculePage extends State<VueVehiculePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      body : Column(
+      body: Column(
         children: <Widget>[
           Stack(
             children: <Widget>[
@@ -40,7 +38,8 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 40, left: 12.5, right: 12.5),
+                padding:
+                    const EdgeInsets.only(top: 40, left: 12.5, right: 12.5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -52,8 +51,7 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                     IconButton(
                       icon: const Icon(Icons.integration_instructions),
                       iconSize: 35,
-                      onPressed: () {
-                      },
+                      onPressed: () {},
                     ),
                   ],
                 ),
@@ -90,15 +88,16 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                           color: navy,
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 24, right: 16, left: 16),
+                          padding: const EdgeInsets.only(
+                              top: 24, right: 16, left: 16),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Row(
                                 children: const <Widget>[
                                   Icon(
-                                     Icons.calendar_today,
-                                      size: 25,
+                                    Icons.calendar_today,
+                                    size: 25,
                                   ),
                                   CommonText(
                                     text: "12/12/2022",
@@ -111,8 +110,8 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                               Row(
                                 children: const <Widget>[
                                   Icon(
-                                     Icons.mode_of_travel,
-                                      size: 25,
+                                    Icons.mode_of_travel,
+                                    size: 25,
                                   ),
                                   CommonText(
                                     text: "2000 km",
@@ -144,8 +143,8 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                   color: navy,
                 ),
                 Icon(
-                    Icons.car_repair,
-                    size: 35,
+                  Icons.car_repair,
+                  size: 35,
                 ),
               ],
             ),
@@ -157,7 +156,7 @@ class _VueVehiculePage extends State<VueVehiculePage> {
             scrollDirection: Axis.horizontal,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const <Widget> [
+              children: const <Widget>[
                 CardVehicule(
                   prix: '200',
                   title: 'Roue',
@@ -182,16 +181,15 @@ class _VueVehiculePage extends State<VueVehiculePage> {
 }
 
 class CardVehicule extends StatelessWidget {
-
-  const CardVehicule(
-    {Key? key,
+  const CardVehicule({
+    Key? key,
     required this.prix,
     required this.title,
     required this.date,
     required this.km,
     required this.location,
-    }) : super(key: key);
-  
+  }) : super(key: key);
+
   final String prix;
   final String title;
   final String date;
@@ -200,84 +198,82 @@ class CardVehicule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return 
-      Container(
-        height: MediaQuery.of(context).size.height * 0.21,
-        width: MediaQuery.of(context).size.width * 0.55,
-        decoration: BoxDecoration(
-          color: blue,
-          borderRadius: BorderRadius.circular(12.5),
-        ),
-        child: Row(
-          children: <Widget> [
-            Padding(
-              padding: const EdgeInsets.only(left: 24),
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.21,
-                width: MediaQuery.of(context).size.width * 0.1,
-                color: white,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8, bottom: 8),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget> [
-                      const Icon(
-                        Icons.car_repair,
-                        size: 30,
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.21,
+      width: MediaQuery.of(context).size.width * 0.55,
+      decoration: BoxDecoration(
+        color: blue,
+        borderRadius: BorderRadius.circular(12.5),
+      ),
+      child: Row(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(left: 24),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.21,
+              width: MediaQuery.of(context).size.width * 0.1,
+              color: white,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8, bottom: 8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    const Icon(
+                      Icons.car_repair,
+                      size: 30,
+                    ),
+                    RotatedBox(
+                      quarterTurns: 3,
+                      child: CommonText(
+                        text: '$prix €',
+                        fontSizeText: 17,
+                        fontWeight: fontBold,
+                        color: navy,
                       ),
-                      RotatedBox(
-                        quarterTurns: 3,
-                        child: CommonText(
-                          text: '$prix €',
-                          fontSizeText: 17,
-                          fontWeight: fontBold,
-                          color: navy,
-                        ),
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget> [
-                CommonText(
-                  text: title,
-                  fontSizeText: 20,
-                  fontWeight: fontBold,
-                  paddingTop: 8,
-                  paddingLeft: 16,
-                  color: white,
-                ),
-                CommonText(
-                  text: date,
-                  fontSizeText: 17.5,
-                  fontWeight: fontLight,
-                  paddingTop: 24,
-                  paddingLeft: 16,
-                  color: white,
-                ),
-                CommonText(
-                  text: '$km km',
-                  fontSizeText: 17.5,
-                  fontWeight: fontLight,
-                  paddingLeft: 16,
-                  color: white,
-                ),
-                CommonText(
-                  text: location,
-                  fontSizeText: 15,
-                  fontWeight: fontLight,
-                  paddingTop: 16,
-                  paddingLeft: 16,
-                  color: white,
-                ),
-              ],
-            )
-          ],
-        ),
-      )
-    ;
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              CommonText(
+                text: title,
+                fontSizeText: 20,
+                fontWeight: fontBold,
+                paddingTop: 8,
+                paddingLeft: 16,
+                color: white,
+              ),
+              CommonText(
+                text: date,
+                fontSizeText: 17.5,
+                fontWeight: fontLight,
+                paddingTop: 24,
+                paddingLeft: 16,
+                color: white,
+              ),
+              CommonText(
+                text: '$km km',
+                fontSizeText: 17.5,
+                fontWeight: fontLight,
+                paddingLeft: 16,
+                color: white,
+              ),
+              CommonText(
+                text: location,
+                fontSizeText: 15,
+                fontWeight: fontLight,
+                paddingTop: 16,
+                paddingLeft: 16,
+                color: white,
+              ),
+            ],
+          )
+        ],
+      ),
+    );
   }
 }

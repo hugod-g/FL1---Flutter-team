@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:mon_petit_entretien/Class/appClass.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Config/endpoint.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,7 +10,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
 Future<int> loginCall(
-    String email, String password, BuildContext context) async {
+  String email,
+  String password,
+  BuildContext context,
+) async {
   final SharedPreferences prefs = await _prefs;
 
   final http.Response response = await http.post(
