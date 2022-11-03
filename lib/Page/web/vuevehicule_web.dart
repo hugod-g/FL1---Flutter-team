@@ -16,6 +16,12 @@ class VueVehiculeWebPage extends StatefulWidget {
 
 class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
 
+  final String prix = "200";
+  final String title = "Roue";
+  final String date = "12/20/2022";
+  final String km = "2000";
+  final String enterprise = "Point S";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -163,21 +169,21 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
             scrollDirection: Axis.horizontal,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const <Widget> [
+              children: <Widget> [
                 CardVehiculeWeb(
-                  prix: '200',
-                  title: 'Roue',
-                  date: '12/12/2022',
-                  km: '2000',
-                  location: 'Point S',
+                  prix: prix,
+                  title: title,
+                  date: date,
+                  km: km,
+                  enterprise: enterprise,
                 ),
                 CardVehiculeWeb(
-                  prix: '200',
-                  title: 'Roue',
-                  date: '12/12/2022',
-                  km: '2000',
-                  location: 'Point S',
-                ),
+                  prix: prix,
+                  title: title,
+                  date: date,
+                  km: km,
+                  enterprise: enterprise,
+                  ),
               ],
             ),
           ),
@@ -203,14 +209,14 @@ class CardVehiculeWeb extends StatelessWidget {
     required this.title,
     required this.date,
     required this.km,
-    required this.location,
+    required this.enterprise,
     }) : super(key: key);
   
   final String prix;
   final String title;
   final String date;
   final String km;
-  final String location;
+  final String enterprise;
 
   @override
   Widget build(BuildContext context) {
@@ -282,7 +288,7 @@ class CardVehiculeWeb extends StatelessWidget {
                     color: white,
                   ),
                   CommonText(
-                    text: location,
+                    text: enterprise,
                     fontSizeText: 15,
                     fontWeight: fontLight,
                     paddingTop: 16,

@@ -37,7 +37,7 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      backgroundColor: lightBlue,
       body : Padding(
         padding: const EdgeInsets.only(top: 75, bottom: 125, left: 600, right: 600),
         child: Column(
@@ -46,7 +46,7 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
               child: Column(
                 children: <Widget>[
                   const CommonText(
-                    text: 'Modification du profile',
+                    text: 'Modification du profil',
                     fontSizeText: 40,
                     fontWeight: fontMedium,
                     paddingTop: 44,

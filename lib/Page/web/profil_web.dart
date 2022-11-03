@@ -25,7 +25,7 @@ class _ProfilWebPage extends State<ProfilWebPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      backgroundColor: lightBlue,
       body :
         Padding(
           padding: const EdgeInsets.only(top: 75, bottom: 125, left: 125, right: 125),
@@ -35,7 +35,7 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                 child: Column(
                   children: <Widget>[
                     const CommonText(
-                      text: 'Mon Profile',
+                      text: 'Mon Profil',
                       fontSizeText: 40,
                       fontWeight: fontMedium,
                       paddingTop: 24,
@@ -54,7 +54,7 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                       child: CircleAvatar(
                         radius: 90,
                         backgroundColor: Colors.amber,
-                        backgroundImage: AssetImage('assets/image/logo.png'),
+                        backgroundImage: AssetImage('assets/avatar.jpg'),
                       ),
                     ),
                     const CommonText(
@@ -112,12 +112,7 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                                 padding: const EdgeInsets.only(left: 75, right: 75),
                                 child: Button(
                                   text: "Modifier le profil",
-                                  onPress: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (BuildContext context) => const ModifProfilWebPage(),
-                                    ),
-                                  ),
+                                  onPress: () => Navigator.pushNamed(context, '/modifProfil'),
                                 ),
                               ),
                             ),
@@ -126,12 +121,7 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                                 padding: const EdgeInsets.only(left: 75, right: 75),
                                 child: Button(
                                   text: "Déconnexion",
-                                  onPress: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (BuildContext context) => const ModifProfilWebPage(),
-                                    ),
-                                  ),
+                                  onPress: () => Navigator.pushNamed(context, '/modifProfil'),
                                   secondary: true,
                                 ),
                               ),

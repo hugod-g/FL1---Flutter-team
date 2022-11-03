@@ -20,11 +20,17 @@ class _VueVehiculePage extends State<VueVehiculePage> {
   Widget build(BuildContext context) {
     
     final double currentWith = MediaQuery.of(context).size.width;
+    const String prix = "200";
+    const String title = "Roue";
+    const String date = "12/20/2022";
+    const String km = "2000";
+    const String enterprise = "Point S";
+
 
     if (currentWith < 800) {
       return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
+        backgroundColor: lightBlue,
         body : Column(
           children: <Widget>[
             Stack(
@@ -162,20 +168,20 @@ class _VueVehiculePage extends State<VueVehiculePage> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const <Widget> [
+                children: <Widget> [
                   CardVehicule(
-                    prix: '200',
-                    title: 'Roue',
-                    date: '12/12/2022',
-                    km: '2000',
-                    location: 'Point S',
+                    prix: prix,
+                    title: title,
+                    date: date,
+                    km: km,
+                    enterprise: enterprise,
                   ),
                   CardVehicule(
-                    prix: '200',
-                    title: 'Roue',
-                    date: '12/12/2022',
-                    km: '2000',
-                    location: 'Point S',
+                    prix: prix,
+                    title: title,
+                    date: date,
+                    km: km,
+                    enterprise: enterprise,
                   ),
                 ],
               ),
@@ -197,14 +203,14 @@ class CardVehicule extends StatelessWidget {
     required this.title,
     required this.date,
     required this.km,
-    required this.location,
+    required this.enterprise,
     }) : super(key: key);
   
   final String prix;
   final String title;
   final String date;
   final String km;
-  final String location;
+  final String enterprise;
 
   @override
   Widget build(BuildContext context) {
@@ -274,7 +280,7 @@ class CardVehicule extends StatelessWidget {
                   color: white,
                 ),
                 CommonText(
-                  text: location,
+                  text: enterprise,
                   fontSizeText: 15,
                   fontWeight: fontLight,
                   paddingTop: 16,

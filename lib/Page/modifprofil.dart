@@ -42,7 +42,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
     if (currentWith < 800) {
       return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
+        backgroundColor: lightBlue,
         body :
           Padding(
             padding: const EdgeInsets.all(22.5),
@@ -66,7 +66,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                       const Align(
                         alignment: Alignment.topLeft,
                         child: CommonText(
-                          text: 'du profile',
+                          text: 'du profil',
                           fontSizeText: 30,
                           fontWeight: fontMedium,
                           paddingBot: 15,

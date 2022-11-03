@@ -31,7 +31,7 @@ class _ProfilPage extends State<ProfilPage> {
     if (currentWith < 800) {
       return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
+        backgroundColor: lightBlue,
         body : Padding(
           padding: const EdgeInsets.all(22.5),
           child: Column(
@@ -54,7 +54,7 @@ class _ProfilPage extends State<ProfilPage> {
                     const Align(
                       alignment: Alignment.topLeft,
                       child: CommonText(
-                        text: 'Profile',
+                        text: 'Profil',
                         fontSizeText: 30,
                         fontWeight: fontMedium,
                         paddingBot: 15,
@@ -76,7 +76,7 @@ class _ProfilPage extends State<ProfilPage> {
                       child: CircleAvatar(
                         radius: 50,
                         backgroundColor: Colors.amber,
-                        backgroundImage: AssetImage('assets/image/logo.png'),
+                        backgroundImage: AssetImage('assets/avatar.jpg'),
                       ),
                     ),
                     const CommonText(
@@ -121,24 +121,14 @@ class _ProfilPage extends State<ProfilPage> {
                       padding: const EdgeInsets.only(top: 25),
                       child: Button(
                         text: "Modifier le profil",
-                        onPress: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => const ModifProfilPage(),
-                          ),
-                        ),
+                        onPress: () => Navigator.pushNamed(context, '/modifProfile'),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 25),
                       child: Button(
                         text: "Déconnexion",
-                        onPress: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => const ModifProfilPage(),
-                          ),
-                        ),
+                        onPress: () => Navigator.pushNamed(context, '/modifProfil'),
                         secondary: true,
                       ),
                     ),
