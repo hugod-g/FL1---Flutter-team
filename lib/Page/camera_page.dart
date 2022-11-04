@@ -2,7 +2,6 @@ import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
-import 'package:mon_petit_entretien/Page/add_vehicule.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -47,10 +46,8 @@ class _CameraPageState extends State<CameraPage> {
     }
     try {
       await _cameraController.setFlashMode(FlashMode.off);
-      // ignore: prefer_final_locals
-      XFile picture = await _cameraController.takePicture();
+      final XFile picture = await _cameraController.takePicture();
       data.vehicles.last.updatePicturePath(picture.path);
-      print("la apres  ferniere image est ${data.vehicles.last.picturePath}");
       // ignore: use_build_context_synchronously
       Navigator.pop(context);
     } on CameraException catch (e) {
@@ -59,7 +56,7 @@ class _CameraPageState extends State<CameraPage> {
     }
   }
 
-  Future initCamera(CameraDescription cameraDescription) async {
+  void initCamera(CameraDescription cameraDescription) async {
     _cameraController =
         CameraController(cameraDescription, ResolutionPreset.high);
     try {

@@ -26,6 +26,16 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+    <key>NSBonjourServices</key>
+    <array>
+        <string>_dartobservatory._tcp</string>
+    </array>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Autoriser MPE a accéder à votre microphone</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Autoriser MPE a accéder à votre librairie</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Autoriser MPE a accéder à votre caméra</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>

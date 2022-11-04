@@ -54,7 +54,6 @@ class _AddVehicule extends State<AddVehicule> {
     return takePictureGalery(data);
   }
 
-  // ignore: always_specify_types
   Future<int> takePictureGalery(AppData data) async {
     String newPath = '/assets/car.jpg';
     final XFile? file =
@@ -174,26 +173,22 @@ class _AddVehicule extends State<AddVehicule> {
                     context: context,
                     builder: (BuildContext context) {
                       return SizedBox(
-                        height: 100,
+                        height: 150,
                         child: Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               SizedBox(
-                                height: 100,
+                                height: 150,
                                 width: double.infinity,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 16,
-                                    right: 16,
-                                  ),
+                                  padding: const EdgeInsets.all(24),
                                   child: Column(
                                     children: <Widget>[
                                       Padding(
                                         padding: const EdgeInsets.only(
-                                          bottom: 10,
-                                          top: 13,
+                                          bottom: 16,
                                         ),
                                         child: InkWell(
                                           onTap: () async {
