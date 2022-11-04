@@ -1,11 +1,13 @@
 import 'dart:io';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/comment_text.dart';
-import 'package:mon_petit_entretien/Components/photo_input.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
+import 'package:mon_petit_entretien/Page/camera_page.dart';
 import 'package:mon_petit_entretien/Page/home.dart';
 import 'package:mon_petit_entretien/Services/api/vehicule.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
@@ -46,52 +48,92 @@ class _AddVehicule extends State<AddVehicule> {
     });
   }
 
-  void _onAddVehicule() async {
-    await createVehicle(
-      Provider.of<AppData>(context, listen: false).token,
+  Future<int> takePictureGaleryLoaded() {
+    AppData data;
+    data = Provider.of<AppData>(context, listen: false);
+    return takePictureGalery(data);
+  }
+
+  // ignore: always_specify_types
+  Future<int> takePictureGalery(AppData data) async {
+    String newPath = '/assets/car.jpg';
+    final XFile? file =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (file == null) {
+      data.vehicles.last.updatePicturePath(newPath);
+      return 401;
+    } else {
+      newPath = file.path;
+      data.vehicles.last.updatePicturePath(newPath);
+      return 200;
+    }
+  }
+
+  void _onAddVehicule() {
+    AppData data;
+    data = Provider.of<AppData>(context, listen: false);
+
+    _onAddVehiculeAsync(data).then((int response) {
+      if (response == 200) {
+        data.vehicles.removeLast();
+        setState(() {
+          isThereAnImage = false;
+        });
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute<Home>(
+            builder: (BuildContext context) => const Home(),
+          ),
+          (Route route) => false,
+        );
+      } else {
+        const SnackBar snackBar = SnackBar(
+          content: Text('Le véhicule n\'a pas pu être ajouté'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    });
+  }
+
+  Future<int> _onAddVehiculeAsync(AppData data) async {
+    final int response = await createVehicle(
+      data.token,
       name,
       date,
       kilometer,
-      File(
-        Provider.of<AppData>(context, listen: false).vehicles.last.picturePath,
-      ),
+      data.vehicles.last.picturePath,
     );
 
-    await Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(
-        builder: (BuildContext context) => Home(),
-      ),
-      (Route route) => false,
-    );
-    //Navigator.pop(context);
+    if (response == 200) {
+      return 200;
+    } else {}
+    return 500;
   }
 
   void isThereImage() {
-    if (Provider.of<AppData>(context, listen: false).vehicles.isNotEmpty) {
-      if (Provider.of<AppData>(context, listen: false)
-                  .vehicles
-                  .last
-                  .picturePath !=
-              '/assets/car.jpg' ||
-          Provider.of<AppData>(context, listen: false)
-                  .vehicles
-                  .last
-                  .picturePath !=
-              '') {
+    final AppData appData = Provider.of<AppData>(context, listen: false);
+    if (appData.vehicles.isNotEmpty) {
+      if (appData.vehicles.last.picturePath != "") {
         setState(() {
           isThereAnImage = true;
         });
       }
     }
-    print("is there an image?");
   }
 
   @override
   void initState() {
-    isThereImage();
-    // TODO: implement initState
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<AppData>(context, listen: false).addDataVehicle(
+        "tmp",
+        0,
+        "",
+        DateTime.now().toString(),
+        '0',
+      );
+      isThereImage();
+    });
   }
 
   @override
@@ -131,17 +173,114 @@ class _AddVehicule extends State<AddVehicule> {
                   showModalBottomSheet<void>(
                     context: context,
                     builder: (BuildContext context) {
-                      return Container(
+                      return SizedBox(
                         height: 100,
                         child: Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
-                              PhotoInput(
-                                value: image,
-                                placeholder: "Image",
-                              ),
+                              SizedBox(
+                                height: 100,
+                                width: double.infinity,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 16,
+                                    right: 16,
+                                  ),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          bottom: 10,
+                                          top: 13,
+                                        ),
+                                        child: InkWell(
+                                          onTap: () async {
+                                            await availableCameras().then(
+                                              (List<CameraDescription> value) =>
+                                                  Navigator.push(
+                                                context,
+                                                // ignore: always_specify_types
+                                                MaterialPageRoute(
+                                                  builder: (_) => CameraPage(
+                                                    cameras: value,
+                                                  ),
+                                                ),
+                                              ).then((_) {
+                                                AppData data;
+                                                data = Provider.of<AppData>(
+                                                  context,
+                                                  listen: false,
+                                                );
+                                                if (data.vehicles.last
+                                                        .picturePath !=
+                                                    "") {
+                                                  setState(() {
+                                                    isThereAnImage = true;
+                                                  });
+                                                }
+                                              }),
+                                            );
+                                          },
+                                          child: Ink(
+                                            child: Row(
+                                              children: const <Widget>[
+                                                Icon(
+                                                  Icons.camera_alt,
+                                                  size: 30,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      EdgeInsets.only(left: 10),
+                                                  child: CommonText(
+                                                    text: "Camera",
+                                                    fontSizeText: 20,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    color: navy,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          takePictureGaleryLoaded()
+                                              .then((int value) {
+                                            if (value == 200) {}
+                                            setState(() {
+                                              isThereAnImage = true;
+                                            });
+                                          });
+                                        },
+                                        child: Ink(
+                                          child: Row(
+                                            children: const <Widget>[
+                                              Icon(
+                                                Icons.photo,
+                                                size: 30,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 10),
+                                                child: CommonText(
+                                                  text: "Galerie",
+                                                  fontSizeText: 20,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: navy,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         ),
@@ -151,7 +290,7 @@ class _AddVehicule extends State<AddVehicule> {
                 },
                 child: isThereAnImage
                     ? Center(
-                        child: Container(
+                        child: SizedBox(
                           width: 200,
                           height: 200,
                           child: Image.file(
