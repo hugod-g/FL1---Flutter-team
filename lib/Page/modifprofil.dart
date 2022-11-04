@@ -6,11 +6,10 @@ import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Page/web/modifprofil_web.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
-import '../Components/commentText.dart';
+import '../Components/comment_text.dart';
 import '../Style/colors.dart';
 
 class ModifProfilPage extends StatefulWidget {
-
   const ModifProfilPage({Key? key}) : super(key: key);
 
   @override

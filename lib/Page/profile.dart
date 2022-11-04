@@ -6,11 +6,10 @@ import 'package:mon_petit_entretien/Page/modifprofil.dart';
 import 'package:mon_petit_entretien/Page/web/profil_web.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
-import '../Components/commentText.dart';
+import '../Components/comment_text.dart';
 import '../Style/colors.dart';
 
 class ProfilPage extends StatefulWidget {
-
   const ProfilPage({Key? key}) : super(key: key);
 
   @override
@@ -18,14 +17,12 @@ class ProfilPage extends StatefulWidget {
 }
 
 class _ProfilPage extends State<ProfilPage> {
-
   String name = "Eliott Aunoble";
   String email = "ea.aunoble@gmail.com";
   String age = "21";
 
   @override
   Widget build(BuildContext context) {
-
     final double currentWith = MediaQuery.of(context).size.width;
 
     if (currentWith < 800) {
@@ -121,14 +118,14 @@ class _ProfilPage extends State<ProfilPage> {
                       padding: const EdgeInsets.only(top: 25),
                       child: Button(
                         text: "Modifier le profil",
-                        onPress: () => Navigator.pushNamed(context, '/modifProfile'),
+                        onPress: () => Navigator.pushNamed(context, '/modifProfil'),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 25),
                       child: Button(
                         text: "Déconnexion",
-                        onPress: () => Navigator.pushNamed(context, '/modifProfil'),
+                        onPress: () => Navigator.pushNamed(context, '/vueVehicule'),
                         secondary: true,
                       ),
                     ),

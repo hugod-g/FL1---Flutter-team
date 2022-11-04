@@ -1,8 +1,14 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
+import 'package:mon_petit_entretien/Class/user_class.dart';
+import 'package:mon_petit_entretien/Page/admin.dart';
 import 'package:mon_petit_entretien/Page/home.dart';
 import 'package:mon_petit_entretien/Page/profile.dart';
 import 'package:mon_petit_entretien/Page/statistique.dart';
+import 'package:mon_petit_entretien/Services/api/user.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:provider/provider.dart';
 import '../Style/colors.dart';
 
 class GestionPage extends StatefulWidget {
@@ -13,35 +19,47 @@ class GestionPage extends StatefulWidget {
 }
 
 class _GestionPage extends State<GestionPage> {
-  int index = 1;
+  int index = 0;
 
   @override
   void initState() {
     super.initState();
+    getUserProfile();
   }
 
-  PageController pageController = PageController(
-    initialPage: 1,
-    keepPage: true,
-  );
+  void getUserProfile() async {
+    final AppData data = Provider.of<AppData>(context, listen: false);
+
+    final UserModel profile = await getProfileCall(data.token);
+
+    data.user = profile;
+  }
+
+  PageController pageController = PageController();
 
   List<BottomNavigationBarItem> buildBottomNavBarItems() {
-    return const [
-      BottomNavigationBarItem(
+    return [
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.car_repair),
+        label: 'Véhicules',
+        backgroundColor: lightBlue,
+      ),
+      const BottomNavigationBarItem(
         icon: Icon(Icons.query_stats_sharp),
-        label: 'Statistique',
+        label: 'Statistiques',
         backgroundColor: lightBlue,
       ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.home),
-        label: 'Home',
-        backgroundColor: lightBlue,
-      ),
-      BottomNavigationBarItem(
+      const BottomNavigationBarItem(
         icon: Icon(Icons.people),
-        label: 'Profile',
+        label: 'Profil',
         backgroundColor: lightBlue,
       ),
+      if (Provider.of<AppData>(context, listen: false).user.admin)
+        const BottomNavigationBarItem(
+          icon: Icon(Icons.settings),
+          label: 'Admin',
+          backgroundColor: lightBlue,
+        )
     ];
   }
 
@@ -58,6 +76,9 @@ class _GestionPage extends State<GestionPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (kIsWeb) {
+      return const Home();
+    }
     return Scaffold(
       body: PageView(
         controller: pageController,
@@ -66,10 +87,12 @@ class _GestionPage extends State<GestionPage> {
             index = newIndex;
           });
         },
-        children: const <Widget>[
-          Statistique(),
-          Home(),
-          ProfilPage(),
+        children: <Widget>[
+          const Home(),
+          const Statistique(),
+          const ProfilPage(),
+          if (Provider.of<AppData>(context, listen: false).user.admin)
+            const AdminPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -86,7 +109,7 @@ class _GestionPage extends State<GestionPage> {
           fontWeight: fontRegular,
         ),
         currentIndex: index,
-        onTap: (index) {
+        onTap: (int index) {
           setState(() {
             index = index;
             pageController.animateToPage(

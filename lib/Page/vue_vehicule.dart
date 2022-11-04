@@ -3,10 +3,9 @@ import 'package:mon_petit_entretien/Page/web/vuevehicule_web.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
-import '../Components/commentText.dart';
+import '../Components/comment_text.dart';
 
 class VueVehiculePage extends StatefulWidget {
-
   const VueVehiculePage({Key? key}) : super(key: key);
 
   @override
@@ -15,7 +14,6 @@ class VueVehiculePage extends StatefulWidget {
 }
 
 class _VueVehiculePage extends State<VueVehiculePage> {
-
   @override
   Widget build(BuildContext context) {
     
@@ -168,7 +166,7 @@ class _VueVehiculePage extends State<VueVehiculePage> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget> [
+                children: const <Widget> [
                   CardVehicule(
                     prix: prix,
                     title: title,
@@ -196,9 +194,8 @@ class _VueVehiculePage extends State<VueVehiculePage> {
 }
 
 class CardVehicule extends StatelessWidget {
-
-  const CardVehicule(
-    {Key? key,
+  const CardVehicule({
+    Key? key,
     required this.prix,
     required this.title,
     required this.date,
@@ -214,45 +211,44 @@ class CardVehicule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return 
-      Container(
-        height: MediaQuery.of(context).size.height * 0.21,
-        width: MediaQuery.of(context).size.width * 0.55,
-        decoration: BoxDecoration(
-          color: blue,
-          borderRadius: BorderRadius.circular(12.5),
-        ),
-        child: Row(
-          children: <Widget> [
-            Padding(
-              padding: const EdgeInsets.only(left: 24),
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.21,
-                width: MediaQuery.of(context).size.width * 0.1,
-                color: white,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8, bottom: 8),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget> [
-                      const Icon(
-                        Icons.car_repair,
-                        size: 30,
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.21,
+      width: MediaQuery.of(context).size.width * 0.55,
+      decoration: BoxDecoration(
+        color: blue,
+        borderRadius: BorderRadius.circular(12.5),
+      ),
+      child: Row(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(left: 24),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.21,
+              width: MediaQuery.of(context).size.width * 0.1,
+              color: white,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8, bottom: 8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    const Icon(
+                      Icons.car_repair,
+                      size: 30,
+                    ),
+                    RotatedBox(
+                      quarterTurns: 3,
+                      child: CommonText(
+                        text: '$prix €',
+                        fontSizeText: 17,
+                        fontWeight: fontBold,
+                        color: navy,
                       ),
-                      RotatedBox(
-                        quarterTurns: 3,
-                        child: CommonText(
-                          text: '$prix €',
-                          fontSizeText: 17,
-                          fontWeight: fontBold,
-                          color: navy,
-                        ),
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
             ),
+          ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget> [
@@ -288,10 +284,9 @@ class CardVehicule extends StatelessWidget {
                   color: white,
                 ),
               ],
-            )
+            ),
           ],
         ),
-      )
-    ;
+      );
   }
 }

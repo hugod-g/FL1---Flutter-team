@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
-import 'package:mon_petit_entretien/Page/gestion.dart';
 import 'package:mon_petit_entretien/Services/api/auth.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 import '../Style/colors.dart';
@@ -60,12 +59,8 @@ class _RegisterPage extends State<RegisterPage> {
           await registerCall(email, password, firstname, lastname, context);
 
       if (response == 200) {
-        await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => const GestionPage(),
-          ),
-        );
+        // ignore: use_build_context_synchronously
+        await Navigator.popAndPushNamed(context, '/gestion');
       }
     } catch (e) {
       setState(() {
@@ -80,139 +75,173 @@ class _RegisterPage extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final double currentWith = MediaQuery.of(context).size.width;
+
     return Material(
       color: lightBlue,
       child: SafeArea(
         child: Container(
           color: lightBlue,
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
             children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      SizedBox(
-                        width: 30,
-                        child: IconButton(
-                          onPressed: _onBackPress,
-                          icon: const Icon(Icons.arrow_back),
-                        ),
-                      ),
-                      const Text(
-                        "Inscription",
-                        style: TextStyle(
-                          color: navy,
-                          fontSize: 24,
-                          fontFamily: appFont,
-                          fontWeight: fontMedium,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 30,
-                        child: Material(),
-                      ),
-                    ],
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 24),
-                    child: Text(
-                      "Prénom",
-                      style: TextStyle(
-                        color: navy,
-                        fontSize: 16,
-                        fontFamily: appFont,
-                        fontWeight: fontLight,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8, bottom: 24),
-                    child: TextInput(
-                      value: firstname,
-                      placeholder: "Prénom",
-                      onChangeText: _onFirstnameChange,
-                    ),
-                  ),
-                  const Text(
-                    "Nom",
-                    style: TextStyle(
-                      color: navy,
-                      fontSize: 16,
-                      fontFamily: appFont,
-                      fontWeight: fontLight,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8, bottom: 24),
-                    child: TextInput(
-                      value: lastname,
-                      placeholder: "Nom",
-                      onChangeText: _onLastnameChange,
-                    ),
-                  ),
-                  const Text(
-                    "Email",
-                    style: TextStyle(
-                      color: navy,
-                      fontSize: 16,
-                      fontFamily: appFont,
-                      fontWeight: fontLight,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8, bottom: 24),
-                    child: TextInput(
-                      value: email,
-                      placeholder: "Adresse E-mail",
-                      onChangeText: _onEmailChange,
-                    ),
-                  ),
-                  const Text(
-                    "Mot de passe",
-                    style: TextStyle(
-                      color: navy,
-                      fontSize: 16,
-                      fontFamily: appFont,
-                      fontWeight: fontLight,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8, bottom: 16),
-                    child: TextInput(
-                      value: password,
-                      placeholder: "Mot de passe",
-                      onChangeText: _onPasswordChange,
-                      secure: true,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8, bottom: 16),
-                    child: Text(
-                      error ?? "",
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: errorColor,
-                        fontSize: 16,
-                        fontFamily: appFont,
-                        fontWeight: fontLight,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
               Padding(
-                padding: const EdgeInsets.only(top: 32),
-                child: Button(
-                  text: "S'inscrire",
-                  onPress: _registerPress,
-                  isLoading: isLoading,
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            SizedBox(
+                              child: IconButton(
+                                iconSize: currentWith < 800 ? 32 : 40,
+                                onPressed: _onBackPress,
+                                icon: const Icon(Icons.arrow_back),
+                              ),
+                            ),
+                            Text(
+                              "Inscription",
+                              style: TextStyle(
+                                color: navy,
+                                fontSize: currentWith < 800 ? 24 : 42,
+                                fontFamily: appFont,
+                                fontWeight: fontMedium,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 32,
+                              child: Material(),
+                            ),
+                          ],
+                        ),
+                        Align(
+                          child: Container(
+                            constraints: const BoxConstraints(maxWidth: 800),
+                            child: Column(
+                              children: <Widget>[
+                                const Padding(
+                                  padding: EdgeInsets.only(top: 24),
+                                  child: Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      "Prénom",
+                                      style: TextStyle(
+                                        color: navy,
+                                        fontSize: 16,
+                                        fontFamily: appFont,
+                                        fontWeight: fontLight,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 8, bottom: 24),
+                                  child: TextInput(
+                                    value: firstname,
+                                    placeholder: "Prénom",
+                                    onChangeText: _onFirstnameChange,
+                                  ),
+                                ),
+                                const Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    "Nom",
+                                    style: TextStyle(
+                                      color: navy,
+                                      fontSize: 16,
+                                      fontFamily: appFont,
+                                      fontWeight: fontLight,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 8, bottom: 24),
+                                  child: TextInput(
+                                    value: lastname,
+                                    placeholder: "Nom",
+                                    onChangeText: _onLastnameChange,
+                                  ),
+                                ),
+                                const Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    "Email",
+                                    style: TextStyle(
+                                      color: navy,
+                                      fontSize: 16,
+                                      fontFamily: appFont,
+                                      fontWeight: fontLight,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 8, bottom: 24),
+                                  child: TextInput(
+                                    value: email,
+                                    placeholder: "Adresse E-mail",
+                                    onChangeText: _onEmailChange,
+                                  ),
+                                ),
+                                const Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    "Mot de passe",
+                                    style: TextStyle(
+                                      color: navy,
+                                      fontSize: 16,
+                                      fontFamily: appFont,
+                                      fontWeight: fontLight,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 8, bottom: 16),
+                                  child: TextInput(
+                                    value: password,
+                                    placeholder: "Mot de passe",
+                                    onChangeText: _onPasswordChange,
+                                    secure: true,
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 8, bottom: 16),
+                                  child: Text(
+                                    error ?? "",
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      color: errorColor,
+                                      fontSize: 16,
+                                      fontFamily: appFont,
+                                      fontWeight: fontLight,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 32),
+                                  child: Button(
+                                    text: "S'inscrire",
+                                    onPress: _registerPress,
+                                    isLoading: isLoading,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
                 ),
-              )
+              ),
             ],
           ),
         ),
