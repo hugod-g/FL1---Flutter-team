@@ -31,7 +31,14 @@ class _CameraPageState extends State<CameraPage> {
     initCamera(widget.cameras![0]);
   }
 
-  Future takePicture() async {
+  void takePictureLoaded() {
+    AppData data;
+    data = Provider.of<AppData>(context, listen: false);
+    takePicture(data);
+  }
+
+  // ignore: always_specify_types
+  Future takePicture(AppData data) async {
     if (!_cameraController.value.isInitialized) {
       return null;
     }
@@ -40,29 +47,12 @@ class _CameraPageState extends State<CameraPage> {
     }
     try {
       await _cameraController.setFlashMode(FlashMode.off);
+      // ignore: prefer_final_locals
       XFile picture = await _cameraController.takePicture();
-      Provider.of<AppData>(context, listen: false).addDataVehicle(
-        "tmp",
-        0,
-        picture.path,
-        DateTime.now().toString(),
-        '0',
-      );
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => AddVehicule(),
-        ),
-      );
-      /*//Navigator.pop(context);
-      await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => PreviewPage(
-            picture: picture,
-          ),
-        ),
-      );*/
+      data.vehicles.last.updatePicturePath(picture.path);
+      print("la apres  ferniere image est ${data.vehicles.last.picturePath}");
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context);
     } on CameraException catch (e) {
       debugPrint('Error occured while taking picture: $e');
       return null;
@@ -127,7 +117,7 @@ class _CameraPageState extends State<CameraPage> {
                     ),
                     Expanded(
                       child: IconButton(
-                        onPressed: takePicture,
+                        onPressed: takePictureLoaded,
                         iconSize: 50,
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),

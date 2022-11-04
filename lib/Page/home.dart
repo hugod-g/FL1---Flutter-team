@@ -21,7 +21,7 @@ class Home extends StatefulWidget {
 
 class _Home extends State<Home> {
   String search = "";
-  Map<String, bool> select = {
+  Map<String, bool> select = <String, bool>{
     'KM': false,
     'DATE': false,
     'A-Z': false,
@@ -73,14 +73,15 @@ class _Home extends State<Home> {
 
   @override
   void initState() {
-    getEveryVehicules();
     super.initState();
+    getEveryVehicules();
   }
 
   void getEveryVehicules() async {
     AppData data;
     data = Provider.of<AppData>(context, listen: false);
     List<vehiculeModel> newVehicules;
+    data.vehicles.clear();
     newVehicules = await getVehicles(data.token);
     for (vehiculeModel newVehicule in newVehicules) {
       data.vehicles.add(newVehicule);
@@ -159,7 +160,7 @@ class _Home extends State<Home> {
   }
 
   Widget _listCar() {
-    return Container(
+    return SizedBox(
       height: 270,
       width: 500,
       child: ListView(
@@ -168,8 +169,12 @@ class _Home extends State<Home> {
           _addCar(),
           for (vehiculeModel vehicule
               in Provider.of<AppData>(context, listen: false).vehicles)
-            _showCar(vehicule.name, vehicule.kilometrage.toString(),
-                vehicule.maintenances.length.toString(), vehicule.picturePath),
+            _showCar(
+              vehicule.name,
+              vehicule.kilometrage.toString(),
+              vehicule.maintenances.length.toString(),
+              vehicule.picturePath,
+            ),
         ],
       ),
     );
@@ -206,12 +211,6 @@ class _Home extends State<Home> {
       padding: const EdgeInsets.only(right: 20),
       child: InkWell(
         onTap: () {
-          Map data = {
-            'name': 'marie',
-            'email': 'example@example.com',
-            'age': 42
-          };
-
           Navigator.push(
             context,
             // ignore: always_specify_types
@@ -222,7 +221,7 @@ class _Home extends State<Home> {
         },
         child: Ink(
           child: Stack(
-            children: [
+            children: <Widget>[
               Container(
                 height: 270,
                 width: 230,
@@ -275,13 +274,17 @@ class _Home extends State<Home> {
   }
 
   Widget _showCar(
-      String name, String mileage, String nbMaintenance, String pathImage) {
+    String name,
+    String mileage,
+    String nbMaintenance,
+    String pathImage,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(right: 20),
       child: InkWell(
         child: Ink(
           child: Stack(
-            children: [
+            children: <Widget>[
               if (isLoaded)
                 Container(
                   height: 270,
@@ -377,7 +380,9 @@ class _Home extends State<Home> {
                               child: Text(
                                 nbMaintenance,
                                 style: const TextStyle(
-                                    fontSize: 20, fontWeight: fontBold),
+                                  fontSize: 20,
+                                  fontWeight: fontBold,
+                                ),
                               ),
                             ),
                           ),
