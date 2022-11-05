@@ -36,8 +36,7 @@ class _CameraPageState extends State<CameraPage> {
     takePicture(data);
   }
 
-  // ignore: always_specify_types
-  Future takePicture(AppData data) async {
+  void takePicture(AppData data) async {
     if (!_cameraController.value.isInitialized) {
       return null;
     }
@@ -48,8 +47,9 @@ class _CameraPageState extends State<CameraPage> {
       await _cameraController.setFlashMode(FlashMode.off);
       final XFile picture = await _cameraController.takePicture();
       data.vehicles.last.updatePicturePath(picture.path);
-      // ignore: use_build_context_synchronously
-      Navigator.pop(context);
+      if (mounted) {
+        Navigator.pop(context);
+      }
     } on CameraException catch (e) {
       debugPrint('Error occured while taking picture: $e');
       return null;
