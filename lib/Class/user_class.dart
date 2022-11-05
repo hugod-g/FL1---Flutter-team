@@ -19,8 +19,8 @@ class UserModel extends ChangeNotifier {
     final bool admin = data['admin'] as bool;
     final List<dynamic> centersTmp = data['centers'] as List<dynamic>;
 
-    final List<centerModel> centers = centersTmp
-        .map<centerModel>((dynamic json) => centerModel.fromJson(json))
+    final List<CenterModel> centers = centersTmp
+        .map<CenterModel>((dynamic json) => CenterModel.fromJson(json))
         .toList();
 
     return UserModel(id, firstName, lastName, username, admin, centers);
@@ -31,7 +31,7 @@ class UserModel extends ChangeNotifier {
   String username = "";
   bool admin = false;
   String id = "";
-  List<centerModel> centers = List<centerModel>.empty();
+  List<CenterModel> centers = List<CenterModel>.empty();
 
   void updateLastName(String newVar) {
     lastName = newVar;

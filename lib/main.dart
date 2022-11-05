@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<AppData>(
       create: (BuildContext context) => AppData(),
       child: MaterialApp(
-        routes: {
+        routes: <String, Widget Function(BuildContext)>{
           '/login': (BuildContext context) => const LoginPage(),
           '/register': (BuildContext context) => const RegisterPage(),
           '/home': (BuildContext context) => const Home(),
@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
           '/profil': (BuildContext context) => const ProfilPage(),
           '/modifProfil': (BuildContext context) => const ModifProfilPage(),
           '/vueVehicule': (BuildContext constext) => const VueVehiculePage(),
+          '/add_vehicle': (BuildContext constext) => const AddVehicule(),
         },
         home: const LoginPage(),
       ),

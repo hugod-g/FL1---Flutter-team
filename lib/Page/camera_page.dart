@@ -2,7 +2,6 @@ import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
-import 'package:mon_petit_entretien/Page/add_vehicule.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -31,45 +30,35 @@ class _CameraPageState extends State<CameraPage> {
     initCamera(widget.cameras![0]);
   }
 
-  Future takePicture() async {
+  void takePicture() async {
+    final AppData provider = Provider.of<AppData>(context, listen: false);
+
     if (!_cameraController.value.isInitialized) {
-      return null;
+      return;
     }
     if (_cameraController.value.isTakingPicture) {
-      return null;
+      return;
     }
     try {
       await _cameraController.setFlashMode(FlashMode.off);
-      XFile picture = await _cameraController.takePicture();
-      Provider.of<AppData>(context, listen: false).addDataVehicle(
+      final XFile picture = await _cameraController.takePicture();
+      provider.addDataVehicle(
         "tmp",
         0,
         picture.path,
         DateTime.now().toString(),
         '0',
       );
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => AddVehicule(),
-        ),
-      );
-      /*//Navigator.pop(context);
-      await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => PreviewPage(
-            picture: picture,
-          ),
-        ),
-      );*/
+      if (mounted) {
+        await Navigator.pushNamed(context, 'add_vehicle');
+      }
     } on CameraException catch (e) {
       debugPrint('Error occured while taking picture: $e');
-      return null;
+      return;
     }
   }
 
-  Future initCamera(CameraDescription cameraDescription) async {
+  void initCamera(CameraDescription cameraDescription) async {
     _cameraController =
         CameraController(cameraDescription, ResolutionPreset.high);
     try {
@@ -87,7 +76,7 @@ class _CameraPageState extends State<CameraPage> {
     return Scaffold(
       body: SafeArea(
         child: Stack(
-          children: [
+          children: <Widget>[
             if (_cameraController.value.isInitialized)
               CameraPreview(_cameraController)
             else
@@ -104,7 +93,7 @@ class _CameraPageState extends State<CameraPage> {
                   color: navy,
                 ),
                 child: Row(
-                  children: [
+                  children: <Widget>[
                     Expanded(
                       child: IconButton(
                         padding: EdgeInsets.zero,
@@ -121,7 +110,8 @@ class _CameraPageState extends State<CameraPage> {
                                 _isRearCameraSelected = !_isRearCameraSelected,
                           );
                           initCamera(
-                              widget.cameras![_isRearCameraSelected ? 0 : 1]);
+                            widget.cameras![_isRearCameraSelected ? 0 : 1],
+                          );
                         },
                       ),
                     ),

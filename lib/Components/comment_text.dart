@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
 class CommonText extends StatefulWidget {

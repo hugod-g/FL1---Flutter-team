@@ -1,5 +1,3 @@
-// ignore_for_file: library_private_types_in_public_api, always_specify_types
-
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Page/web/profil_web.dart';
@@ -13,7 +11,7 @@ class ProfilPage extends StatefulWidget {
   const ProfilPage({Key? key}) : super(key: key);
 
   @override
-  _ProfilPage createState() => _ProfilPage();
+  State<ProfilPage> createState() => _ProfilPage();
 }
 
 class _ProfilPage extends State<ProfilPage> {
@@ -32,7 +30,7 @@ class _ProfilPage extends State<ProfilPage> {
       await Navigator.pushNamedAndRemoveUntil(
         context,
         '/login',
-        (Route route) => false,
+        (Route<dynamic> route) => false,
       );
     }
   }

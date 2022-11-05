@@ -5,9 +5,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/comment_text.dart';
 import 'package:provider/provider.dart';
-import '../Style/colors.dart';
 
 import '../Page/camera_page.dart';
+import '../Style/colors.dart';
 
 class PhotoInput extends StatefulWidget {
   const PhotoInput({
@@ -28,13 +28,15 @@ class PhotoInput extends StatefulWidget {
 class PhotoInputState extends State<PhotoInput> {
   @override
   Widget build(BuildContext context) {
+    final AppData provider = Provider.of<AppData>(context, listen: false);
+
     return SizedBox(
       height: 100,
       width: double.infinity,
       child: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16),
         child: Column(
-          children: [
+          children: <Widget>[
             Padding(
               padding: const EdgeInsets.only(bottom: 10, top: 13),
               child: InkWell(
@@ -75,7 +77,7 @@ class PhotoInputState extends State<PhotoInput> {
                 final XFile? file =
                     await ImagePicker().pickImage(source: ImageSource.gallery);
                 if (file == null) {
-                  Provider.of<AppData>(context, listen: false).addDataVehicle(
+                  provider.addDataVehicle(
                     "tmp",
                     0,
                     newPath,
@@ -84,7 +86,7 @@ class PhotoInputState extends State<PhotoInput> {
                   );
                 } else {
                   newPath = file.path;
-                  Provider.of<AppData>(context, listen: false).addDataVehicle(
+                  provider.addDataVehicle(
                     "tmp",
                     0,
                     newPath,
@@ -92,7 +94,6 @@ class PhotoInputState extends State<PhotoInput> {
                     '0',
                   );
                 }
-                print("galerie");
               },
               child: Ink(
                 child: Row(

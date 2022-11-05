@@ -6,7 +6,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:mon_petit_entretien/Class/vehicle_class.dart';
 import 'package:mon_petit_entretien/Config/endpoint.dart';
 
-Future<List<vehiculeModel>> getVehicles(String authorization) async {
+Future<List<VehiculeModel>> getVehicles(String authorization) async {
   final http.Response response = await http.get(
     Uri.parse(vehiclesEndPoint),
     headers: <String, String>{
@@ -16,11 +16,10 @@ Future<List<vehiculeModel>> getVehicles(String authorization) async {
   );
 
   if (response.statusCode == 200) {
-    // ignore: always_specify_types
-    final payload = jsonDecode(response.body);
-    final List rest = payload as List;
-    final List<vehiculeModel> tmpListVehicule = rest
-        .map<vehiculeModel>((json) => vehiculeModel.fromJson(json))
+    final dynamic payload = jsonDecode(response.body);
+    final List<dynamic> rest = payload as List<dynamic>;
+    final List<VehiculeModel> tmpListVehicule = rest
+        .map<VehiculeModel>((dynamic json) => VehiculeModel.fromJson(json))
         .toList();
 
     return tmpListVehicule;
@@ -36,9 +35,9 @@ Future<int> createVehicle(
   String mileage,
   File upload,
 ) async {
-  http.MultipartRequest request =
+  final http.MultipartRequest request =
       http.MultipartRequest('POST', Uri.parse(vehiclesEndPoint));
-  Map<String, String> headers = {
+  final Map<String, String> headers = {
     "Authorization": "Bearer $authorization",
     "Content-type": "multipart/form-data"
   };
@@ -52,12 +51,12 @@ Future<int> createVehicle(
     ),
   );
   request.headers.addAll(headers);
-  request.fields.addAll({
+  request.fields.addAll(<String, String>{
     'name': name,
     'buyDate': buyDate,
     'mileage': mileage,
   });
-  http.StreamedResponse res = await request.send();
+  final http.StreamedResponse res = await request.send();
   /*final http.Response response = await http.post(
     Uri.parse(vehiclesEndPoint),
     headers: <String, String>{

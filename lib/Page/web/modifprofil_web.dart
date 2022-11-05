@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/comment_text.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
-import 'package:mon_petit_entretien/Components/web/burgerMenu.dart';
+import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
 class ModifProfilWebPage extends StatefulWidget {
-
   const ModifProfilWebPage({Key? key}) : super(key: key);
 
   @override
@@ -16,7 +15,6 @@ class ModifProfilWebPage extends StatefulWidget {
 }
 
 class _ModifProfilWebPage extends State<ModifProfilWebPage> {
-
   String firsname = "";
   String lastname = "";
 
@@ -37,8 +35,9 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: lightBlue,
-      body : Padding(
-        padding: const EdgeInsets.only(top: 75, bottom: 125, left: 600, right: 600),
+      body: Padding(
+        padding:
+            const EdgeInsets.only(top: 75, bottom: 125, left: 600, right: 600),
         child: Column(
           children: <Widget>[
             Center(
@@ -60,51 +59,53 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
                     color: navy,
                   ),
                   Padding(
-                      padding: const EdgeInsets.only(top: 125),
-                      child: TextInput(
-                        value: firsname,
-                        placeholder: "Name",
-                        onChangeText: _onNameChange,
-                      ),
+                    padding: const EdgeInsets.only(top: 125),
+                    child: TextInput(
+                      value: firsname,
+                      placeholder: "Name",
+                      onChangeText: _onNameChange,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40),
-                      child: TextInput(
-                        value: lastname,
-                        placeholder: "Email",
-                        onChangeText: _onEmailChange,
-                      ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: TextInput(
+                      value: lastname,
+                      placeholder: "Email",
+                      onChangeText: _onEmailChange,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 75),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget> [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 50, right: 50),
-                                child: Button(
-                                  text: "Retour",
-                                  onPress: () => Navigator.pop(context),
-                                  secondary: true,
-                                ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 75),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 50, right: 50),
+                              child: Button(
+                                text: "Retour",
+                                onPress: () => Navigator.pop(context),
+                                secondary: true,
                               ),
                             ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 50, right: 50),
-                                child: Button(
-                                  text: "Sauvegarder",
-                                  onPress: () => Navigator.pop(context),
-                                ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 50, right: 50),
+                              child: Button(
+                                text: "Sauvegarder",
+                                onPress: () => Navigator.pop(context),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
+                  ),
                 ],
               ),
             )
@@ -114,7 +115,7 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
       appBar: AppBar(
         title: const Text('Mon Petit Entretient'),
         backgroundColor: blue,
-        ),
+      ),
       drawer: Theme(
         data: Theme.of(context).copyWith(canvasColor: gray),
         child: const BurgerMenu(),
