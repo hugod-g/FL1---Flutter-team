@@ -6,7 +6,8 @@ import 'package:mon_petit_entretien/Class/vehicle_class.dart';
 class AppData extends ChangeNotifier {
   List<VehiculeModel> vehicles = List<VehiculeModel>.empty(growable: true);
   String token = "";
-  UserModel user = UserModel("", "", "", "", false, List<CenterModel>.empty());
+  UserModel user =
+      UserModel("", "", "", "", false, List<CenterModel>.empty(growable: true));
   List<UserModel> usersList = List<UserModel>.empty();
 
   void addDataVehicle(

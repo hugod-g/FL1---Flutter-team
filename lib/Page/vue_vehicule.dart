@@ -78,13 +78,73 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                         ),
                       ),
                     ),
-                    child: Column(
+                  ),
+                ),
+                Column(
+                  children: <Widget>[
+                    const CommonText(
+                      text: "Vehicule",
+                      fontSizeText: 25,
+                      fontWeight: fontBold,
+                      paddingTop: 16,
+                      color: navy,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 24,
+                        right: 16,
+                        left: 16,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Row(
+                            children: const <Widget>[
+                              Icon(
+                                Icons.calendar_today,
+                                size: 25,
+                              ),
+                              CommonText(
+                                text: "12/12/2022",
+                                fontSizeText: 17.5,
+                                fontWeight: fontLight,
+                                color: navy,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: const <Widget>[
+                              Icon(
+                                Icons.mode_of_travel,
+                                size: 25,
+                              ),
+                              CommonText(
+                                text: "2000 km",
+                                fontSizeText: 17.5,
+                                fontWeight: fontLight,
+                                color: navy,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const CommonText(
+                      text: "12/12/2022",
+                      fontSizeText: 17.5,
+                      fontWeight: fontLight,
+                      color: navy,
+                    ),
+                    Row(
                       children: <Widget>[
+                        const Icon(
+                          Icons.mode_of_travel,
+                          size: 25,
+                        ),
                         const CommonText(
-                          text: "Vehicule",
-                          fontSizeText: 25,
-                          fontWeight: fontBold,
-                          paddingTop: 16,
+                          text: "2000 km",
+                          fontSizeText: 17.5,
+                          fontWeight: fontLight,
                           color: navy,
                         ),
                         Padding(
@@ -126,67 +186,10 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                               ),
                             ],
                           ),
-                          CommonText(
-                            text: "12/12/2022",
-                            fontSizeText: 17.5,
-                            fontWeight: fontLight,
-                            color: navy,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: const <Widget>[
-                          Icon(
-                            Icons.mode_of_travel,
-                            size: 25,
-                          ),
-                          CommonText(
-                            text: "2000 km",
-                            fontSizeText: 17.5,
-                            fontWeight: fontLight,
-                            color: navy,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 24, right: 16, left: 16),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Row(
-                                  children: const <Widget>[
-                                    Icon(
-                                      Icons.calendar_today,
-                                      size: 25,
-                                    ),
-                                    CommonText(
-                                      text: "12/12/2022",
-                                      fontSizeText: 17.5,
-                                      fontWeight: fontLight,
-                                      color: navy,
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: const <Widget>[
-                                    Icon(
-                                      Icons.mode_of_travel,
-                                      size: 25,
-                                    ),
-                                    CommonText(
-                                      text: "2000 km",
-                                      fontSizeText: 17.5,
-                                      fontWeight: fontLight,
-                                      color: navy,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
+                        )
+                      ],
+                    ),
+                  ],
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 24, right: 16, left: 16),
@@ -223,12 +226,12 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                       ),
                     ],
                   ),
-                  Icon(
-                    Icons.car_repair,
-                    size: 35,
-                  ),
-                ],
-              ),
+                ),
+                const Icon(
+                  Icons.car_repair,
+                  size: 35,
+                ),
+              ],
             ),
             SingleChildScrollView(
               padding: EdgeInsets.only(
@@ -245,28 +248,15 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                     km: km,
                     enterprise: enterprise,
                   ),
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const <Widget>[
-                      CardVehicule(
-                        prix: prix,
-                        title: title,
-                        date: date,
-                        km: km,
-                        enterprise: enterprise,
-                      ),
-                      CardVehicule(
-                        prix: prix,
-                        title: title,
-                        date: date,
-                        km: km,
-                        enterprise: enterprise,
-                      ),
-                    ],
+                  CardVehicule(
+                    prix: prix,
+                    title: title,
+                    date: date,
+                    km: km,
+                    enterprise: enterprise,
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),

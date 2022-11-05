@@ -308,7 +308,8 @@ class _AddVehicule extends State<AddVehicule> {
                                                     ),
                                                     Padding(
                                                       padding: EdgeInsets.only(
-                                                          left: 10),
+                                                        left: 10,
+                                                      ),
                                                       child: CommonText(
                                                         text: "Galerie",
                                                         fontSizeText: 20,
@@ -424,7 +425,10 @@ class _AddVehicule extends State<AddVehicule> {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.only(
-                                left: 16, right: 16, top: 2),
+                              left: 16,
+                              right: 16,
+                              top: 2,
+                            ),
                             child: Center(
                               child: TextField(
                                 controller: dateinput,
