@@ -28,7 +28,7 @@ class _Statistique extends State<Statistique> {
     AppData data;
     data = Provider.of<AppData>(context, listen: false);
     int tempPrice = 0;
-    for (vehiculeModel vehicule in data.vehicles) {
+    for (VehiculeModel vehicule in data.vehicles) {
       for (maintenanceModel maintenance in vehicule.maintenances) {
         tempPrice += int.parse(maintenance.prix);
       }

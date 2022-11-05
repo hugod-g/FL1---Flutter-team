@@ -4,7 +4,7 @@ import 'package:mon_petit_entretien/Class/user_class.dart';
 import 'package:mon_petit_entretien/Class/vehicle_class.dart';
 
 class AppData extends ChangeNotifier {
-  List<vehiculeModel> vehicles = List<vehiculeModel>.empty(growable: true);
+  List<VehiculeModel> vehicles = List<VehiculeModel>.empty(growable: true);
   String token = "";
   UserModel user = UserModel("", "", "", "", false, List<centerModel>.empty());
   List<UserModel> usersList = List<UserModel>.empty();
@@ -16,7 +16,7 @@ class AppData extends ChangeNotifier {
     String date,
     String id,
   ) {
-    vehicles.add(vehiculeModel(newName, km, picturePath, date, id));
+    vehicles.add(VehiculeModel(newName, km, picturePath, date, id));
     notifyListeners();
   }
 
