@@ -46,8 +46,7 @@ class _LoginPage extends State<LoginPage> {
     try {
       final int responseStatus = await loginCall(email, password, context);
 
-      if (responseStatus == 200) {
-        // ignore: use_build_context_synchronously
+      if (responseStatus == 200 && mounted) {
         await Navigator.popAndPushNamed(context, '/gestion');
       }
     } catch (e) {

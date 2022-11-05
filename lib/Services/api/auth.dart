@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:js_util';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -28,10 +29,10 @@ Future<int> loginCall(
   );
 
   if (response.statusCode == 200) {
-    // ignore: always_specify_types
-    final payload = jsonDecode(response.body);
+    final dynamic payload = jsonDecode(response.body);
 
     final String token = payload["token"];
+
     Provider.of<AppData>(context, listen: false).token = token;
     await prefs.setString('token', token);
   } else {
@@ -41,8 +42,13 @@ Future<int> loginCall(
   return response.statusCode;
 }
 
-Future<int> registerCall(String email, String password, String firstname,
-    String lastname, BuildContext context) async {
+Future<int> registerCall(
+  String email,
+  String password,
+  String firstname,
+  String lastname,
+  BuildContext context,
+) async {
   final http.Response response = await http.post(
     Uri.parse(registerEndpoint),
     headers: <String, String>{
@@ -56,7 +62,7 @@ Future<int> registerCall(String email, String password, String firstname,
     }),
   );
 
-  if (response.statusCode == 200) {
+  if (response.statusCode == 200 && context.widget != null) {
     await loginCall(email, password, context);
   } else {
     throw "Une erreur est survenu lors de votre inscription. Merci de réessayer";

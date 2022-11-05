@@ -58,8 +58,7 @@ class _RegisterPage extends State<RegisterPage> {
       final int response =
           await registerCall(email, password, firstname, lastname, context);
 
-      if (response == 200) {
-        // ignore: use_build_context_synchronously
+      if (response == 200 && mounted) {
         await Navigator.popAndPushNamed(context, '/gestion');
       }
     } catch (e) {
