@@ -18,13 +18,13 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
   String firsname = "";
   String lastname = "";
 
-  void _onNameChange(String newValue) {
+  void _onFirstNameChange(String newValue) {
     setState(() {
       firsname = newValue;
     });
   }
 
-  void _onEmailChange(String newValue) {
+  void _onLastNameChange(String newValue) {
     setState(() {
       lastname = newValue;
     });
@@ -62,16 +62,16 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
                     padding: const EdgeInsets.only(top: 125),
                     child: TextInput(
                       value: firsname,
-                      placeholder: "Name",
-                      onChangeText: _onNameChange,
+                      placeholder: "Firstname",
+                      onChangeText: _onFirstNameChange,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 40),
                     child: TextInput(
                       value: lastname,
-                      placeholder: "Email",
-                      onChangeText: _onEmailChange,
+                      placeholder: "Lastname",
+                      onChangeText: _onLastNameChange,
                     ),
                   ),
                   Padding(
