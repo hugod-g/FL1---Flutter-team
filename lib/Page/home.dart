@@ -144,10 +144,50 @@ class _Home extends State<Home> {
                   paddingBot: 10,
                   color: navy,
                 ),
-                _sortCar(),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      ButtonSelect(
+                        text: "KM",
+                        onPress: _onSelectKM,
+                        isSelect: select["KM"],
+                      ),
+                      ButtonSelect(
+                        text: "DATE",
+                        onPress: _onSelectDate,
+                        isSelect: select["DATE"],
+                      ),
+                      ButtonSelect(
+                        text: "A-Z",
+                        onPress: _onSelectAlph,
+                        isSelect: select["A-Z"],
+                      ),
+                    ],
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 40),
-                  child: _listCar(),
+                  child: SizedBox(
+                    height: 270,
+                    width: 500,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        _addCar(),
+                        for (vehiculeModel vehicule
+                            in Provider.of<AppData>(context, listen: false)
+                                .vehicles)
+                          _showCar(
+                            vehicule.name,
+                            vehicule.kilometrage.toString(),
+                            vehicule.maintenances.length.toString(),
+                            vehicule.picturePath,
+                          ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -157,53 +197,6 @@ class _Home extends State<Home> {
     } else {
       return const HomeWebPage();
     }
-  }
-
-  Widget _listCar() {
-    return SizedBox(
-      height: 270,
-      width: 500,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          _addCar(),
-          for (vehiculeModel vehicule
-              in Provider.of<AppData>(context, listen: false).vehicles)
-            _showCar(
-              vehicule.name,
-              vehicule.kilometrage.toString(),
-              vehicule.maintenances.length.toString(),
-              vehicule.picturePath,
-            ),
-        ],
-      ),
-    );
-  }
-
-  Widget _sortCar() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 10, right: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          ButtonSelect(
-            text: "KM",
-            onPress: _onSelectKM,
-            isSelect: select["KM"],
-          ),
-          ButtonSelect(
-            text: "DATE",
-            onPress: _onSelectDate,
-            isSelect: select["DATE"],
-          ),
-          ButtonSelect(
-            text: "A-Z",
-            onPress: _onSelectAlph,
-            isSelect: select["A-Z"],
-          ),
-        ],
-      ),
-    );
   }
 
   Widget _addCar() {
@@ -289,14 +282,35 @@ class _Home extends State<Home> {
                 Container(
                   height: 270,
                   width: 230,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: NetworkImage(
-                        "http://152.228.134.93:1339/$pathImage",
-                      ),
-                    ),
-                    borderRadius: const BorderRadius.all(Radius.circular(8)),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                  ),
+                  child: Image.network(
+                    "http://152.228.134.93:1339/$pathImage",
+                    loadingBuilder: (
+                      BuildContext context,
+                      Widget child,
+                      ImageChunkEvent? loadingProgress,
+                    ) {
+                      if (loadingProgress == null) {
+                        return FittedBox(
+                          fit: BoxFit.cover,
+                          child: child,
+                        );
+                      }
+                      return Container(
+                        color: navy,
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: white,
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
+                                : null,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 )
               else
