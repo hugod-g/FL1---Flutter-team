@@ -6,7 +6,7 @@ import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Page/web/modifprofil_web.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
-import '../Components/comment_text.dart';
+import '../Components/common_text.dart';
 import '../Style/colors.dart';
 
 class ModifProfilPage extends StatefulWidget {

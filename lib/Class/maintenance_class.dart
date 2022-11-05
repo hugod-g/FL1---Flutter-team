@@ -2,7 +2,12 @@ import 'package:flutter/cupertino.dart';
 
 class maintenanceModel extends ChangeNotifier {
   maintenanceModel(
-      this.name, this.kilometrage, this.center, this.date, this.id);
+    this.name,
+    this.kilometrage,
+    this.center,
+    this.date,
+    this.id,
+  );
   String name = "";
   String prix = "";
   String center = "";
@@ -10,17 +15,17 @@ class maintenanceModel extends ChangeNotifier {
   String date = "";
   String id = "";
 
-  void updateName(newVar) {
+  void updateName(String newVar) {
     name = newVar;
     notifyListeners();
   }
 
-  void updatePrix(newVar) {
+  void updatePrix(String newVar) {
     prix = newVar;
     notifyListeners();
   }
 
-  void updateDate(newVar) {
+  void updateDate(String newVar) {
     date = newVar;
     notifyListeners();
   }

@@ -44,7 +44,9 @@ class _LoginPage extends State<LoginPage> {
     });
 
     try {
-      final int responseStatus = await loginCall(email, password, context);
+      AppData data;
+      data = Provider.of<AppData>(context, listen: false);
+      final int responseStatus = await loginCall(email, password, data);
 
       if (responseStatus == 200) {
         // ignore: use_build_context_synchronously

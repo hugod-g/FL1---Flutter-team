@@ -43,15 +43,14 @@ class ButtonSelectState extends State<ButtonSelect> {
         child: TextButton(
           onPressed: _onButtonPress,
           child: Text(
-                  widget.text,
-                  style: TextStyle(
-                    color: widget.isSelect == true ? white : navy,
-                    fontFamily: appFont,
-                    fontWeight: fontMedium,
-                    fontSize: 16,
-                  ),
-                )
-              
+            widget.text,
+            style: TextStyle(
+              color: widget.isSelect == true ? white : navy,
+              fontFamily: appFont,
+              fontWeight: fontMedium,
+              fontSize: 16,
+            ),
+          ),
         ),
       ),
     );

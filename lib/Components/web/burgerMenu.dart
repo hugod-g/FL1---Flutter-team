@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../Style/colors.dart';
 import '../../Style/fonts.dart';
-import '../comment_text.dart';
+import '../common_text.dart';
 
 class BurgerMenu extends StatelessWidget {
   const BurgerMenu({
