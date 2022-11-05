@@ -30,6 +30,7 @@ class _AddVehicule extends State<AddVehicule> {
   TextEditingController dateinput = TextEditingController();
   String image = "";
 
+  bool isLoadingCreate = false;
   bool isLoadedImage = false;
   bool isLoadedVehicule = false;
   bool isThereAnImage = false;
@@ -74,6 +75,10 @@ class _AddVehicule extends State<AddVehicule> {
   }
 
   void _onAddVehicule() {
+    if (isLoadedVehicule) {
+      return;
+    }
+
     AppData data;
     data = Provider.of<AppData>(context, listen: false);
 
@@ -96,7 +101,6 @@ class _AddVehicule extends State<AddVehicule> {
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
       setState(() {
-        isSecondary = true;
         isLoadedVehicule = true;
       });
 
@@ -104,27 +108,20 @@ class _AddVehicule extends State<AddVehicule> {
         if (response == 200) {
           data.vehicles.removeLast();
           setState(() {
-            isLoadedVehicule = false;
             isThereAnImage = false;
-            isSecondary = null;
           });
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute<Home>(
-              builder: (BuildContext context) => const Home(),
-            ),
-            (Route route) => false,
-          );
+          Navigator.pop(context);
         } else {
-          setState(() {
-            isLoadedVehicule = false;
-            isSecondary = null;
-          });
           const SnackBar snackBar = SnackBar(
             content: Text('Le véhicule n\'a pas pu être ajouté'),
           );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
+
+        setState(() {
+          isLoadedVehicule = false;
+          isSecondary = null;
+        });
       });
     }
   }
@@ -477,25 +474,10 @@ class _AddVehicule extends State<AddVehicule> {
                         BoxShadow(blurRadius: 16, color: lightGray)
                       ],
                     ),
-                    child: TextButton(
-                      onPressed: isLoadedVehicule ? null : _onAddVehicule,
-                      child: isLoadedVehicule == true
-                          ? const SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(
-                                color: white,
-                              ),
-                            )
-                          : const Text(
-                              "Ajoutez le véhicule",
-                              style: TextStyle(
-                                color: white,
-                                fontFamily: appFont,
-                                fontWeight: fontMedium,
-                                fontSize: 16,
-                              ),
-                            ),
+                    child: Button(
+                      text: "Ajouter véhicule",
+                      onPress: _onAddVehicule,
+                      isLoading: isLoadedVehicule,
                     ),
                   ),
                 ),
