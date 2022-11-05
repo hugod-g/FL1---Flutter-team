@@ -3,6 +3,9 @@ import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Page/web/profil_web.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mon_petit_entretien/Class/user_class.dart';
+import 'package:provider/provider.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
 
 import '../Components/common_text.dart';
 import '../Style/colors.dart';
@@ -17,10 +20,6 @@ class ProfilPage extends StatefulWidget {
 class _ProfilPage extends State<ProfilPage> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  String name = "Eliott Aunoble";
-  String email = "ea.aunoble@gmail.com";
-  String age = "21";
-
   void _onLogout() async {
     final SharedPreferences prefs = await _prefs;
 
@@ -33,6 +32,18 @@ class _ProfilPage extends State<ProfilPage> {
         (Route<dynamic> route) => false,
       );
     }
+  }
+
+  String firstName = "";
+  String lastName = "";
+  String email = "";
+
+    @override
+  void initState() {
+    super.initState();
+    firstName = Provider.of<AppData>(context, listen: false).user.firstName;
+    lastName = Provider.of<AppData>(context, listen: false).user.lastName;
+    email = Provider.of<AppData>(context, listen: false).user.username;
   }
 
   @override
@@ -90,8 +101,8 @@ class _ProfilPage extends State<ProfilPage> {
                         backgroundImage: AssetImage('assets/avatar.jpg'),
                       ),
                     ),
-                    const CommonText(
-                      text: "Eliott Aunoble",
+                    CommonText(
+                      text: "$firstName $lastName",
                       fontSizeText: 22,
                       fontWeight: fontBold,
                       paddingTop: 16,
