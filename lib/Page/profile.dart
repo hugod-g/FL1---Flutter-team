@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
-import 'package:mon_petit_entretien/Page/modifprofil.dart';
 import 'package:mon_petit_entretien/Page/web/profil_web.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Components/comment_text.dart';
 import '../Style/colors.dart';
@@ -17,9 +17,25 @@ class ProfilPage extends StatefulWidget {
 }
 
 class _ProfilPage extends State<ProfilPage> {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
   String name = "Eliott Aunoble";
   String email = "ea.aunoble@gmail.com";
   String age = "21";
+
+  void _onLogout() async {
+    final SharedPreferences prefs = await _prefs;
+
+    await prefs.setString('token', '');
+
+    if (mounted) {
+      await Navigator.pushNamedAndRemoveUntil(
+        context,
+        '/login',
+        (Route route) => false,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +45,7 @@ class _ProfilPage extends State<ProfilPage> {
       return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: lightBlue,
-        body : Padding(
+        body: Padding(
           padding: const EdgeInsets.all(22.5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,15 +93,15 @@ class _ProfilPage extends State<ProfilPage> {
                       ),
                     ),
                     const CommonText(
-                        text: "Eliott Aunoble",
-                        fontSizeText: 22,
-                        fontWeight: fontBold,
-                        paddingTop: 16,
-                        color: navy,
-                      ),
+                      text: "Eliott Aunoble",
+                      fontSizeText: 22,
+                      fontWeight: fontBold,
+                      paddingTop: 16,
+                      color: navy,
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(top: 30),
-                      child : Column(
+                      child: Column(
                         children: <Widget>[
                           Row(
                             children: const <Widget>[
@@ -118,14 +134,15 @@ class _ProfilPage extends State<ProfilPage> {
                       padding: const EdgeInsets.only(top: 25),
                       child: Button(
                         text: "Modifier le profil",
-                        onPress: () => Navigator.pushNamed(context, '/modifProfil'),
+                        onPress: () =>
+                            Navigator.pushNamed(context, '/modifProfil'),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 25),
                       child: Button(
                         text: "Déconnexion",
-                        onPress: () => Navigator.pushNamed(context, '/vueVehicule'),
+                        onPress: _onLogout,
                         secondary: true,
                       ),
                     ),
