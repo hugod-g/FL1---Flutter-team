@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
-import 'package:mon_petit_entretien/Components/comment_text.dart';
+import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';

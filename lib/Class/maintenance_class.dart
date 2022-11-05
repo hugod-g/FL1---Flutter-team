@@ -1,8 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
-class MaintenanceModel extends ChangeNotifier {
-  MaintenanceModel(
-      this.name, this.kilometrage, this.center, this.date, this.id);
+class maintenanceModel extends ChangeNotifier {
+  maintenanceModel(
+    this.name,
+    this.kilometrage,
+    this.center,
+    this.date,
+    this.id,
+  );
   String name = "";
   String prix = "";
   String center = "";

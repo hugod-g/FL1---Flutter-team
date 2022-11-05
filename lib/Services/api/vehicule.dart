@@ -33,19 +33,20 @@ Future<int> createVehicle(
   String name,
   String buyDate,
   String mileage,
-  File upload,
+  String upload,
 ) async {
   final http.MultipartRequest request =
       http.MultipartRequest('POST', Uri.parse(vehiclesEndPoint));
-  final Map<String, String> headers = {
+  final Map<String, String> headers = <String, String>{
+    "HttpHeaders.contentTypeHeader": "application/json",
     "Authorization": "Bearer $authorization",
     "Content-type": "multipart/form-data"
   };
   request.files.add(
     http.MultipartFile(
       'upload',
-      upload.readAsBytes().asStream(),
-      upload.lengthSync(),
+      File(upload).readAsBytes().asStream(),
+      File(upload).lengthSync(),
       filename: "filename",
       contentType: MediaType('image', 'jpeg'),
     ),
@@ -57,30 +58,10 @@ Future<int> createVehicle(
     'mileage': mileage,
   });
   final http.StreamedResponse res = await request.send();
-  /*final http.Response response = await http.post(
-    Uri.parse(vehiclesEndPoint),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': "Bearer $authorization"
-    },
-    body: jsonEncode(<String, dynamic>{
-      'name': name,
-      'buyDate': buyDate,
-      'mileage': mileage,
-      'upload': upload,
-    }),
-  );*/
 
   if (res.statusCode == 200) {
-    print(
-      "le res est ${res.stream} et le status code ${res.statusCode}",
-    );
+    return 200;
   } else {
-    print(
-      "l'erreur est ${res.stream} et le status code ${res.statusCode}",
-    );
     throw "le véhicule n'est pas ajouté";
   }
-
-  return res.statusCode;
 }

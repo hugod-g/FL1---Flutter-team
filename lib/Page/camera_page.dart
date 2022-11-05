@@ -30,9 +30,13 @@ class _CameraPageState extends State<CameraPage> {
     initCamera(widget.cameras![0]);
   }
 
-  void takePicture() async {
-    final AppData provider = Provider.of<AppData>(context, listen: false);
+  void takePictureLoaded() {
+    AppData data;
+    data = Provider.of<AppData>(context, listen: false);
+    takePicture(data);
+  }
 
+  void takePicture(AppData data) async {
     if (!_cameraController.value.isInitialized) {
       return;
     }
@@ -42,15 +46,9 @@ class _CameraPageState extends State<CameraPage> {
     try {
       await _cameraController.setFlashMode(FlashMode.off);
       final XFile picture = await _cameraController.takePicture();
-      provider.addDataVehicle(
-        "tmp",
-        0,
-        picture.path,
-        DateTime.now().toString(),
-        '0',
-      );
+      data.vehicles.last.updatePicturePath(picture.path);
       if (mounted) {
-        await Navigator.pushNamed(context, 'add_vehicle');
+        Navigator.pop(context);
       }
     } on CameraException catch (e) {
       debugPrint('Error occured while taking picture: $e');
@@ -117,7 +115,7 @@ class _CameraPageState extends State<CameraPage> {
                     ),
                     Expanded(
                       child: IconButton(
-                        onPressed: takePicture,
+                        onPressed: takePictureLoaded,
                         iconSize: 50,
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),

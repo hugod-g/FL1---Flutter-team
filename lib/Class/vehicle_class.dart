@@ -19,13 +19,13 @@ class VehiculeModel extends ChangeNotifier {
     return VehiculeModel(name, kilometrage, picturePath, date, id);
   }
 
-  String name = "";
-  int kilometrage = 0;
-  String picturePath = "";
-  String id = "";
-  String date = "";
-  List<MaintenanceModel> maintenances =
-      List<MaintenanceModel>.empty(growable: true);
+  String name;
+  int kilometrage;
+  String picturePath;
+  String id;
+  String date;
+  List<maintenanceModel> maintenances =
+      List<maintenanceModel>.empty(growable: true);
 
   void updateName(String newVar) {
     name = newVar;

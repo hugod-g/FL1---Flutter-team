@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
-import 'package:mon_petit_entretien/Components/comment_text.dart';
+import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
 import 'package:mon_petit_entretien/Page/web/modifprofil_web.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
@@ -112,7 +112,9 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                               child: Button(
                                 text: "Modifier le profil",
                                 onPress: () => Navigator.pushNamed(
-                                    context, '/modifProfil'),
+                                  context,
+                                  '/modifProfil',
+                                ),
                               ),
                             ),
                           ),
@@ -123,7 +125,9 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                               child: Button(
                                 text: "Déconnexion",
                                 onPress: () => Navigator.pushNamed(
-                                    context, '/modifProfil'),
+                                  context,
+                                  '/modifProfil',
+                                ),
                                 secondary: true,
                               ),
                             ),

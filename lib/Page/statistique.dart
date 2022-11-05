@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Components/comment_text.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
+import 'package:mon_petit_entretien/Class/maintenance_class.dart';
+import 'package:mon_petit_entretien/Class/vehicle_class.dart';
+import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Page/web/stat_web.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:provider/provider.dart';
 import '../Style/colors.dart';
 
 class Statistique extends StatefulWidget {
@@ -12,6 +16,28 @@ class Statistique extends StatefulWidget {
 }
 
 class _Statistique extends State<Statistique> {
+  int statMaintenances = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    getStatMaintenance();
+  }
+
+  void getStatMaintenance() async {
+    AppData data;
+    data = Provider.of<AppData>(context, listen: false);
+    int tempPrice = 0;
+    for (VehiculeModel vehicule in data.vehicles) {
+      for (maintenanceModel maintenance in vehicule.maintenances) {
+        tempPrice += int.parse(maintenance.prix);
+      }
+    }
+    setState(() {
+      statMaintenances = tempPrice;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final double currentWith = MediaQuery.of(context).size.width;
@@ -51,14 +77,14 @@ class _Statistique extends State<Statistique> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 20),
                     child: Column(
-                      children: const <Widget>[
+                      children: <Widget>[
                         CommonText(
-                          text: "28 987" " €",
+                          text: "$statMaintenances €",
                           fontSizeText: 50,
                           fontWeight: fontBold,
                           color: navy,
                         ),
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(top: 20),
                           child: CommonText(
                             text: "Total",

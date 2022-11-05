@@ -3,7 +3,7 @@ import 'package:mon_petit_entretien/Page/web/vuevehicule_web.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
-import '../Components/comment_text.dart';
+import '../Components/common_text.dart';
 
 class VueVehiculePage extends StatefulWidget {
   const VueVehiculePage({Key? key}) : super(key: key);
@@ -70,92 +70,168 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.175,
                       width: MediaQuery.of(context).size.width * 0.875,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: white,
-                        image: const DecorationImage(
+                        image: DecorationImage(
                           image: AssetImage('assets/image/logo.png'),
                           fit: BoxFit.fill,
                         ),
-                        borderRadius: BorderRadius.circular(12.5),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: const Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: <Widget>[
-                          const CommonText(
-                            text: "Vehicule",
-                            fontSizeText: 25,
-                            fontWeight: fontBold,
-                            paddingTop: 16,
-                            color: navy,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 24, right: 16, left: 16),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Row(
-                                  children: const <Widget>[
-                                    Icon(
-                                      Icons.calendar_today,
-                                      size: 25,
-                                    ),
-                                    CommonText(
-                                      text: "12/12/2022",
-                                      fontSizeText: 17.5,
-                                      fontWeight: fontLight,
-                                      color: navy,
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: const <Widget>[
-                                    Icon(
-                                      Icons.mode_of_travel,
-                                      size: 25,
-                                    ),
-                                    CommonText(
-                                      text: "2000 km",
-                                      fontSizeText: 17.5,
-                                      fontWeight: fontLight,
-                                      color: navy,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
                       ),
                     ),
                   ),
-                )
+                ),
+                Column(
+                  children: <Widget>[
+                    const CommonText(
+                      text: "Vehicule",
+                      fontSizeText: 25,
+                      fontWeight: fontBold,
+                      paddingTop: 16,
+                      color: navy,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 24,
+                        right: 16,
+                        left: 16,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Row(
+                            children: const <Widget>[
+                              Icon(
+                                Icons.calendar_today,
+                                size: 25,
+                              ),
+                              CommonText(
+                                text: "12/12/2022",
+                                fontSizeText: 17.5,
+                                fontWeight: fontLight,
+                                color: navy,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: const <Widget>[
+                              Icon(
+                                Icons.mode_of_travel,
+                                size: 25,
+                              ),
+                              CommonText(
+                                text: "2000 km",
+                                fontSizeText: 17.5,
+                                fontWeight: fontLight,
+                                color: navy,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const CommonText(
+                      text: "12/12/2022",
+                      fontSizeText: 17.5,
+                      fontWeight: fontLight,
+                      color: navy,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        const Icon(
+                          Icons.mode_of_travel,
+                          size: 25,
+                        ),
+                        const CommonText(
+                          text: "2000 km",
+                          fontSizeText: 17.5,
+                          fontWeight: fontLight,
+                          color: navy,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 24,
+                            right: 16,
+                            left: 16,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Row(
+                                children: const <Widget>[
+                                  Icon(
+                                    Icons.calendar_today,
+                                    size: 25,
+                                  ),
+                                  CommonText(
+                                    text: "12/12/2022",
+                                    fontSizeText: 17.5,
+                                    fontWeight: fontLight,
+                                    color: navy,
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: const <Widget>[
+                                  Icon(
+                                    Icons.mode_of_travel,
+                                    size: 25,
+                                  ),
+                                  CommonText(
+                                    text: "2000 km",
+                                    fontSizeText: 17.5,
+                                    fontWeight: fontLight,
+                                    color: navy,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 24, right: 16, left: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: const <Widget>[
+                          Icon(
+                            Icons.calendar_today,
+                            size: 25,
+                          ),
+                          CommonText(
+                            text: "12/12/2022",
+                            fontSizeText: 17.5,
+                            fontWeight: fontLight,
+                            color: navy,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: const <Widget>[
+                          Icon(
+                            Icons.mode_of_travel,
+                            size: 25,
+                          ),
+                          CommonText(
+                            text: "2000 km",
+                            fontSizeText: 17.5,
+                            fontWeight: fontLight,
+                            color: navy,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const Icon(
+                  Icons.car_repair,
+                  size: 35,
+                ),
               ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(24),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const <Widget>[
-                  CommonText(
-                    text: "Mes entretiens",
-                    fontSizeText: 25,
-                    fontWeight: fontBold,
-                    color: navy,
-                  ),
-                  Icon(
-                    Icons.car_repair,
-                    size: 35,
-                  ),
-                ],
-              ),
             ),
             SingleChildScrollView(
               padding: EdgeInsets.only(

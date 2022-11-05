@@ -10,7 +10,7 @@ final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 Future<int> loginCall(
   String email,
   String password,
-  AppData provider,
+  AppData data,
 ) async {
   final SharedPreferences prefs = await _prefs;
 
@@ -29,8 +29,7 @@ Future<int> loginCall(
     final dynamic payload = jsonDecode(response.body);
 
     final String token = payload["token"];
-
-    provider.token = token;
+    data.token = token;
     await prefs.setString('token', token);
   } else {
     throw "Email ou mot de passe incorrect";
@@ -44,7 +43,7 @@ Future<int> registerCall(
   String password,
   String firstname,
   String lastname,
-  AppData provider,
+  AppData data,
 ) async {
   final http.Response response = await http.post(
     Uri.parse(registerEndpoint),
@@ -60,7 +59,7 @@ Future<int> registerCall(
   );
 
   if (response.statusCode == 200) {
-    await loginCall(email, password, provider);
+    await loginCall(email, password, data);
   } else {
     throw "Une erreur est survenu lors de votre inscription. Merci de réessayer";
   }

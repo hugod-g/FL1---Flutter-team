@@ -57,10 +57,10 @@ class _RegisterPage extends State<RegisterPage> {
     });
 
     try {
-      final AppData provider = Provider.of<AppData>(context, listen: false);
-
+      AppData data;
+      data = Provider.of<AppData>(context, listen: false);
       final int response =
-          await registerCall(email, password, firstname, lastname, provider);
+          await registerCall(email, password, firstname, lastname, data);
 
       if (response == 200 && mounted) {
         await Navigator.popAndPushNamed(context, '/gestion');

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Components/comment_text.dart';
+import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
@@ -49,7 +49,10 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                          top: 40, left: 12.5, right: 12.5),
+                        top: 40,
+                        left: 12.5,
+                        right: 12.5,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
@@ -99,7 +102,10 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    top: 24, right: 16, left: 16),
+                                  top: 24,
+                                  right: 16,
+                                  left: 16,
+                                ),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -147,7 +153,11 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
           ),
           Padding(
             padding: const EdgeInsets.only(
-                left: 150, right: 150, bottom: 25, top: 25),
+              left: 150,
+              right: 150,
+              bottom: 25,
+              top: 25,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const <Widget>[
