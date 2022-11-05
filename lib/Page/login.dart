@@ -44,7 +44,9 @@ class _LoginPage extends State<LoginPage> {
     });
 
     try {
-      final int responseStatus = await loginCall(email, password, context);
+      final AppData provider = Provider.of<AppData>(context, listen: false);
+
+      final int responseStatus = await loginCall(email, password, provider);
 
       if (responseStatus == 200 && mounted) {
         await Navigator.popAndPushNamed(context, '/gestion');

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Services/api/auth.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:provider/provider.dart';
 import '../Style/colors.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -55,8 +57,10 @@ class _RegisterPage extends State<RegisterPage> {
     });
 
     try {
+      final AppData provider = Provider.of<AppData>(context, listen: false);
+
       final int response =
-          await registerCall(email, password, firstname, lastname, context);
+          await registerCall(email, password, firstname, lastname, provider);
 
       if (response == 200 && mounted) {
         await Navigator.popAndPushNamed(context, '/gestion');
