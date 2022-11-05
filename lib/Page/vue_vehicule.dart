@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
-import '../Components/comment_text.dart';
+import '../Components/common_text.dart';
 
 class VueVehiculePage extends StatefulWidget {
   const VueVehiculePage({Key? key}) : super(key: key);
@@ -89,7 +89,10 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              top: 24, right: 16, left: 16),
+                            top: 24,
+                            right: 16,
+                            left: 16,
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[

@@ -8,6 +8,7 @@ class TextInput extends StatefulWidget {
     required this.value,
     required this.placeholder,
     required this.onChangeText,
+    this.textinput,
     this.secure = false,
   });
 
@@ -15,6 +16,7 @@ class TextInput extends StatefulWidget {
   final String? placeholder;
   final bool secure;
   final void Function(String)? onChangeText;
+  final TextInputType? textinput;
 
   @override
   TextInputState createState() => TextInputState();
@@ -45,10 +47,10 @@ class TextInputState extends State<TextInput> {
               hintText: widget.placeholder,
               hintStyle: const TextStyle(
                 color: lightGray,
-              )
+              ),
             ),
+            keyboardType: widget.textinput,
             style: const TextStyle(
-              
               fontFamily: appFont,
               fontWeight: fontRegular,
             ),

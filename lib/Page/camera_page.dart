@@ -74,7 +74,7 @@ class _CameraPageState extends State<CameraPage> {
     return Scaffold(
       body: SafeArea(
         child: Stack(
-          children: [
+          children: <Widget>[
             if (_cameraController.value.isInitialized)
               CameraPreview(_cameraController)
             else
@@ -91,7 +91,7 @@ class _CameraPageState extends State<CameraPage> {
                   color: navy,
                 ),
                 child: Row(
-                  children: [
+                  children: <Widget>[
                     Expanded(
                       child: IconButton(
                         padding: EdgeInsets.zero,
@@ -108,7 +108,8 @@ class _CameraPageState extends State<CameraPage> {
                                 _isRearCameraSelected = !_isRearCameraSelected,
                           );
                           initCamera(
-                              widget.cameras![_isRearCameraSelected ? 0 : 1]);
+                            widget.cameras![_isRearCameraSelected ? 0 : 1],
+                          );
                         },
                       ),
                     ),

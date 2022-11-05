@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Class/vehicle_class.dart';
 import 'package:mon_petit_entretien/Components/button_select.dart';
-import 'package:mon_petit_entretien/Components/comment_text.dart';
+import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Page/add_vehicule.dart';
 import 'package:mon_petit_entretien/Page/web/home_web.dart';
@@ -296,16 +296,6 @@ class _Home extends State<Home> {
                         "http://152.228.134.93:1339/$pathImage",
                       ),
                     ),
-                    /*DecorationImage(
-                    image: AssetImage('assets/car.jpg'),
-                    fit: BoxFit.fitHeight,
-                  ),
-                  DecorationImage(
-                    fit: BoxFit.fill,
-                    image:  //NetworkImage(
-                      //"https://picsum.photos/250?image=9",
-                    ), 
-                  ),*/
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
                   ),
                 )
@@ -317,11 +307,13 @@ class _Home extends State<Home> {
                     color: navy,
                   ),
                 ),
-              Row(
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Padding(
+              SizedBox(
+                height: 270,
+                width: 230,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Padding(
                       padding: const EdgeInsets.only(left: 10, bottom: 10),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -346,11 +338,8 @@ class _Home extends State<Home> {
                         ],
                       ),
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 30, bottom: 25),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15, right: 10),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
@@ -389,9 +378,9 @@ class _Home extends State<Home> {
                         ],
                       ),
                     ),
-                  ),
-                ],
-              )
+                  ],
+                ),
+              ),
             ],
           ),
         ),

@@ -12,7 +12,7 @@ class centerModel extends ChangeNotifier {
   String name = "";
   String id = "";
 
-  void updateName(newVar) {
+  void updateName(String newVar) {
     name = newVar;
     notifyListeners();
   }

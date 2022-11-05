@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Class/user_class.dart';
-import 'package:mon_petit_entretien/Components/comment_text.dart';
+import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
@@ -50,7 +50,7 @@ class UserRowState extends State<UserRow> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Row(
-              children: [
+              children: <Widget>[
                 CommonText(
                   text: "${widget.user.firstName} ${widget.user.lastName}",
                   fontSizeText: 16,
