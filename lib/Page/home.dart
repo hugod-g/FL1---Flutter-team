@@ -38,8 +38,23 @@ class _Home extends State<Home> {
 
   void _onSelectKM() async {
     if (select["KM"] == false) {
+      AppData data;
+      data = Provider.of<AppData>(context, listen: false);
+      final List<VehiculeModel> newVehiculesHigh =
+          List<VehiculeModel>.empty(growable: true);
+      newVehiculesHigh.addAll(data.vehicles);
+
+      newVehiculesHigh.sort((VehiculeModel a, VehiculeModel b) {
+        return a.kilometrage.compareTo(b.kilometrage);
+      });
+      data.vehicles.clear();
+      for (VehiculeModel newVehicule in newVehiculesHigh) {
+        data.vehicles.add(newVehicule);
+      }
       setState(() {
         select["KM"] = true;
+        select["A-Z"] = false;
+        select["DATE"] = false;
       });
     } else {
       setState(() {
@@ -50,8 +65,23 @@ class _Home extends State<Home> {
 
   void _onSelectDate() async {
     if (select["DATE"] == false) {
+      AppData data;
+      data = Provider.of<AppData>(context, listen: false);
+      final List<VehiculeModel> newVehiculesDate =
+          List<VehiculeModel>.empty(growable: true);
+      newVehiculesDate.addAll(data.vehicles);
+
+      newVehiculesDate.sort((VehiculeModel a, VehiculeModel b) {
+        return a.date.compareTo(b.date);
+      });
+      data.vehicles.clear();
+      for (VehiculeModel newVehicule in newVehiculesDate) {
+        data.vehicles.add(newVehicule);
+      }
       setState(() {
         select["DATE"] = true;
+        select["A-Z"] = false;
+        select["KM"] = false;
       });
     } else {
       setState(() {
@@ -62,8 +92,23 @@ class _Home extends State<Home> {
 
   void _onSelectAlph() async {
     if (select["A-Z"] == false) {
+      AppData data;
+      data = Provider.of<AppData>(context, listen: false);
+      final List<VehiculeModel> newVehiculesAlph =
+          List<VehiculeModel>.empty(growable: true);
+      newVehiculesAlph.addAll(data.vehicles);
+
+      newVehiculesAlph.sort((VehiculeModel a, VehiculeModel b) {
+        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+      });
+      data.vehicles.clear();
+      for (VehiculeModel newVehicule in newVehiculesAlph) {
+        data.vehicles.add(newVehicule);
+      }
       setState(() {
         select["A-Z"] = true;
+        select["DATE"] = false;
+        select["KM"] = false;
       });
     } else {
       setState(() {
