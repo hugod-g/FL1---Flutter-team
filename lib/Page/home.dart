@@ -74,6 +74,7 @@ class _Home extends State<Home> {
       newVehiculesDate.sort((VehiculeModel a, VehiculeModel b) {
         return a.date.compareTo(b.date);
       });
+
       data.vehicles.clear();
       for (VehiculeModel newVehicule in newVehiculesDate) {
         data.vehicles.add(newVehicule);
