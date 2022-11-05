@@ -81,10 +81,10 @@ class _Home extends State<Home> {
   void getEveryVehicules() async {
     AppData data;
     data = Provider.of<AppData>(context, listen: false);
-    List<vehiculeModel> newVehicules;
+    List<VehiculeModel> newVehicules;
     data.vehicles.clear();
     newVehicules = await getVehicles(data.token);
-    for (vehiculeModel newVehicule in newVehicules) {
+    for (VehiculeModel newVehicule in newVehicules) {
       data.vehicles.add(newVehicule);
     }
     if (data.vehicles.isNotEmpty) {
@@ -199,7 +199,8 @@ class _Home extends State<Home> {
                                         decoration: const BoxDecoration(
                                           color: navy,
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(8)),
+                                            Radius.circular(8),
+                                          ),
                                         ),
                                       ),
                                       Row(
@@ -252,7 +253,7 @@ class _Home extends State<Home> {
                                 ),
                               ),
                             ),
-                            for (vehiculeModel vehicule
+                            for (VehiculeModel vehicule
                                 in Provider.of<AppData>(context, listen: false)
                                     .vehicles)
                               CardCar(

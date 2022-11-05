@@ -6,7 +6,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:mon_petit_entretien/Class/vehicle_class.dart';
 import 'package:mon_petit_entretien/Config/endpoint.dart';
 
-Future<List<vehiculeModel>> getVehicles(String authorization) async {
+Future<List<VehiculeModel>> getVehicles(String authorization) async {
   final http.Response response = await http.get(
     Uri.parse(vehiclesEndPoint),
     headers: <String, String>{
@@ -18,8 +18,8 @@ Future<List<vehiculeModel>> getVehicles(String authorization) async {
   if (response.statusCode == 200) {
     final dynamic payload = jsonDecode(response.body);
     final List<dynamic> rest = payload as List<dynamic>;
-    final List<vehiculeModel> tmpListVehicule = rest
-        .map<vehiculeModel>((dynamic json) => vehiculeModel.fromJson(json))
+    final List<VehiculeModel> tmpListVehicule = rest
+        .map<VehiculeModel>((dynamic json) => VehiculeModel.fromJson(json))
         .toList();
 
     return tmpListVehicule;
