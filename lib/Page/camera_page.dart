@@ -38,10 +38,10 @@ class _CameraPageState extends State<CameraPage> {
 
   void takePicture(AppData data) async {
     if (!_cameraController.value.isInitialized) {
-      return null;
+      return;
     }
     if (_cameraController.value.isTakingPicture) {
-      return null;
+      return;
     }
     try {
       await _cameraController.setFlashMode(FlashMode.off);
@@ -52,7 +52,7 @@ class _CameraPageState extends State<CameraPage> {
       }
     } on CameraException catch (e) {
       debugPrint('Error occured while taking picture: $e');
-      return null;
+      return;
     }
   }
 

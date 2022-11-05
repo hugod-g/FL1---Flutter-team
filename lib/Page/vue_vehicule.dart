@@ -9,8 +9,7 @@ class VueVehiculePage extends StatefulWidget {
   const VueVehiculePage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _VueVehiculePage createState() => _VueVehiculePage();
+  State<VueVehiculePage> createState() => _VueVehiculePage();
 }
 
 class _VueVehiculePage extends State<VueVehiculePage> {
@@ -147,6 +146,43 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                             fontWeight: fontLight,
                             color: navy,
                           ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 24, right: 16, left: 16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Row(
+                                  children: const <Widget>[
+                                    Icon(
+                                      Icons.calendar_today,
+                                      size: 25,
+                                    ),
+                                    CommonText(
+                                      text: "12/12/2022",
+                                      fontSizeText: 17.5,
+                                      fontWeight: fontLight,
+                                      color: navy,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: const <Widget>[
+                                    Icon(
+                                      Icons.mode_of_travel,
+                                      size: 25,
+                                    ),
+                                    CommonText(
+                                      text: "2000 km",
+                                      fontSizeText: 17.5,
+                                      fontWeight: fontLight,
+                                      color: navy,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     ],
@@ -187,28 +223,27 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                       ),
                     ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(24),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const <Widget>[
-                      CommonText(
-                        text: "Mes entretiens",
-                        fontSizeText: 25,
-                        fontWeight: fontBold,
-                        color: navy,
-                      ),
-                      Icon(
-                        Icons.car_repair,
-                        size: 35,
-                      ),
-                    ],
+                  Icon(
+                    Icons.car_repair,
+                    size: 35,
                   ),
-                ),
-                SingleChildScrollView(
-                  padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.0125,
+                ],
+              ),
+            ),
+            SingleChildScrollView(
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.0125,
+              ),
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const <Widget>[
+                  CardVehicule(
+                    prix: prix,
+                    title: title,
+                    date: date,
+                    km: km,
+                    enterprise: enterprise,
                   ),
                   scrollDirection: Axis.horizontal,
                   child: Row(

@@ -26,8 +26,7 @@ Future<int> loginCall(
   );
 
   if (response.statusCode == 200) {
-    // ignore: always_specify_types
-    final payload = jsonDecode(response.body);
+    final dynamic payload = jsonDecode(response.body);
 
     final String token = payload["token"];
     data.token = token;
