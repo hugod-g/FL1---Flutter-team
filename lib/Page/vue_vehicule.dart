@@ -79,22 +79,53 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                         ),
                       ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 24,
-                    right: 16,
-                    left: 16,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: const <Widget>[
-                          Icon(
-                            Icons.calendar_today,
-                            size: 25,
+                    child: Column(
+                      children: <Widget>[
+                        const CommonText(
+                          text: "Vehicule",
+                          fontSizeText: 25,
+                          fontWeight: fontBold,
+                          paddingTop: 16,
+                          color: navy,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 24,
+                            right: 16,
+                            left: 16,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Row(
+                                children: const <Widget>[
+                                  Icon(
+                                    Icons.calendar_today,
+                                    size: 25,
+                                  ),
+                                  CommonText(
+                                    text: "12/12/2022",
+                                    fontSizeText: 17.5,
+                                    fontWeight: fontLight,
+                                    color: navy,
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: const <Widget>[
+                                  Icon(
+                                    Icons.mode_of_travel,
+                                    size: 25,
+                                  ),
+                                  CommonText(
+                                    text: "2000 km",
+                                    fontSizeText: 17.5,
+                                    fontWeight: fontLight,
+                                    color: navy,
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                           CommonText(
                             text: "12/12/2022",
