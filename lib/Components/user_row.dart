@@ -50,7 +50,7 @@ class UserRowState extends State<UserRow> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Row(
-              children: [
+              children: <Widget>[
                 CommonText(
                   text: "${widget.user.firstName} ${widget.user.lastName}",
                   fontSizeText: 16,

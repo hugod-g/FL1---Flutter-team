@@ -44,10 +44,11 @@ class _LoginPage extends State<LoginPage> {
     });
 
     try {
-      final int responseStatus = await loginCall(email, password, context);
+      final AppData provider = Provider.of<AppData>(context, listen: false);
 
-      if (responseStatus == 200) {
-        // ignore: use_build_context_synchronously
+      final int responseStatus = await loginCall(email, password, provider);
+
+      if (responseStatus == 200 && mounted) {
         await Navigator.popAndPushNamed(context, '/gestion');
       }
     } catch (e) {

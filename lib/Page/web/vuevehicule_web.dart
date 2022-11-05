@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Components/comment_text.dart';
-import 'package:mon_petit_entretien/Components/web/burgerMenu.dart';
+import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
 class VueVehiculeWebPage extends StatefulWidget {
-
   const VueVehiculeWebPage({Key? key}) : super(key: key);
 
   @override
@@ -14,7 +13,6 @@ class VueVehiculeWebPage extends StatefulWidget {
 }
 
 class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
-
   final String prix = "200";
   final String title = "Roue";
   final String date = "12/20/2022";
@@ -26,12 +24,12 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      body : Column(
+      body: Column(
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(left: 375, right: 375, bottom: 50),
             child: Column(
-              children: <Widget> [
+              children: <Widget>[
                 Stack(
                   children: <Widget>[
                     Container(
@@ -50,7 +48,8 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 40, left: 12.5, right: 12.5),
+                      padding: const EdgeInsets.only(
+                          top: 40, left: 12.5, right: 12.5),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
@@ -62,8 +61,7 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
                           IconButton(
                             icon: const Icon(Icons.integration_instructions),
                             iconSize: 35,
-                            onPressed: () {
-                            },
+                            onPressed: () {},
                           ),
                         ],
                       ),
@@ -100,15 +98,17 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
                                 color: navy,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 24, right: 16, left: 16),
+                                padding: const EdgeInsets.only(
+                                    top: 24, right: 16, left: 16),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Row(
                                       children: const <Widget>[
                                         Icon(
                                           Icons.calendar_today,
-                                            size: 25,
+                                          size: 25,
                                         ),
                                         CommonText(
                                           text: "12/12/2022",
@@ -122,7 +122,7 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
                                       children: const <Widget>[
                                         Icon(
                                           Icons.mode_of_travel,
-                                            size: 25,
+                                          size: 25,
                                         ),
                                         CommonText(
                                           text: "2000 km",
@@ -146,7 +146,8 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 150, right: 150, bottom: 25, top: 25),
+            padding: const EdgeInsets.only(
+                left: 150, right: 150, bottom: 25, top: 25),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const <Widget>[
@@ -157,8 +158,8 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
                   color: navy,
                 ),
                 Icon(
-                    Icons.car_repair,
-                    size: 35,
+                  Icons.car_repair,
+                  size: 35,
                 ),
               ],
             ),
@@ -168,7 +169,7 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
             scrollDirection: Axis.horizontal,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget> [
+              children: <Widget>[
                 CardVehiculeWeb(
                   prix: prix,
                   title: title,
@@ -182,7 +183,7 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
                   date: date,
                   km: km,
                   enterprise: enterprise,
-                  ),
+                ),
               ],
             ),
           ),
@@ -191,7 +192,7 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
       appBar: AppBar(
         title: const Text('Mon Petit Entretient'),
         backgroundColor: blue,
-        ),
+      ),
       drawer: Theme(
         data: Theme.of(context).copyWith(canvasColor: gray),
         child: const BurgerMenu(),
@@ -201,16 +202,15 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
 }
 
 class CardVehiculeWeb extends StatelessWidget {
-
-  const CardVehiculeWeb(
-    {Key? key,
+  const CardVehiculeWeb({
+    Key? key,
     required this.prix,
     required this.title,
     required this.date,
     required this.km,
     required this.enterprise,
-    }) : super(key: key);
-  
+  }) : super(key: key);
+
   final String prix;
   final String title;
   final String date;
@@ -219,87 +219,85 @@ class CardVehiculeWeb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return 
-      Padding(
-        padding: const EdgeInsets.only(left: 50),
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.2,
-          width: MediaQuery.of(context).size.width * 0.25,
-          decoration: BoxDecoration(
-            color: blue,
-            borderRadius: BorderRadius.circular(12.5),
-          ),
-          child: Row(
-            children: <Widget> [
-              Padding(
-                padding: const EdgeInsets.only(left: 24),
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.2,
-                  width: MediaQuery.of(context).size.width * 0.05,
-                  color: white,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 8, bottom: 8),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget> [
-                        const Icon(
-                          Icons.car_repair,
-                          size: 30,
+    return Padding(
+      padding: const EdgeInsets.only(left: 50),
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.2,
+        width: MediaQuery.of(context).size.width * 0.25,
+        decoration: BoxDecoration(
+          color: blue,
+          borderRadius: BorderRadius.circular(12.5),
+        ),
+        child: Row(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 24),
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.2,
+                width: MediaQuery.of(context).size.width * 0.05,
+                color: white,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8, bottom: 8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      const Icon(
+                        Icons.car_repair,
+                        size: 30,
+                      ),
+                      RotatedBox(
+                        quarterTurns: 3,
+                        child: CommonText(
+                          text: '$prix €',
+                          fontSizeText: 17,
+                          fontWeight: fontBold,
+                          color: navy,
                         ),
-                        RotatedBox(
-                          quarterTurns: 3,
-                          child: CommonText(
-                            text: '$prix €',
-                            fontSizeText: 17,
-                            fontWeight: fontBold,
-                            color: navy,
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget> [
-                  CommonText(
-                    text: title,
-                    fontSizeText: 20,
-                    fontWeight: fontBold,
-                    paddingTop: 8,
-                    paddingLeft: 16,
-                    color: white,
-                  ),
-                  CommonText(
-                    text: date,
-                    fontSizeText: 17.5,
-                    fontWeight: fontLight,
-                    paddingTop: 24,
-                    paddingLeft: 16,
-                    color: white,
-                  ),
-                  CommonText(
-                    text: '$km km',
-                    fontSizeText: 17.5,
-                    fontWeight: fontLight,
-                    paddingLeft: 16,
-                    color: white,
-                  ),
-                  CommonText(
-                    text: enterprise,
-                    fontSizeText: 15,
-                    fontWeight: fontLight,
-                    paddingTop: 16,
-                    paddingLeft: 16,
-                    color: white,
-                  ),
-                ],
-              )
-            ],
-          ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                CommonText(
+                  text: title,
+                  fontSizeText: 20,
+                  fontWeight: fontBold,
+                  paddingTop: 8,
+                  paddingLeft: 16,
+                  color: white,
+                ),
+                CommonText(
+                  text: date,
+                  fontSizeText: 17.5,
+                  fontWeight: fontLight,
+                  paddingTop: 24,
+                  paddingLeft: 16,
+                  color: white,
+                ),
+                CommonText(
+                  text: '$km km',
+                  fontSizeText: 17.5,
+                  fontWeight: fontLight,
+                  paddingLeft: 16,
+                  color: white,
+                ),
+                CommonText(
+                  text: enterprise,
+                  fontSizeText: 15,
+                  fontWeight: fontLight,
+                  paddingTop: 16,
+                  paddingLeft: 16,
+                  color: white,
+                ),
+              ],
+            )
+          ],
         ),
-      )
-    ;
+      ),
+    );
   }
 }

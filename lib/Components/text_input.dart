@@ -45,10 +45,9 @@ class TextInputState extends State<TextInput> {
               hintText: widget.placeholder,
               hintStyle: const TextStyle(
                 color: lightGray,
-              )
+              ),
             ),
             style: const TextStyle(
-              
               fontFamily: appFont,
               fontWeight: fontRegular,
             ),

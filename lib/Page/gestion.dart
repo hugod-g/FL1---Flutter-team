@@ -38,7 +38,7 @@ class _GestionPage extends State<GestionPage> {
   PageController pageController = PageController();
 
   List<BottomNavigationBarItem> buildBottomNavBarItems() {
-    return [
+    return <BottomNavigationBarItem>[
       const BottomNavigationBarItem(
         icon: Icon(Icons.car_repair),
         label: 'Véhicules',

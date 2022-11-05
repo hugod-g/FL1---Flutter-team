@@ -4,7 +4,6 @@ import 'package:mon_petit_entretien/Class/vehicle_class.dart';
 import 'package:mon_petit_entretien/Components/button_select.dart';
 import 'package:mon_petit_entretien/Components/comment_text.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
-import 'package:mon_petit_entretien/Page/add_vehicule.dart';
 import 'package:mon_petit_entretien/Page/web/home_web.dart';
 import 'package:mon_petit_entretien/Services/api/vehicule.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
@@ -80,9 +79,9 @@ class _Home extends State<Home> {
   void getEveryVehicules() async {
     AppData data;
     data = Provider.of<AppData>(context, listen: false);
-    List<vehiculeModel> newVehicules;
+    List<VehiculeModel> newVehicules;
     newVehicules = await getVehicles(data.token);
-    for (vehiculeModel newVehicule in newVehicules) {
+    for (VehiculeModel newVehicule in newVehicules) {
       data.vehicles.add(newVehicule);
     }
     if (data.vehicles.isNotEmpty) {
@@ -159,17 +158,21 @@ class _Home extends State<Home> {
   }
 
   Widget _listCar() {
-    return Container(
+    return SizedBox(
       height: 270,
       width: 500,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
           _addCar(),
-          for (vehiculeModel vehicule
+          for (VehiculeModel vehicule
               in Provider.of<AppData>(context, listen: false).vehicles)
-            _showCar(vehicule.name, vehicule.kilometrage.toString(),
-                vehicule.maintenances.length.toString(), vehicule.picturePath),
+            _showCar(
+              vehicule.name,
+              vehicule.kilometrage.toString(),
+              vehicule.maintenances.length.toString(),
+              vehicule.picturePath,
+            ),
         ],
       ),
     );
@@ -206,23 +209,11 @@ class _Home extends State<Home> {
       padding: const EdgeInsets.only(right: 20),
       child: InkWell(
         onTap: () {
-          Map data = {
-            'name': 'marie',
-            'email': 'example@example.com',
-            'age': 42
-          };
-
-          Navigator.push(
-            context,
-            // ignore: always_specify_types
-            MaterialPageRoute(
-              builder: (BuildContext context) => const AddVehicule(),
-            ),
-          );
+          Navigator.pushNamed(context, '/add_vehicle');
         },
         child: Ink(
           child: Stack(
-            children: [
+            children: <Widget>[
               Container(
                 height: 270,
                 width: 230,
@@ -275,13 +266,17 @@ class _Home extends State<Home> {
   }
 
   Widget _showCar(
-      String name, String mileage, String nbMaintenance, String pathImage) {
+    String name,
+    String mileage,
+    String nbMaintenance,
+    String pathImage,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(right: 20),
       child: InkWell(
         child: Ink(
           child: Stack(
-            children: [
+            children: <Widget>[
               if (isLoaded)
                 Container(
                   height: 270,
@@ -377,7 +372,9 @@ class _Home extends State<Home> {
                               child: Text(
                                 nbMaintenance,
                                 style: const TextStyle(
-                                    fontSize: 20, fontWeight: fontBold),
+                                  fontSize: 20,
+                                  fontWeight: fontBold,
+                                ),
                               ),
                             ),
                           ),
