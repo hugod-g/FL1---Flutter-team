@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
@@ -195,6 +196,13 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
                   enterprise: enterprise,
                 ),
               ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 40, left: 75, right: 75),
+            child: Button(
+              text: "Ajouter un entretient",
+              onPress: () => Navigator.pushNamed(context, '/add_maintenance'),
             ),
           ),
         ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
+import 'package:mon_petit_entretien/Page/web/addmaintenance_web.dart';
 import 'package:mon_petit_entretien/Page/web/modifprofil_web.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
@@ -167,7 +168,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
         ),
       );
     } else {
-      return const ModifProfilWebPage();
+      return const AddMaintenanceWebPage();
     }
   }
 }
