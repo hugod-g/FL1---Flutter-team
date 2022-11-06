@@ -29,27 +29,62 @@ class _Home extends State<Home> {
   };
 
   bool isLoaded = false;
+  bool isSearching = false;
+  final List<VehiculeModel> _searchVehicules =
+      List<VehiculeModel>.empty(growable: true);
 
   void _onSearchChange(String newValue) {
     setState(() {
       search = newValue;
     });
+    if (search.isNotEmpty) {
+      AppData data;
+      data = Provider.of<AppData>(context, listen: false);
+      _searchVehicules.clear();
+      for (VehiculeModel newVehicule in data.vehicles) {
+        if (newVehicule.name.toLowerCase().contains(search) &&
+            newVehicule.name[0].toLowerCase() == search[0]) {
+          _searchVehicules.add(newVehicule);
+        }
+      }
+      setState(() {
+        isSearching = true;
+      });
+    } else {
+      setState(() {
+        isSearching = false;
+      });
+    }
   }
 
   void _onSelectKM() async {
     if (select["KM"] == false) {
-      AppData data;
-      data = Provider.of<AppData>(context, listen: false);
-      final List<VehiculeModel> newVehiculesHigh =
-          List<VehiculeModel>.empty(growable: true);
-      newVehiculesHigh.addAll(data.vehicles);
+      if (isSearching == true) {
+        final List<VehiculeModel> newVehiculesHigh =
+            List<VehiculeModel>.empty(growable: true);
+        newVehiculesHigh.addAll(_searchVehicules);
 
-      newVehiculesHigh.sort((VehiculeModel a, VehiculeModel b) {
-        return a.kilometrage.compareTo(b.kilometrage);
-      });
-      data.vehicles.clear();
-      for (VehiculeModel newVehicule in newVehiculesHigh) {
-        data.vehicles.add(newVehicule);
+        newVehiculesHigh.sort((VehiculeModel a, VehiculeModel b) {
+          return a.kilometrage.compareTo(b.kilometrage);
+        });
+        _searchVehicules.clear();
+        for (VehiculeModel newVehicule in newVehiculesHigh) {
+          _searchVehicules.add(newVehicule);
+        }
+      } else {
+        AppData data;
+        data = Provider.of<AppData>(context, listen: false);
+        final List<VehiculeModel> newVehiculesHigh =
+            List<VehiculeModel>.empty(growable: true);
+        newVehiculesHigh.addAll(data.vehicles);
+
+        newVehiculesHigh.sort((VehiculeModel a, VehiculeModel b) {
+          return a.kilometrage.compareTo(b.kilometrage);
+        });
+        data.vehicles.clear();
+        for (VehiculeModel newVehicule in newVehiculesHigh) {
+          data.vehicles.add(newVehicule);
+        }
       }
       setState(() {
         select["KM"] = true;
@@ -65,19 +100,33 @@ class _Home extends State<Home> {
 
   void _onSelectDate() async {
     if (select["DATE"] == false) {
-      AppData data;
-      data = Provider.of<AppData>(context, listen: false);
-      final List<VehiculeModel> newVehiculesDate =
-          List<VehiculeModel>.empty(growable: true);
-      newVehiculesDate.addAll(data.vehicles);
+      if (isSearching == true) {
+        final List<VehiculeModel> newVehiculesDate =
+            List<VehiculeModel>.empty(growable: true);
+        newVehiculesDate.addAll(_searchVehicules);
 
-      newVehiculesDate.sort((VehiculeModel a, VehiculeModel b) {
-        return a.date.compareTo(b.date);
-      });
+        newVehiculesDate.sort((VehiculeModel a, VehiculeModel b) {
+          return a.date.compareTo(b.date);
+        });
+        _searchVehicules.clear();
+        for (VehiculeModel newVehicule in newVehiculesDate) {
+          _searchVehicules.add(newVehicule);
+        }
+      } else {
+        AppData data;
+        data = Provider.of<AppData>(context, listen: false);
+        final List<VehiculeModel> newVehiculesDate =
+            List<VehiculeModel>.empty(growable: true);
+        newVehiculesDate.addAll(data.vehicles);
 
-      data.vehicles.clear();
-      for (VehiculeModel newVehicule in newVehiculesDate) {
-        data.vehicles.add(newVehicule);
+        newVehiculesDate.sort((VehiculeModel a, VehiculeModel b) {
+          return a.date.compareTo(b.date);
+        });
+
+        data.vehicles.clear();
+        for (VehiculeModel newVehicule in newVehiculesDate) {
+          data.vehicles.add(newVehicule);
+        }
       }
       setState(() {
         select["DATE"] = true;
@@ -93,19 +142,34 @@ class _Home extends State<Home> {
 
   void _onSelectAlph() async {
     if (select["A-Z"] == false) {
-      AppData data;
-      data = Provider.of<AppData>(context, listen: false);
-      final List<VehiculeModel> newVehiculesAlph =
-          List<VehiculeModel>.empty(growable: true);
-      newVehiculesAlph.addAll(data.vehicles);
+      if (isSearching == true) {
+        final List<VehiculeModel> newVehiculesAlph =
+            List<VehiculeModel>.empty(growable: true);
+        newVehiculesAlph.addAll(_searchVehicules);
 
-      newVehiculesAlph.sort((VehiculeModel a, VehiculeModel b) {
-        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
-      });
-      data.vehicles.clear();
-      for (VehiculeModel newVehicule in newVehiculesAlph) {
-        data.vehicles.add(newVehicule);
+        newVehiculesAlph.sort((VehiculeModel a, VehiculeModel b) {
+          return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+        });
+        _searchVehicules.clear();
+        for (VehiculeModel newVehicule in newVehiculesAlph) {
+          _searchVehicules.add(newVehicule);
+        }
+      } else {
+        AppData data;
+        data = Provider.of<AppData>(context, listen: false);
+        final List<VehiculeModel> newVehiculesAlph =
+            List<VehiculeModel>.empty(growable: true);
+        newVehiculesAlph.addAll(data.vehicles);
+
+        newVehiculesAlph.sort((VehiculeModel a, VehiculeModel b) {
+          return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+        });
+        data.vehicles.clear();
+        for (VehiculeModel newVehicule in newVehiculesAlph) {
+          data.vehicles.add(newVehicule);
+        }
       }
+
       setState(() {
         select["A-Z"] = true;
         select["DATE"] = false;
@@ -299,17 +363,30 @@ class _Home extends State<Home> {
                                 ),
                               ),
                             ),
-                            for (VehiculeModel vehicule
-                                in Provider.of<AppData>(context, listen: false)
-                                    .vehicles)
-                              CardCar(
-                                name: vehicule.name,
-                                mileage: vehicule.kilometrage.toString(),
-                                nbMaintenance:
-                                    vehicule.maintenances.length.toString(),
-                                pathImage: vehicule.picturePath,
-                                isLoaded: isLoaded,
-                              ),
+                            if (isSearching == true)
+                              for (VehiculeModel vehicule in _searchVehicules)
+                                CardCar(
+                                  name: vehicule.name,
+                                  mileage: vehicule.kilometrage.toString(),
+                                  nbMaintenance:
+                                      vehicule.maintenances.length.toString(),
+                                  pathImage: vehicule.picturePath,
+                                  isLoaded: isLoaded,
+                                ),
+                            if (isSearching == false)
+                              for (VehiculeModel vehicule
+                                  in Provider.of<AppData>(
+                                context,
+                                listen: false,
+                              ).vehicles)
+                                CardCar(
+                                  name: vehicule.name,
+                                  mileage: vehicule.kilometrage.toString(),
+                                  nbMaintenance:
+                                      vehicule.maintenances.length.toString(),
+                                  pathImage: vehicule.picturePath,
+                                  isLoaded: isLoaded,
+                                ),
                           ],
                         ),
                       ),
