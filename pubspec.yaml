@@ -44,6 +44,7 @@ dependencies:
   intl: ^0.17.0
   provider: ^6.0.4
   shared_preferences: ^2.0.15
+  universal_io: ^2.0.4
   
   
   

@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:mon_petit_entretien/Class/center_class.dart';
 import 'package:mon_petit_entretien/Class/user_class.dart';
@@ -17,7 +19,15 @@ class AppData extends ChangeNotifier {
     String date,
     String id,
   ) {
-    vehicles.add(VehiculeModel(newName, km, picturePath, date, id));
+    vehicles.add(
+      VehiculeModel(
+        newName,
+        km,
+        picturePath,
+        date,
+        id,
+      ),
+    );
     notifyListeners();
   }
 

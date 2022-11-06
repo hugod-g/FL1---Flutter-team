@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Class/vehicle_class.dart';
 import 'package:mon_petit_entretien/Config/endpoint.dart';
 
@@ -34,6 +36,7 @@ Future<int> createVehicle(
   String buyDate,
   String mileage,
   String upload,
+  Uint8List pickedFileBytes,
 ) async {
   final http.MultipartRequest request =
       http.MultipartRequest('POST', Uri.parse(vehiclesEndPoint));
@@ -42,15 +45,27 @@ Future<int> createVehicle(
     "Authorization": "Bearer $authorization",
     "Content-type": "multipart/form-data"
   };
-  request.files.add(
-    http.MultipartFile(
-      'upload',
-      File(upload).readAsBytes().asStream(),
-      File(upload).lengthSync(),
-      filename: "filename",
-      contentType: MediaType('image', 'jpeg'),
-    ),
-  );
+  if (upload != "") {
+    request.files.add(
+      http.MultipartFile(
+        'upload',
+        File(upload).readAsBytes().asStream(),
+        File(upload).lengthSync(),
+        filename: "filename",
+        contentType: MediaType('image', 'jpeg'),
+      ),
+    );
+  } else {
+    request.files.add(
+      http.MultipartFile.fromBytes(
+        'upload',
+        pickedFileBytes,
+        filename: "filename",
+        contentType: MediaType('image', 'jpeg'),
+      ),
+    );
+  }
+
   request.headers.addAll(headers);
   request.fields.addAll(<String, String>{
     'name': name,

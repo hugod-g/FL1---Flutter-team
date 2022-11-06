@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Page/add_vehicule.dart';
 import 'package:mon_petit_entretien/Page/admin.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<AppData>(
       create: (BuildContext context) => AppData(),
       child: MaterialApp(
+        scrollBehavior: MyCustomScrollBehavior(),
         routes: <String, Widget Function(BuildContext)>{
           '/login': (BuildContext context) => const LoginPage(),
           '/register': (BuildContext context) => const RegisterPage(),
@@ -42,4 +44,13 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }

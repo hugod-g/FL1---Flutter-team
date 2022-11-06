@@ -168,7 +168,6 @@ class _Home extends State<Home> {
   void initState() {
     super.initState();
     getEveryVehicules();
-    _onSelectAlph();
   }
 
   void getEveryVehicules() async {
@@ -285,7 +284,12 @@ class _Home extends State<Home> {
                                       builder: (BuildContext context) =>
                                           const AddVehicule(),
                                     ),
-                                  );
+                                  ).then((_) {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    getEveryVehicules();
+                                  });
                                 },
                                 child: Ink(
                                   child: Stack(
