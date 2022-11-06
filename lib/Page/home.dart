@@ -25,7 +25,7 @@ class _Home extends State<Home> {
   Map<String, bool> select = <String, bool>{
     'KM': false,
     'DATE': false,
-    'A-Z': false,
+    'A-Z': true,
   };
 
   bool isLoaded = false;
@@ -58,143 +58,130 @@ class _Home extends State<Home> {
   }
 
   void _onSelectKM() async {
-    if (select["KM"] == false) {
-      if (isSearching == true) {
-        final List<VehiculeModel> newVehiculesHigh =
-            List<VehiculeModel>.empty(growable: true);
-        newVehiculesHigh.addAll(_searchVehicules);
+    if (isSearching == true) {
+      final List<VehiculeModel> newVehiculesHigh =
+          List<VehiculeModel>.empty(growable: true);
+      newVehiculesHigh.addAll(_searchVehicules);
 
-        newVehiculesHigh.sort((VehiculeModel a, VehiculeModel b) {
-          return a.kilometrage.compareTo(b.kilometrage);
-        });
-        _searchVehicules.clear();
-        for (VehiculeModel newVehicule in newVehiculesHigh) {
-          _searchVehicules.add(newVehicule);
-        }
-      } else {
-        AppData data;
-        data = Provider.of<AppData>(context, listen: false);
-        final List<VehiculeModel> newVehiculesHigh =
-            List<VehiculeModel>.empty(growable: true);
-        newVehiculesHigh.addAll(data.vehicles);
-
-        newVehiculesHigh.sort((VehiculeModel a, VehiculeModel b) {
-          return a.kilometrage.compareTo(b.kilometrage);
-        });
-        data.vehicles.clear();
-        for (VehiculeModel newVehicule in newVehiculesHigh) {
-          data.vehicles.add(newVehicule);
-        }
+      newVehiculesHigh.sort((VehiculeModel a, VehiculeModel b) {
+        return a.kilometrage.compareTo(b.kilometrage);
+      });
+      _searchVehicules.clear();
+      for (VehiculeModel newVehicule in newVehiculesHigh) {
+        _searchVehicules.add(newVehicule);
       }
-      setState(() {
-        select["KM"] = true;
-        select["A-Z"] = false;
-        select["DATE"] = false;
-      });
     } else {
-      setState(() {
-        select["KM"] = false;
+      AppData data;
+      data = Provider.of<AppData>(context, listen: false);
+      final List<VehiculeModel> newVehiculesHigh =
+          List<VehiculeModel>.empty(growable: true);
+      newVehiculesHigh.addAll(data.vehicles);
+
+      newVehiculesHigh.sort((VehiculeModel a, VehiculeModel b) {
+        return a.kilometrage.compareTo(b.kilometrage);
       });
+      data.vehicles.clear();
+      for (VehiculeModel newVehicule in newVehiculesHigh) {
+        data.vehicles.add(newVehicule);
+      }
     }
+    setState(() {
+      select["KM"] = true;
+      select["A-Z"] = false;
+      select["DATE"] = false;
+    });
   }
 
   void _onSelectDate() async {
-    if (select["DATE"] == false) {
-      if (isSearching == true) {
-        final List<VehiculeModel> newVehiculesDate =
-            List<VehiculeModel>.empty(growable: true);
-        newVehiculesDate.addAll(_searchVehicules);
+    if (isSearching == true) {
+      final List<VehiculeModel> newVehiculesDate =
+          List<VehiculeModel>.empty(growable: true);
+      newVehiculesDate.addAll(_searchVehicules);
 
-        newVehiculesDate.sort((VehiculeModel a, VehiculeModel b) {
-          return a.date.compareTo(b.date);
-        });
-        _searchVehicules.clear();
-        for (VehiculeModel newVehicule in newVehiculesDate) {
-          _searchVehicules.add(newVehicule);
-        }
-      } else {
-        AppData data;
-        data = Provider.of<AppData>(context, listen: false);
-        final List<VehiculeModel> newVehiculesDate =
-            List<VehiculeModel>.empty(growable: true);
-        newVehiculesDate.addAll(data.vehicles);
-
-        newVehiculesDate.sort((VehiculeModel a, VehiculeModel b) {
-          return a.date.compareTo(b.date);
-        });
-
-        data.vehicles.clear();
-        for (VehiculeModel newVehicule in newVehiculesDate) {
-          data.vehicles.add(newVehicule);
-        }
+      newVehiculesDate.sort((VehiculeModel a, VehiculeModel b) {
+        return a.date.compareTo(b.date);
+      });
+      _searchVehicules.clear();
+      for (VehiculeModel newVehicule in newVehiculesDate) {
+        _searchVehicules.add(newVehicule);
       }
-      setState(() {
-        select["DATE"] = true;
-        select["A-Z"] = false;
-        select["KM"] = false;
-      });
     } else {
-      setState(() {
-        select["DATE"] = false;
+      AppData data;
+      data = Provider.of<AppData>(context, listen: false);
+      final List<VehiculeModel> newVehiculesDate =
+          List<VehiculeModel>.empty(growable: true);
+      newVehiculesDate.addAll(data.vehicles);
+
+      newVehiculesDate.sort((VehiculeModel a, VehiculeModel b) {
+        return a.date.compareTo(b.date);
       });
+
+      data.vehicles.clear();
+      for (VehiculeModel newVehicule in newVehiculesDate) {
+        data.vehicles.add(newVehicule);
+      }
     }
+    setState(() {
+      select["DATE"] = true;
+      select["A-Z"] = false;
+      select["KM"] = false;
+    });
   }
 
   void _onSelectAlph() async {
-    if (select["A-Z"] == false) {
-      if (isSearching == true) {
-        final List<VehiculeModel> newVehiculesAlph =
-            List<VehiculeModel>.empty(growable: true);
-        newVehiculesAlph.addAll(_searchVehicules);
+    if (isSearching == true) {
+      final List<VehiculeModel> newVehiculesAlph =
+          List<VehiculeModel>.empty(growable: true);
+      newVehiculesAlph.addAll(_searchVehicules);
 
-        newVehiculesAlph.sort((VehiculeModel a, VehiculeModel b) {
-          return a.name.toLowerCase().compareTo(b.name.toLowerCase());
-        });
-        _searchVehicules.clear();
-        for (VehiculeModel newVehicule in newVehiculesAlph) {
-          _searchVehicules.add(newVehicule);
-        }
-      } else {
-        AppData data;
-        data = Provider.of<AppData>(context, listen: false);
-        final List<VehiculeModel> newVehiculesAlph =
-            List<VehiculeModel>.empty(growable: true);
-        newVehiculesAlph.addAll(data.vehicles);
-
-        newVehiculesAlph.sort((VehiculeModel a, VehiculeModel b) {
-          return a.name.toLowerCase().compareTo(b.name.toLowerCase());
-        });
-        data.vehicles.clear();
-        for (VehiculeModel newVehicule in newVehiculesAlph) {
-          data.vehicles.add(newVehicule);
-        }
+      newVehiculesAlph.sort((VehiculeModel a, VehiculeModel b) {
+        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+      });
+      _searchVehicules.clear();
+      for (VehiculeModel newVehicule in newVehiculesAlph) {
+        _searchVehicules.add(newVehicule);
       }
-
-      setState(() {
-        select["A-Z"] = true;
-        select["DATE"] = false;
-        select["KM"] = false;
-      });
     } else {
-      setState(() {
-        select["A-Z"] = false;
+      AppData data;
+      data = Provider.of<AppData>(context, listen: false);
+      final List<VehiculeModel> newVehiculesAlph =
+          List<VehiculeModel>.empty(growable: true);
+      newVehiculesAlph.addAll(data.vehicles);
+
+      newVehiculesAlph.sort((VehiculeModel a, VehiculeModel b) {
+        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
       });
+      data.vehicles.clear();
+      for (VehiculeModel newVehicule in newVehiculesAlph) {
+        data.vehicles.add(newVehicule);
+      }
     }
+
+    setState(() {
+      select["A-Z"] = true;
+      select["DATE"] = false;
+      select["KM"] = false;
+    });
   }
 
   @override
   void initState() {
     super.initState();
     getEveryVehicules();
+    _onSelectAlph();
   }
 
   void getEveryVehicules() async {
     AppData data;
     data = Provider.of<AppData>(context, listen: false);
-    List<VehiculeModel> newVehicules;
+    List<VehiculeModel> newVehiculesAlphSort;
     data.vehicles.clear();
-    newVehicules = await getVehicles(data.token);
-    for (VehiculeModel newVehicule in newVehicules) {
+    newVehiculesAlphSort = await getVehicles(data.token);
+    newVehiculesAlphSort.sort((VehiculeModel a, VehiculeModel b) {
+      return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+    });
+    data.vehicles.clear();
+    for (VehiculeModel newVehicule in newVehiculesAlphSort) {
       data.vehicles.add(newVehicule);
     }
     if (data.vehicles.isNotEmpty) {
@@ -263,6 +250,11 @@ class _Home extends State<Home> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           ButtonSelect(
+                            text: "A-Z",
+                            onPress: _onSelectAlph,
+                            isSelect: select["A-Z"],
+                          ),
+                          ButtonSelect(
                             text: "KM",
                             onPress: _onSelectKM,
                             isSelect: select["KM"],
@@ -271,11 +263,6 @@ class _Home extends State<Home> {
                             text: "DATE",
                             onPress: _onSelectDate,
                             isSelect: select["DATE"],
-                          ),
-                          ButtonSelect(
-                            text: "A-Z",
-                            onPress: _onSelectAlph,
-                            isSelect: select["A-Z"],
                           ),
                         ],
                       ),
