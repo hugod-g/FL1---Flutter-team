@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/cupertino.dart';
 import 'package:mon_petit_entretien/Class/center_class.dart';
 import 'package:mon_petit_entretien/Class/user_class.dart';

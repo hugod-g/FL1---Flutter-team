@@ -32,8 +32,8 @@ class VehiculeModel extends ChangeNotifier {
   String picturePath;
   String id;
   String date;
-  List<maintenanceModel> maintenances =
-      List<maintenanceModel>.empty(growable: true);
+  List<MaintenanceModel> maintenances =
+      List<MaintenanceModel>.empty(growable: true);
   Uint8List pickedFileBytes = Uint8List.fromList(<int>[0]);
 
   void updateName(String newVar) {

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-class maintenanceModel extends ChangeNotifier {
-  maintenanceModel(
+class MaintenanceModel extends ChangeNotifier {
+  MaintenanceModel(
     this.name,
     this.kilometrage,
     this.center,

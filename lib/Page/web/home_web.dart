@@ -17,8 +17,7 @@ class HomeWebPage extends StatefulWidget {
   const HomeWebPage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _HomeWebPage createState() => _HomeWebPage();
+  State<HomeWebPage> createState() => _HomeWebPage();
 }
 
 class _HomeWebPage extends State<HomeWebPage> {

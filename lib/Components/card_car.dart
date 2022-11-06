@@ -25,7 +25,6 @@ class CardCar extends StatefulWidget {
 class CardCarState extends State<CardCar> {
   @override
   Widget build(BuildContext context) {
-    print("le véhicule est ${widget.name}");
     return Padding(
       padding: const EdgeInsets.only(right: 20),
       child: InkWell(

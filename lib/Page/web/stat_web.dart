@@ -12,8 +12,7 @@ class StatWebPage extends StatefulWidget {
   const StatWebPage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _StatWebPage createState() => _StatWebPage();
+  State<StatWebPage> createState() => _StatWebPage();
 }
 
 class _StatWebPage extends State<StatWebPage> {
@@ -30,7 +29,7 @@ class _StatWebPage extends State<StatWebPage> {
     data = Provider.of<AppData>(context, listen: false);
     int tempPrice = 0;
     for (VehiculeModel vehicule in data.vehicles) {
-      for (maintenanceModel maintenance in vehicule.maintenances) {
+      for (MaintenanceModel maintenance in vehicule.maintenances) {
         tempPrice += int.parse(maintenance.prix);
       }
     }
