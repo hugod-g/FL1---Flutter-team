@@ -5,7 +5,7 @@ import 'package:mon_petit_entretien/Class/user_class.dart';
 import 'package:mon_petit_entretien/Page/admin.dart';
 import 'package:mon_petit_entretien/Page/home.dart';
 import 'package:mon_petit_entretien/Page/profile.dart';
-import 'package:mon_petit_entretien/Page/statistique.dart';
+import 'package:mon_petit_entretien/Page/statistics.dart';
 import 'package:mon_petit_entretien/Services/api/user.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 import 'package:provider/provider.dart';
@@ -89,7 +89,7 @@ class _GestionPage extends State<GestionPage> {
         },
         children: <Widget>[
           const Home(),
-          const Statistique(),
+          const Statistics(),
           const ProfilPage(),
           if (Provider.of<AppData>(context, listen: false).user.admin)
             const AdminPage(),

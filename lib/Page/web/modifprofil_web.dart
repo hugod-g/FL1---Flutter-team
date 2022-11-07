@@ -10,8 +10,7 @@ class ModifProfilWebPage extends StatefulWidget {
   const ModifProfilWebPage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _ModifProfilWebPage createState() => _ModifProfilWebPage();
+  State<ModifProfilWebPage> createState() => _ModifProfilWebPage();
 }
 
 class _ModifProfilWebPage extends State<ModifProfilWebPage> {

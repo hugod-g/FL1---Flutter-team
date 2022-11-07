@@ -8,7 +8,7 @@ class AppData extends ChangeNotifier {
   String token = "";
   UserModel user =
       UserModel("", "", "", "", false, List<CenterModel>.empty(growable: true));
-  List<UserModel> usersList = List<UserModel>.empty();
+  List<UserModel> usersList = List<UserModel>.empty(growable: true);
 
   void addDataVehicle(
     String newName,
@@ -17,7 +17,15 @@ class AppData extends ChangeNotifier {
     String date,
     String id,
   ) {
-    vehicles.add(VehiculeModel(newName, km, picturePath, date, id));
+    vehicles.add(
+      VehiculeModel(
+        newName,
+        km,
+        picturePath,
+        date,
+        id,
+      ),
+    );
     notifyListeners();
   }
 

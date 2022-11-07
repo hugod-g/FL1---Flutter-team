@@ -1,10 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Page/add_vehicule.dart';
 import 'package:mon_petit_entretien/Page/admin.dart';
 import 'package:mon_petit_entretien/Page/gestion.dart';
 import 'package:mon_petit_entretien/Page/modifprofil.dart';
 import 'package:mon_petit_entretien/Page/profile.dart';
-import 'package:mon_petit_entretien/Page/statistique.dart';
+import 'package:mon_petit_entretien/Page/statistics.dart';
 import 'package:mon_petit_entretien/Page/vue_vehicule.dart';
 import 'package:provider/provider.dart';
 
@@ -25,12 +26,13 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<AppData>(
       create: (BuildContext context) => AppData(),
       child: MaterialApp(
+        scrollBehavior: MyCustomScrollBehavior(),
         routes: <String, Widget Function(BuildContext)>{
           '/login': (BuildContext context) => const LoginPage(),
           '/register': (BuildContext context) => const RegisterPage(),
           '/home': (BuildContext context) => const Home(),
           '/addVehicule': (BuildContext context) => const AddVehicule(),
-          '/stats': (BuildContext context) => const Statistique(),
+          '/stats': (BuildContext context) => const Statistics(),
           '/gestion': (BuildContext context) => const GestionPage(),
           '/admin': (BuildContext context) => const AdminPage(),
           '/profil': (BuildContext context) => const ProfilPage(),
@@ -42,4 +44,12 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => <PointerDeviceKind>{
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }

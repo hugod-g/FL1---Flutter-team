@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
-import 'package:mon_petit_entretien/Page/web/modifprofil_web.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 
 import '../../Style/fonts.dart';
@@ -11,8 +10,7 @@ class ProfilWebPage extends StatefulWidget {
   const ProfilWebPage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _ProfilWebPage createState() => _ProfilWebPage();
+  State<ProfilWebPage> createState() => _ProfilWebPage();
 }
 
 class _ProfilWebPage extends State<ProfilWebPage> {

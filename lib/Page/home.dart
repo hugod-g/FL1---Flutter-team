@@ -25,51 +25,143 @@ class _Home extends State<Home> {
   Map<String, bool> select = <String, bool>{
     'KM': false,
     'DATE': false,
-    'A-Z': false,
+    'A-Z': true,
   };
 
   bool isLoaded = false;
+  bool isSearching = false;
+  final List<VehiculeModel> _searchVehicules =
+      List<VehiculeModel>.empty(growable: true);
 
   void _onSearchChange(String newValue) {
     setState(() {
       search = newValue;
     });
+    if (search.isNotEmpty) {
+      AppData data;
+      data = Provider.of<AppData>(context, listen: false);
+      _searchVehicules.clear();
+      for (VehiculeModel newVehicule in data.vehicles) {
+        if (newVehicule.name.toLowerCase().contains(search) &&
+            newVehicule.name[0].toLowerCase() == search[0]) {
+          _searchVehicules.add(newVehicule);
+        }
+      }
+      setState(() {
+        isSearching = true;
+      });
+    } else {
+      setState(() {
+        isSearching = false;
+      });
+    }
   }
 
   void _onSelectKM() async {
-    if (select["KM"] == false) {
-      setState(() {
-        select["KM"] = true;
+    if (isSearching == true) {
+      final List<VehiculeModel> newVehiculesHigh =
+          List<VehiculeModel>.empty(growable: true);
+      newVehiculesHigh.addAll(_searchVehicules);
+
+      newVehiculesHigh.sort((VehiculeModel a, VehiculeModel b) {
+        return a.kilometrage.compareTo(b.kilometrage);
       });
+      _searchVehicules.clear();
+      for (VehiculeModel newVehicule in newVehiculesHigh) {
+        _searchVehicules.add(newVehicule);
+      }
     } else {
-      setState(() {
-        select["KM"] = false;
+      AppData data;
+      data = Provider.of<AppData>(context, listen: false);
+      final List<VehiculeModel> newVehiculesHigh =
+          List<VehiculeModel>.empty(growable: true);
+      newVehiculesHigh.addAll(data.vehicles);
+
+      newVehiculesHigh.sort((VehiculeModel a, VehiculeModel b) {
+        return a.kilometrage.compareTo(b.kilometrage);
       });
+      data.vehicles.clear();
+      for (VehiculeModel newVehicule in newVehiculesHigh) {
+        data.vehicles.add(newVehicule);
+      }
     }
+    setState(() {
+      select["KM"] = true;
+      select["A-Z"] = false;
+      select["DATE"] = false;
+    });
   }
 
   void _onSelectDate() async {
-    if (select["DATE"] == false) {
-      setState(() {
-        select["DATE"] = true;
+    if (isSearching == true) {
+      final List<VehiculeModel> newVehiculesDate =
+          List<VehiculeModel>.empty(growable: true);
+      newVehiculesDate.addAll(_searchVehicules);
+
+      newVehiculesDate.sort((VehiculeModel a, VehiculeModel b) {
+        return a.date.compareTo(b.date);
       });
+      _searchVehicules.clear();
+      for (VehiculeModel newVehicule in newVehiculesDate) {
+        _searchVehicules.add(newVehicule);
+      }
     } else {
-      setState(() {
-        select["DATE"] = false;
+      AppData data;
+      data = Provider.of<AppData>(context, listen: false);
+      final List<VehiculeModel> newVehiculesDate =
+          List<VehiculeModel>.empty(growable: true);
+      newVehiculesDate.addAll(data.vehicles);
+
+      newVehiculesDate.sort((VehiculeModel a, VehiculeModel b) {
+        return a.date.compareTo(b.date);
       });
+
+      data.vehicles.clear();
+      for (VehiculeModel newVehicule in newVehiculesDate) {
+        data.vehicles.add(newVehicule);
+      }
     }
+    setState(() {
+      select["DATE"] = true;
+      select["A-Z"] = false;
+      select["KM"] = false;
+    });
   }
 
   void _onSelectAlph() async {
-    if (select["A-Z"] == false) {
-      setState(() {
-        select["A-Z"] = true;
+    if (isSearching == true) {
+      final List<VehiculeModel> newVehiculesAlph =
+          List<VehiculeModel>.empty(growable: true);
+      newVehiculesAlph.addAll(_searchVehicules);
+
+      newVehiculesAlph.sort((VehiculeModel a, VehiculeModel b) {
+        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
       });
+      _searchVehicules.clear();
+      for (VehiculeModel newVehicule in newVehiculesAlph) {
+        _searchVehicules.add(newVehicule);
+      }
     } else {
-      setState(() {
-        select["A-Z"] = false;
+      AppData data;
+      data = Provider.of<AppData>(context, listen: false);
+      final List<VehiculeModel> newVehiculesAlph =
+          List<VehiculeModel>.empty(growable: true);
+      newVehiculesAlph.addAll(data.vehicles);
+
+      newVehiculesAlph.sort((VehiculeModel a, VehiculeModel b) {
+        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
       });
+      data.vehicles.clear();
+      for (VehiculeModel newVehicule in newVehiculesAlph) {
+        data.vehicles.add(newVehicule);
+      }
     }
+
+    setState(() {
+      select["A-Z"] = true;
+      select["DATE"] = false;
+      select["KM"] = false;
+    });
   }
 
   @override
@@ -81,10 +173,14 @@ class _Home extends State<Home> {
   void getEveryVehicules() async {
     AppData data;
     data = Provider.of<AppData>(context, listen: false);
-    List<VehiculeModel> newVehicules;
+    List<VehiculeModel> newVehiculesAlphSort;
     data.vehicles.clear();
-    newVehicules = await getVehicles(data.token);
-    for (VehiculeModel newVehicule in newVehicules) {
+    newVehiculesAlphSort = await getVehicles(data.token);
+    newVehiculesAlphSort.sort((VehiculeModel a, VehiculeModel b) {
+      return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+    });
+    data.vehicles.clear();
+    for (VehiculeModel newVehicule in newVehiculesAlphSort) {
       data.vehicles.add(newVehicule);
     }
     if (data.vehicles.isNotEmpty) {
@@ -153,6 +249,11 @@ class _Home extends State<Home> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           ButtonSelect(
+                            text: "A-Z",
+                            onPress: _onSelectAlph,
+                            isSelect: select["A-Z"],
+                          ),
+                          ButtonSelect(
                             text: "KM",
                             onPress: _onSelectKM,
                             isSelect: select["KM"],
@@ -161,11 +262,6 @@ class _Home extends State<Home> {
                             text: "DATE",
                             onPress: _onSelectDate,
                             isSelect: select["DATE"],
-                          ),
-                          ButtonSelect(
-                            text: "A-Z",
-                            onPress: _onSelectAlph,
-                            isSelect: select["A-Z"],
                           ),
                         ],
                       ),
@@ -188,7 +284,12 @@ class _Home extends State<Home> {
                                       builder: (BuildContext context) =>
                                           const AddVehicule(),
                                     ),
-                                  );
+                                  ).then((_) {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    getEveryVehicules();
+                                  });
                                 },
                                 child: Ink(
                                   child: Stack(
@@ -253,17 +354,30 @@ class _Home extends State<Home> {
                                 ),
                               ),
                             ),
-                            for (VehiculeModel vehicule
-                                in Provider.of<AppData>(context, listen: false)
-                                    .vehicles)
-                              CardCar(
-                                name: vehicule.name,
-                                mileage: vehicule.kilometrage.toString(),
-                                nbMaintenance:
-                                    vehicule.maintenances.length.toString(),
-                                pathImage: vehicule.picturePath,
-                                isLoaded: isLoaded,
-                              ),
+                            if (isSearching == true)
+                              for (VehiculeModel vehicule in _searchVehicules)
+                                CardCar(
+                                  name: vehicule.name,
+                                  mileage: vehicule.kilometrage.toString(),
+                                  nbMaintenance:
+                                      vehicule.maintenances.length.toString(),
+                                  pathImage: vehicule.picturePath,
+                                  isLoaded: isLoaded,
+                                ),
+                            if (isSearching == false)
+                              for (VehiculeModel vehicule
+                                  in Provider.of<AppData>(
+                                context,
+                                listen: false,
+                              ).vehicles)
+                                CardCar(
+                                  name: vehicule.name,
+                                  mileage: vehicule.kilometrage.toString(),
+                                  nbMaintenance:
+                                      vehicule.maintenances.length.toString(),
+                                  pathImage: vehicule.picturePath,
+                                  isLoaded: isLoaded,
+                                ),
                           ],
                         ),
                       ),
