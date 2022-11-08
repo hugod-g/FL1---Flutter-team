@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
@@ -34,6 +35,19 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
   late String name;
   String center = "";
   late AppData data;
+  TextEditingController dateinput = TextEditingController();
+
+  final SnackBar snackBar = SnackBar(
+    content: const Text(
+      "Tout les champs ne sont pas remplis !",
+    ),
+    duration: const Duration(seconds: 2),
+    action: SnackBarAction(
+      label: 'Ok',
+      textColor: white,
+      onPressed: () {},
+    ),
+  );
 
   @override
   void initState() {
@@ -134,10 +148,70 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 40),
-                        child: TextInput(
-                          value: date,
-                          placeholder: "Date",
-                          onChangeText: _onDateChange,
+                        child: Container(
+                          height: 54,
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(blurRadius: 16, color: lightGray)
+                            ],
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              color: white,
+                              borderRadius: BorderRadius.all(Radius.circular(16)),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                                top: 2,
+                              ),
+                              child: Center(
+                                child: TextField(
+                                  controller: dateinput,
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    iconColor: navy,
+                                    icon: Icon(Icons.calendar_today),
+                                    labelText: "Date d'achat",
+                                    labelStyle: TextStyle(color: navy),
+                                    hintStyle: TextStyle(
+                                      color: lightGray,
+                                    ),
+                                  ),
+                                  style: const TextStyle(
+                                    fontFamily: appFont,
+                                    fontWeight: fontRegular,
+                                  ),
+                                  readOnly: true,
+                                  onTap: () async {
+                                    final DateTime? pickedDate =
+                                        await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(
+                                        2000,
+                                      ),
+                                      lastDate: DateTime(2101),
+                                    );
+
+                                    if (pickedDate != null) {
+                                      final String formattedDate =
+                                          DateFormat('yyyy-MM-dd')
+                                              .format(pickedDate);
+
+                                      setState(() {
+                                        dateinput.text = formattedDate;
+                                        _onDateChange(dateinput.text);
+                                      });
+                                    } else {}
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       Padding(
@@ -168,8 +242,10 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                         padding: const EdgeInsets.only(top: 40),
                         child: Button(
                           text: "Sauvegarder",
-                          onPress: () =>
-                            addMaintenance(data.token, mileage, date, price, name, center, widget.vehicleId),
+                          // ignore: unrelated_type_equality_checks
+                          onPress: () async => await addMaintenance(data.token, mileage, date, price, name, center, widget.vehicleId) == true
+                          ? Navigator.popAndPushNamed(context, '/home')
+                          : ScaffoldMessenger.of(context).showSnackBar(snackBar),
                         ),
                       ),
                       Padding(

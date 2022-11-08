@@ -6,6 +6,7 @@ import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
 import 'package:mon_petit_entretien/Page/web/modifprofil_web.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Style/fonts.dart';
 
@@ -18,21 +19,26 @@ class ProfilWebPage extends StatefulWidget {
 }
 
 class _ProfilWebPage extends State<ProfilWebPage> {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  String firstName = "";
-  String lastName = "";
-  String email = "";
+  void _onLogout() async {
+    final SharedPreferences prefs = await _prefs;
 
-    @override
-  void initState() {
-    super.initState();
-    firstName = Provider.of<AppData>(context, listen: false).user.firstName;
-    lastName = Provider.of<AppData>(context, listen: false).user.lastName;
-    email = Provider.of<AppData>(context, listen: false).user.username;
+    await prefs.setString('token', '');
+
+    if (mounted) {
+      await Navigator.pushNamedAndRemoveUntil(
+        context,
+        '/login',
+        (Route<dynamic> route) => false,
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final AppData data = Provider.of<AppData>(context, listen: false);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: lightBlue,
@@ -68,7 +74,7 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                     ),
                   ),
                   CommonText(
-                    text: "$firstName $lastName",
+                    text: "${data.user.firstName} ${data.user.lastName}",
                     fontSizeText: 27.5,
                     fontWeight: fontBold,
                     paddingTop: 16,
@@ -100,7 +106,7 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                           ),
                         ),
                         CommonText(
-                          text: email,
+                          text: data.user.username,
                           fontSizeText: 25,
                           fontWeight: fontLight,
                           paddingTop: 10,
@@ -130,8 +136,8 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                                     MaterialPageRoute<ModifProfilWebPage>(
                                       builder: (BuildContext context) =>
                                           ModifProfilWebPage(
-                                            firstname: firstName,
-                                            lastname: lastName,
+                                            firstname: data.user.firstName,
+                                            lastname: data.user.lastName,
                                           ),
                                     ),
                                   )

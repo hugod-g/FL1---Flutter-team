@@ -34,21 +34,10 @@ class _ProfilPage extends State<ProfilPage> {
     }
   }
 
-  String firstName = "";
-  String lastName = "";
-  String email = "";
-
-    @override
-  void initState() {
-    super.initState();
-    firstName = Provider.of<AppData>(context, listen: false).user.firstName;
-    lastName = Provider.of<AppData>(context, listen: false).user.lastName;
-    email = Provider.of<AppData>(context, listen: false).user.username;
-  }
-
   @override
   Widget build(BuildContext context) {
     final double currentWith = MediaQuery.of(context).size.width;
+    final AppData data = Provider.of<AppData>(context, listen: false);
 
     if (currentWith < 800) {
       return Scaffold(
@@ -102,7 +91,7 @@ class _ProfilPage extends State<ProfilPage> {
                       ),
                     ),
                     CommonText(
-                      text: "$firstName $lastName",
+                      text: "${data.user.firstName} ${data.user.lastName}",
                       fontSizeText: 22,
                       fontWeight: fontBold,
                       paddingTop: 16,
@@ -129,7 +118,7 @@ class _ProfilPage extends State<ProfilPage> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: CommonText(
-                              text: email,
+                              text: data.user.username,
                               fontSizeText: 16,
                               fontWeight: fontLight,
                               paddingTop: 10,
@@ -150,8 +139,8 @@ class _ProfilPage extends State<ProfilPage> {
                             MaterialPageRoute<ModifProfilPage>(
                               builder: (BuildContext context) =>
                                   ModifProfilPage(
-                                    firstname: firstName,
-                                    lastname: lastName,
+                                    firstname: data.user.firstName,
+                                    lastname: data.user.lastName,
                                   ),
                             ),
                           )

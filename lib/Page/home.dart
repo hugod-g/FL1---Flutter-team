@@ -265,6 +265,7 @@ class _Home extends State<Home> {
                                 isLoaded: isLoaded,
                                 date: vehicule.date,
                                 id: vehicule.id,
+                                maintenance: vehicule.maintenances,
                               ),
                           ],
                         ),

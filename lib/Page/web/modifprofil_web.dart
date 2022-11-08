@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
+import 'package:mon_petit_entretien/Services/api/modif_user.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:provider/provider.dart';
+
 
 class ModifProfilWebPage extends StatefulWidget {
   const ModifProfilWebPage({
@@ -22,19 +26,33 @@ class ModifProfilWebPage extends StatefulWidget {
 }
 
 class _ModifProfilWebPage extends State<ModifProfilWebPage> {
-  late String firsname;
+  late String firstname;
   late String lastname;
+  late AppData data;
+
+  final SnackBar snackBar = SnackBar(
+    content: const Text(
+      "Tout les champs ne sont pas remplis !",
+    ),
+    duration: const Duration(seconds: 2),
+    action: SnackBarAction(
+      label: 'Ok',
+      textColor: white,
+      onPressed: () {},
+    ),
+  );
 
   @override
   void initState() {
     super.initState();
-    firsname = widget.firstname;
+    data = Provider.of<AppData>(context, listen: false);
+    firstname = widget.firstname;
     lastname = widget.lastname;
   }
 
   void _onFirstNameChange(String newValue) {
     setState(() {
-      firsname = newValue;
+      firstname = newValue;
     });
   }
 
@@ -75,8 +93,8 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
                   Padding(
                     padding: const EdgeInsets.only(top: 125),
                     child: TextInput(
-                      value: firsname,
-                      placeholder: "Firstname",
+                      value: firstname,
+                      placeholder: firstname,
                       onChangeText: _onFirstNameChange,
                     ),
                   ),
@@ -84,7 +102,7 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
                     padding: const EdgeInsets.only(top: 40),
                     child: TextInput(
                       value: lastname,
-                      placeholder: "Lastname",
+                      placeholder: lastname,
                       onChangeText: _onLastNameChange,
                     ),
                   ),
@@ -100,9 +118,11 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
                               padding:
                                   const EdgeInsets.only(left: 50, right: 50),
                               child: Button(
-                                text: "Retour",
-                                onPress: () => Navigator.pop(context),
-                                secondary: true,
+                                text: "Sauvegarder",
+                                // ignore: unrelated_type_equality_checks
+                                onPress: () async => await modifProfil(data.token, firstname, lastname, data)
+                                ? Navigator.pop(context)
+                                : ScaffoldMessenger.of(context).showSnackBar(snackBar),
                               ),
                             ),
                           ),
@@ -111,8 +131,9 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
                               padding:
                                   const EdgeInsets.only(left: 50, right: 50),
                               child: Button(
-                                text: "Sauvegarder",
+                                text: "Retour",
                                 onPress: () => Navigator.pop(context),
+                                secondary: true,
                               ),
                             ),
                           ),

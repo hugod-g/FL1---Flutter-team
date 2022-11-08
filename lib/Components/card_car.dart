@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/maintenance_class.dart';
 import 'package:mon_petit_entretien/Page/vue_vehicule.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
@@ -13,6 +14,7 @@ class CardCar extends StatefulWidget {
     required this.isLoaded,
     required this.date,
     required this.id,
+    required this.maintenance,
   });
 
   final String name;
@@ -22,6 +24,7 @@ class CardCar extends StatefulWidget {
   final bool isLoaded;
   final String date;
   final String id;
+  final List<maintenanceModel> maintenance;
 
   @override
   CardCarState createState() => CardCarState();
@@ -44,6 +47,7 @@ class CardCarState extends State<CardCar> {
                     pathImage: widget.pathImage,
                     date: widget.date,
                     vehicleId: widget.id,
+                    maintenance: widget.maintenance,
                   ),
             ),
           );

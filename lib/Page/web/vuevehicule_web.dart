@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/maintenance_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
@@ -13,6 +14,7 @@ class VueVehiculeWebPage extends StatefulWidget {
     required this.pathImage,
     required this.date,
     required this.vehicleId,
+    required this.maintenance,
   });
 
   final String name;
@@ -20,6 +22,7 @@ class VueVehiculeWebPage extends StatefulWidget {
   final String pathImage;
   final String date;
   final String vehicleId;
+  final List<maintenanceModel> maintenance;
   @override
   // ignore: library_private_types_in_public_api
   _VueVehiculeWebPage createState() => _VueVehiculeWebPage();
@@ -177,22 +180,16 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
             scrollDirection: Axis.horizontal,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                CardVehiculeWeb(
-                  prix: prix,
-                  title: title,
-                  date: date,
-                  km: km,
-                  enterprise: enterprise,
-                ),
-                CardVehiculeWeb(
-                  prix: prix,
-                  title: title,
-                  date: date,
-                  km: km,
-                  enterprise: enterprise,
-                ),
-              ],
+              children:
+                widget.maintenance.map((maintenanceModel info) =>
+                  CardVehiculeWeb(
+                    prix: info.prix,
+                    title: info.name,
+                    date: info.date,
+                    km: info.kilometrage,
+                    enterprise: info.center,
+                  ),
+                ).toList(),
             ),
           ),
           Padding(

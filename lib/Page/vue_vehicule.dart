@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/maintenance_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Page/add_maintenance.dart';
 import 'package:mon_petit_entretien/Page/web/vuevehicule_web.dart';
@@ -15,6 +16,7 @@ class VueVehiculePage extends StatefulWidget {
     required this.pathImage,
     required this.date,
     required this.vehicleId,
+    required this.maintenance,
   });
 
   final String name;
@@ -22,6 +24,7 @@ class VueVehiculePage extends StatefulWidget {
   final String pathImage;
   final String date;
   final String vehicleId;
+  final List<maintenanceModel> maintenance;
 
   @override
   State<VueVehiculePage> createState() => _VueVehiculePage();
@@ -31,11 +34,6 @@ class _VueVehiculePage extends State<VueVehiculePage> {
   @override
   Widget build(BuildContext context) {
     final double currentWith = MediaQuery.of(context).size.width;
-    const String prix = "200";
-    const String title = "Roue";
-    const String date = "12/20/2022";
-    const String km = "2000";
-    const String enterprise = "Point S";
 
     if (currentWith < 800) {
       return Scaffold(
@@ -125,7 +123,7 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                                       size: 25,
                                     ),
                                     CommonText(
-                                      text: widget.mileage,
+                                      text: '${widget.mileage} km',
                                       fontSizeText: 17.5,
                                       fontWeight: fontLight,
                                       color: navy,
@@ -172,22 +170,16 @@ class _VueVehiculePage extends State<VueVehiculePage> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const <Widget>[
-                  CardVehicule(
-                    prix: prix,
-                    title: title,
-                    date: date,
-                    km: km,
-                    enterprise: enterprise,
-                  ),
-                  CardVehicule(
-                    prix: prix,
-                    title: title,
-                    date: date,
-                    km: km,
-                    enterprise: enterprise,
-                  ),
-                ],
+                children:
+                  widget.maintenance.map((maintenanceModel info) =>
+                    CardVehicule(
+                      prix: info.prix,
+                      title: info.name,
+                      date: info.date,
+                      km: info.kilometrage,
+                      enterprise: info.center,
+                    ),
+                  ).toList(),
               ),
             ),
             Padding(
@@ -220,6 +212,7 @@ class _VueVehiculePage extends State<VueVehiculePage> {
         pathImage: widget.pathImage,
         date: widget.date,
         vehicleId: widget.vehicleId,
+        maintenance: widget.maintenance,
       );
     }
   }

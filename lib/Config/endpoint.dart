@@ -16,4 +16,4 @@ const String promoteUserEndpoint = "$apiUrl/admin/promote";
 const String deleteUserEndpoint = "$apiUrl/admin/user";
 
 // Maintenance
-const String maintenance = "$apiUrl/maintenance";
+const String maintenanceEndPoint = "$apiUrl/maintenance";
