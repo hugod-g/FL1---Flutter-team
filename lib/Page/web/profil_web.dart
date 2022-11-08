@@ -65,12 +65,23 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                     paddingBot: 20,
                     color: navy,
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 17.5),
-                    child: CircleAvatar(
-                      radius: 90,
-                      backgroundColor: Colors.amber,
-                      backgroundImage: AssetImage('assets/avatar.jpg'),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 17.5),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.15,
+                      width: MediaQuery.of(context).size.width * 0.15,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(150),
+                        child: data.user.picturePath == ""
+                        ? Image.asset(
+                          'assets/avatar.jpg',
+                          fit: BoxFit.fill,
+                        )
+                        : Image.network(
+                          "http://152.228.134.93:1339/${data.user.picturePath}",
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                     ),
                   ),
                   CommonText(
@@ -151,10 +162,7 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                                   const EdgeInsets.only(left: 75, right: 75),
                               child: Button(
                                 text: "Déconnexion",
-                                onPress: () => Navigator.pushNamed(
-                                  context,
-                                  '/modifProfil',
-                                ),
+                                onPress: _onLogout,
                                 secondary: true,
                               ),
                             ),
