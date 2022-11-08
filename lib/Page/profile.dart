@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
+import 'package:mon_petit_entretien/Page/modifprofil.dart';
 import 'package:mon_petit_entretien/Page/web/profil_web.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:mon_petit_entretien/Class/user_class.dart';
 import 'package:provider/provider.dart';
-import 'package:mon_petit_entretien/Class/app_class.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Components/common_text.dart';
 import '../Style/colors.dart';
@@ -143,8 +143,19 @@ class _ProfilPage extends State<ProfilPage> {
                       padding: const EdgeInsets.only(top: 25),
                       child: Button(
                         text: "Modifier le profil",
-                        onPress: () =>
-                            Navigator.pushNamed(context, '/modifProfil'),
+                        // ignore: always_specify_types
+                        onPress: () => { 
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute<ModifProfilPage>(
+                              builder: (BuildContext context) =>
+                                  ModifProfilPage(
+                                    firstname: firstName,
+                                    lastname: lastName,
+                                  ),
+                            ),
+                          )
+                        },
                       ),
                     ),
                     Padding(

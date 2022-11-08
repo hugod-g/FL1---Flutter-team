@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Page/vue_vehicule.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
@@ -10,6 +11,8 @@ class CardCar extends StatefulWidget {
     required this.nbMaintenance,
     required this.pathImage,
     required this.isLoaded,
+    required this.date,
+    required this.id,
   });
 
   final String name;
@@ -17,6 +20,8 @@ class CardCar extends StatefulWidget {
   final String nbMaintenance;
   final String pathImage;
   final bool isLoaded;
+  final String date;
+  final String id;
 
   @override
   CardCarState createState() => CardCarState();
@@ -28,6 +33,21 @@ class CardCarState extends State<CardCar> {
     return Padding(
       padding: const EdgeInsets.only(right: 20),
       child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute<VueVehiculePage>(
+              builder: (BuildContext context) =>
+                  VueVehiculePage(
+                    name: widget.name,
+                    mileage: widget.mileage,
+                    pathImage: widget.pathImage,
+                    date: widget.date,
+                    vehicleId: widget.id,
+                  ),
+            ),
+          );
+        },
         child: Ink(
           child: Stack(
             children: <Widget>[

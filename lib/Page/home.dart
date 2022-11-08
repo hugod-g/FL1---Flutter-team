@@ -263,6 +263,8 @@ class _Home extends State<Home> {
                                     vehicule.maintenances.length.toString(),
                                 pathImage: vehicule.picturePath,
                                 isLoaded: isLoaded,
+                                date: vehicule.date,
+                                id: vehicule.id,
                               ),
                           ],
                         ),

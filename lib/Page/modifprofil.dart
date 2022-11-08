@@ -8,15 +8,29 @@ import '../Components/common_text.dart';
 import '../Style/colors.dart';
 
 class ModifProfilPage extends StatefulWidget {
-  const ModifProfilPage({Key? key}) : super(key: key);
+  const ModifProfilPage({
+    super.key,
+    required this.firstname,
+    required this.lastname,
+  });
+
+  final String firstname;
+  final String lastname;
 
   @override
   State<ModifProfilPage> createState() => _ModifProfilPage();
 }
 
 class _ModifProfilPage extends State<ModifProfilPage> {
-  String firsname = "";
-  String lastname = "";
+  late String firsname;
+  late String lastname;
+
+  @override
+  void initState() {
+    super.initState();
+    firsname = widget.firstname;
+    lastname = widget.lastname;
+  }
 
   void _onFirstNameChange(String newValue) {
     setState(() {
@@ -97,7 +111,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                       padding: const EdgeInsets.only(top: 40),
                       child: Button(
                         text: "Sauvegarder",
-                        onPress: () => Navigator.pushNamed(context, '/vueVehicule'),
+                        onPress: () => Navigator.pop(context),
                       ),
                     ),
                     Padding(
@@ -116,7 +130,10 @@ class _ModifProfilPage extends State<ModifProfilPage> {
         ),
       );
     } else {
-      return const ModifProfilWebPage();
+      return ModifProfilWebPage(
+        firstname: widget.firstname,
+        lastname: widget.lastname,
+      );
     }
   }
 }

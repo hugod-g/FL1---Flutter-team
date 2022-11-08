@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
 import 'package:mon_petit_entretien/Page/web/modifprofil_web.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
+import 'package:provider/provider.dart';
 
 import '../../Style/fonts.dart';
 
@@ -16,8 +18,18 @@ class ProfilWebPage extends StatefulWidget {
 }
 
 class _ProfilWebPage extends State<ProfilWebPage> {
-  String name = "Eliott Aunoble";
-  String email = "ea.aunoble@gmail.com";
+
+  String firstName = "";
+  String lastName = "";
+  String email = "";
+
+    @override
+  void initState() {
+    super.initState();
+    firstName = Provider.of<AppData>(context, listen: false).user.firstName;
+    lastName = Provider.of<AppData>(context, listen: false).user.lastName;
+    email = Provider.of<AppData>(context, listen: false).user.username;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +67,8 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                       backgroundImage: AssetImage('assets/avatar.jpg'),
                     ),
                   ),
-                  const CommonText(
-                    text: "Eliott Aunoble",
+                  CommonText(
+                    text: "$firstName $lastName",
                     fontSizeText: 27.5,
                     fontWeight: fontBold,
                     paddingTop: 16,
@@ -111,10 +123,19 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                                   const EdgeInsets.only(left: 75, right: 75),
                               child: Button(
                                 text: "Modifier le profil",
-                                onPress: () => Navigator.pushNamed(
-                                  context,
-                                  '/modifProfil',
-                                ),
+                                // ignore: always_specify_types
+                                onPress: () => { 
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute<ModifProfilWebPage>(
+                                      builder: (BuildContext context) =>
+                                          ModifProfilWebPage(
+                                            firstname: firstName,
+                                            lastname: lastName,
+                                          ),
+                                    ),
+                                  )
+                                },
                               ),
                             ),
                           ),

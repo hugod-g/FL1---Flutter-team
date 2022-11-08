@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
+import 'package:mon_petit_entretien/Page/add_maintenance.dart';
 import 'package:mon_petit_entretien/Page/web/vuevehicule_web.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
@@ -7,7 +8,20 @@ import 'package:mon_petit_entretien/Style/fonts.dart';
 import '../Components/common_text.dart';
 
 class VueVehiculePage extends StatefulWidget {
-  const VueVehiculePage({Key? key}) : super(key: key);
+  const VueVehiculePage({
+    super.key,
+    required this.name,
+    required this.mileage,
+    required this.pathImage,
+    required this.date,
+    required this.vehicleId,
+  });
+
+  final String name;
+  final String mileage;
+  final String pathImage;
+  final String date;
+  final String vehicleId;
 
   @override
   State<VueVehiculePage> createState() => _VueVehiculePage();
@@ -31,38 +45,27 @@ class _VueVehiculePage extends State<VueVehiculePage> {
           children: <Widget>[
             Stack(
               children: <Widget>[
-                Container(
+                SizedBox(
                   height: MediaQuery.of(context).size.height * 0.35,
                   width: MediaQuery.of(context).size.width,
-                  decoration: const BoxDecoration(
-                    color: errorColor,
-                    image: DecorationImage(
-                      image: AssetImage('assets/image/logo.png'),
-                      fit: BoxFit.fill,
-                    ),
-                    borderRadius: BorderRadius.only(
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(50),
                       bottomRight: Radius.circular(50),
+                    ),
+                    child: Image.network(
+                      "http://152.228.134.93:1339/${widget.pathImage}",
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
                 Padding(
                   padding:
                       const EdgeInsets.only(top: 40, left: 12.5, right: 12.5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      IconButton(
-                        icon: const Icon(Icons.integration_instructions),
-                        iconSize: 35,
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.integration_instructions),
-                        iconSize: 35,
-                        onPressed: () {},
-                      ),
-                    ],
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back_ios_new),
+                    iconSize: 35,
+                    onPressed: () => Navigator.pop(context),
                   ),
                 ),
                 Center(
@@ -71,17 +74,22 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.175,
                       width: MediaQuery.of(context).size.width * 0.875,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         color: white,
-                        image: DecorationImage(
-                          image: AssetImage('assets/image/logo.png'),
-                          fit: BoxFit.fill,
-                        ),
+                        borderRadius: BorderRadius.circular(12.5),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
                       ),
                       child: Column(
                         children: <Widget>[
-                          const CommonText(
-                            text: "Vehicule",
+                          CommonText(
+                            text: widget.name,
                             fontSizeText: 25,
                             fontWeight: fontBold,
                             paddingTop: 16,
@@ -97,13 +105,13 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Row(
-                                  children: const <Widget>[
-                                    Icon(
+                                  children: <Widget>[
+                                    const Icon(
                                       Icons.calendar_today,
                                       size: 25,
                                     ),
                                     CommonText(
-                                      text: "12/12/2022",
+                                      text: widget.date.substring(0,10),
                                       fontSizeText: 17.5,
                                       fontWeight: fontLight,
                                       color: navy,
@@ -111,13 +119,13 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                                   ],
                                 ),
                                 Row(
-                                  children: const <Widget>[
-                                    Icon(
+                                  children: <Widget>[
+                                    const Icon(
                                       Icons.mode_of_travel,
                                       size: 25,
                                     ),
                                     CommonText(
-                                      text: "2000 km",
+                                      text: widget.mileage,
                                       fontSizeText: 17.5,
                                       fontWeight: fontLight,
                                       color: navy,
@@ -186,14 +194,33 @@ class _VueVehiculePage extends State<VueVehiculePage> {
               padding: const EdgeInsets.only(top: 40, left: 50, right: 50),
               child: Button(
                 text: "Ajouter un entretient",
-                onPress: () => Navigator.pushNamed(context, '/add_maintenance'),
+                // ignore: always_specify_types
+                onPress: () => { 
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<AddMaintenancePage>(
+                      builder: (BuildContext context) =>
+                          AddMaintenancePage(
+                            name: widget.name,
+                            mileage: widget.mileage,
+                            vehicleId: widget.vehicleId,
+                          ),
+                    ),
+                  )
+                },
               ),
             ),
           ],
         ),
       );
     } else {
-      return const VueVehiculeWebPage();
+      return VueVehiculeWebPage(
+        name: widget.name,
+        mileage: widget.mileage,
+        pathImage: widget.pathImage,
+        date: widget.date,
+        vehicleId: widget.vehicleId,
+      );
     }
   }
 }

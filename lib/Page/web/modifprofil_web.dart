@@ -7,7 +7,14 @@ import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
 class ModifProfilWebPage extends StatefulWidget {
-  const ModifProfilWebPage({Key? key}) : super(key: key);
+  const ModifProfilWebPage({
+    super.key,
+    required this.firstname,
+    required this.lastname,
+  });
+
+  final String firstname;
+  final String lastname;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -15,8 +22,15 @@ class ModifProfilWebPage extends StatefulWidget {
 }
 
 class _ModifProfilWebPage extends State<ModifProfilWebPage> {
-  String firsname = "";
-  String lastname = "";
+  late String firsname;
+  late String lastname;
+
+  @override
+  void initState() {
+    super.initState();
+    firsname = widget.firstname;
+    lastname = widget.lastname;
+  }
 
   void _onFirstNameChange(String newValue) {
     setState(() {

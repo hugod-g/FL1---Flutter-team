@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:provider/provider.dart';
 
 class AddMaintenanceWebPage extends StatefulWidget {
-  const AddMaintenanceWebPage({Key? key}) : super(key: key);
+  const AddMaintenanceWebPage({
+    super.key,
+    required this.name,
+    required this.mileage,
+    required this.vehicleId,
+  });
+
+  final String name;
+  final String mileage;
+  final String vehicleId;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -15,12 +26,21 @@ class AddMaintenanceWebPage extends StatefulWidget {
 }
 
 class _AddMaintenanceWebPage extends State<AddMaintenanceWebPage> {
-
-  String mileage = "";
+  
+  late String mileage;
   String date = "";
   String price = "";
-  String name = "";
+  late String name;
   String center = "";
+  late AppData data;
+
+  @override
+  void initState() {
+    super.initState();
+    data = Provider.of<AppData>(context, listen: false);
+    name = widget.name;
+    mileage = widget.mileage;
+  }
 
   void _onMileageChange(String newValue) {
     setState(() {

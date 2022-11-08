@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Page/web/addmaintenance_web.dart';
-import 'package:mon_petit_entretien/Page/web/modifprofil_web.dart';
+import 'package:mon_petit_entretien/Services/api/add_maintenance.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../Components/common_text.dart';
 import '../Style/colors.dart';
 
 class AddMaintenancePage extends StatefulWidget {
-  const AddMaintenancePage({Key? key}) : super(key: key);
+  const AddMaintenancePage({
+    super.key,
+    required this.name,
+    required this.mileage,
+    required this.vehicleId,
+  });
+
+  final String name;
+  final String mileage;
+  final String vehicleId;
 
   @override
   State<AddMaintenancePage> createState() => _AddMaintenancePage();
@@ -17,11 +28,20 @@ class AddMaintenancePage extends StatefulWidget {
 
 class _AddMaintenancePage extends State<AddMaintenancePage> {
   
-  String mileage = "";
+  late String mileage;
   String date = "";
   String price = "";
-  String name = "";
+  late String name;
   String center = "";
+  late AppData data;
+
+  @override
+  void initState() {
+    super.initState();
+    data = Provider.of<AppData>(context, listen: false);
+    name = widget.name;
+    mileage = widget.mileage;
+  }
 
   void _onMileageChange(String newValue) {
     setState(() {
@@ -148,7 +168,8 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                         padding: const EdgeInsets.only(top: 40),
                         child: Button(
                           text: "Sauvegarder",
-                          onPress: () => Navigator.pop(context),
+                          onPress: () =>
+                            addMaintenance(data.token, mileage, date, price, name, center, widget.vehicleId),
                         ),
                       ),
                       Padding(
@@ -168,7 +189,11 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
         ),
       );
     } else {
-      return const AddMaintenanceWebPage();
+      return AddMaintenanceWebPage(
+        name: widget.name,
+        mileage: widget.mileage,
+        vehicleId: widget.vehicleId,
+      );
     }
   }
 }
