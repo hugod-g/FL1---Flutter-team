@@ -1,7 +1,12 @@
+import 'dart:io';
+
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
+import 'package:mon_petit_entretien/Page/camera_page.dart';
 import 'package:mon_petit_entretien/Page/web/modifprofil_web.dart';
 import 'package:mon_petit_entretien/Services/api/modif_user.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
@@ -28,6 +33,13 @@ class _ModifProfilPage extends State<ModifProfilPage> {
   late String firstname;
   late String lastname;
   late AppData data;
+  String image = "";
+
+  bool isLoadingCreate = false;
+  bool isLoadedImage = false;
+  bool isLoadedVehicule = false;
+  bool isThereAnImage = false;
+  bool? isSecondary;
 
   final SnackBar snackBar = SnackBar(
     content: const Text(
@@ -61,6 +73,26 @@ class _ModifProfilPage extends State<ModifProfilPage> {
     });
   }
 
+  Future<int> takePictureGaleryLoaded() {
+    AppData data;
+    data = Provider.of<AppData>(context, listen: false);
+    return takePictureGalery(data);
+  }
+
+  Future<int> takePictureGalery(AppData data) async {
+    String newPath = '/assets/car.jpg';
+    final XFile? file =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (file == null) {
+      data.user.updatePicturePath(newPath);
+      return 401;
+    } else {
+      newPath = file.path;
+      data.user.updatePicturePath(newPath);
+      return 200;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final double currentWith = MediaQuery.of(context).size.width;
@@ -70,7 +102,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
         resizeToAvoidBottomInset: false,
         backgroundColor: lightBlue,
         body: Padding(
-          padding: const EdgeInsets.all(22.5),
+          padding: const EdgeInsets.all(20),
           child: SingleChildScrollView(
             padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0.0125,
@@ -111,6 +143,194 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                           paddingBot: 20,
                           color: navy,
                         ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet<void>(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return SizedBox(
+                                height: 150,
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      SizedBox(
+                                        height: 150,
+                                        width: double.infinity,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                            top: 5,
+                                            left: 24,
+                                            right: 24,
+                                          ),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  bottom: 10,
+                                                ),
+                                                child: InkWell(
+                                                  onTap: () async {
+                                                    await availableCameras().then(
+                                                      (
+                                                        List<CameraDescription>
+                                                            value,
+                                                      ) =>
+                                                          Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute<
+                                                            CameraPage>(
+                                                          builder: (_) =>
+                                                              CameraPage(
+                                                            cameras: value,
+                                                          ),
+                                                        ),
+                                                      ).then((_) {
+                                                        AppData data;
+                                                        data =
+                                                            Provider.of<AppData>(
+                                                          context,
+                                                          listen: false,
+                                                        );
+                                                        if (data.vehicles.last
+                                                                .picturePath !=
+                                                            "") {
+                                                          setState(() {
+                                                            isThereAnImage = true;
+                                                          });
+                                                        }
+                                                        Navigator.pop(context);
+                                                      }),
+                                                    );
+                                                  },
+                                                  child: Ink(
+                                                    child: Row(
+                                                      children: const <Widget>[
+                                                        Icon(
+                                                          Icons.camera_alt,
+                                                          size: 30,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                            left: 10,
+                                                          ),
+                                                          child: CommonText(
+                                                            text: "Camera",
+                                                            fontSizeText: 20,
+                                                            fontWeight:
+                                                                FontWeight.normal,
+                                                            color: navy,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              InkWell(
+                                                onTap: () {
+                                                  takePictureGaleryLoaded()
+                                                      .then((int value) {
+                                                    if (value == 200) {}
+                                                    setState(() {
+                                                      isThereAnImage = true;
+                                                    });
+                                                  });
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Ink(
+                                                  child: Row(
+                                                    children: const <Widget>[
+                                                      Icon(
+                                                        Icons.photo,
+                                                        size: 30,
+                                                      ),
+                                                      Padding(
+                                                        padding: EdgeInsets.only(
+                                                          left: 10,
+                                                        ),
+                                                        child: CommonText(
+                                                          text: "Galerie",
+                                                          fontSizeText: 20,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: navy,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: isThereAnImage
+                            ? Center(
+                                child: SizedBox(
+                                  width: 200,
+                                  height: 200,
+                                  child: Image.file(
+                                    File(
+                                      Provider.of<AppData>(context, listen: false)
+                                          .vehicles
+                                          .last
+                                          .picturePath,
+                                    ),
+                                    fit: BoxFit.cover,
+                                    frameBuilder: (
+                                      BuildContext context,
+                                      Widget child,
+                                      int? frame,
+                                      bool wasSynchronouslyLoaded,
+                                    ) {
+                                      if (wasSynchronouslyLoaded) {
+                                        return const SizedBox(
+                                          width: 20,
+                                          height: 20,
+                                          child: CircularProgressIndicator(
+                                            color: navy,
+                                          ),
+                                        );
+                                      }
+                                      return child;
+                                    },
+                                  ),
+                                ),
+                              )
+                            : Align(
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.height * 0.25,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.25,
+                                  decoration: const BoxDecoration(
+                                    color: navy,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Align(
+                                    child: Text(
+                                      "Ajoutez une image",
+                                      style: TextStyle(
+                                        color: white,
+                                        fontSize: 16,
+                                        fontFamily: appFont,
+                                        fontWeight: fontLight,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 40),

@@ -7,7 +7,7 @@ class AppData extends ChangeNotifier {
   List<VehiculeModel> vehicles = List<VehiculeModel>.empty(growable: true);
   String token = "";
   UserModel user =
-      UserModel("", "", "", "", false, List<CenterModel>.empty(growable: true));
+      UserModel("", "", "", "", false, "", List<CenterModel>.empty(growable: true));
   List<UserModel> usersList = List<UserModel>.empty();
 
   void addDataVehicle(

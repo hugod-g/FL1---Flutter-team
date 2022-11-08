@@ -244,7 +244,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                           text: "Sauvegarder",
                           // ignore: unrelated_type_equality_checks
                           onPress: () async => await addMaintenance(data.token, mileage, date, price, name, center, widget.vehicleId) == true
-                          ? Navigator.popAndPushNamed(context, '/home')
+                          ? Navigator.popAndPushNamed(context, '/gestion')
                           : ScaffoldMessenger.of(context).showSnackBar(snackBar),
                         ),
                       ),
