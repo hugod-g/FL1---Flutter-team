@@ -173,10 +173,10 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                 children:
                   widget.maintenance.map((maintenanceModel info) =>
                     CardVehicule(
-                      prix: info.prix,
+                      prix: info.prix.toString(),
                       title: info.name,
-                      date: info.date,
-                      km: info.kilometrage,
+                      date: info.date.substring(0, 10),
+                      km: info.kilometrage.toString(),
                       enterprise: info.center,
                     ),
                   ).toList(),

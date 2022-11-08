@@ -82,12 +82,23 @@ class _ProfilPage extends State<ProfilPage> {
                         color: navy,
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 17.5),
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundColor: Colors.amber,
-                        backgroundImage: AssetImage('assets/avatar.jpg'),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 17.5),
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.width * 0.275,
+                        width: MediaQuery.of(context).size.width * 0.275,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(50),
+                          child: data.user.picturePath == ""
+                          ? Image.asset(
+                            'assets/avatar.jpg',
+                            fit: BoxFit.fill,
+                          )
+                          : Image.network(
+                            "http://152.228.134.93:1339/${data.user.picturePath}",
+                            fit: BoxFit.fill,
+                          ),
+                        ),
                       ),
                     ),
                     CommonText(

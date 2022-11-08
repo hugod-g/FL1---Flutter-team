@@ -8,6 +8,7 @@ class VehiculeModel extends ChangeNotifier {
     this.picturePath,
     this.date,
     this.id,
+    this.maintenances,
   );
 
   factory VehiculeModel.fromJson(Map<String, dynamic> data) {
@@ -16,7 +17,11 @@ class VehiculeModel extends ChangeNotifier {
     final String picturePath = data['image'] as String;
     final String date = data['buyDate'] as String;
     final String id = data['_id'] as String;
-    return VehiculeModel(name, kilometrage, picturePath, date, id);
+    final List<dynamic> maintenances = data['maintenances'] as List<dynamic>;
+    final List<maintenanceModel> tmpMaintenances = maintenances
+        .map<maintenanceModel>((dynamic json) => maintenanceModel.fromJson(json))
+        .toList();
+    return VehiculeModel(name, kilometrage, picturePath, date, id, tmpMaintenances);
   }
 
   String name;

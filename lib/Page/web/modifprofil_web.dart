@@ -120,7 +120,7 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
                               child: Button(
                                 text: "Sauvegarder",
                                 // ignore: unrelated_type_equality_checks
-                                onPress: () async => await modifProfil(data.token, firstname, lastname, data)
+                                onPress: () async => await modifProfil(data.token, firstname, lastname, data.user.picturePath, data)
                                 ? Navigator.pop(context)
                                 : ScaffoldMessenger.of(context).showSnackBar(snackBar),
                               ),

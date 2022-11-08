@@ -30,7 +30,7 @@ class _Statistique extends State<Statistique> {
     int tempPrice = 0;
     for (VehiculeModel vehicule in data.vehicles) {
       for (maintenanceModel maintenance in vehicule.maintenances) {
-        tempPrice += int.parse(maintenance.prix);
+        tempPrice += maintenance.prix;
       }
     }
     setState(() {

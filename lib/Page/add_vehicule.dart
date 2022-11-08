@@ -162,6 +162,7 @@ class _AddVehicule extends State<AddVehicule> {
         "",
         DateTime.now().toString(),
         '0',
+        [],
       );
       isThereImage();
     });

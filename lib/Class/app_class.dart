@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:mon_petit_entretien/Class/center_class.dart';
+import 'package:mon_petit_entretien/Class/maintenance_class.dart';
 import 'package:mon_petit_entretien/Class/user_class.dart';
 import 'package:mon_petit_entretien/Class/vehicle_class.dart';
 
@@ -16,8 +17,9 @@ class AppData extends ChangeNotifier {
     String picturePath,
     String date,
     String id,
+    List<maintenanceModel> maintenances,
   ) {
-    vehicles.add(VehiculeModel(newName, km, picturePath, date, id));
+    vehicles.add(VehiculeModel(newName, km, picturePath, date, id, maintenances));
     notifyListeners();
   }
 

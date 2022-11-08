@@ -89,6 +89,9 @@ class _ModifProfilPage extends State<ModifProfilPage> {
     } else {
       newPath = file.path;
       data.user.updatePicturePath(newPath);
+      setState(() {
+        isThereAnImage = true;
+      });
       return 200;
     }
   }
@@ -194,7 +197,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                                                           context,
                                                           listen: false,
                                                         );
-                                                        if (data.vehicles.last
+                                                        if (data.user
                                                                 .picturePath !=
                                                             "") {
                                                           setState(() {
@@ -283,8 +286,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                                   child: Image.file(
                                     File(
                                       Provider.of<AppData>(context, listen: false)
-                                          .vehicles
-                                          .last
+                                          .user
                                           .picturePath,
                                     ),
                                     fit: BoxFit.cover,
@@ -353,7 +355,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                         child: Button(
                             text: "Sauvegarder",
                             // ignore: unrelated_type_equality_checks
-                            onPress: () async => await modifProfil(data.token, firstname, lastname, data)
+                            onPress: () async => await modifProfil(data.token, firstname, lastname, data.user.picturePath, data)
                             ? Navigator.pop(context)
                             : ScaffoldMessenger.of(context).showSnackBar(snackBar),
                           ),
