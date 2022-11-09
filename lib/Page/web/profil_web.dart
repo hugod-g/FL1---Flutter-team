@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
+import 'package:mon_petit_entretien/Page/web/modifprofil_web.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Style/fonts.dart';
 
@@ -14,11 +18,26 @@ class ProfilWebPage extends StatefulWidget {
 }
 
 class _ProfilWebPage extends State<ProfilWebPage> {
-  String name = "Eliott Aunoble";
-  String email = "ea.aunoble@gmail.com";
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  void _onLogout() async {
+    final SharedPreferences prefs = await _prefs;
+
+    await prefs.setString('token', '');
+
+    if (mounted) {
+      await Navigator.pushNamedAndRemoveUntil(
+        context,
+        '/login',
+        (Route<dynamic> route) => false,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final AppData data = Provider.of<AppData>(context, listen: false);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: lightBlue,
@@ -45,16 +64,27 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                     paddingBot: 20,
                     color: navy,
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 17.5),
-                    child: CircleAvatar(
-                      radius: 90,
-                      backgroundColor: Colors.amber,
-                      backgroundImage: AssetImage('assets/avatar.jpg'),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 17.5),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.15,
+                      width: MediaQuery.of(context).size.width * 0.15,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(150),
+                        child: data.user.picturePath == ""
+                        ? Image.asset(
+                          'assets/avatar.jpg',
+                          fit: BoxFit.fill,
+                        )
+                        : Image.network(
+                          "http://152.228.134.93:1339/${data.user.picturePath}",
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                     ),
                   ),
-                  const CommonText(
-                    text: "Eliott Aunoble",
+                  CommonText(
+                    text: "${data.user.firstName} ${data.user.lastName}",
                     fontSizeText: 27.5,
                     fontWeight: fontBold,
                     paddingTop: 16,
@@ -86,7 +116,7 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                           ),
                         ),
                         CommonText(
-                          text: email,
+                          text: data.user.username,
                           fontSizeText: 25,
                           fontWeight: fontLight,
                           paddingTop: 10,
@@ -109,10 +139,18 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                                   const EdgeInsets.only(left: 75, right: 75),
                               child: Button(
                                 text: "Modifier le profil",
-                                onPress: () => Navigator.pushNamed(
-                                  context,
-                                  '/modifProfil',
-                                ),
+                                onPress: () => <Future<ModifProfilWebPage?>>{ 
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute<ModifProfilWebPage>(
+                                      builder: (BuildContext context) =>
+                                          ModifProfilWebPage(
+                                            firstname: data.user.firstName,
+                                            lastname: data.user.lastName,
+                                          ),
+                                    ),
+                                  )
+                                },
                               ),
                             ),
                           ),
@@ -122,10 +160,7 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                                   const EdgeInsets.only(left: 75, right: 75),
                               child: Button(
                                 text: "Déconnexion",
-                                onPress: () => Navigator.pushNamed(
-                                  context,
-                                  '/modifProfil',
-                                ),
+                                onPress: _onLogout,
                                 secondary: true,
                               ),
                             ),

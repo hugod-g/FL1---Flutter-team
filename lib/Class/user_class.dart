@@ -8,6 +8,7 @@ class UserModel extends ChangeNotifier {
     this.lastName,
     this.username,
     this.admin,
+    this.picturePath,
     this.centers,
   );
 
@@ -17,19 +18,21 @@ class UserModel extends ChangeNotifier {
     final String lastName = data['lastname'] as String;
     final String username = data['username'] as String;
     final bool admin = data['admin'] as bool;
+    final String picturePath = data['image'] as String;
     final List<dynamic> centersTmp = data['centers'] as List<dynamic>;
 
     final List<CenterModel> centers = centersTmp
         .map<CenterModel>((dynamic json) => CenterModel.fromJson(json))
         .toList();
 
-    return UserModel(id, firstName, lastName, username, admin, centers);
+    return UserModel(id, firstName, lastName, username, admin, picturePath, centers);
   }
 
   String lastName = "";
   String firstName = "";
   String username = "";
   bool admin = false;
+  String picturePath;
   String id = "";
   List<CenterModel> centers = List<CenterModel>.empty();
 
@@ -40,6 +43,11 @@ class UserModel extends ChangeNotifier {
 
   void updateFirstName(String newVar) {
     firstName = newVar;
+    notifyListeners();
+  }
+
+  void updatePicturePath(String newVar) {
+    picturePath = newVar;
     notifyListeners();
   }
 

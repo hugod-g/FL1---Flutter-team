@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/maintenance_class.dart';
+import 'package:mon_petit_entretien/Page/vue_vehicule.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
@@ -10,6 +12,9 @@ class CardCar extends StatefulWidget {
     required this.nbMaintenance,
     required this.pathImage,
     required this.isLoaded,
+    required this.date,
+    required this.id,
+    required this.maintenance,
   });
 
   final String name;
@@ -17,6 +22,9 @@ class CardCar extends StatefulWidget {
   final String nbMaintenance;
   final String pathImage;
   final bool isLoaded;
+  final String date;
+  final String id;
+  final List<MaintenanceModel> maintenance;
 
   @override
   CardCarState createState() => CardCarState();
@@ -28,6 +36,22 @@ class CardCarState extends State<CardCar> {
     return Padding(
       padding: const EdgeInsets.only(right: 20),
       child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute<VehicleView>(
+              builder: (BuildContext context) =>
+                  VehicleView(
+                    name: widget.name,
+                    mileage: widget.mileage,
+                    pathImage: widget.pathImage,
+                    date: widget.date,
+                    vehicleId: widget.id,
+                    maintenance: widget.maintenance,
+                  ),
+            ),
+          );
+        },
         child: Ink(
           child: Stack(
             children: <Widget>[

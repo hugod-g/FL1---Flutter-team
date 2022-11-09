@@ -1,26 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/maintenance_class.dart';
+import 'package:mon_petit_entretien/Components/button.dart';
+import 'package:mon_petit_entretien/Page/add_maintenance.dart';
 import 'package:mon_petit_entretien/Page/web/vuevehicule_web.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
 import '../Components/common_text.dart';
 
-class VueVehiculePage extends StatefulWidget {
-  const VueVehiculePage({Key? key}) : super(key: key);
+class VehicleView extends StatefulWidget {
+  const VehicleView({
+    super.key,
+    required this.name,
+    required this.mileage,
+    required this.pathImage,
+    required this.date,
+    required this.vehicleId,
+    required this.maintenance,
+  });
+
+  final String name;
+  final String mileage;
+  final String pathImage;
+  final String date;
+  final String vehicleId;
+  final List<MaintenanceModel> maintenance;
 
   @override
-  State<VueVehiculePage> createState() => _VueVehiculePage();
+  State<VehicleView> createState() => _VehicleView();
 }
 
-class _VueVehiculePage extends State<VueVehiculePage> {
+class _VehicleView extends State<VehicleView> {
   @override
   Widget build(BuildContext context) {
     final double currentWith = MediaQuery.of(context).size.width;
-    const String prix = "200";
-    const String title = "Roue";
-    const String date = "12/20/2022";
-    const String km = "2000";
-    const String enterprise = "Point S";
 
     if (currentWith < 800) {
       return Scaffold(
@@ -30,38 +43,27 @@ class _VueVehiculePage extends State<VueVehiculePage> {
           children: <Widget>[
             Stack(
               children: <Widget>[
-                Container(
+                SizedBox(
                   height: MediaQuery.of(context).size.height * 0.35,
                   width: MediaQuery.of(context).size.width,
-                  decoration: const BoxDecoration(
-                    color: errorColor,
-                    image: DecorationImage(
-                      image: AssetImage('assets/image/logo.png'),
-                      fit: BoxFit.fill,
-                    ),
-                    borderRadius: BorderRadius.only(
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(50),
                       bottomRight: Radius.circular(50),
+                    ),
+                    child: Image.network(
+                      "http://152.228.134.93:1339/${widget.pathImage}",
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
                 Padding(
                   padding:
                       const EdgeInsets.only(top: 40, left: 12.5, right: 12.5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      IconButton(
-                        icon: const Icon(Icons.integration_instructions),
-                        iconSize: 35,
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.integration_instructions),
-                        iconSize: 35,
-                        onPressed: () {},
-                      ),
-                    ],
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back_ios_new),
+                    iconSize: 35,
+                    onPressed: () => Navigator.pop(context),
                   ),
                 ),
                 Center(
@@ -70,168 +72,96 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.175,
                       width: MediaQuery.of(context).size.width * 0.875,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         color: white,
-                        image: DecorationImage(
-                          image: AssetImage('assets/image/logo.png'),
-                          fit: BoxFit.fill,
-                        ),
+                        borderRadius: BorderRadius.circular(12.5),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
                       ),
-                    ),
-                  ),
-                ),
-                Column(
-                  children: <Widget>[
-                    const CommonText(
-                      text: "Vehicule",
-                      fontSizeText: 25,
-                      fontWeight: fontBold,
-                      paddingTop: 16,
-                      color: navy,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 24,
-                        right: 16,
-                        left: 16,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Column(
                         children: <Widget>[
-                          Row(
-                            children: const <Widget>[
-                              Icon(
-                                Icons.calendar_today,
-                                size: 25,
-                              ),
-                              CommonText(
-                                text: "12/12/2022",
-                                fontSizeText: 17.5,
-                                fontWeight: fontLight,
-                                color: navy,
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: const <Widget>[
-                              Icon(
-                                Icons.mode_of_travel,
-                                size: 25,
-                              ),
-                              CommonText(
-                                text: "2000 km",
-                                fontSizeText: 17.5,
-                                fontWeight: fontLight,
-                                color: navy,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    const CommonText(
-                      text: "12/12/2022",
-                      fontSizeText: 17.5,
-                      fontWeight: fontLight,
-                      color: navy,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        const Icon(
-                          Icons.mode_of_travel,
-                          size: 25,
-                        ),
-                        const CommonText(
-                          text: "2000 km",
-                          fontSizeText: 17.5,
-                          fontWeight: fontLight,
-                          color: navy,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 24,
-                            right: 16,
-                            left: 16,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Row(
-                                children: const <Widget>[
-                                  Icon(
-                                    Icons.calendar_today,
-                                    size: 25,
-                                  ),
-                                  CommonText(
-                                    text: "12/12/2022",
-                                    fontSizeText: 17.5,
-                                    fontWeight: fontLight,
-                                    color: navy,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: const <Widget>[
-                                  Icon(
-                                    Icons.mode_of_travel,
-                                    size: 25,
-                                  ),
-                                  CommonText(
-                                    text: "2000 km",
-                                    fontSizeText: 17.5,
-                                    fontWeight: fontLight,
-                                    color: navy,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 24, right: 16, left: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: const <Widget>[
-                          Icon(
-                            Icons.calendar_today,
-                            size: 25,
-                          ),
                           CommonText(
-                            text: "12/12/2022",
-                            fontSizeText: 17.5,
-                            fontWeight: fontLight,
+                            text: widget.name,
+                            fontSizeText: 25,
+                            fontWeight: fontBold,
+                            paddingTop: 16,
                             color: navy,
                           ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 24,
+                              right: 16,
+                              left: 16,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    const Icon(
+                                      Icons.calendar_today,
+                                      size: 25,
+                                    ),
+                                    CommonText(
+                                      text: widget.date.substring(0,10),
+                                      fontSizeText: 17.5,
+                                      fontWeight: fontLight,
+                                      color: navy,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    const Icon(
+                                      Icons.mode_of_travel,
+                                      size: 25,
+                                    ),
+                                    CommonText(
+                                      text: '${widget.mileage} km',
+                                      fontSizeText: 17.5,
+                                      fontWeight: fontLight,
+                                      color: navy,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
-                      Row(
-                        children: const <Widget>[
-                          Icon(
-                            Icons.mode_of_travel,
-                            size: 25,
-                          ),
-                          CommonText(
-                            text: "2000 km",
-                            fontSizeText: 17.5,
-                            fontWeight: fontLight,
-                            color: navy,
-                          ),
-                        ],
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-                const Icon(
-                  Icons.car_repair,
-                  size: 35,
                 ),
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 25,
+                right: 25,
+                bottom: 25,
+                top: 25,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const <Widget>[
+                  CommonText(
+                    text: "Mes entretiens",
+                    fontSizeText: 25,
+                    fontWeight: fontBold,
+                    color: navy,
+                  ),
+                  Icon(
+                    Icons.car_repair,
+                    size: 35,
+                  ),
+                ],
+              ),
             ),
             SingleChildScrollView(
               padding: EdgeInsets.only(
@@ -240,29 +170,49 @@ class _VueVehiculePage extends State<VueVehiculePage> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const <Widget>[
-                  CardVehicule(
-                    prix: prix,
-                    title: title,
-                    date: date,
-                    km: km,
-                    enterprise: enterprise,
-                  ),
-                  CardVehicule(
-                    prix: prix,
-                    title: title,
-                    date: date,
-                    km: km,
-                    enterprise: enterprise,
-                  ),
-                ],
+                children:
+                  widget.maintenance.map((MaintenanceModel info) =>
+                    CardVehicule(
+                      prix: info.price.toString(),
+                      title: info.name,
+                      date: info.date.substring(0, 10),
+                      km: info.kilometrage.toString(),
+                      enterprise: info.center,
+                    ),
+                  ).toList(),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 40, left: 50, right: 50),
+              child: Button(
+                text: "Ajouter un entretient",
+                onPress: () => <Future<AddMaintenancePage?>>{ 
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<AddMaintenancePage>(
+                      builder: (BuildContext context) =>
+                          AddMaintenancePage(
+                            name: widget.name,
+                            mileage: widget.mileage,
+                            vehicleId: widget.vehicleId,
+                          ),
+                    ),
+                  )
+                },
               ),
             ),
           ],
         ),
       );
     } else {
-      return const VueVehiculeWebPage();
+      return VehicleViewWeb(
+        name: widget.name,
+        mileage: widget.mileage,
+        pathImage: widget.pathImage,
+        date: widget.date,
+        vehicleId: widget.vehicleId,
+        maintenance: widget.maintenance,
+      );
     }
   }
 }
@@ -285,81 +235,84 @@ class CardVehicule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.21,
-      width: MediaQuery.of(context).size.width * 0.55,
-      decoration: BoxDecoration(
-        color: blue,
-        borderRadius: BorderRadius.circular(12.5),
-      ),
-      child: Row(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 24),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.21,
-              width: MediaQuery.of(context).size.width * 0.1,
-              color: white,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8, bottom: 8),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    const Icon(
-                      Icons.car_repair,
-                      size: 30,
-                    ),
-                    RotatedBox(
-                      quarterTurns: 3,
-                      child: CommonText(
-                        text: '$prix €',
-                        fontSizeText: 17,
-                        fontWeight: fontBold,
-                        color: navy,
+    return Padding(
+      padding: const EdgeInsets.only(left: 15),
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.21,
+        width: MediaQuery.of(context).size.width * 0.55,
+        decoration: BoxDecoration(
+          color: blue,
+          borderRadius: BorderRadius.circular(12.5),
+        ),
+        child: Row(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 24),
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.21,
+                width: MediaQuery.of(context).size.width * 0.1,
+                color: white,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8, bottom: 8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      const Icon(
+                        Icons.car_repair,
+                        size: 30,
                       ),
-                    )
-                  ],
+                      RotatedBox(
+                        quarterTurns: 3,
+                        child: CommonText(
+                          text: '$prix €',
+                          fontSizeText: 17,
+                          fontWeight: fontBold,
+                          color: navy,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              CommonText(
-                text: title,
-                fontSizeText: 20,
-                fontWeight: fontBold,
-                paddingTop: 8,
-                paddingLeft: 16,
-                color: white,
-              ),
-              CommonText(
-                text: date,
-                fontSizeText: 17.5,
-                fontWeight: fontLight,
-                paddingTop: 24,
-                paddingLeft: 16,
-                color: white,
-              ),
-              CommonText(
-                text: '$km km',
-                fontSizeText: 17.5,
-                fontWeight: fontLight,
-                paddingLeft: 16,
-                color: white,
-              ),
-              CommonText(
-                text: enterprise,
-                fontSizeText: 15,
-                fontWeight: fontLight,
-                paddingTop: 16,
-                paddingLeft: 16,
-                color: white,
-              ),
-            ],
-          ),
-        ],
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                CommonText(
+                  text: title,
+                  fontSizeText: 20,
+                  fontWeight: fontBold,
+                  paddingTop: 8,
+                  paddingLeft: 16,
+                  color: white,
+                ),
+                CommonText(
+                  text: date,
+                  fontSizeText: 17.5,
+                  fontWeight: fontLight,
+                  paddingTop: 24,
+                  paddingLeft: 16,
+                  color: white,
+                ),
+                CommonText(
+                  text: '$km km',
+                  fontSizeText: 17.5,
+                  fontWeight: fontLight,
+                  paddingLeft: 16,
+                  color: white,
+                ),
+                CommonText(
+                  text: enterprise,
+                  fontSizeText: 15,
+                  fontWeight: fontLight,
+                  paddingTop: 16,
+                  paddingLeft: 16,
+                  color: white,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
