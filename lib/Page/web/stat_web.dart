@@ -30,7 +30,7 @@ class _StatWebPage extends State<StatWebPage> {
     int tempPrice = 0;
     for (VehiculeModel vehicule in data.vehicles) {
       for (MaintenanceModel maintenance in vehicule.maintenances) {
-        tempPrice += int.parse(maintenance.prix);
+        tempPrice += maintenance.price;
       }
     }
     setState(() {

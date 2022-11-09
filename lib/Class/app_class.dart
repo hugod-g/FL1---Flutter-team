@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:mon_petit_entretien/Class/center_class.dart';
+import 'package:mon_petit_entretien/Class/maintenance_class.dart';
 import 'package:mon_petit_entretien/Class/user_class.dart';
 import 'package:mon_petit_entretien/Class/vehicle_class.dart';
 
@@ -7,8 +8,8 @@ class AppData extends ChangeNotifier {
   List<VehiculeModel> vehicles = List<VehiculeModel>.empty(growable: true);
   String token = "";
   UserModel user =
-      UserModel("", "", "", "", false, List<CenterModel>.empty(growable: true));
-  List<UserModel> usersList = List<UserModel>.empty(growable: true);
+      UserModel("", "", "", "", false, "", List<CenterModel>.empty(growable: true));
+  List<UserModel> usersList = List<UserModel>.empty();
 
   void addDataVehicle(
     String newName,
@@ -16,16 +17,9 @@ class AppData extends ChangeNotifier {
     String picturePath,
     String date,
     String id,
+    List<MaintenanceModel> maintenances,
   ) {
-    vehicles.add(
-      VehiculeModel(
-        newName,
-        km,
-        picturePath,
-        date,
-        id,
-      ),
-    );
+    vehicles.add(VehiculeModel(newName, km, picturePath, date, id, maintenances));
     notifyListeners();
   }
 

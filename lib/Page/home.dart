@@ -357,13 +357,16 @@ class _Home extends State<Home> {
                             if (isSearching == true)
                               for (VehiculeModel vehicule in _searchVehicules)
                                 CardCar(
-                                  name: vehicule.name,
-                                  mileage: vehicule.kilometrage.toString(),
-                                  nbMaintenance:
-                                      vehicule.maintenances.length.toString(),
-                                  pathImage: vehicule.picturePath,
-                                  isLoaded: isLoaded,
-                                ),
+                                name: vehicule.name,
+                                mileage: vehicule.kilometrage.toString(),
+                                nbMaintenance:
+                                    vehicule.maintenances.length.toString(),
+                                pathImage: vehicule.picturePath,
+                                isLoaded: isLoaded,
+                                date: vehicule.date,
+                                id: vehicule.id,
+                                maintenance: vehicule.maintenances,
+                              ),
                             if (isSearching == false)
                               for (VehiculeModel vehicule
                                   in Provider.of<AppData>(
@@ -377,7 +380,10 @@ class _Home extends State<Home> {
                                       vehicule.maintenances.length.toString(),
                                   pathImage: vehicule.picturePath,
                                   isLoaded: isLoaded,
-                                ),
+                                  date: vehicule.date,
+                                  id: vehicule.id,
+                                  maintenance: vehicule.maintenances,
+                              ),
                           ],
                         ),
                       ),

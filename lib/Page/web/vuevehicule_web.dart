@@ -1,17 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/maintenance_class.dart';
+import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
+import 'package:mon_petit_entretien/Page/web/addmaintenance_web.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
-class VueVehiculeWebPage extends StatefulWidget {
-  const VueVehiculeWebPage({Key? key}) : super(key: key);
+class VehicleViewWeb extends StatefulWidget {
+  const VehicleViewWeb({
+    super.key,
+    required this.name,
+    required this.mileage,
+    required this.pathImage,
+    required this.date,
+    required this.vehicleId,
+    required this.maintenance,
+  });
 
+  final String name;
+  final String mileage;
+  final String pathImage;
+  final String date;
+  final String vehicleId;
+  final List<MaintenanceModel> maintenance;
   @override
-  State<VueVehiculeWebPage> createState() => _VueVehiculeWebPage();
+  State<VehicleViewWeb> createState() => _VehicleViewWeb();
 }
 
-class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
+class _VehicleViewWeb extends State<VehicleViewWeb> {
   final String prix = "200";
   final String title = "Roue";
   final String date = "12/20/2022";
@@ -31,18 +48,17 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
               children: <Widget>[
                 Stack(
                   children: <Widget>[
-                    Container(
+                    SizedBox(
                       height: MediaQuery.of(context).size.height * 0.35,
                       width: MediaQuery.of(context).size.width,
-                      decoration: const BoxDecoration(
-                        color: errorColor,
-                        image: DecorationImage(
-                          image: AssetImage('assets/image/logo.png'),
-                          fit: BoxFit.fill,
-                        ),
-                        borderRadius: BorderRadius.only(
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(50),
                           bottomRight: Radius.circular(50),
+                        ),
+                        child: Image.network(
+                          "http://152.228.134.93:1339/${widget.pathImage}",
+                          fit: BoxFit.fill,
                         ),
                       ),
                     ),
@@ -52,20 +68,10 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
                         left: 12.5,
                         right: 12.5,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          IconButton(
-                            icon: const Icon(Icons.integration_instructions),
-                            iconSize: 35,
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.integration_instructions),
-                            iconSize: 35,
-                            onPressed: () {},
-                          ),
-                        ],
+                      child: IconButton(
+                        icon: const Icon(Icons.arrow_back_ios_new),
+                        iconSize: 35,
+                        onPressed: () => Navigator.pop(context),
                       ),
                     ),
                     Center(
@@ -76,10 +82,6 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
                           width: MediaQuery.of(context).size.width * 0.35,
                           decoration: BoxDecoration(
                             color: white,
-                            image: const DecorationImage(
-                              image: AssetImage('assets/image/logo.png'),
-                              fit: BoxFit.fill,
-                            ),
                             borderRadius: BorderRadius.circular(12.5),
                             boxShadow: <BoxShadow>[
                               BoxShadow(
@@ -92,8 +94,8 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
                           ),
                           child: Column(
                             children: <Widget>[
-                              const CommonText(
-                                text: "Vehicules",
+                              CommonText(
+                                text: widget.name,
                                 fontSizeText: 25,
                                 fontWeight: fontBold,
                                 paddingTop: 16,
@@ -110,13 +112,13 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Row(
-                                      children: const <Widget>[
-                                        Icon(
+                                      children: <Widget>[
+                                        const Icon(
                                           Icons.calendar_today,
                                           size: 25,
                                         ),
                                         CommonText(
-                                          text: "12/12/2022",
+                                          text: widget.date.substring(0,10),
                                           fontSizeText: 17.5,
                                           fontWeight: fontLight,
                                           color: navy,
@@ -124,13 +126,13 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
                                       ],
                                     ),
                                     Row(
-                                      children: const <Widget>[
-                                        Icon(
+                                      children: <Widget>[
+                                        const Icon(
                                           Icons.mode_of_travel,
                                           size: 25,
                                         ),
                                         CommonText(
-                                          text: "2000 km",
+                                          text: widget.mileage,
                                           fontSizeText: 17.5,
                                           fontWeight: fontLight,
                                           color: navy,
@@ -178,22 +180,35 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
             scrollDirection: Axis.horizontal,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                CardVehiculeWeb(
-                  prix: prix,
-                  title: title,
-                  date: date,
-                  km: km,
-                  enterprise: enterprise,
-                ),
-                CardVehiculeWeb(
-                  prix: prix,
-                  title: title,
-                  date: date,
-                  km: km,
-                  enterprise: enterprise,
-                ),
-              ],
+              children:
+                widget.maintenance.map((MaintenanceModel info) =>
+                  CardVehiculeWeb(
+                    prix: info.price.toString(),
+                    title: info.name,
+                    date: info.date.substring(0, 10),
+                    km: info.kilometrage.toString(),
+                    enterprise: info.center,
+                  ),
+                ).toList(),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 40, left: 75, right: 75),
+            child: Button(
+              text: "Ajouter un entretient",
+              onPress: () => <Future<AddMaintenanceWebPage?>> {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute<AddMaintenanceWebPage>(
+                      builder: (BuildContext context) =>
+                          AddMaintenanceWebPage(
+                            name: widget.name,
+                            mileage: widget.mileage,
+                            vehicleId: widget.vehicleId,
+                          ),
+                    ),
+                  )
+              },
             ),
           ),
         ],

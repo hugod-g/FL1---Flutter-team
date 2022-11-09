@@ -1,29 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
+import 'package:mon_petit_entretien/Services/api/modif_user.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:provider/provider.dart';
+
 
 class ModifProfilWebPage extends StatefulWidget {
-  const ModifProfilWebPage({Key? key}) : super(key: key);
+  const ModifProfilWebPage({
+    super.key,
+    required this.firstname,
+    required this.lastname,
+  });
+
+  final String firstname;
+  final String lastname;
 
   @override
   State<ModifProfilWebPage> createState() => _ModifProfilWebPage();
 }
 
 class _ModifProfilWebPage extends State<ModifProfilWebPage> {
-  String firsname = "";
-  String lastname = "";
+  late String firstname;
+  late String lastname;
+  late AppData data;
 
-  void _onNameChange(String newValue) {
+  final SnackBar snackBar = SnackBar(
+    content: const Text(
+      "Tout les champs ne sont pas remplis !",
+    ),
+    duration: const Duration(seconds: 2),
+    action: SnackBarAction(
+      label: 'Ok',
+      textColor: white,
+      onPressed: () {},
+    ),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    data = Provider.of<AppData>(context, listen: false);
+    firstname = widget.firstname;
+    lastname = widget.lastname;
+  }
+
+  void _onFirstNameChange(String newValue) {
     setState(() {
-      firsname = newValue;
+      firstname = newValue;
     });
   }
 
-  void _onEmailChange(String newValue) {
+  void _onLastNameChange(String newValue) {
     setState(() {
       lastname = newValue;
     });
@@ -60,17 +92,17 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
                   Padding(
                     padding: const EdgeInsets.only(top: 125),
                     child: TextInput(
-                      value: firsname,
-                      placeholder: "Name",
-                      onChangeText: _onNameChange,
+                      value: firstname,
+                      placeholder: firstname,
+                      onChangeText: _onFirstNameChange,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 40),
                     child: TextInput(
                       value: lastname,
-                      placeholder: "Email",
-                      onChangeText: _onEmailChange,
+                      placeholder: lastname,
+                      onChangeText: _onLastNameChange,
                     ),
                   ),
                   Padding(
@@ -85,9 +117,10 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
                               padding:
                                   const EdgeInsets.only(left: 50, right: 50),
                               child: Button(
-                                text: "Retour",
-                                onPress: () => Navigator.pop(context),
-                                secondary: true,
+                                text: "Sauvegarder",
+                                onPress: () async => await modifProfil(data.token, firstname, lastname, data.user.picturePath, data)
+                                ? Navigator.pop(context)
+                                : ScaffoldMessenger.of(context).showSnackBar(snackBar),
                               ),
                             ),
                           ),
@@ -96,8 +129,9 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
                               padding:
                                   const EdgeInsets.only(left: 50, right: 50),
                               child: Button(
-                                text: "Sauvegarder",
+                                text: "Retour",
                                 onPress: () => Navigator.pop(context),
+                                secondary: true,
                               ),
                             ),
                           ),

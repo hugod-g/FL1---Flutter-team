@@ -7,11 +7,23 @@ class MaintenanceModel extends ChangeNotifier {
     this.center,
     this.date,
     this.id,
+    this.price,
   );
+
+  factory MaintenanceModel.fromJson(Map<String, dynamic> data) {
+    final String name = data['name'] as String;
+    final int kilometrage = data['mileage'] as int;
+    final String center = data['center'] as String;
+    final String date = data['date'] as String;
+    final String id = data['_id'] as String;
+    final int price = data['price'] as int;
+    return MaintenanceModel(name, kilometrage, center, date, id, price);
+  }
+
   String name = "";
-  String prix = "";
+  int price = 0;
   String center = "";
-  String kilometrage = "";
+  int kilometrage = 0;
   String date = "";
   String id = "";
 
@@ -20,8 +32,8 @@ class MaintenanceModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updatePrix(String newVar) {
-    prix = newVar;
+  void updatePrix(int newVar) {
+    price = newVar;
     notifyListeners();
   }
 

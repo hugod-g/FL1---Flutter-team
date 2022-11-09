@@ -374,7 +374,10 @@ class _HomeWebPage extends State<HomeWebPage> {
                                   vehicule.maintenances.length.toString(),
                               pathImage: vehicule.picturePath,
                               isLoaded: isLoaded,
-                            ),
+                              date: vehicule.date,
+                              id: vehicule.id,
+                              maintenance: vehicule.maintenances,
+                          ),
                         if (isSearching == false)
                           for (VehiculeModel vehicule in Provider.of<AppData>(
                             context,
@@ -387,7 +390,10 @@ class _HomeWebPage extends State<HomeWebPage> {
                                   vehicule.maintenances.length.toString(),
                               pathImage: vehicule.picturePath,
                               isLoaded: isLoaded,
-                            ),
+                              date: vehicule.date,
+                              id: vehicule.id,
+                              maintenance: vehicule.maintenances,
+                          ),
                       ],
                     ),
                   ),
