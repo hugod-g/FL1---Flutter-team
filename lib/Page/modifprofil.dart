@@ -111,6 +111,40 @@ class _ModifProfilPage extends State<ModifProfilPage> {
     }
   }
 
+  void _camera() async {
+    await availableCameras().then(
+      (
+        List<CameraDescription>
+            value,
+      ) =>
+          Navigator.push(
+        context,
+        MaterialPageRoute<
+            CameraPage>(
+          builder: (_) =>
+              CameraPage(
+            cameras: value,
+          ),
+        ),
+      ).then((_) {
+        AppData data;
+        data =
+            Provider.of<AppData>(
+          context,
+          listen: false,
+        );
+        if (data.user
+                .picturePath !=
+            "") {
+          setState(() {
+            isThereAnImage = true;
+          });
+        }
+        Navigator.pop(context);
+      }),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final double currentWith = MediaQuery.of(context).size.width;
@@ -122,9 +156,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
         body: Padding(
           padding: const EdgeInsets.all(20),
           child: SingleChildScrollView(
-            padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.0125,
-            ),
+            padding: const EdgeInsets.only(top: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -190,39 +222,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                                                   bottom: 10,
                                                 ),
                                                 child: InkWell(
-                                                  onTap: () async {
-                                                    await availableCameras().then(
-                                                      (
-                                                        List<CameraDescription>
-                                                            value,
-                                                      ) =>
-                                                          Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute<
-                                                            CameraPage>(
-                                                          builder: (_) =>
-                                                              CameraPage(
-                                                            cameras: value,
-                                                          ),
-                                                        ),
-                                                      ).then((_) {
-                                                        AppData data;
-                                                        data =
-                                                            Provider.of<AppData>(
-                                                          context,
-                                                          listen: false,
-                                                        );
-                                                        if (data.user
-                                                                .picturePath !=
-                                                            "") {
-                                                          setState(() {
-                                                            isThereAnImage = true;
-                                                          });
-                                                        }
-                                                        Navigator.pop(context);
-                                                      }),
-                                                    );
-                                                  },
+                                                  onTap: _camera,
                                                   child: Ink(
                                                     child: Row(
                                                       children: const <Widget>[

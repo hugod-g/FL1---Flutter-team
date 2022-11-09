@@ -39,9 +39,9 @@ class CardCarState extends State<CardCar> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute<VueVehiculePage>(
+            MaterialPageRoute<VehicleView>(
               builder: (BuildContext context) =>
-                  VueVehiculePage(
+                  VehicleView(
                     name: widget.name,
                     mileage: widget.mileage,
                     pathImage: widget.pathImage,

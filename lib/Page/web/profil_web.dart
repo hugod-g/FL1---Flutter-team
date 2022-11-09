@@ -139,8 +139,7 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                                   const EdgeInsets.only(left: 75, right: 75),
                               child: Button(
                                 text: "Modifier le profil",
-                                // ignore: always_specify_types
-                                onPress: () => { 
+                                onPress: () => <Future<ModifProfilWebPage?>>{ 
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute<ModifProfilWebPage>(

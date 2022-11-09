@@ -8,8 +8,8 @@ import 'package:mon_petit_entretien/Style/fonts.dart';
 
 import '../Components/common_text.dart';
 
-class VueVehiculePage extends StatefulWidget {
-  const VueVehiculePage({
+class VehicleView extends StatefulWidget {
+  const VehicleView({
     super.key,
     required this.name,
     required this.mileage,
@@ -27,10 +27,10 @@ class VueVehiculePage extends StatefulWidget {
   final List<maintenanceModel> maintenance;
 
   @override
-  State<VueVehiculePage> createState() => _VueVehiculePage();
+  State<VehicleView> createState() => _VehicleView();
 }
 
-class _VueVehiculePage extends State<VueVehiculePage> {
+class _VehicleView extends State<VehicleView> {
   @override
   Widget build(BuildContext context) {
     final double currentWith = MediaQuery.of(context).size.width;
@@ -205,7 +205,7 @@ class _VueVehiculePage extends State<VueVehiculePage> {
         ),
       );
     } else {
-      return VueVehiculeWebPage(
+      return VehicleViewWeb(
         name: widget.name,
         mileage: widget.mileage,
         pathImage: widget.pathImage,

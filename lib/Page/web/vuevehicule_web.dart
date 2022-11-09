@@ -7,8 +7,8 @@ import 'package:mon_petit_entretien/Page/web/addmaintenance_web.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
-class VueVehiculeWebPage extends StatefulWidget {
-  const VueVehiculeWebPage({
+class VehicleViewWeb extends StatefulWidget {
+  const VehicleViewWeb({
     super.key,
     required this.name,
     required this.mileage,
@@ -25,10 +25,10 @@ class VueVehiculeWebPage extends StatefulWidget {
   final String vehicleId;
   final List<maintenanceModel> maintenance;
   @override
-  State<VueVehiculeWebPage> createState() => _VueVehiculeWebPage();
+  State<VehicleViewWeb> createState() => _VehicleViewWeb();
 }
 
-class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
+class _VehicleViewWeb extends State<VehicleViewWeb> {
   final String prix = "200";
   final String title = "Roue";
   final String date = "12/20/2022";
