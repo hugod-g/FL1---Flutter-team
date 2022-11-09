@@ -87,8 +87,19 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
     });
   }
 
-  void _callApi() {
+  void _callApi() async {
 
+    final bool response = await addMaintenance(data.token, mileage, date, price, name, center, widget.vehicleId);
+
+    if (response == true) {
+      if (mounted) {
+        await Navigator.popAndPushNamed(context, '/gestion');
+      }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    }
   }
 
   @override
@@ -244,9 +255,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                         padding: const EdgeInsets.only(top: 40),
                         child: Button(
                           text: "Sauvegarder",
-                          onPress: () async => await addMaintenance(data.token, mileage, date, price, name, center, widget.vehicleId) == true
-                          ? Navigator.popAndPushNamed(context, '/gestion')
-                          : ScaffoldMessenger.of(context).showSnackBar(snackBar),
+                          onPress: _callApi,
                         ),
                       ),
                       Padding(

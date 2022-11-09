@@ -96,6 +96,21 @@ class _ModifProfilPage extends State<ModifProfilPage> {
     }
   }
 
+    void _callApi() async {
+
+    final bool response = await modifProfil(data.token, firstname, lastname, data.user.picturePath, data);
+
+    if (response == true) {
+      if (mounted) {
+        Navigator.pop(context);
+      }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final double currentWith = MediaQuery.of(context).size.width;
@@ -354,9 +369,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                         padding: const EdgeInsets.only(top: 40),
                         child: Button(
                             text: "Sauvegarder",
-                            onPress: () async => await modifProfil(data.token, firstname, lastname, data.user.picturePath, data)
-                            ? Navigator.pop(context)
-                            : ScaffoldMessenger.of(context).showSnackBar(snackBar),
+                            onPress: _callApi,
                           ),
                       ),
                       Padding(
