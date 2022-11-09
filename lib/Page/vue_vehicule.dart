@@ -173,7 +173,7 @@ class _VueVehiculePage extends State<VueVehiculePage> {
                 children:
                   widget.maintenance.map((maintenanceModel info) =>
                     CardVehicule(
-                      prix: info.prix.toString(),
+                      prix: info.price.toString(),
                       title: info.name,
                       date: info.date.substring(0, 10),
                       km: info.kilometrage.toString(),
@@ -186,8 +186,7 @@ class _VueVehiculePage extends State<VueVehiculePage> {
               padding: const EdgeInsets.only(top: 40, left: 50, right: 50),
               child: Button(
                 text: "Ajouter un entretient",
-                // ignore: always_specify_types
-                onPress: () => { 
+                onPress: () => <Future<AddMaintenancePage?>>{ 
                   Navigator.push(
                     context,
                     MaterialPageRoute<AddMaintenancePage>(

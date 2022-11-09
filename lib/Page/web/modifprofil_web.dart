@@ -21,8 +21,7 @@ class ModifProfilWebPage extends StatefulWidget {
   final String lastname;
 
   @override
-  // ignore: library_private_types_in_public_api
-  _ModifProfilWebPage createState() => _ModifProfilWebPage();
+  State<ModifProfilWebPage> createState() => _ModifProfilWebPage();
 }
 
 class _ModifProfilWebPage extends State<ModifProfilWebPage> {
@@ -119,7 +118,6 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
                                   const EdgeInsets.only(left: 50, right: 50),
                               child: Button(
                                 text: "Sauvegarder",
-                                // ignore: unrelated_type_equality_checks
                                 onPress: () async => await modifProfil(data.token, firstname, lastname, data.user.picturePath, data)
                                 ? Navigator.pop(context)
                                 : ScaffoldMessenger.of(context).showSnackBar(snackBar),

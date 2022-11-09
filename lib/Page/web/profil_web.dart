@@ -14,8 +14,7 @@ class ProfilWebPage extends StatefulWidget {
   const ProfilWebPage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _ProfilWebPage createState() => _ProfilWebPage();
+  State<ProfilWebPage> createState() => _ProfilWebPage();
 }
 
 class _ProfilWebPage extends State<ProfilWebPage> {

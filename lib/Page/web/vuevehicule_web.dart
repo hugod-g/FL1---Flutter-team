@@ -3,6 +3,7 @@ import 'package:mon_petit_entretien/Class/maintenance_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
+import 'package:mon_petit_entretien/Page/web/addmaintenance_web.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
@@ -24,8 +25,7 @@ class VueVehiculeWebPage extends StatefulWidget {
   final String vehicleId;
   final List<maintenanceModel> maintenance;
   @override
-  // ignore: library_private_types_in_public_api
-  _VueVehiculeWebPage createState() => _VueVehiculeWebPage();
+  State<VueVehiculeWebPage> createState() => _VueVehiculeWebPage();
 }
 
 class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
@@ -183,7 +183,7 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
               children:
                 widget.maintenance.map((maintenanceModel info) =>
                   CardVehiculeWeb(
-                    prix: info.prix.toString(),
+                    prix: info.price.toString(),
                     title: info.name,
                     date: info.date.substring(0, 10),
                     km: info.kilometrage.toString(),
@@ -196,7 +196,19 @@ class _VueVehiculeWebPage extends State<VueVehiculeWebPage> {
             padding: const EdgeInsets.only(top: 40, left: 75, right: 75),
             child: Button(
               text: "Ajouter un entretient",
-              onPress: () => Navigator.pushNamed(context, '/add_maintenance'),
+              onPress: () => <Future<AddMaintenanceWebPage?>> {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute<AddMaintenanceWebPage>(
+                      builder: (BuildContext context) =>
+                          AddMaintenanceWebPage(
+                            name: widget.name,
+                            mileage: widget.mileage,
+                            vehicleId: widget.vehicleId,
+                          ),
+                    ),
+                  )
+              },
             ),
           ),
         ],

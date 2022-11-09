@@ -87,6 +87,10 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
     });
   }
 
+  void _callApi() {
+
+  }
+
   @override
   Widget build(BuildContext context) {
     final double currentWith = MediaQuery.of(context).size.width;
@@ -98,9 +102,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
         body: Padding(
           padding: const EdgeInsets.all(20),
           child: SingleChildScrollView(
-            padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.0125,
-            ),
+            padding: const EdgeInsets.only(top: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -242,7 +244,6 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                         padding: const EdgeInsets.only(top: 40),
                         child: Button(
                           text: "Sauvegarder",
-                          // ignore: unrelated_type_equality_checks
                           onPress: () async => await addMaintenance(data.token, mileage, date, price, name, center, widget.vehicleId) == true
                           ? Navigator.popAndPushNamed(context, '/gestion')
                           : ScaffoldMessenger.of(context).showSnackBar(snackBar),

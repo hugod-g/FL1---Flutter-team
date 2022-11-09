@@ -23,8 +23,7 @@ class AddMaintenanceWebPage extends StatefulWidget {
   final String vehicleId;
 
   @override
-  // ignore: library_private_types_in_public_api
-  _AddMaintenanceWebPage createState() => _AddMaintenanceWebPage();
+  State<AddMaintenanceWebPage> createState() => _AddMaintenanceWebPage();
 }
 
 class _AddMaintenanceWebPage extends State<AddMaintenanceWebPage> {
@@ -228,7 +227,6 @@ class _AddMaintenanceWebPage extends State<AddMaintenanceWebPage> {
                                   const EdgeInsets.only(left: 50, right: 50),
                               child: Button(
                                 text: "Sauvegarder",
-                                // ignore: unrelated_type_equality_checks
                                 onPress: () async => await addMaintenance(data.token, mileage, date, price, name, center, widget.vehicleId) == true
                                 ? Navigator.popAndPushNamed(context, '/home')
                                 : ScaffoldMessenger.of(context).showSnackBar(snackBar),

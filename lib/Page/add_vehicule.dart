@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
+import 'package:mon_petit_entretien/Class/maintenance_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
@@ -162,7 +163,7 @@ class _AddVehicule extends State<AddVehicule> {
         "",
         DateTime.now().toString(),
         '0',
-        [],
+        List<maintenanceModel>.empty(growable: true),
       );
       isThereImage();
     });
