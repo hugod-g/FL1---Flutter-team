@@ -8,14 +8,14 @@ import 'package:mon_petit_entretien/Style/fonts.dart';
 import 'package:provider/provider.dart';
 import '../Style/colors.dart';
 
-class Statistique extends StatefulWidget {
-  const Statistique({Key? key}) : super(key: key);
+class Statistics extends StatefulWidget {
+  const Statistics({Key? key}) : super(key: key);
 
   @override
-  State<Statistique> createState() => _Statistique();
+  State<Statistics> createState() => _Statistique();
 }
 
-class _Statistique extends State<Statistique> {
+class _Statistique extends State<Statistics> {
   int statMaintenances = 0;
 
   @override
@@ -29,7 +29,7 @@ class _Statistique extends State<Statistique> {
     data = Provider.of<AppData>(context, listen: false);
     int tempPrice = 0;
     for (VehiculeModel vehicule in data.vehicles) {
-      for (maintenanceModel maintenance in vehicule.maintenances) {
+      for (MaintenanceModel maintenance in vehicule.maintenances) {
         tempPrice += maintenance.price;
       }
     }

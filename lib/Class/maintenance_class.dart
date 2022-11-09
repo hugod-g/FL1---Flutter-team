@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-class maintenanceModel extends ChangeNotifier {
-  maintenanceModel(
+class MaintenanceModel extends ChangeNotifier {
+  MaintenanceModel(
     this.name,
     this.kilometrage,
     this.center,
@@ -10,14 +10,14 @@ class maintenanceModel extends ChangeNotifier {
     this.price,
   );
 
-  factory maintenanceModel.fromJson(Map<String, dynamic> data) {
+  factory MaintenanceModel.fromJson(Map<String, dynamic> data) {
     final String name = data['name'] as String;
     final int kilometrage = data['mileage'] as int;
     final String center = data['center'] as String;
     final String date = data['date'] as String;
     final String id = data['_id'] as String;
     final int price = data['price'] as int;
-    return maintenanceModel(name, kilometrage, center, date, id, price);
+    return MaintenanceModel(name, kilometrage, center, date, id, price);
   }
 
   String name = "";

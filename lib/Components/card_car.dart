@@ -24,7 +24,7 @@ class CardCar extends StatefulWidget {
   final bool isLoaded;
   final String date;
   final String id;
-  final List<maintenanceModel> maintenance;
+  final List<MaintenanceModel> maintenance;
 
   @override
   CardCarState createState() => CardCarState();

@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:mon_petit_entretien/Class/maintenance_class.dart';
 
@@ -18,8 +20,8 @@ class VehiculeModel extends ChangeNotifier {
     final String date = data['buyDate'] as String;
     final String id = data['_id'] as String;
     final List<dynamic> maintenances = data['maintenances'] as List<dynamic>;
-    final List<maintenanceModel> tmpMaintenances = maintenances
-        .map<maintenanceModel>((dynamic json) => maintenanceModel.fromJson(json))
+    final List<MaintenanceModel> tmpMaintenances = maintenances
+        .map<MaintenanceModel>((dynamic json) => MaintenanceModel.fromJson(json))
         .toList();
     return VehiculeModel(name, kilometrage, picturePath, date, id, tmpMaintenances);
   }
@@ -29,8 +31,9 @@ class VehiculeModel extends ChangeNotifier {
   String picturePath;
   String id;
   String date;
-  List<maintenanceModel> maintenances =
-      List<maintenanceModel>.empty(growable: true);
+  List<MaintenanceModel> maintenances =
+      List<MaintenanceModel>.empty(growable: true);
+  Uint8List pickedFileBytes = Uint8List.fromList(<int>[0]);
 
   void updateName(String newVar) {
     name = newVar;
@@ -44,6 +47,11 @@ class VehiculeModel extends ChangeNotifier {
 
   void updatePicturePath(String newVar) {
     picturePath = newVar;
+    notifyListeners();
+  }
+
+  void updatePicketFilesBytes(Uint8List newVar) {
+    pickedFileBytes = newVar;
     notifyListeners();
   }
 

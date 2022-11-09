@@ -17,7 +17,7 @@ class AppData extends ChangeNotifier {
     String picturePath,
     String date,
     String id,
-    List<maintenanceModel> maintenances,
+    List<MaintenanceModel> maintenances,
   ) {
     vehicles.add(VehiculeModel(newName, km, picturePath, date, id, maintenances));
     notifyListeners();

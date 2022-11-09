@@ -24,7 +24,7 @@ class VehicleView extends StatefulWidget {
   final String pathImage;
   final String date;
   final String vehicleId;
-  final List<maintenanceModel> maintenance;
+  final List<MaintenanceModel> maintenance;
 
   @override
   State<VehicleView> createState() => _VehicleView();
@@ -171,7 +171,7 @@ class _VehicleView extends State<VehicleView> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:
-                  widget.maintenance.map((maintenanceModel info) =>
+                  widget.maintenance.map((MaintenanceModel info) =>
                     CardVehicule(
                       prix: info.price.toString(),
                       title: info.name,
