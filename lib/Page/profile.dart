@@ -224,15 +224,7 @@ class _ProfilPage extends State<ProfilPage> {
                                         const EdgeInsets.only(left: 40, right: 40),
                                     child: Button(
                                       text: "Modifier le profil",
-                                      onPress: () => <Future<ModifProfilPage?>>{
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute<ModifProfilPage>(
-                                            builder: (BuildContext context) =>
-                                                const ModifProfilPage(),
-                                          ),
-                                        )
-                                      },
+                                      onPress: () => Navigator.pushNamed(context, '/modif_profil'),
                                     ),
                                   ),
                                 ),

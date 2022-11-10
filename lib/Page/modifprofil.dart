@@ -362,100 +362,49 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                               ),
                             ),
                     ),
-                    if(kIsWeb)
-                      Column(
-                        children: <Widget> [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 50),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.3,
-                              child: TextInput(
-                                value: firstname,
-                                placeholder: firstname,
-                                onChangeText: _onFirstNameChange,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 40),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.3,
-                              child: TextInput(
-                                value: lastname,
-                                placeholder: lastname,
-                                onChangeText: _onLastNameChange,
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    else
-                      Column(
-                        children: <Widget> [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 40),
-                            child: TextInput(
-                              value: firstname,
-                              placeholder: firstname,
-                              onChangeText: _onFirstNameChange,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 40),
-                            child: TextInput(
-                              value: lastname,
-                              placeholder: lastname,
-                              onChangeText: _onLastNameChange,
-                            ),
-                          ),
-                        ],
+                    Padding(
+                      padding: const EdgeInsets.only(top: 50),
+                      child: SizedBox(
+                        width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.8,
+                        child: TextInput(
+                          value: firstname,
+                          placeholder: firstname,
+                          onChangeText: _onFirstNameChange,
+                        ),
                       ),
-                    if(kIsWeb)
-                      Column(
-                        children: <Widget> [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 50),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.3,
-                              child: Button(
-                                text: "Sauvegarder",
-                                onPress: _callApi,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 40),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.3,
-                              child: Button(
-                                text: "Retour",
-                                onPress: () => Navigator.pop(context),
-                                secondary: true,
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    else
-                      Column(
-                        children: <Widget> [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 40),
-                            child: Button(
-                                text: "Sauvegarder",
-                                onPress: _callApi,
-                              ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 25),
-                            child: Button(
-                              text: "Retour",
-                              onPress: () => Navigator.pop(context),
-                              secondary: true,
-                            ),
-                          ),
-                        ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 40),
+                      child: SizedBox(
+                        width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.8,
+                        child: TextInput(
+                          value: lastname,
+                          placeholder: lastname,
+                          onChangeText: _onLastNameChange,
+                        ),
                       ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 50),
+                      child: SizedBox(
+                        width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.8,
+                        child: Button(
+                          text: "Sauvegarder",
+                          onPress: _callApi,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 40),
+                      child: SizedBox(
+                        width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.8,
+                        child: Button(
+                          text: "Retour",
+                          onPress: () => Navigator.pop(context),
+                          secondary: true,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               )

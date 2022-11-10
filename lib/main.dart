@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Page/add_vehicule.dart';
 import 'package:mon_petit_entretien/Page/admin.dart';
 import 'package:mon_petit_entretien/Page/gestion.dart';
+import 'package:mon_petit_entretien/Page/modifprofil.dart';
 import 'package:mon_petit_entretien/Page/profile.dart';
 import 'package:mon_petit_entretien/Page/statistics.dart';
 import 'package:provider/provider.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
           '/gestion': (BuildContext context) => const GestionPage(),
           '/admin': (BuildContext context) => const AdminPage(),
           '/profil': (BuildContext context) => const ProfilPage(),
+          '/modif_profil': (BuildContext context) => const ModifProfilPage(),
           '/add_vehicle': (BuildContext constext) => const AddVehicule(),
         },
         home: const LoginPage(),

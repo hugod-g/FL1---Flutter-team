@@ -1,8 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Class/maintenance_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Page/add_maintenance.dart';
-import 'package:mon_petit_entretien/Page/web/vuevehicule_web.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 
@@ -33,19 +33,18 @@ class VehicleView extends StatefulWidget {
 class _VehicleView extends State<VehicleView> {
   @override
   Widget build(BuildContext context) {
-    final double currentWith = MediaQuery.of(context).size.width;
 
-    if (currentWith < 800) {
-      return Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: lightBlue,
-        body: Column(
-          children: <Widget>[
-            Stack(
-              children: <Widget>[
-                SizedBox(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: lightBlue,
+      body: Column(
+        children: <Widget>[
+          Stack(
+            children: <Widget>[
+              Center(
+                child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.35,
-                  width: MediaQuery.of(context).size.width,
+                  width: kIsWeb ? MediaQuery.of(context).size.width * 0.5 : MediaQuery.of(context).size.width * 1,
                   child: ClipRRect(
                     borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(50),
@@ -57,6 +56,8 @@ class _VehicleView extends State<VehicleView> {
                     ),
                   ),
                 ),
+              ),
+              if(!kIsWeb)
                 Padding(
                   padding:
                       const EdgeInsets.only(top: 40, left: 12.5, right: 12.5),
@@ -66,124 +67,127 @@ class _VehicleView extends State<VehicleView> {
                     onPressed: () => Navigator.pop(context),
                   ),
                 ),
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 175),
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.175,
-                      width: MediaQuery.of(context).size.width * 0.875,
-                      decoration: BoxDecoration(
-                        color: white,
-                        borderRadius: BorderRadius.circular(12.5),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: const Offset(0, 2),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: kIsWeb ? 300 : 175),
+                  child: Container(
+                    height: kIsWeb ? MediaQuery.of(context).size.height * 0.125 : MediaQuery.of(context).size.height * 0.175,
+                    width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.875,
+                    decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: BorderRadius.circular(12.5),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        CommonText(
+                          text: widget.name,
+                          fontSizeText: 25,
+                          fontWeight: fontBold,
+                          paddingTop: 16,
+                          color: navy,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 24,
+                            right: 16,
+                            left: 16,
                           ),
-                        ],
-                      ),
-                      child: Column(
-                        children: <Widget>[
-                          CommonText(
-                            text: widget.name,
-                            fontSizeText: 25,
-                            fontWeight: fontBold,
-                            paddingTop: 16,
-                            color: navy,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  const Icon(
+                                    Icons.calendar_today,
+                                    size: 25,
+                                  ),
+                                  CommonText(
+                                    text: widget.date.substring(0,10),
+                                    fontSizeText: 17.5,
+                                    fontWeight: fontLight,
+                                    color: navy,
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  const Icon(
+                                    Icons.mode_of_travel,
+                                    size: 25,
+                                  ),
+                                  CommonText(
+                                    text: '${widget.mileage} km',
+                                    fontSizeText: 17.5,
+                                    fontWeight: fontLight,
+                                    color: navy,
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 24,
-                              right: 16,
-                              left: 16,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    const Icon(
-                                      Icons.calendar_today,
-                                      size: 25,
-                                    ),
-                                    CommonText(
-                                      text: widget.date.substring(0,10),
-                                      fontSizeText: 17.5,
-                                      fontWeight: fontLight,
-                                      color: navy,
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    const Icon(
-                                      Icons.mode_of_travel,
-                                      size: 25,
-                                    ),
-                                    CommonText(
-                                      text: '${widget.mileage} km',
-                                      fontSizeText: 17.5,
-                                      fontWeight: fontLight,
-                                      color: navy,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 25,
+              right: 25,
+              bottom: 25,
+              top: 25,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const <Widget>[
+                CommonText(
+                  text: "Mes entretiens",
+                  fontSizeText: 25,
+                  fontWeight: fontBold,
+                  color: navy,
+                ),
+                if(!kIsWeb)
+                Icon(
+                  Icons.car_repair,
+                  size: 35,
+                ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 25,
-                right: 25,
-                bottom: 25,
-                top: 25,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const <Widget>[
-                  CommonText(
-                    text: "Mes entretiens",
-                    fontSizeText: 25,
-                    fontWeight: fontBold,
-                    color: navy,
-                  ),
-                  Icon(
-                    Icons.car_repair,
-                    size: 35,
-                  ),
-                ],
-              ),
+          ),
+          SingleChildScrollView(
+            padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height * 0.0125,
             ),
-            SingleChildScrollView(
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.0125,
-              ),
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children:
-                  widget.maintenance.map((MaintenanceModel info) =>
-                    CardVehicule(
-                      prix: info.price.toString(),
-                      title: info.name,
-                      date: info.date.substring(0, 10),
-                      km: info.kilometrage.toString(),
-                      enterprise: info.center,
-                    ),
-                  ).toList(),
-              ),
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:
+                widget.maintenance.map((MaintenanceModel info) =>
+                  CardVehicule(
+                    prix: info.price.toString(),
+                    title: info.name,
+                    date: info.date.substring(0, 10),
+                    km: info.kilometrage.toString(),
+                    enterprise: info.center,
+                  ),
+                ).toList(),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 40, left: 50, right: 50),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 40),
+            child: SizedBox(
+              width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.6,
               child: Button(
                 text: "Ajouter un entretient",
                 onPress: () => <Future<AddMaintenancePage?>>{ 
@@ -201,19 +205,21 @@ class _VehicleView extends State<VehicleView> {
                 },
               ),
             ),
-          ],
-        ),
-      );
-    } else {
-      return VehicleViewWeb(
-        name: widget.name,
-        mileage: widget.mileage,
-        pathImage: widget.pathImage,
-        date: widget.date,
-        vehicleId: widget.vehicleId,
-        maintenance: widget.maintenance,
-      );
-    }
+          ),
+          if(kIsWeb)
+            Padding(
+              padding: const EdgeInsets.only(top: 40),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.3,
+                child: Button(
+                  text: "Retour",
+                  onPress: () => Navigator.pop(context),
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
   }
 }
 
@@ -238,8 +244,8 @@ class CardVehicule extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 15),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.21,
-        width: MediaQuery.of(context).size.width * 0.55,
+        height: kIsWeb ? MediaQuery.of(context).size.height * 0.15 : MediaQuery.of(context).size.height * 0.21,
+        width: kIsWeb ? MediaQuery.of(context).size.width * 0.15 : MediaQuery.of(context).size.width * 0.55,
         decoration: BoxDecoration(
           color: blue,
           borderRadius: BorderRadius.circular(12.5),
@@ -249,8 +255,8 @@ class CardVehicule extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 24),
               child: Container(
-                height: MediaQuery.of(context).size.height * 0.21,
-                width: MediaQuery.of(context).size.width * 0.1,
+                height: kIsWeb ? MediaQuery.of(context).size.height * 0.15 : MediaQuery.of(context).size.height * 0.21,
+                width: kIsWeb ? MediaQuery.of(context).size.width * 0.025 : MediaQuery.of(context).size.width * 0.1,
                 color: white,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
