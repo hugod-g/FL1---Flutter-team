@@ -6,10 +6,13 @@ import 'package:mon_petit_entretien/Components/button_select.dart';
 import 'package:mon_petit_entretien/Components/card_car.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
+import 'package:mon_petit_entretien/Components/transition_widgets.dart';
+
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
 import 'package:mon_petit_entretien/Page/add_vehicle.dart';
 import 'package:mon_petit_entretien/Services/api/vehicule.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
+
 import 'package:provider/provider.dart';
 
 import '../Style/colors.dart';
@@ -21,13 +24,17 @@ class Home extends StatefulWidget {
   State<Home> createState() => _Home();
 }
 
-class _Home extends State<Home> {
+class _Home extends State<Home> with TickerProviderStateMixin {
   String search = "";
   Map<String, bool> select = <String, bool>{
     'KM': false,
     'DATE': false,
     'A-Z': true,
   };
+
+  late AnimationController rotationControllerDate;
+  late AnimationController rotationControllerAlph;
+  late AnimationController rotationControllerKM;
 
   bool isLoaded = false;
   bool isSearching = false;
@@ -59,6 +66,7 @@ class _Home extends State<Home> {
   }
 
   void _onSelectKM() async {
+    rotationControllerKM.forward(from: 0.0);
     if (isSearching == true) {
       final List<VehiculeModel> newVehiculesHigh =
           List<VehiculeModel>.empty(growable: true);
@@ -94,6 +102,7 @@ class _Home extends State<Home> {
   }
 
   void _onSelectDate() async {
+    rotationControllerDate.forward(from: 0.0);
     if (isSearching == true) {
       final List<VehiculeModel> newVehiculesDate =
           List<VehiculeModel>.empty(growable: true);
@@ -130,6 +139,7 @@ class _Home extends State<Home> {
   }
 
   void _onSelectAlph() async {
+    rotationControllerAlph.forward(from: 0.0);
     if (isSearching == true) {
       final List<VehiculeModel> newVehiculesAlph =
           List<VehiculeModel>.empty(growable: true);
@@ -168,6 +178,18 @@ class _Home extends State<Home> {
   @override
   void initState() {
     super.initState();
+    rotationControllerKM = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+    rotationControllerDate = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+    rotationControllerAlph = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
     getEveryVehicules();
   }
 
@@ -303,20 +325,32 @@ class _Home extends State<Home> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            ButtonSelect(
-                              text: "A-Z",
-                              onPress: _onSelectAlph,
-                              isSelect: select["A-Z"],
+                            RotationTransition(
+                              turns: Tween<double>(begin: 0.0, end: 1.0)
+                                  .animate(rotationControllerAlph),
+                              child: ButtonSelect(
+                                text: "A-Z",
+                                onPress: _onSelectAlph,
+                                isSelect: select["A-Z"],
+                              ),
                             ),
-                            ButtonSelect(
-                              text: "KM",
-                              onPress: _onSelectKM,
-                              isSelect: select["KM"],
+                            RotationTransition(
+                              turns: Tween<double>(begin: 0.0, end: 1.0)
+                                  .animate(rotationControllerKM),
+                              child: ButtonSelect(
+                                text: "KM",
+                                onPress: _onSelectKM,
+                                isSelect: select["KM"],
+                              ),
                             ),
-                            ButtonSelect(
-                              text: "DATE",
-                              onPress: _onSelectDate,
-                              isSelect: select["DATE"],
+                            RotationTransition(
+                              turns: Tween<double>(begin: 0.0, end: 1.0)
+                                  .animate(rotationControllerDate),
+                              child: ButtonSelect(
+                                text: "DATE",
+                                onPress: _onSelectDate,
+                                isSelect: select["DATE"],
+                              ),
                             ),
                           ],
                         ),
@@ -335,10 +369,7 @@ class _Home extends State<Home> {
                                 onTap: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute<AddVehicule>(
-                                      builder: (BuildContext context) =>
-                                          const AddVehicule(),
-                                    ),
+                                    TransitionList.createRouteAddVehicule(),
                                   ).then((_) {
                                     setState(() {
                                       isLoaded = false;
