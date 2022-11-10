@@ -63,8 +63,12 @@ class _Home extends State<Home> with TickerProviderStateMixin {
     }
   }
 
+  void rotationAsync(AnimationController controller) async {
+    await controller.forward(from: 0.0);
+  }
+
   void _onSelectKM() async {
-    rotationControllerKM.forward(from: 0.0);
+    rotationAsync(rotationControllerKM);
     if (isSearching == true) {
       final List<VehiculeModel> newVehiculesHigh =
           List<VehiculeModel>.empty(growable: true);
@@ -100,7 +104,7 @@ class _Home extends State<Home> with TickerProviderStateMixin {
   }
 
   void _onSelectDate() async {
-    rotationControllerDate.forward(from: 0.0);
+    rotationAsync(rotationControllerDate);
     if (isSearching == true) {
       final List<VehiculeModel> newVehiculesDate =
           List<VehiculeModel>.empty(growable: true);
@@ -137,7 +141,7 @@ class _Home extends State<Home> with TickerProviderStateMixin {
   }
 
   void _onSelectAlph() async {
-    rotationControllerAlph.forward(from: 0.0);
+    rotationAsync(rotationControllerAlph);
     if (isSearching == true) {
       final List<VehiculeModel> newVehiculesAlph =
           List<VehiculeModel>.empty(growable: true);
