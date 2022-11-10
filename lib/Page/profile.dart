@@ -3,6 +3,7 @@ import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Page/modifprofil.dart';
 import 'package:mon_petit_entretien/Page/web/profil_web.dart';
+import 'package:mon_petit_entretien/Services/api/auth.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,6 +21,8 @@ class ProfilPage extends StatefulWidget {
 class _ProfilPage extends State<ProfilPage> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
+  bool isLoadingDelete = false;
+
   void _onLogout() async {
     final SharedPreferences prefs = await _prefs;
 
@@ -31,6 +34,23 @@ class _ProfilPage extends State<ProfilPage> {
         '/login',
         (Route<dynamic> route) => false,
       );
+    }
+  }
+
+  void _onDeleteAccount() async {
+    setState(() {
+      isLoadingDelete = true;
+    });
+
+    final AppData data = Provider.of<AppData>(context, listen: false);
+    final int response = await deleteAccountCall(data.token);
+
+    setState(() {
+      isLoadingDelete = false;
+    });
+
+    if (response == 200) {
+      _onLogout();
     }
   }
 
@@ -90,14 +110,14 @@ class _ProfilPage extends State<ProfilPage> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(50),
                           child: data.user.picturePath == ""
-                          ? Image.asset(
-                            'assets/avatar.jpg',
-                            fit: BoxFit.fill,
-                          )
-                          : Image.network(
-                            "http://152.228.134.93:1339/${data.user.picturePath}",
-                            fit: BoxFit.fill,
-                          ),
+                              ? Image.asset(
+                                  'assets/avatar.jpg',
+                                  fit: BoxFit.fill,
+                                )
+                              : Image.network(
+                                  "http://152.228.134.93:1339/${data.user.picturePath}",
+                                  fit: BoxFit.fill,
+                                ),
                         ),
                       ),
                     ),
@@ -143,15 +163,15 @@ class _ProfilPage extends State<ProfilPage> {
                       padding: const EdgeInsets.only(top: 25),
                       child: Button(
                         text: "Modifier le profil",
-                        onPress: () => <Future<ModifProfilPage?>> { 
+                        onPress: () => <Future<ModifProfilPage?>>{
                           Navigator.push(
                             context,
                             MaterialPageRoute<ModifProfilPage>(
                               builder: (BuildContext context) =>
                                   ModifProfilPage(
-                                    firstname: data.user.firstName,
-                                    lastname: data.user.lastName,
-                                  ),
+                                firstname: data.user.firstName,
+                                lastname: data.user.lastName,
+                              ),
                             ),
                           )
                         },
@@ -163,6 +183,15 @@ class _ProfilPage extends State<ProfilPage> {
                         text: "Déconnexion",
                         onPress: _onLogout,
                         secondary: true,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 25),
+                      child: Button(
+                        text: "Supprimer mon compte",
+                        onPress: _onDeleteAccount,
+                        important: true,
+                        isLoading: isLoadingDelete,
                       ),
                     ),
                   ],

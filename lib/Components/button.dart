@@ -8,12 +8,14 @@ class Button extends StatefulWidget {
     required this.text,
     required this.onPress,
     this.secondary,
+    this.important,
     this.isLoading,
   });
 
   final String text;
   final void Function()? onPress;
   final bool? secondary;
+  final bool? important;
   final bool? isLoading;
 
   @override
@@ -37,7 +39,11 @@ class ButtonState extends State<Button> {
         height: 54,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(16)),
-          color: widget.secondary == true ? white : navy,
+          color: widget.important == true
+              ? Colors.red
+              : widget.secondary == true
+                  ? white
+                  : navy,
           boxShadow: const <BoxShadow>[
             BoxShadow(blurRadius: 16, color: lightGray)
           ],
