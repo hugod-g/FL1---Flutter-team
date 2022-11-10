@@ -31,11 +31,11 @@
 		<string>_dartobservatory._tcp</string>
 	</array>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Autorisez Mon Petit Entretien a accéder à votre micro pour enregistrer votre voix.</string>
+	<string>Autorisez Mon Petit Entretien a accéder à votre micro pour enregistrer votre voix pour envoyer un message.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Autorisez Mon Petit Entretien a accéder à votre gallerie pour ajouter une photo dans l&apos;application.</string>
+	<string>Autorisez Mon Petit Entretien a accéder à votre gallerie pour ajouter une photo dans de profil ou de véhicule.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Autorisez Mon Petit Entretien a accéder à votre caméra pour capturer et enregistrer une photo dans l&apos;application.</string>
+	<string>Autorisez Mon Petit Entretien a accéder à votre caméra pour capturer et ajouter une photo de profil ou de véhicule.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
