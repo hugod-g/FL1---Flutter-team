@@ -66,3 +66,17 @@ Future<int> registerCall(
 
   return response.statusCode;
 }
+
+Future<int> deleteAccountCall(
+  String token,
+) async {
+  final http.Response response = await http.delete(
+    Uri.parse(deleteAccountEndpoint),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token'
+    },
+  );
+
+  return response.statusCode;
+}

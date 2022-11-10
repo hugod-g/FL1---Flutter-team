@@ -3,6 +3,7 @@ import 'constants.dart';
 // Auth
 const String loginEndpoint = "$apiUrl/login";
 const String registerEndpoint = "$apiUrl/register";
+const String deleteAccountEndpoint = "$apiUrl/account";
 
 // User
 const String getProfileEndPoint = "$apiUrl/profile";
