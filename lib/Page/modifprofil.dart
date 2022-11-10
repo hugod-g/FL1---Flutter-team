@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Page/camera_page.dart';
-import 'package:mon_petit_entretien/Page/web/modifprofil_web.dart';
 import 'package:mon_petit_entretien/Services/api/modif_user.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 import 'package:provider/provider.dart';
@@ -16,14 +16,7 @@ import '../Components/common_text.dart';
 import '../Style/colors.dart';
 
 class ModifProfilPage extends StatefulWidget {
-  const ModifProfilPage({
-    super.key,
-    required this.firstname,
-    required this.lastname,
-  });
-
-  final String firstname;
-  final String lastname;
+  const ModifProfilPage({Key? key}) : super(key: key);
 
   @override
   State<ModifProfilPage> createState() => _ModifProfilPage();
@@ -40,6 +33,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
   bool isLoadedVehicule = false;
   bool isThereAnImage = false;
   bool? isSecondary;
+  bool isDesktop = false;
 
   final SnackBar snackBar = SnackBar(
     content: const Text(
@@ -57,8 +51,8 @@ class _ModifProfilPage extends State<ModifProfilPage> {
   void initState() {
     super.initState();
     data = Provider.of<AppData>(context, listen: false);
-    firstname = widget.firstname;
-    lastname = widget.lastname;
+    firstname = data.user.firstName;
+    lastname = data.user.lastName;
   }
 
   void _onFirstNameChange(String newValue) {
@@ -87,18 +81,26 @@ class _ModifProfilPage extends State<ModifProfilPage> {
       data.user.updatePicturePath(newPath);
       return 401;
     } else {
-      newPath = file.path;
-      data.user.updatePicturePath(newPath);
-      setState(() {
-        isThereAnImage = true;
-      });
+      if (isDesktop) {
+        final Uint8List pickedFileBytes = await file.readAsBytes();
+        data.user.updatePicketFilesBytes(pickedFileBytes);
+        setState(() {
+          isThereAnImage = true;
+        });
+      } else {
+        newPath = file.path;
+        data.user.updatePicturePath(newPath);
+        setState(() {
+          isThereAnImage = true;
+        });
+      }
       return 200;
     }
   }
 
     void _callApi() async {
 
-    final bool response = await modifProfil(data.token, firstname, lastname, data.user.picturePath, data);
+    final bool response = await modifProfil(data.token, firstname, lastname, data.user.picturePath, data.user.pickedFileBytes, data);
 
     if (response == true) {
       if (mounted) {
@@ -147,252 +149,320 @@ class _ModifProfilPage extends State<ModifProfilPage> {
 
   @override
   Widget build(BuildContext context) {
-    final double currentWith = MediaQuery.of(context).size.width;
 
-    if (currentWith < 800) {
-      return Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: lightBlue,
-        body: Padding(
-          padding: const EdgeInsets.all(20),
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.only(top: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Center(
-                  child: Column(
-                    children: <Widget>[
-                      const Align(
-                        alignment: Alignment.topLeft,
-                        child: CommonText(
-                          text: 'Modification',
-                          fontSizeText: 30,
-                          fontWeight: fontLight,
-                          paddingTop: 44,
-                          paddingBot: 8,
-                          color: navy,
-                        ),
-                      ),
-                      const Align(
-                        alignment: Alignment.topLeft,
-                        child: CommonText(
-                          text: 'du profil',
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: lightBlue,
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.only(top: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Center(
+                child: Column(
+                  children: <Widget>[
+                    if(kIsWeb)
+                        const CommonText(
+                          text: 'Modification du profil',
                           fontSizeText: 30,
                           fontWeight: fontMedium,
                           paddingBot: 15,
                           color: navy,
+                        )
+                      else
+                        Column(
+                          children: const <Widget> [
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: CommonText(
+                                text: 'Modification',
+                                fontSizeText: 30,
+                                fontWeight: fontLight,
+                                paddingTop: 24,
+                                paddingBot: 8,
+                                color: navy,
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: CommonText(
+                                text: 'du profil',
+                                fontSizeText: 30,
+                                fontWeight: fontMedium,
+                                paddingBot: 15,
+                                color: navy,
+                              ),
+                            ),
+                          ],
                         ),
+                    const Align(
+                      alignment: kIsWeb ? Alignment.center : Alignment.topLeft,
+                      child: CommonText(
+                        text: 'Modifier mes informations',
+                        fontSizeText: 20,
+                        fontWeight: fontLight,
+                        paddingBot: 20,
+                        color: navy,
                       ),
-                      const Align(
-                        alignment: Alignment.topLeft,
-                        child: CommonText(
-                          text: 'Modifier mes informations',
-                          fontSizeText: 20,
-                          fontWeight: fontLight,
-                          paddingBot: 20,
-                          color: navy,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          showModalBottomSheet<void>(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return SizedBox(
-                                height: 150,
-                                child: Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: <Widget>[
-                                      SizedBox(
-                                        height: 150,
-                                        width: double.infinity,
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                            top: 5,
-                                            left: 24,
-                                            right: 24,
-                                          ),
-                                          child: Column(
-                                            children: <Widget>[
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                  bottom: 10,
-                                                ),
-                                                child: InkWell(
-                                                  onTap: _camera,
-                                                  child: Ink(
-                                                    child: Row(
-                                                      children: const <Widget>[
-                                                        Icon(
-                                                          Icons.camera_alt,
-                                                          size: 30,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                            left: 10,
-                                                          ),
-                                                          child: CommonText(
-                                                            text: "Camera",
-                                                            fontSizeText: 20,
-                                                            fontWeight:
-                                                                FontWeight.normal,
-                                                            color: navy,
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        showModalBottomSheet<void>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return SizedBox(
+                              height: 150,
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    SizedBox(
+                                      height: 150,
+                                      width: double.infinity,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 5,
+                                          left: 24,
+                                          right: 24,
+                                        ),
+                                        child: Column(
+                                          children: <Widget>[
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                bottom: 10,
                                               ),
-                                              InkWell(
-                                                onTap: () {
-                                                  takePictureGaleryLoaded()
-                                                      .then((int value) {
-                                                    if (value == 200) {}
-                                                    setState(() {
-                                                      isThereAnImage = true;
-                                                    });
-                                                  });
-                                                  Navigator.pop(context);
-                                                },
+                                              child: InkWell(
+                                                onTap: _camera,
                                                 child: Ink(
                                                   child: Row(
                                                     children: const <Widget>[
                                                       Icon(
-                                                        Icons.photo,
+                                                        Icons.camera_alt,
                                                         size: 30,
                                                       ),
                                                       Padding(
-                                                        padding: EdgeInsets.only(
+                                                        padding:
+                                                            EdgeInsets.only(
                                                           left: 10,
                                                         ),
                                                         child: CommonText(
-                                                          text: "Galerie",
+                                                          text: "Camera",
                                                           fontSizeText: 20,
                                                           fontWeight:
                                                               FontWeight.normal,
                                                           color: navy,
                                                         ),
-                                                      ),
+                                                      )
                                                     ],
                                                   ),
                                                 ),
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                takePictureGaleryLoaded()
+                                                    .then((int value) {
+                                                  if (value == 200) {}
+                                                  setState(() {
+                                                    isThereAnImage = true;
+                                                  });
+                                                });
+                                                Navigator.pop(context);
+                                              },
+                                              child: Ink(
+                                                child: Row(
+                                                  children: const <Widget>[
+                                                    Icon(
+                                                      Icons.photo,
+                                                      size: 30,
+                                                    ),
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                        left: 10,
+                                                      ),
+                                                      child: CommonText(
+                                                        text: "Galerie",
+                                                        fontSizeText: 20,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: navy,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        child: isThereAnImage
-                            ? Center(
-                                child: SizedBox(
-                                  width: 200,
-                                  height: 200,
-                                  child: Image.file(
-                                    File(
-                                      Provider.of<AppData>(context, listen: false)
-                                          .user
-                                          .picturePath,
-                                    ),
-                                    fit: BoxFit.cover,
-                                    frameBuilder: (
-                                      BuildContext context,
-                                      Widget child,
-                                      int? frame,
-                                      bool wasSynchronouslyLoaded,
-                                    ) {
-                                      if (wasSynchronouslyLoaded) {
-                                        return const SizedBox(
-                                          width: 20,
-                                          height: 20,
-                                          child: CircularProgressIndicator(
-                                            color: navy,
-                                          ),
-                                        );
-                                      }
-                                      return child;
-                                    },
-                                  ),
-                                ),
-                              )
-                            : Align(
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.height * 0.25,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.25,
-                                  decoration: const BoxDecoration(
-                                    color: navy,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: const Align(
-                                    child: Text(
-                                      "Ajoutez une image",
-                                      style: TextStyle(
-                                        color: white,
-                                        fontSize: 16,
-                                        fontFamily: appFont,
-                                        fontWeight: fontLight,
                                       ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      child: isThereAnImage
+                          ? Center(
+                              child: SizedBox(
+                                width: 200,
+                                height: 200,
+                                child: Image.file(
+                                  File(
+                                    Provider.of<AppData>(context, listen: false)
+                                        .user
+                                        .picturePath,
+                                  ),
+                                  fit: BoxFit.cover,
+                                  frameBuilder: (
+                                    BuildContext context,
+                                    Widget child,
+                                    int? frame,
+                                    bool wasSynchronouslyLoaded,
+                                  ) {
+                                    if (wasSynchronouslyLoaded) {
+                                      return const SizedBox(
+                                        width: 20,
+                                        height: 20,
+                                        child: CircularProgressIndicator(
+                                          color: navy,
+                                        ),
+                                      );
+                                    }
+                                    return child;
+                                  },
+                                ),
+                              ),
+                            )
+                          : Align(
+                              child: Container(
+                                width:
+                                    MediaQuery.of(context).size.height * 0.25,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.25,
+                                decoration: const BoxDecoration(
+                                  color: navy,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Align(
+                                  child: Text(
+                                    "Ajoutez une image",
+                                    style: TextStyle(
+                                      color: white,
+                                      fontSize: 16,
+                                      fontFamily: appFont,
+                                      fontWeight: fontLight,
                                     ),
                                   ),
                                 ),
                               ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: TextInput(
-                          value: firstname,
-                          placeholder: firstname,
-                          onChangeText: _onFirstNameChange,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: TextInput(
-                          value: lastname,
-                          placeholder: lastname,
-                          onChangeText: _onLastNameChange,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: Button(
-                            text: "Sauvegarder",
-                            onPress: _callApi,
+                            ),
+                    ),
+                    if(kIsWeb)
+                      Column(
+                        children: <Widget> [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 50),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: TextInput(
+                                value: firstname,
+                                placeholder: firstname,
+                                onChangeText: _onFirstNameChange,
+                              ),
+                            ),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 40),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: TextInput(
+                                value: lastname,
+                                placeholder: lastname,
+                                onChangeText: _onLastNameChange,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    else
+                      Column(
+                        children: <Widget> [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 40),
+                            child: TextInput(
+                              value: firstname,
+                              placeholder: firstname,
+                              onChangeText: _onFirstNameChange,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 40),
+                            child: TextInput(
+                              value: lastname,
+                              placeholder: lastname,
+                              onChangeText: _onLastNameChange,
+                            ),
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 25),
-                        child: Button(
-                          text: "Retour",
-                          onPress: () => Navigator.pop(context),
-                          secondary: true,
-                        ),
+                    if(kIsWeb)
+                      Column(
+                        children: <Widget> [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 50),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: Button(
+                                text: "Sauvegarder",
+                                onPress: _callApi,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 40),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: Button(
+                                text: "Retour",
+                                onPress: () => Navigator.pop(context),
+                                secondary: true,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    else
+                      Column(
+                        children: <Widget> [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 40),
+                            child: Button(
+                                text: "Sauvegarder",
+                                onPress: _callApi,
+                              ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 25),
+                            child: Button(
+                              text: "Retour",
+                              onPress: () => Navigator.pop(context),
+                              secondary: true,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+                  ],
+                ),
+              )
+            ],
           ),
         ),
-      );
-    } else {
-      return ModifProfilWebPage(
-        firstname: widget.firstname,
-        lastname: widget.lastname,
-      );
-    }
+      ),
+    );
   }
 }
