@@ -78,9 +78,5 @@ Future<int> deleteAccountCall(
     },
   );
 
-  final dynamic payload = jsonDecode(response.body);
-
-  print(payload);
-
   return response.statusCode;
 }
