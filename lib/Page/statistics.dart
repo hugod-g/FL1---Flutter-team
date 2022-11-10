@@ -54,9 +54,9 @@ class _Statistique extends State<Statistics> {
               child: const BurgerMenu(),
             )
           : null,
-      backgroundColor: lightBlue,
       resizeToAvoidBottomInset: !kIsWeb,
       body: Material(
+        color: lightBlue,
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(24),
@@ -79,7 +79,7 @@ class _Statistique extends State<Statistics> {
                   color: navy,
                 ),
                 const CommonText(
-                  text: "Surveillez vos coûts",
+                  text: "Surveiller vos coûts",
                   fontSizeText: 20,
                   fontWeight: fontLight,
                   paddingBot: 20,

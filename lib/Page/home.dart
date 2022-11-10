@@ -206,9 +206,9 @@ class _Home extends State<Home> {
               child: const BurgerMenu(),
             )
           : null,
-      backgroundColor: lightBlue,
       resizeToAvoidBottomInset: !kIsWeb,
       body: Material(
+        color: lightBlue,
         child: SafeArea(
           child: ListView(
             children: <Widget>[
@@ -261,7 +261,7 @@ class _Home extends State<Home> {
                         ),
                       ),
                     const CommonText(
-                      text: "Triez par :",
+                      text: "Trier par :",
                       fontSizeText: 20,
                       fontWeight: fontLight,
                       paddingTop: 10,

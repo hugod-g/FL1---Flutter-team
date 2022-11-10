@@ -282,7 +282,7 @@ class _AddVehicule extends State<AddVehicule> {
                         color: navy,
                       ),
                       const CommonText(
-                        text: "Ajoutez un véhicule",
+                        text: "Ajouter un véhicule",
                         fontSizeText: 20,
                         fontWeight: fontLight,
                         paddingBot: 20,
@@ -520,7 +520,7 @@ class _AddVehicule extends State<AddVehicule> {
                               constraints: const BoxConstraints(maxWidth: 500),
                               child: TextInput(
                                 value: kilometer,
-                                placeholder: "Kilométrag (en km)",
+                                placeholder: "Kilométrage (en km)",
                                 onChangeText: _onKMChange,
                               ),
                             ),
@@ -531,7 +531,7 @@ class _AddVehicule extends State<AddVehicule> {
                           padding: const EdgeInsets.only(top: 8, bottom: 16),
                           child: TextInput(
                             value: kilometer,
-                            placeholder: "Kilométrag (en km)",
+                            placeholder: "Kilométrage (en km)",
                             onChangeText: _onKMChange,
                             textinput: TextInputType.number,
                           ),
