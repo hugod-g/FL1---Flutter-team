@@ -1,9 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Class/maintenance_class.dart';
 import 'package:mon_petit_entretien/Class/vehicle_class.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
-import 'package:mon_petit_entretien/Page/web/stat_web.dart';
+import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 import 'package:provider/provider.dart';
 import '../Style/colors.dart';
@@ -40,11 +41,22 @@ class _Statistique extends State<Statistics> {
 
   @override
   Widget build(BuildContext context) {
-    final double currentWith = MediaQuery.of(context).size.width;
-
-    if (currentWith < 800) {
-      return Material(
-        color: lightBlue,
+    return Scaffold(
+      appBar: kIsWeb
+          ? AppBar(
+              title: const Text('Mon Petit Entretient'),
+              backgroundColor: blue,
+            )
+          : null,
+      drawer: kIsWeb
+          ? Theme(
+              data: Theme.of(context).copyWith(canvasColor: gray),
+              child: const BurgerMenu(),
+            )
+          : null,
+      backgroundColor: lightBlue,
+      resizeToAvoidBottomInset: !kIsWeb,
+      body: Material(
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(24),
@@ -101,9 +113,7 @@ class _Statistique extends State<Statistics> {
             ),
           ),
         ),
-      );
-    } else {
-      return const StatWebPage();
-    }
+      ),
+    );
   }
 }
