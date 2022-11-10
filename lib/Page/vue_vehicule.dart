@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Class/maintenance_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
+import 'package:mon_petit_entretien/Config/constants.dart';
 import 'package:mon_petit_entretien/Page/add_maintenance.dart';
 import 'package:mon_petit_entretien/Page/web/vuevehicule_web.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
@@ -52,7 +53,7 @@ class _VehicleView extends State<VehicleView> {
                       bottomRight: Radius.circular(50),
                     ),
                     child: Image.network(
-                      "http://152.228.134.93:1339/${widget.pathImage}",
+                      "$apiUrl/${widget.pathImage}",
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -109,7 +110,7 @@ class _VehicleView extends State<VehicleView> {
                                       size: 25,
                                     ),
                                     CommonText(
-                                      text: widget.date.substring(0,10),
+                                      text: widget.date.substring(0, 10),
                                       fontSizeText: 17.5,
                                       fontWeight: fontLight,
                                       color: navy,
@@ -170,32 +171,32 @@ class _VehicleView extends State<VehicleView> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children:
-                  widget.maintenance.map((MaintenanceModel info) =>
-                    CardVehicule(
-                      prix: info.price.toString(),
-                      title: info.name,
-                      date: info.date.substring(0, 10),
-                      km: info.kilometrage.toString(),
-                      enterprise: info.center,
-                    ),
-                  ).toList(),
+                children: widget.maintenance
+                    .map(
+                      (MaintenanceModel info) => CardVehicule(
+                        prix: info.price.toString(),
+                        title: info.name,
+                        date: info.date.substring(0, 10),
+                        km: info.kilometrage.toString(),
+                        enterprise: info.center,
+                      ),
+                    )
+                    .toList(),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 40, left: 50, right: 50),
               child: Button(
                 text: "Ajouter un entretient",
-                onPress: () => <Future<AddMaintenancePage?>>{ 
+                onPress: () => <Future<AddMaintenancePage?>>{
                   Navigator.push(
                     context,
                     MaterialPageRoute<AddMaintenancePage>(
-                      builder: (BuildContext context) =>
-                          AddMaintenancePage(
-                            name: widget.name,
-                            mileage: widget.mileage,
-                            vehicleId: widget.vehicleId,
-                          ),
+                      builder: (BuildContext context) => AddMaintenancePage(
+                        name: widget.name,
+                        mileage: widget.mileage,
+                        vehicleId: widget.vehicleId,
+                      ),
                     ),
                   )
                 },

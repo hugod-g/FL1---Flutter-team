@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
+import 'package:mon_petit_entretien/Config/constants.dart';
 import 'package:mon_petit_entretien/Page/modifprofil.dart';
 import 'package:mon_petit_entretien/Page/web/profil_web.dart';
 import 'package:mon_petit_entretien/Services/api/auth.dart';
@@ -117,7 +118,7 @@ class _ProfilPage extends State<ProfilPage> {
                                       fit: BoxFit.fill,
                                     )
                                   : Image.network(
-                                      "http://152.228.134.93:1339/${data.user.picturePath}",
+                                      "$apiUrl/${data.user.picturePath}",
                                       fit: BoxFit.fill,
                                     ),
                             ),

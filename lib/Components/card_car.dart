@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Class/maintenance_class.dart';
+import 'package:mon_petit_entretien/Config/constants.dart';
 import 'package:mon_petit_entretien/Page/vue_vehicule.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
@@ -40,15 +41,14 @@ class CardCarState extends State<CardCar> {
           Navigator.push(
             context,
             MaterialPageRoute<VehicleView>(
-              builder: (BuildContext context) =>
-                  VehicleView(
-                    name: widget.name,
-                    mileage: widget.mileage,
-                    pathImage: widget.pathImage,
-                    date: widget.date,
-                    vehicleId: widget.id,
-                    maintenance: widget.maintenance,
-                  ),
+              builder: (BuildContext context) => VehicleView(
+                name: widget.name,
+                mileage: widget.mileage,
+                pathImage: widget.pathImage,
+                date: widget.date,
+                vehicleId: widget.id,
+                maintenance: widget.maintenance,
+              ),
             ),
           );
         },
@@ -62,7 +62,7 @@ class CardCarState extends State<CardCar> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(
-                      "http://152.228.134.93:1339/${widget.pathImage}",
+                      "$apiUrl/${widget.pathImage}",
                       loadingBuilder: (
                         BuildContext context,
                         Widget child,

@@ -3,6 +3,7 @@ import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
+import 'package:mon_petit_entretien/Config/constants.dart';
 import 'package:mon_petit_entretien/Page/web/modifprofil_web.dart';
 import 'package:mon_petit_entretien/Services/api/auth.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
@@ -97,7 +98,7 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                                 fit: BoxFit.fill,
                               )
                             : Image.network(
-                                "http://152.228.134.93:1339/${data.user.picturePath}",
+                                "$apiUrl/${data.user.picturePath}",
                                 fit: BoxFit.fill,
                               ),
                       ),

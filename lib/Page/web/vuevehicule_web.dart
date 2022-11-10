@@ -3,6 +3,7 @@ import 'package:mon_petit_entretien/Class/maintenance_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
+import 'package:mon_petit_entretien/Config/constants.dart';
 import 'package:mon_petit_entretien/Page/web/addmaintenance_web.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
@@ -57,7 +58,7 @@ class _VehicleViewWeb extends State<VehicleViewWeb> {
                           bottomRight: Radius.circular(50),
                         ),
                         child: Image.network(
-                          "http://152.228.134.93:1339/${widget.pathImage}",
+                          "$apiUrl/${widget.pathImage}",
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -118,7 +119,7 @@ class _VehicleViewWeb extends State<VehicleViewWeb> {
                                           size: 25,
                                         ),
                                         CommonText(
-                                          text: widget.date.substring(0,10),
+                                          text: widget.date.substring(0, 10),
                                           fontSizeText: 17.5,
                                           fontWeight: fontLight,
                                           color: navy,
@@ -180,34 +181,34 @@ class _VehicleViewWeb extends State<VehicleViewWeb> {
             scrollDirection: Axis.horizontal,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children:
-                widget.maintenance.map((MaintenanceModel info) =>
-                  CardVehiculeWeb(
-                    prix: info.price.toString(),
-                    title: info.name,
-                    date: info.date.substring(0, 10),
-                    km: info.kilometrage.toString(),
-                    enterprise: info.center,
-                  ),
-                ).toList(),
+              children: widget.maintenance
+                  .map(
+                    (MaintenanceModel info) => CardVehiculeWeb(
+                      prix: info.price.toString(),
+                      title: info.name,
+                      date: info.date.substring(0, 10),
+                      km: info.kilometrage.toString(),
+                      enterprise: info.center,
+                    ),
+                  )
+                  .toList(),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 40, left: 75, right: 75),
             child: Button(
               text: "Ajouter un entretient",
-              onPress: () => <Future<AddMaintenanceWebPage?>> {
+              onPress: () => <Future<AddMaintenanceWebPage?>>{
                 Navigator.push(
-                    context,
-                    MaterialPageRoute<AddMaintenanceWebPage>(
-                      builder: (BuildContext context) =>
-                          AddMaintenanceWebPage(
-                            name: widget.name,
-                            mileage: widget.mileage,
-                            vehicleId: widget.vehicleId,
-                          ),
+                  context,
+                  MaterialPageRoute<AddMaintenanceWebPage>(
+                    builder: (BuildContext context) => AddMaintenanceWebPage(
+                      name: widget.name,
+                      mileage: widget.mileage,
+                      vehicleId: widget.vehicleId,
                     ),
-                  )
+                  ),
+                )
               },
             ),
           ),
