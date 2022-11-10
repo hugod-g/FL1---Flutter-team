@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -89,7 +90,7 @@ class _AddVehicule extends State<AddVehicule> {
     AppData data;
     data = Provider.of<AppData>(context, listen: false);
 
-    if (isDesktop) {
+    if (kIsWeb) {
       if (data.token == "" ||
           name == "" ||
           date == "" ||
@@ -230,12 +231,6 @@ class _AddVehicule extends State<AddVehicule> {
 
   @override
   Widget build(BuildContext context) {
-    final double currentWith = MediaQuery.of(context).size.width;
-    if (currentWith >= 800) {
-      setState(() {
-        isDesktop = true;
-      });
-    }
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -287,7 +282,7 @@ class _AddVehicule extends State<AddVehicule> {
                         color: navy,
                       ),
                       const CommonText(
-                        text: "Ajoutez un véhicule",
+                        text: "Ajouter un véhicule",
                         fontSizeText: 20,
                         fontWeight: fontLight,
                         paddingBot: 20,
@@ -494,7 +489,7 @@ class _AddVehicule extends State<AddVehicule> {
                                 ),
                               ),
                       ),
-                      if (currentWith >= 800)
+                      if (kIsWeb)
                         Center(
                           child: Padding(
                             padding: const EdgeInsets.only(top: 20, bottom: 16),
@@ -507,8 +502,17 @@ class _AddVehicule extends State<AddVehicule> {
                               ),
                             ),
                           ),
+                        )
+                      else
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20, bottom: 16),
+                          child: TextInput(
+                            value: name,
+                            placeholder: "Nom",
+                            onChangeText: _onNameChange,
+                          ),
                         ),
-                      if (currentWith >= 800)
+                      if (kIsWeb)
                         Center(
                           child: Padding(
                             padding: const EdgeInsets.only(top: 20, bottom: 16),
@@ -516,13 +520,23 @@ class _AddVehicule extends State<AddVehicule> {
                               constraints: const BoxConstraints(maxWidth: 500),
                               child: TextInput(
                                 value: kilometer,
-                                placeholder: "Kilométrag (en km)",
+                                placeholder: "Kilométrage (en km)",
                                 onChangeText: _onKMChange,
                               ),
                             ),
                           ),
+                        )
+                      else
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8, bottom: 16),
+                          child: TextInput(
+                            value: kilometer,
+                            placeholder: "Kilométrage (en km)",
+                            onChangeText: _onKMChange,
+                            textinput: TextInputType.number,
+                          ),
                         ),
-                      if (currentWith >= 800)
+                      if (kIsWeb)
                         Center(
                           child: Padding(
                             padding: const EdgeInsets.only(top: 8, bottom: 16),
@@ -597,53 +611,8 @@ class _AddVehicule extends State<AddVehicule> {
                               ),
                             ),
                           ),
-                        ),
-                      if (currentWith >= 800)
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 32),
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(maxWidth: 500),
-                              child: Container(
-                                width: double.infinity,
-                                height: 54,
-                                decoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(16)),
-                                  color: navy,
-                                  boxShadow: <BoxShadow>[
-                                    BoxShadow(blurRadius: 16, color: lightGray)
-                                  ],
-                                ),
-                                child: Button(
-                                  text: "Ajouter véhicule",
-                                  onPress: _onAddVehicule,
-                                  isLoading: isLoadedVehicule,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      if (currentWith < 800)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20, bottom: 16),
-                          child: TextInput(
-                            value: name,
-                            placeholder: "Nom",
-                            onChangeText: _onNameChange,
-                          ),
-                        ),
-                      if (currentWith < 800)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8, bottom: 16),
-                          child: TextInput(
-                            value: kilometer,
-                            placeholder: "Kilométrag (en km)",
-                            onChangeText: _onKMChange,
-                            textinput: TextInputType.number,
-                          ),
-                        ),
-                      if (currentWith < 800)
+                        )
+                      else
                         Padding(
                           padding: const EdgeInsets.only(top: 8, bottom: 16),
                           child: Container(
@@ -714,7 +683,33 @@ class _AddVehicule extends State<AddVehicule> {
                             ),
                           ),
                         ),
-                      if (currentWith < 800)
+                      if (kIsWeb)
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 32),
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(maxWidth: 500),
+                              child: Container(
+                                width: double.infinity,
+                                height: 54,
+                                decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                  color: navy,
+                                  boxShadow: <BoxShadow>[
+                                    BoxShadow(blurRadius: 16, color: lightGray)
+                                  ],
+                                ),
+                                child: Button(
+                                  text: "Ajouter véhicule",
+                                  onPress: _onAddVehicule,
+                                  isLoading: isLoadedVehicule,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      else
                         Padding(
                           padding: const EdgeInsets.only(top: 32),
                           child: Container(

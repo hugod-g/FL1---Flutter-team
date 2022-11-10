@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Class/vehicle_class.dart';
@@ -5,8 +6,8 @@ import 'package:mon_petit_entretien/Components/button_select.dart';
 import 'package:mon_petit_entretien/Components/card_car.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
+import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
 import 'package:mon_petit_entretien/Page/add_vehicule.dart';
-import 'package:mon_petit_entretien/Page/web/home_web.dart';
 import 'package:mon_petit_entretien/Services/api/vehicule.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 import 'package:provider/provider.dart';
@@ -192,10 +193,21 @@ class _Home extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final double currentWith = MediaQuery.of(context).size.width;
-
-    if (currentWith < 800) {
-      return Material(
+    return Scaffold(
+      appBar: kIsWeb
+          ? AppBar(
+              title: const Text('Mon Petit Entretient'),
+              backgroundColor: blue,
+            )
+          : null,
+      drawer: kIsWeb
+          ? Theme(
+              data: Theme.of(context).copyWith(canvasColor: gray),
+              child: const BurgerMenu(),
+            )
+          : null,
+      resizeToAvoidBottomInset: !kIsWeb,
+      body: Material(
         color: lightBlue,
         child: SafeArea(
           child: ListView(
@@ -227,50 +239,93 @@ class _Home extends State<Home> {
                       paddingBot: 20,
                       color: navy,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8, bottom: 16),
-                      child: TextInput(
-                        value: search,
-                        placeholder: "Rechercher",
-                        onChangeText: _onSearchChange,
+                    if (kIsWeb)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8, bottom: 16),
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 300),
+                          child: TextInput(
+                            value: search,
+                            placeholder: "Rechercher",
+                            onChangeText: _onSearchChange,
+                          ),
+                        ),
+                      )
+                    else
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8, bottom: 16),
+                        child: TextInput(
+                          value: search,
+                          placeholder: "Rechercher",
+                          onChangeText: _onSearchChange,
+                        ),
                       ),
-                    ),
                     const CommonText(
-                      text: "Triez par :",
+                      text: "Trier par :",
                       fontSizeText: 20,
                       fontWeight: fontLight,
                       paddingTop: 10,
                       paddingBot: 10,
                       color: navy,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10, right: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    if (kIsWeb)
+                      Row(
                         children: <Widget>[
-                          ButtonSelect(
-                            text: "A-Z",
-                            onPress: _onSelectAlph,
-                            isSelect: select["A-Z"],
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: ButtonSelect(
+                              text: "A-Z",
+                              onPress: _onSelectAlph,
+                              isSelect: select["A-Z"],
+                            ),
                           ),
-                          ButtonSelect(
-                            text: "KM",
-                            onPress: _onSelectKM,
-                            isSelect: select["KM"],
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 10),
+                            child: ButtonSelect(
+                              text: "KM",
+                              onPress: _onSelectKM,
+                              isSelect: select["KM"],
+                            ),
                           ),
-                          ButtonSelect(
-                            text: "DATE",
-                            onPress: _onSelectDate,
-                            isSelect: select["DATE"],
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 10),
+                            child: ButtonSelect(
+                              text: "DATE",
+                              onPress: _onSelectDate,
+                              isSelect: select["DATE"],
+                            ),
                           ),
                         ],
+                      )
+                    else
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            ButtonSelect(
+                              text: "A-Z",
+                              onPress: _onSelectAlph,
+                              isSelect: select["A-Z"],
+                            ),
+                            ButtonSelect(
+                              text: "KM",
+                              onPress: _onSelectKM,
+                              isSelect: select["KM"],
+                            ),
+                            ButtonSelect(
+                              text: "DATE",
+                              onPress: _onSelectDate,
+                              isSelect: select["DATE"],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: SizedBox(
                         height: 270,
-                        width: 500,
+                        width: kIsWeb ? double.infinity : 500,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children: <Widget>[
@@ -354,20 +409,20 @@ class _Home extends State<Home> {
                                 ),
                               ),
                             ),
-                            if (isSearching == true)
+                            if (isSearching)
                               for (VehiculeModel vehicule in _searchVehicules)
                                 CardCar(
-                                name: vehicule.name,
-                                mileage: vehicule.kilometrage.toString(),
-                                nbMaintenance:
-                                    vehicule.maintenances.length.toString(),
-                                pathImage: vehicule.picturePath,
-                                isLoaded: isLoaded,
-                                date: vehicule.date,
-                                id: vehicule.id,
-                                maintenance: vehicule.maintenances,
-                              ),
-                            if (isSearching == false)
+                                  name: vehicule.name,
+                                  mileage: vehicule.kilometrage.toString(),
+                                  nbMaintenance:
+                                      vehicule.maintenances.length.toString(),
+                                  pathImage: vehicule.picturePath,
+                                  isLoaded: isLoaded,
+                                  date: vehicule.date,
+                                  id: vehicule.id,
+                                  maintenance: vehicule.maintenances,
+                                )
+                            else
                               for (VehiculeModel vehicule
                                   in Provider.of<AppData>(
                                 context,
@@ -383,7 +438,7 @@ class _Home extends State<Home> {
                                   date: vehicule.date,
                                   id: vehicule.id,
                                   maintenance: vehicule.maintenances,
-                              ),
+                                ),
                           ],
                         ),
                       ),
@@ -394,9 +449,7 @@ class _Home extends State<Home> {
             ],
           ),
         ),
-      );
-    } else {
-      return const HomeWebPage();
-    }
+      ),
+    );
   }
 }

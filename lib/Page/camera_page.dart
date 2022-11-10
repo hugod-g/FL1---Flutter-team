@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
@@ -19,7 +20,6 @@ class CameraPage extends StatefulWidget {
 class _CameraPageState extends State<CameraPage> {
   late CameraController _cameraController;
   bool _isRearCameraSelected = true;
-  bool isDesktop = false;
 
   @override
   void dispose() {
@@ -30,9 +30,6 @@ class _CameraPageState extends State<CameraPage> {
   @override
   void initState() {
     super.initState();
-    if (MediaQuery.of(context).size.width >= 800) {
-      isDesktop = true;
-    }
     initCamera(widget.cameras![0]);
   }
 
@@ -52,7 +49,7 @@ class _CameraPageState extends State<CameraPage> {
     try {
       await _cameraController.setFlashMode(FlashMode.off);
       final XFile picture = await _cameraController.takePicture();
-      if (isDesktop) {
+      if (kIsWeb) {
         final Uint8List pickedFileBytes = await picture.readAsBytes();
         data.vehicles.last.updatePicketFilesBytes(pickedFileBytes);
       } else {
