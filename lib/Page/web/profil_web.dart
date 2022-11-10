@@ -4,6 +4,7 @@ import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
 import 'package:mon_petit_entretien/Page/web/modifprofil_web.dart';
+import 'package:mon_petit_entretien/Services/api/auth.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,6 +21,8 @@ class ProfilWebPage extends StatefulWidget {
 class _ProfilWebPage extends State<ProfilWebPage> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
+  bool isLoadingDelete = false;
+
   void _onLogout() async {
     final SharedPreferences prefs = await _prefs;
 
@@ -31,6 +34,23 @@ class _ProfilWebPage extends State<ProfilWebPage> {
         '/login',
         (Route<dynamic> route) => false,
       );
+    }
+  }
+
+  void _onDeleteAccount() async {
+    setState(() {
+      isLoadingDelete = true;
+    });
+
+    final AppData data = Provider.of<AppData>(context, listen: false);
+    final int response = await deleteAccountCall(data.token);
+
+    setState(() {
+      isLoadingDelete = false;
+    });
+
+    if (response == 200) {
+      _onLogout();
     }
   }
 
@@ -72,14 +92,14 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(150),
                         child: data.user.picturePath == ""
-                        ? Image.asset(
-                          'assets/avatar.jpg',
-                          fit: BoxFit.fill,
-                        )
-                        : Image.network(
-                          "http://152.228.134.93:1339/${data.user.picturePath}",
-                          fit: BoxFit.fill,
-                        ),
+                            ? Image.asset(
+                                'assets/avatar.jpg',
+                                fit: BoxFit.fill,
+                              )
+                            : Image.network(
+                                "http://152.228.134.93:1339/${data.user.picturePath}",
+                                fit: BoxFit.fill,
+                              ),
                       ),
                     ),
                   ),
@@ -139,15 +159,15 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                                   const EdgeInsets.only(left: 75, right: 75),
                               child: Button(
                                 text: "Modifier le profil",
-                                onPress: () => <Future<ModifProfilWebPage?>>{ 
+                                onPress: () => <Future<ModifProfilWebPage?>>{
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute<ModifProfilWebPage>(
                                       builder: (BuildContext context) =>
                                           ModifProfilWebPage(
-                                            firstname: data.user.firstName,
-                                            lastname: data.user.lastName,
-                                          ),
+                                        firstname: data.user.firstName,
+                                        lastname: data.user.lastName,
+                                      ),
                                     ),
                                   )
                                 },
@@ -162,6 +182,18 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                                 text: "Déconnexion",
                                 onPress: _onLogout,
                                 secondary: true,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 75, right: 75),
+                              child: Button(
+                                text: "Supprimer mon compte",
+                                onPress: _onDeleteAccount,
+                                important: true,
+                                isLoading: isLoadingDelete,
                               ),
                             ),
                           ),
