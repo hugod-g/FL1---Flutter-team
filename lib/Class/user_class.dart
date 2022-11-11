@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mon_petit_entretien/Class/center_class.dart';
 
 class UserModel extends ChangeNotifier {
@@ -26,7 +26,7 @@ class UserModel extends ChangeNotifier {
         .toList();
 
     return UserModel(
-        id, firstName, lastName, username, admin, picturePath ?? "", centers);
+        id, firstName, lastName, username, admin, picturePath ?? "", centers,);
   }
 
   String lastName = "";
@@ -36,6 +36,7 @@ class UserModel extends ChangeNotifier {
   String picturePath;
   String id = "";
   List<CenterModel> centers = List<CenterModel>.empty();
+  Uint8List pickedFileBytes = Uint8List.fromList(<int>[0]);
 
   void updateLastName(String newVar) {
     lastName = newVar;
@@ -49,6 +50,11 @@ class UserModel extends ChangeNotifier {
 
   void updatePicturePath(String newVar) {
     picturePath = newVar;
+    notifyListeners();
+  }
+
+  void updatePicketFilesBytes(Uint8List newVar) {
+    pickedFileBytes = newVar;
     notifyListeners();
   }
 

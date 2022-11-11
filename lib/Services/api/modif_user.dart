@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
@@ -11,6 +12,7 @@ Future<bool> modifProfil(
   String firstname,
   String lastname,
   String image,
+  Uint8List pickedFileBytes,
   AppData data,
 ) async {
   final http.MultipartRequest request =
@@ -20,15 +22,26 @@ Future<bool> modifProfil(
     "Authorization": "Bearer $authorization",
     "Content-type": "multipart/form-data"
   };
-  request.files.add(
-    http.MultipartFile(
-      'upload',
-      File(image).readAsBytes().asStream(),
-      File(image).lengthSync(),
-      filename: "filename",
-      contentType: MediaType('image', 'jpeg'),
-    ),
-  );
+  if (image != "") {
+    request.files.add(
+      http.MultipartFile(
+        'upload',
+        File(image).readAsBytes().asStream(),
+        File(image).lengthSync(),
+        filename: "filename",
+        contentType: MediaType('image', 'jpeg'),
+      ),
+    );
+  } else {
+    request.files.add(
+      http.MultipartFile.fromBytes(
+        'upload',
+        pickedFileBytes,
+        filename: "filename",
+        contentType: MediaType('image', 'jpeg'),
+      ),
+    );
+  }
   request.headers.addAll(headers);
   request.fields.addAll(<String, String>{
     'firstname': firstname,

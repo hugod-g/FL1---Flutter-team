@@ -1,10 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Page/add_vehicule.dart';
+import 'package:mon_petit_entretien/Page/add_maintenance.dart';
+import 'package:mon_petit_entretien/Page/add_vehicle.dart';
 import 'package:mon_petit_entretien/Page/admin.dart';
 import 'package:mon_petit_entretien/Page/gestion.dart';
+import 'package:mon_petit_entretien/Page/modif_profile.dart';
 import 'package:mon_petit_entretien/Page/profile.dart';
 import 'package:mon_petit_entretien/Page/statistics.dart';
+import 'package:mon_petit_entretien/Page/vehicle_view.dart';
 import 'package:provider/provider.dart';
 
 import 'Class/app_class.dart';
@@ -33,7 +36,10 @@ class MyApp extends StatelessWidget {
           '/stats': (BuildContext context) => const Statistics(),
           '/gestion': (BuildContext context) => const GestionPage(),
           '/admin': (BuildContext context) => const AdminPage(),
-          '/profil': (BuildContext context) => const ProfilPage(),
+          '/profile': (BuildContext context) => const ProfilePage(),
+          '/modif_profile': (BuildContext context) => const ModifProfilePage(),
+          '/addMaintenance': (BuildContext context) => const AddMaintenancePage(),
+          '/vue_vehicle': (BuildContext context) => const VehicleView(),
           '/add_vehicle': (BuildContext constext) => const AddVehicule(),
         },
         home: const LoginPage(),

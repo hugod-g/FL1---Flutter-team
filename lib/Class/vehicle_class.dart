@@ -59,4 +59,14 @@ class VehiculeModel extends ChangeNotifier {
     date = newVar;
     notifyListeners();
   }
+
+  void updateId(String newVar) {
+    id = newVar;
+    notifyListeners();
+  }
+
+    void updateMaintenance(List<MaintenanceModel> newVar) {
+    maintenances = newVar;
+    notifyListeners();
+  }
 }

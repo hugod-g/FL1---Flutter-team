@@ -7,7 +7,7 @@ import 'package:mon_petit_entretien/Components/card_car.dart';
 import 'package:mon_petit_entretien/Components/common_text.dart';
 import 'package:mon_petit_entretien/Components/text_input.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
-import 'package:mon_petit_entretien/Page/add_vehicule.dart';
+import 'package:mon_petit_entretien/Page/add_vehicle.dart';
 import 'package:mon_petit_entretien/Services/api/vehicule.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 import 'package:provider/provider.dart';

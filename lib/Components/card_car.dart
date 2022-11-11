@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Class/maintenance_class.dart';
-import 'package:mon_petit_entretien/Page/vue_vehicule.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
-
+import 'package:provider/provider.dart';
 class CardCar extends StatefulWidget {
   const CardCar({
     super.key,
@@ -37,20 +37,9 @@ class CardCarState extends State<CardCar> {
       padding: const EdgeInsets.only(right: 20),
       child: InkWell(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute<VehicleView>(
-              builder: (BuildContext context) =>
-                  VehicleView(
-                    name: widget.name,
-                    mileage: widget.mileage,
-                    pathImage: widget.pathImage,
-                    date: widget.date,
-                    vehicleId: widget.id,
-                    maintenance: widget.maintenance,
-                  ),
-            ),
-          );
+          final AppData data = Provider.of<AppData>(context, listen: false);
+          data.updateDataThisVehicle(widget.name, int.parse(widget.mileage), widget.pathImage, widget.date, widget.id, widget.maintenance);
+          Navigator.pushNamed(context, '/vue_vehicle');
         },
         child: Ink(
           child: Stack(
