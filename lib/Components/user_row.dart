@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Class/user_class.dart';
-import 'package:mon_petit_entretien/Components/common_text.dart';
-import 'package:mon_petit_entretien/Style/colors.dart';
-import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:mon_petit_entretien/class/user_class.dart';
+import 'package:mon_petit_entretien/components/common_text.dart';
+import 'package:mon_petit_entretien/style/colors.dart';
+import 'package:mon_petit_entretien/style/fonts.dart';
 
 class UserRow extends StatefulWidget {
   const UserRow({

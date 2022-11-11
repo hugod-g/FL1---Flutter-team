@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
-import 'package:mon_petit_entretien/Config/endpoint.dart';
+import 'package:mon_petit_entretien/config/endpoint.dart';
 
 Future<bool> addMaintenance(
   String authorization,
@@ -12,7 +12,7 @@ Future<bool> addMaintenance(
   String name,
   String center,
   String vehicleId,
-  ) async {
+) async {
   final http.Response response = await http.post(
     Uri.parse(maintenanceEndPoint),
     headers: <String, String>{

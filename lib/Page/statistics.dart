@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Class/app_class.dart';
-import 'package:mon_petit_entretien/Class/maintenance_class.dart';
-import 'package:mon_petit_entretien/Class/vehicle_class.dart';
-import 'package:mon_petit_entretien/Components/common_text.dart';
-import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
-import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:mon_petit_entretien/class/app_class.dart';
+import 'package:mon_petit_entretien/class/maintenance_class.dart';
+import 'package:mon_petit_entretien/class/vehicle_class.dart';
+import 'package:mon_petit_entretien/components/common_text.dart';
+import 'package:mon_petit_entretien/components/web/burger_menu.dart';
+import 'package:mon_petit_entretien/style/fonts.dart';
 import 'package:provider/provider.dart';
-import '../Style/colors.dart';
+import '../style/colors.dart';
 
 class Statistics extends StatefulWidget {
   const Statistics({Key? key}) : super(key: key);

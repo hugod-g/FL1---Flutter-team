@@ -5,17 +5,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:mon_petit_entretien/Class/app_class.dart';
-import 'package:mon_petit_entretien/Class/maintenance_class.dart';
-import 'package:mon_petit_entretien/Components/button.dart';
-import 'package:mon_petit_entretien/Components/common_text.dart';
-import 'package:mon_petit_entretien/Components/text_input.dart';
-import 'package:mon_petit_entretien/Page/camera_page.dart';
-import 'package:mon_petit_entretien/Services/api/vehicule.dart';
-import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:mon_petit_entretien/class/app_class.dart';
+import 'package:mon_petit_entretien/class/maintenance_class.dart';
+import 'package:mon_petit_entretien/components/button.dart';
+import 'package:mon_petit_entretien/components/common_text.dart';
+import 'package:mon_petit_entretien/components/text_input.dart';
+import 'package:mon_petit_entretien/page/camera_page.dart';
+import 'package:mon_petit_entretien/services/api/vehicule.dart';
+import 'package:mon_petit_entretien/style/fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../Style/colors.dart';
+import '../style/colors.dart';
 
 class AddVehicule extends StatefulWidget {
   const AddVehicule({Key? key}) : super(key: key);

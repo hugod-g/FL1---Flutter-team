@@ -20,8 +20,7 @@ void main() {
       await driver.close();
     });
     test("check health", () async {
-      final Health health = await driver.checkHealth();
-      print(health.status);
+      await driver.checkHealth();
     });
 
     test("ACCOUNT SIGN IN", () async {

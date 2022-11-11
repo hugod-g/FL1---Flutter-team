@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:mon_petit_entretien/Class/user_class.dart';
-import 'package:mon_petit_entretien/Config/endpoint.dart';
+import 'package:mon_petit_entretien/class/user_class.dart';
+import 'package:mon_petit_entretien/config/endpoint.dart';
 
 Future<UserModel> getProfileCall(String token) async {
   final http.Response response = await http.get(

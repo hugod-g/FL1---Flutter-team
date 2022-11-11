@@ -1,19 +1,19 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Page/add_maintenance.dart';
-import 'package:mon_petit_entretien/Page/add_vehicle.dart';
-import 'package:mon_petit_entretien/Page/admin.dart';
-import 'package:mon_petit_entretien/Page/gestion.dart';
-import 'package:mon_petit_entretien/Page/modif_profile.dart';
-import 'package:mon_petit_entretien/Page/profile.dart';
-import 'package:mon_petit_entretien/Page/statistics.dart';
-import 'package:mon_petit_entretien/Page/vue_vehicule.dart';
+import 'package:mon_petit_entretien/page/add_maintenance.dart';
+import 'package:mon_petit_entretien/page/add_vehicle.dart';
+import 'package:mon_petit_entretien/page/admin.dart';
+import 'package:mon_petit_entretien/page/gestion.dart';
+import 'package:mon_petit_entretien/page/modif_profile.dart';
+import 'package:mon_petit_entretien/page/profile.dart';
+import 'package:mon_petit_entretien/page/statistics.dart';
+import 'package:mon_petit_entretien/page/vehicle_view.dart';
 import 'package:provider/provider.dart';
 
-import 'Class/app_class.dart';
-import 'Page/home.dart';
-import 'Page/login.dart';
-import 'Page/register.dart';
+import 'class/app_class.dart';
+import 'page/home.dart';
+import 'page/login.dart';
+import 'page/register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           '/modif_profile': (BuildContext context) => const ModifProfilePage(),
           '/addMaintenance': (BuildContext context) =>
               const AddMaintenancePage(),
-          '/vue_vehicle': (BuildContext context) => const VehicleView(),
+          '/vehicle_view': (BuildContext context) => const VehicleView(),
           '/add_vehicle': (BuildContext constext) => const AddVehicule(),
         },
         home: const LoginPage(),

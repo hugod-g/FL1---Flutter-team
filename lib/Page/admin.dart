@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Class/app_class.dart';
-import 'package:mon_petit_entretien/Class/user_class.dart';
-import 'package:mon_petit_entretien/Components/common_text.dart';
-import 'package:mon_petit_entretien/Components/user_row.dart';
-import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
-import 'package:mon_petit_entretien/Services/api/admin.dart';
-import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:mon_petit_entretien/class/app_class.dart';
+import 'package:mon_petit_entretien/class/user_class.dart';
+import 'package:mon_petit_entretien/components/common_text.dart';
+import 'package:mon_petit_entretien/components/user_row.dart';
+import 'package:mon_petit_entretien/components/web/burger_menu.dart';
+import 'package:mon_petit_entretien/services/api/admin.dart';
+import 'package:mon_petit_entretien/style/fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../Style/colors.dart';
+import '../style/colors.dart';
 
 class AdminPage extends StatefulWidget {
   const AdminPage({Key? key}) : super(key: key);

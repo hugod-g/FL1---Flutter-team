@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
-import 'package:mon_petit_entretien/Class/maintenance_class.dart';
+import 'package:mon_petit_entretien/class/maintenance_class.dart';
 
 class VehiculeModel extends ChangeNotifier {
   VehiculeModel(
@@ -21,9 +21,18 @@ class VehiculeModel extends ChangeNotifier {
     final String id = data['_id'] as String;
     final List<dynamic> maintenances = data['maintenances'] as List<dynamic>;
     final List<MaintenanceModel> tmpMaintenances = maintenances
-        .map<MaintenanceModel>((dynamic json) => MaintenanceModel.fromJson(json))
+        .map<MaintenanceModel>(
+          (dynamic json) => MaintenanceModel.fromJson(json),
+        )
         .toList();
-    return VehiculeModel(name, kilometrage, picturePath, date, id, tmpMaintenances);
+    return VehiculeModel(
+      name,
+      kilometrage,
+      picturePath,
+      date,
+      id,
+      tmpMaintenances,
+    );
   }
 
   String name;
@@ -65,7 +74,7 @@ class VehiculeModel extends ChangeNotifier {
     notifyListeners();
   }
 
-    void updateMaintenance(List<MaintenanceModel> newVar) {
+  void updateMaintenance(List<MaintenanceModel> newVar) {
     maintenances = newVar;
     notifyListeners();
   }

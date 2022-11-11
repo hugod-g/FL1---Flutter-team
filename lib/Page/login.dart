@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Class/app_class.dart';
-import 'package:mon_petit_entretien/Components/button.dart';
-import 'package:mon_petit_entretien/Components/text_input.dart';
-import 'package:mon_petit_entretien/Services/api/auth.dart';
-import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:mon_petit_entretien/class/app_class.dart';
+import 'package:mon_petit_entretien/components/button.dart';
+import 'package:mon_petit_entretien/components/text_input.dart';
+import 'package:mon_petit_entretien/services/api/auth.dart';
+import 'package:mon_petit_entretien/style/fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

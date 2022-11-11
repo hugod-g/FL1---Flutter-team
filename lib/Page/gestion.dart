@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Class/app_class.dart';
-import 'package:mon_petit_entretien/Class/user_class.dart';
-import 'package:mon_petit_entretien/Page/admin.dart';
-import 'package:mon_petit_entretien/Page/home.dart';
-import 'package:mon_petit_entretien/Page/profile.dart';
-import 'package:mon_petit_entretien/Page/statistics.dart';
-import 'package:mon_petit_entretien/Services/api/user.dart';
-import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:mon_petit_entretien/class/app_class.dart';
+import 'package:mon_petit_entretien/class/user_class.dart';
+import 'package:mon_petit_entretien/page/admin.dart';
+import 'package:mon_petit_entretien/page/home.dart';
+import 'package:mon_petit_entretien/page/profile.dart';
+import 'package:mon_petit_entretien/page/statistics.dart';
+import 'package:mon_petit_entretien/services/api/user.dart';
+import 'package:mon_petit_entretien/style/fonts.dart';
 import 'package:provider/provider.dart';
-import '../Style/colors.dart';
+import '../style/colors.dart';
 
 class GestionPage extends StatefulWidget {
   const GestionPage({Key? key}) : super(key: key);

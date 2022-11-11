@@ -1,15 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Class/app_class.dart';
-import 'package:mon_petit_entretien/Components/button.dart';
-import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
-import 'package:mon_petit_entretien/Services/api/auth.dart';
-import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:mon_petit_entretien/class/app_class.dart';
+import 'package:mon_petit_entretien/components/button.dart';
+import 'package:mon_petit_entretien/components/web/burger_menu.dart';
+import 'package:mon_petit_entretien/config/constants.dart';
+import 'package:mon_petit_entretien/services/api/auth.dart';
+import 'package:mon_petit_entretien/style/fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Components/common_text.dart';
-import '../Style/colors.dart';
+import '../components/common_text.dart';
+import '../style/colors.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -144,7 +145,7 @@ class _ProfilePage extends State<ProfilePage> {
                                           fit: BoxFit.fill,
                                         )
                                       : Image.network(
-                                          "http://152.228.134.93:1339/${Provider.of<AppData>(context, listen: false).user.picturePath}",
+                                          "$apiUrl/${Provider.of<AppData>(context, listen: false).user.picturePath}",
                                           fit: BoxFit.fill,
                                         ),
                             ),
@@ -168,7 +169,7 @@ class _ProfilePage extends State<ProfilePage> {
                                           fit: BoxFit.fill,
                                         )
                                       : Image.network(
-                                          "http://152.228.134.93:1339/${Provider.of<AppData>(context, listen: false).user.picturePath}",
+                                          "$apiUrl/${Provider.of<AppData>(context, listen: false).user.picturePath}",
                                           fit: BoxFit.fill,
                                         ),
                             ),

@@ -1,13 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Class/app_class.dart';
-import 'package:mon_petit_entretien/Class/maintenance_class.dart';
-import 'package:mon_petit_entretien/Components/button.dart';
-import 'package:mon_petit_entretien/Style/colors.dart';
-import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:mon_petit_entretien/class/app_class.dart';
+import 'package:mon_petit_entretien/class/maintenance_class.dart';
+import 'package:mon_petit_entretien/components/button.dart';
+import 'package:mon_petit_entretien/config/constants.dart';
+import 'package:mon_petit_entretien/style/colors.dart';
+import 'package:mon_petit_entretien/style/fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../Components/common_text.dart';
+import '../components/common_text.dart';
 
 class VehicleView extends StatefulWidget {
   const VehicleView({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class _VehicleView extends State<VehicleView> {
                       bottomRight: Radius.circular(50),
                     ),
                     child: Image.network(
-                      "http://152.228.134.93:1339/${Provider.of<AppData>(context, listen: false).thisVehicles.picturePath}",
+                      "$apiUrl/${Provider.of<AppData>(context, listen: false).thisVehicles.picturePath}",
                       fit: BoxFit.fill,
                     ),
                   ),
