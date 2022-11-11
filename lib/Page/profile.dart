@@ -208,67 +208,39 @@ class _ProfilePage extends State<ProfilePage> {
                           ],
                         ),
                       ),
-                      if(kIsWeb)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 50),
-                          child: Container(
-                            constraints: const BoxConstraints(maxWidth: 800),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Container(
-                                  constraints: const BoxConstraints(maxWidth: 200),
-                                  child: Button(
-                                    text: "Modifier le profil",
-                                    onPress: () => Navigator.pushNamed(context, '/modif_profile'),
-                                  ),
-                                ),
-                                Container(
-                                  constraints: const BoxConstraints(maxWidth: 200),
-                                  child: Button(
-                                    text: "Déconnexion",
-                                    onPress: _onLogout,
-                                    secondary: true,
-                                  ),
-                                ),
-                                Container(
-                                  constraints: const BoxConstraints(maxWidth: 200),
-                                  child: Button(
-                                    text: "Supprimer mon compte",
-                                    onPress: _onDeleteAccount,
-                                    important: true,
-                                    isLoading: isLoadingDelete,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      else
                         Column(
                           children: <Widget> [
                             Padding(
                               padding: const EdgeInsets.only(top: 25),
-                              child: Button(
-                                text: "Modifier le profil",
-                                onPress: () => Navigator.pushNamed(context, '/modif_profile'),
+                              child: SizedBox(
+                                width: kIsWeb ? 250 : 300,
+                                child: Button(
+                                  text: "Modifier le profil",
+                                  onPress: () => Navigator.pushNamed(context, '/modif_profile'),
+                                ),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 25),
-                              child: Button(
-                                text: "Déconnexion",
-                                onPress: _onLogout,
-                                secondary: true,
+                              child: SizedBox(
+                                width: kIsWeb ? 250 : 300,
+                                child: Button(
+                                  text: "Déconnexion",
+                                  onPress: _onLogout,
+                                  secondary: true,
+                                ),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 25),
-                              child: Button(
-                                text: "Supprimer mon compte",
-                                onPress: _onDeleteAccount,
-                                important: true,
-                                isLoading: isLoadingDelete,
+                              child: SizedBox(
+                                width: kIsWeb ? 250 : 300,
+                                child: Button(
+                                  text: "Supprimer mon compte",
+                                  onPress: _onDeleteAccount,
+                                  important: true,
+                                  isLoading: isLoadingDelete,
+                                ),
                               ),
                             ),
                           ],
