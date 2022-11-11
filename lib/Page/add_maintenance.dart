@@ -79,9 +79,14 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
 
   void _callApi() async {
     final bool response = await addMaintenance(
-        data.token, mileage, date, price, name, center, widget.vehicleId);
-
-    final bool response = await addMaintenance(data.token, mileage, date, price, name, center, data.thisVehicles.id);
+      data.token,
+      mileage,
+      date,
+      price,
+      name,
+      center,
+      data.thisVehicles.id,
+    );
 
     if (response == true) {
       if (mounted) {
@@ -96,9 +101,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: lightBlue,
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -110,40 +113,40 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
               Center(
                 child: Column(
                   children: <Widget>[
-                    if(kIsWeb)
-                        const CommonText(
-                          text: 'Ajout d\'un entretient',
-                          fontSizeText: 30,
-                          fontWeight: fontMedium,
-                          paddingBot: 15,
-                          color: navy,
-                        )
-                      else
-                        Column(
-                          children: const <Widget> [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: CommonText(
-                                text: 'Ajout',
-                                fontSizeText: 30,
-                                fontWeight: fontLight,
-                                paddingTop: 24,
-                                paddingBot: 8,
-                                color: navy,
-                              ),
+                    if (kIsWeb)
+                      const CommonText(
+                        text: 'Ajout d\'un entretient',
+                        fontSizeText: 30,
+                        fontWeight: fontMedium,
+                        paddingBot: 15,
+                        color: navy,
+                      )
+                    else
+                      Column(
+                        children: const <Widget>[
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: CommonText(
+                              text: 'Ajout',
+                              fontSizeText: 30,
+                              fontWeight: fontLight,
+                              paddingTop: 24,
+                              paddingBot: 8,
+                              color: navy,
                             ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: CommonText(
-                                text: 'd\'un entretient',
-                                fontSizeText: 30,
-                                fontWeight: fontMedium,
-                                paddingBot: 15,
-                                color: navy,
-                              ),
+                          ),
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: CommonText(
+                              text: 'd\'un entretient',
+                              fontSizeText: 30,
+                              fontWeight: fontMedium,
+                              paddingBot: 15,
+                              color: navy,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
+                      ),
                     const Align(
                       alignment: kIsWeb ? Alignment.center : Alignment.topLeft,
                       child: CommonText(
@@ -160,9 +163,10 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                         width: kIsWeb ? 500 : 300,
                         child: TextInput(
                           value: mileage,
-                          placeholder: "Mile",
+                          placeholder: "Kilométrage (en km)",
                           onChangeText: _onMileageChange,
                           keyTest: "maintenance_input_mile",
+                          textinput: TextInputType.number,
                         ),
                       ),
                     ),
@@ -195,7 +199,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                                   border: InputBorder.none,
                                   iconColor: navy,
                                   icon: Icon(Icons.calendar_today),
-                                  labelText: "Date d'achat",
+                                  labelText: "Date de l'entretient ",
                                   labelStyle: TextStyle(color: navy),
                                   hintStyle: TextStyle(
                                     color: lightGray,
@@ -243,6 +247,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                           placeholder: "Price",
                           onChangeText: _onPriceChange,
                           keyTest: "add_maintenance_input_price",
+                          textinput: TextInputType.number,
                         ),
                       ),
                     ),
@@ -252,7 +257,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                         width: kIsWeb ? 500 : 300,
                         child: TextInput(
                           value: name,
-                          placeholder: "Name",
+                          placeholder: "Nom de l'entretien (ex: Courroie)",
                           onChangeText: _onNameChange,
                           keyTest: "add_maintenance_input_name",
                         ),
@@ -264,7 +269,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                         width: kIsWeb ? 500 : 300,
                         child: TextInput(
                           value: center,
-                          placeholder: "Center",
+                          placeholder: "Centre",
                           onChangeText: _onCenterChange,
                           keyTest: "add_maintenance_input_center",
                         ),
@@ -275,7 +280,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                       child: SizedBox(
                         width: kIsWeb ? 500 : 300,
                         child: Button(
-                          text: "Sauvegarder",
+                          text: "Ajouter l'entretien",
                           onPress: _callApi,
                           keyTest: "add_maintenance_save_button",
                         ),

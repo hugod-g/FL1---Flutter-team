@@ -56,23 +56,21 @@ class _ProfilePage extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: lightBlue,
-      appBar: kIsWeb ? 
-      AppBar(
-        title: const Text('Mon Petit Entretient'),
-        backgroundColor: blue,
-      )
-      : null,
-      drawer: kIsWeb ?
-      Theme(
-        data: Theme.of(context).copyWith(canvasColor: gray),
-        child: const BurgerMenu(),
-      )
-      :
-      null,
+      appBar: kIsWeb
+          ? AppBar(
+              title: const Text('Mon Petit Entretient'),
+              backgroundColor: blue,
+            )
+          : null,
+      drawer: kIsWeb
+          ? Theme(
+              data: Theme.of(context).copyWith(canvasColor: gray),
+              child: const BurgerMenu(),
+            )
+          : null,
       body: ListView(
         children: <Widget>[
           Padding(
@@ -83,7 +81,7 @@ class _ProfilePage extends State<ProfilePage> {
                 Center(
                   child: Column(
                     children: <Widget>[
-                      if(kIsWeb)
+                      if (kIsWeb)
                         const CommonText(
                           text: 'Mon Profil',
                           fontSizeText: 30,
@@ -93,7 +91,7 @@ class _ProfilePage extends State<ProfilePage> {
                         )
                       else
                         Column(
-                          children: const <Widget> [
+                          children: const <Widget>[
                             Align(
                               alignment: Alignment.topLeft,
                               child: CommonText(
@@ -118,7 +116,8 @@ class _ProfilePage extends State<ProfilePage> {
                           ],
                         ),
                       const Align(
-                        alignment: kIsWeb ? Alignment.center : Alignment.topLeft,
+                        alignment:
+                            kIsWeb ? Alignment.center : Alignment.topLeft,
                         child: CommonText(
                           text: 'Mes informations',
                           fontSizeText: 20,
@@ -127,7 +126,7 @@ class _ProfilePage extends State<ProfilePage> {
                           color: navy,
                         ),
                       ),
-                      if(kIsWeb)
+                      if (kIsWeb)
                         Padding(
                           padding: const EdgeInsets.only(top: 17.5),
                           child: SizedBox(
@@ -135,15 +134,19 @@ class _ProfilePage extends State<ProfilePage> {
                             width: 250,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(150),
-                              child: Provider.of<AppData>(context, listen: false).user.picturePath == ""
-                                  ? Image.asset(
-                                      'assets/avatar.jpg',
-                                      fit: BoxFit.fill,
-                                    )
-                                  : Image.network(
-                                      "http://152.228.134.93:1339/${Provider.of<AppData>(context, listen: false).user.picturePath}",
-                                      fit: BoxFit.fill,
-                                    ),
+                              child:
+                                  Provider.of<AppData>(context, listen: false)
+                                              .user
+                                              .picturePath ==
+                                          ""
+                                      ? Image.asset(
+                                          'assets/avatar.jpg',
+                                          fit: BoxFit.fill,
+                                        )
+                                      : Image.network(
+                                          "http://152.228.134.93:1339/${Provider.of<AppData>(context, listen: false).user.picturePath}",
+                                          fit: BoxFit.fill,
+                                        ),
                             ),
                           ),
                         )
@@ -155,27 +158,37 @@ class _ProfilePage extends State<ProfilePage> {
                             width: 125,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(75),
-                              child: Provider.of<AppData>(context, listen: false).user.picturePath == ""
-                                  ? Image.asset(
-                                      'assets/avatar.jpg',
-                                      fit: BoxFit.fill,
-                                    )
-                                  : Image.network(
-                                      "http://152.228.134.93:1339/${Provider.of<AppData>(context, listen: false).user.picturePath}",
-                                      fit: BoxFit.fill,
-                                    ),
+                              child:
+                                  Provider.of<AppData>(context, listen: false)
+                                              .user
+                                              .picturePath ==
+                                          ""
+                                      ? Image.asset(
+                                          'assets/avatar.jpg',
+                                          fit: BoxFit.fill,
+                                        )
+                                      : Image.network(
+                                          "http://152.228.134.93:1339/${Provider.of<AppData>(context, listen: false).user.picturePath}",
+                                          fit: BoxFit.fill,
+                                        ),
                             ),
                           ),
                         ),
                       CommonText(
-                        text: "${Provider.of<AppData>(context, listen: false).user.firstName} ${Provider.of<AppData>(context, listen: false).user.lastName}",
+                        text:
+                            "${Provider.of<AppData>(context, listen: false).user.firstName} ${Provider.of<AppData>(context, listen: false).user.lastName}",
                         fontSizeText: 22,
                         fontWeight: fontBold,
                         paddingTop: 16,
                         color: navy,
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 30, left: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : 0),
+                        padding: EdgeInsets.only(
+                          top: 30,
+                          left: kIsWeb
+                              ? MediaQuery.of(context).size.width * 0.3
+                              : 0,
+                        ),
                         child: Column(
                           children: <Widget>[
                             Row(
@@ -198,7 +211,10 @@ class _ProfilePage extends State<ProfilePage> {
                             Align(
                               alignment: Alignment.topLeft,
                               child: CommonText(
-                                text: Provider.of<AppData>(context, listen: false).user.username,
+                                text:
+                                    Provider.of<AppData>(context, listen: false)
+                                        .user
+                                        .username,
                                 fontSizeText: kIsWeb ? 23 : 16,
                                 fontWeight: fontLight,
                                 paddingTop: 10,
@@ -208,48 +224,53 @@ class _ProfilePage extends State<ProfilePage> {
                           ],
                         ),
                       ),
-                        Column(
-                          children: <Widget> [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 25),
-                              child: SizedBox(
-                                width: kIsWeb ? 250 : 300,
-                                child: Button(
-                                  text: "Modifier le profil",
-                                  onPress: () => Navigator.pushNamed(context, '/modif_profile'),
-                                  keyTest: "go_to_modif_profile",
+                      Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(top: 25),
+                            child: SizedBox(
+                              width: kIsWeb ? 250 : 300,
+                              child: Button(
+                                text: "Modifier le profil",
+                                onPress: () => Navigator.pushNamed(
+                                  context,
+                                  '/modif_profile',
                                 ),
+                                keyTest: "go_to_modif_profile",
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 25),
-                              child: SizedBox(
-                                width: kIsWeb ? 250 : 300,
-                                child: Button(
-                                  text: "Déconnexion",
-                                  onPress: _onLogout,
-                                  secondary: true,
-                                  keyTest: "go_to_disconnect",
-                                ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 25),
+                            child: SizedBox(
+                              width: kIsWeb ? 250 : 300,
+                              child: Button(
+                                text: "Déconnexion",
+                                onPress: _onLogout,
+                                secondary: true,
+                                keyTest: "go_to_disconnect",
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 25),
-                              child: SizedBox(
-                                width: kIsWeb ? 250 : 300,
-                                child: Button(
-                                  text: "Supprimer mon compte",
-                                  onPress: _onDeleteAccount,
-                                  important: true,
-                                  isLoading: isLoadingDelete,
-                                   keyTest: "go_to_delete_account",
-                                ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 25),
+                            child: SizedBox(
+                              width: kIsWeb ? 250 : 300,
+                              child: Button(
+                                text: "Supprimer mon compte",
+                                onPress: _onDeleteAccount,
+                                important: true,
+                                isLoading: isLoadingDelete,
+                                keyTest: "go_to_delete_account",
                               ),
                             ),
-                          ],
-                        ),
-                            
-                           
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ],

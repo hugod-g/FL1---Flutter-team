@@ -317,7 +317,8 @@ class _AddVehicule extends State<AddVehicule> {
                                                 ),
                                                 child: InkWell(
                                                   key: const Key(
-                                                      "camera_button"),
+                                                    "camera_button",
+                                                  ),
                                                   onTap: () async {
                                                     await availableCameras()
                                                         .then(
@@ -573,7 +574,8 @@ class _AddVehicule extends State<AddVehicule> {
                                     child: Center(
                                       child: TextField(
                                         key: const Key(
-                                            "add_vehicule_input_date"),
+                                          "add_vehicule_input_date",
+                                        ),
                                         controller: dateinput,
                                         decoration: const InputDecoration(
                                           border: InputBorder.none,
