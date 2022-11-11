@@ -109,7 +109,7 @@ class _VehicleView extends State<VehicleView> {
                                       size: 25,
                                     ),
                                     CommonText(
-                                      text: widget.date.substring(0,10),
+                                      text: widget.date.substring(0, 10),
                                       fontSizeText: 17.5,
                                       fontWeight: fontLight,
                                       color: navy,
@@ -170,35 +170,36 @@ class _VehicleView extends State<VehicleView> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children:
-                  widget.maintenance.map((MaintenanceModel info) =>
-                    CardVehicule(
-                      prix: info.price.toString(),
-                      title: info.name,
-                      date: info.date.substring(0, 10),
-                      km: info.kilometrage.toString(),
-                      enterprise: info.center,
-                    ),
-                  ).toList(),
+                children: widget.maintenance
+                    .map(
+                      (MaintenanceModel info) => CardVehicule(
+                        prix: info.price.toString(),
+                        title: info.name,
+                        date: info.date.substring(0, 10),
+                        km: info.kilometrage.toString(),
+                        enterprise: info.center,
+                      ),
+                    )
+                    .toList(),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 40, left: 50, right: 50),
               child: Button(
                 text: "Ajouter un entretient",
-                onPress: () => <Future<AddMaintenancePage?>>{ 
+                onPress: () => <Future<AddMaintenancePage?>>{
                   Navigator.push(
                     context,
                     MaterialPageRoute<AddMaintenancePage>(
-                      builder: (BuildContext context) =>
-                          AddMaintenancePage(
-                            name: widget.name,
-                            mileage: widget.mileage,
-                            vehicleId: widget.vehicleId,
-                          ),
+                      builder: (BuildContext context) => AddMaintenancePage(
+                        name: widget.name,
+                        mileage: widget.mileage,
+                        vehicleId: widget.vehicleId,
+                      ),
                     ),
                   )
                 },
+                keyTest: "add_maintenance_button",
               ),
             ),
           ],

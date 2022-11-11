@@ -9,7 +9,6 @@ import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 import 'package:provider/provider.dart';
 
-
 class ModifProfilWebPage extends StatefulWidget {
   const ModifProfilWebPage({
     super.key,
@@ -95,6 +94,7 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
                       value: firstname,
                       placeholder: firstname,
                       onChangeText: _onFirstNameChange,
+                      keyTest: "modif_profile_input_first_name",
                     ),
                   ),
                   Padding(
@@ -103,6 +103,7 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
                       value: lastname,
                       placeholder: lastname,
                       onChangeText: _onLastNameChange,
+                      keyTest: "modif_profile_input_last_name",
                     ),
                   ),
                   Padding(
@@ -118,9 +119,17 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
                                   const EdgeInsets.only(left: 50, right: 50),
                               child: Button(
                                 text: "Sauvegarder",
-                                onPress: () async => await modifProfil(data.token, firstname, lastname, data.user.picturePath, data)
-                                ? Navigator.pop(context)
-                                : ScaffoldMessenger.of(context).showSnackBar(snackBar),
+                                onPress: () async => await modifProfil(
+                                  data.token,
+                                  firstname,
+                                  lastname,
+                                  data.user.picturePath,
+                                  data,
+                                )
+                                    ? Navigator.pop(context)
+                                    : ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar),
+                                keyTest: "modif_profile_save_button",
                               ),
                             ),
                           ),
@@ -132,6 +141,7 @@ class _ModifProfilWebPage extends State<ModifProfilWebPage> {
                                 text: "Retour",
                                 onPress: () => Navigator.pop(context),
                                 secondary: true,
+                                keyTest: "modif_profile_back_button",
                               ),
                             ),
                           ),
