@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mon_petit_entretien/Class/center_class.dart';
 
@@ -27,7 +26,7 @@ class UserModel extends ChangeNotifier {
         .toList();
 
     return UserModel(
-        id, firstName, lastName, username, admin, picturePath ?? "", centers);
+        id, firstName, lastName, username, admin, picturePath ?? "", centers,);
   }
 
   String lastName = "";
