@@ -33,7 +33,6 @@ class _ModifProfilePage extends State<ModifProfilePage> {
   bool isLoadedVehicule = false;
   bool isThereAnImage = false;
   bool? isSecondary;
-  bool isDesktop = false;
 
   final SnackBar snackBar = SnackBar(
     content: const Text(
@@ -81,7 +80,7 @@ class _ModifProfilePage extends State<ModifProfilePage> {
       data.user.updatePicturePath(newPath);
       return 401;
     } else {
-      if (isDesktop) {
+      if (kIsWeb) {
         final Uint8List pickedFileBytes = await file.readAsBytes();
         data.user.updatePicketFilesBytes(pickedFileBytes);
         setState(() {
