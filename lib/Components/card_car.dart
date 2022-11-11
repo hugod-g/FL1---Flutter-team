@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Class/app_class.dart';
-import 'package:mon_petit_entretien/Class/maintenance_class.dart';
-import 'package:mon_petit_entretien/Style/colors.dart';
-import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:mon_petit_entretien/class/app_class.dart';
+import 'package:mon_petit_entretien/class/maintenance_class.dart';
+import 'package:mon_petit_entretien/style/colors.dart';
+import 'package:mon_petit_entretien/style/fonts.dart';
 import 'package:provider/provider.dart';
 class CardCar extends StatefulWidget {
   const CardCar({

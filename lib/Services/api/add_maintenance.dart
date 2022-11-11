@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
-import 'package:mon_petit_entretien/Config/endpoint.dart';
+import 'package:mon_petit_entretien/config/endpoint.dart';
 
 Future<bool> addMaintenance(
   String authorization,

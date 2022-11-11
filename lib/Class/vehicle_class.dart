@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
-import 'package:mon_petit_entretien/Class/maintenance_class.dart';
+import 'package:mon_petit_entretien/class/maintenance_class.dart';
 
 class VehiculeModel extends ChangeNotifier {
   VehiculeModel(

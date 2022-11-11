@@ -4,8 +4,8 @@ import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-import 'package:mon_petit_entretien/Class/vehicle_class.dart';
-import 'package:mon_petit_entretien/Config/endpoint.dart';
+import 'package:mon_petit_entretien/class/vehicle_class.dart';
+import 'package:mon_petit_entretien/config/endpoint.dart';
 
 Future<List<VehiculeModel>> getVehicles(String authorization) async {
   final http.Response response = await http.get(

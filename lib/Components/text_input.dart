@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Style/colors.dart';
-import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:mon_petit_entretien/style/colors.dart';
+import 'package:mon_petit_entretien/style/fonts.dart';
 
 class TextInput extends StatefulWidget {
   const TextInput({

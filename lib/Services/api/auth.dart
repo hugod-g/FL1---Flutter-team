@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:mon_petit_entretien/Class/app_class.dart';
-import 'package:mon_petit_entretien/Config/endpoint.dart';
+import 'package:mon_petit_entretien/class/app_class.dart';
+import 'package:mon_petit_entretien/config/endpoint.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();

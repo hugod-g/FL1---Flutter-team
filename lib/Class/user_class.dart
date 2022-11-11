@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:mon_petit_entretien/Class/center_class.dart';
+import 'package:mon_petit_entretien/class/center_class.dart';
 
 class UserModel extends ChangeNotifier {
   UserModel(

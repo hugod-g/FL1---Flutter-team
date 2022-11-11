@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Class/app_class.dart';
-import 'package:mon_petit_entretien/Components/button.dart';
-import 'package:mon_petit_entretien/Components/text_input.dart';
-import 'package:mon_petit_entretien/Services/api/update_km.dart';
-import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:mon_petit_entretien/class/app_class.dart';
+import 'package:mon_petit_entretien/components/button.dart';
+import 'package:mon_petit_entretien/components/text_input.dart';
+import 'package:mon_petit_entretien/services/api/update_km.dart';
+import 'package:mon_petit_entretien/style/fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../Components/common_text.dart';
-import '../Style/colors.dart';
+import '../components/common_text.dart';
+import '../style/colors.dart';
 
 class UpdateKilometrage extends StatefulWidget {
   const UpdateKilometrage({Key? key}) : super(key: key);

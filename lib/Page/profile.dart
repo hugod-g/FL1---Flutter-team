@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Class/app_class.dart';
-import 'package:mon_petit_entretien/Components/button.dart';
-import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
-import 'package:mon_petit_entretien/Services/api/auth.dart';
-import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:mon_petit_entretien/class/app_class.dart';
+import 'package:mon_petit_entretien/components/button.dart';
+import 'package:mon_petit_entretien/components/web/burger_menu.dart';
+import 'package:mon_petit_entretien/services/api/auth.dart';
+import 'package:mon_petit_entretien/style/fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Components/common_text.dart';
-import '../Style/colors.dart';
+import '../components/common_text.dart';
+import '../style/colors.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -56,6 +56,8 @@ class _ProfilePage extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final AppData data = Provider.of<AppData>(context, listen: false);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -138,14 +140,13 @@ class _ProfilePage extends State<ProfilePage> {
                               child:
                                   Provider.of<AppData>(context, listen: false)
                                               .user
-                                              .picturePath ==
-                                          ""
+                                              .picturePath == ""
                                       ? Image.asset(
                                           'assets/avatar.jpg',
                                           fit: BoxFit.fill,
                                         )
-                                      : Image.network(
-                                          "http://152.228.134.93:1339/${Provider.of<AppData>(context, listen: false).user.picturePath}",
+                                      :  Image.network(
+                                          "http://152.228.134.93:1339/${data.user.picturePath}",
                                           fit: BoxFit.fill,
                                         ),
                             ),
@@ -160,7 +161,7 @@ class _ProfilePage extends State<ProfilePage> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(75),
                               child:
-                                  Provider.of<AppData>(context, listen: false)
+                                  data
                                               .user
                                               .picturePath ==
                                           ""
@@ -169,7 +170,7 @@ class _ProfilePage extends State<ProfilePage> {
                                           fit: BoxFit.fill,
                                         )
                                       : Image.network(
-                                          "http://152.228.134.93:1339/${Provider.of<AppData>(context, listen: false).user.picturePath}",
+                                          "http://152.228.134.93:1339/${data.user.picturePath}",
                                           fit: BoxFit.fill,
                                         ),
                             ),
@@ -177,7 +178,7 @@ class _ProfilePage extends State<ProfilePage> {
                         ),
                       CommonText(
                         text:
-                            "${Provider.of<AppData>(context, listen: false).user.firstName} ${Provider.of<AppData>(context, listen: false).user.lastName}",
+                            "${data.user.firstName} ${data.user.lastName}",
                         fontSizeText: 22,
                         fontWeight: fontBold,
                         paddingTop: 16,
@@ -213,7 +214,7 @@ class _ProfilePage extends State<ProfilePage> {
                               alignment: Alignment.topLeft,
                               child: CommonText(
                                 text:
-                                    Provider.of<AppData>(context, listen: false)
+                                    data
                                         .user
                                         .username,
                                 fontSizeText: kIsWeb ? 23 : 16,

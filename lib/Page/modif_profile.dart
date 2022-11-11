@@ -4,16 +4,16 @@ import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mon_petit_entretien/Class/app_class.dart';
-import 'package:mon_petit_entretien/Components/button.dart';
-import 'package:mon_petit_entretien/Components/text_input.dart';
-import 'package:mon_petit_entretien/Page/camera_page.dart';
-import 'package:mon_petit_entretien/Services/api/modif_user.dart';
-import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:mon_petit_entretien/class/app_class.dart';
+import 'package:mon_petit_entretien/components/button.dart';
+import 'package:mon_petit_entretien/components/text_input.dart';
+import 'package:mon_petit_entretien/page/camera_page.dart';
+import 'package:mon_petit_entretien/services/api/modif_user.dart';
+import 'package:mon_petit_entretien/style/fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../Components/common_text.dart';
-import '../Style/colors.dart';
+import '../components/common_text.dart';
+import '../style/colors.dart';
 
 class ModifProfilePage extends StatefulWidget {
   const ModifProfilePage({Key? key}) : super(key: key);
@@ -110,7 +110,7 @@ class _ModifProfilePage extends State<ModifProfilePage> {
 
     if (response == true) {
       if (mounted) {
-        Navigator.pop(context);
+        await Navigator.pushNamed(context, "/gestion");
       }
     } else {
       if (mounted) {
@@ -229,37 +229,38 @@ class _ModifProfilePage extends State<ModifProfilePage> {
                                           ),
                                           child: Column(
                                             children: <Widget>[
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                  bottom: 10,
-                                                ),
-                                                child: InkWell(
-                                                  onTap: _camera,
-                                                  child: Ink(
-                                                    child: Row(
-                                                      children: const <Widget>[
-                                                        Icon(
-                                                          Icons.camera_alt,
-                                                          size: 30,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                            left: 10,
+                                              if (!kIsWeb)
+                                                Padding(
+                                                  padding: const EdgeInsets.only(
+                                                    bottom: 10,
+                                                  ),
+                                                  child: InkWell(
+                                                    onTap: _camera,
+                                                    child: Ink(
+                                                      child: Row(
+                                                        children: const <Widget>[
+                                                          Icon(
+                                                            Icons.camera_alt,
+                                                            size: 30,
                                                           ),
-                                                          child: CommonText(
-                                                            text: "Camera",
-                                                            fontSizeText: 20,
-                                                            fontWeight:
-                                                                FontWeight.normal,
-                                                            color: navy,
-                                                          ),
-                                                        )
-                                                      ],
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                              left: 10,
+                                                            ),
+                                                            child: CommonText(
+                                                              text: "Camera",
+                                                              fontSizeText: 20,
+                                                              fontWeight:
+                                                                  FontWeight.normal,
+                                                              color: navy,
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
                                               InkWell(
                                                 onTap: () {
                                                   takePictureGaleryLoaded()
@@ -310,7 +311,15 @@ class _ModifProfilePage extends State<ModifProfilePage> {
                                 child: SizedBox(
                                   width: 200,
                                   height: 200,
-                                  child: Image.file(
+                                  child: kIsWeb
+                                      ? Image.memory(
+                                          Provider.of<AppData>(
+                                            context,
+                                            listen: false,
+                                          ).user.pickedFileBytes,
+                                          fit: BoxFit.cover,
+                                        )
+                                  : Image.file(
                                     File(
                                       Provider.of<AppData>(context, listen: false)
                                           .user

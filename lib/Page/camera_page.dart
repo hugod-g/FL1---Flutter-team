@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
-import 'package:mon_petit_entretien/Style/colors.dart';
+import 'package:mon_petit_entretien/style/colors.dart';
 import 'package:provider/provider.dart';
 
 class CameraPage extends StatefulWidget {
