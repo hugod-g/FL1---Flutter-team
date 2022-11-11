@@ -29,8 +29,8 @@ class _VehicleView extends State<VehicleView> {
             children: <Widget>[
               Center(
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.35,
-                  width: kIsWeb ? MediaQuery.of(context).size.width * 0.5 : MediaQuery.of(context).size.width * 1,
+                  height: kIsWeb ? 350 : 250,
+                  width: kIsWeb ? 750 : MediaQuery.of(context).size.width * 1,
                   child: ClipRRect(
                     borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(50),
@@ -57,8 +57,8 @@ class _VehicleView extends State<VehicleView> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: kIsWeb ? 300 : 175),
                   child: Container(
-                    height: kIsWeb ? MediaQuery.of(context).size.height * 0.125 : MediaQuery.of(context).size.height * 0.175,
-                    width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.875,
+                    height: kIsWeb ? 115 : 110,
+                    width: kIsWeb ? 500 : 325,
                     decoration: BoxDecoration(
                       color: white,
                       borderRadius: BorderRadius.circular(12.5),
@@ -173,7 +173,7 @@ class _VehicleView extends State<VehicleView> {
           Padding(
             padding: const EdgeInsets.only(top: 40),
             child: SizedBox(
-              width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.6,
+              width: kIsWeb ? 500 : 300,
               child: Button(
                 text: "Ajouter un entretient",
                 onPress: () => Navigator.pushNamed(context, '/addMaintenance'),
@@ -184,7 +184,7 @@ class _VehicleView extends State<VehicleView> {
             Padding(
               padding: const EdgeInsets.only(top: 40),
               child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.3,
+                width: 500,
                 child: Button(
                   text: "Retour",
                   onPress: () => Navigator.pop(context),
@@ -218,8 +218,8 @@ class CardVehicule extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 15),
       child: Container(
-        height: kIsWeb ? MediaQuery.of(context).size.height * 0.15 : MediaQuery.of(context).size.height * 0.21,
-        width: kIsWeb ? MediaQuery.of(context).size.width * 0.15 : MediaQuery.of(context).size.width * 0.55,
+        height: kIsWeb ? 150 : 140,
+        width: kIsWeb ? 250 : 200,
         decoration: BoxDecoration(
           color: blue,
           borderRadius: BorderRadius.circular(12.5),
@@ -229,8 +229,8 @@ class CardVehicule extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 24),
               child: Container(
-                height: kIsWeb ? MediaQuery.of(context).size.height * 0.15 : MediaQuery.of(context).size.height * 0.21,
-                width: kIsWeb ? MediaQuery.of(context).size.width * 0.025 : MediaQuery.of(context).size.width * 0.1,
+                height: kIsWeb ? 150 : 140,
+                width: kIsWeb ? 50 : 40,
                 color: white,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),

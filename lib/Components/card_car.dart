@@ -39,7 +39,7 @@ class CardCarState extends State<CardCar> {
         onTap: () {
           final AppData data = Provider.of<AppData>(context, listen: false);
           data.updateDataThisVehicle(widget.name, int.parse(widget.mileage), widget.pathImage, widget.date, widget.id, widget.maintenance);
-          Navigator.pushNamed(context, '/vueVehicule');
+          Navigator.pushNamed(context, '/vue_vehicle');
         },
         child: Ink(
           child: Stack(

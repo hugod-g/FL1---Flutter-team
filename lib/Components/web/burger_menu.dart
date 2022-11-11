@@ -50,7 +50,7 @@ class BurgerMenu extends StatelessWidget {
               color: white,
             ),
             onTap: () {
-              Navigator.popAndPushNamed(context, '/profil');
+              Navigator.popAndPushNamed(context, '/profile');
             },
             leading: const Icon(Icons.people),
             iconColor: white,

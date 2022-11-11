@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Components/web/burger_menu.dart';
-import 'package:mon_petit_entretien/Page/modifprofil.dart';
 import 'package:mon_petit_entretien/Services/api/auth.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 import 'package:provider/provider.dart';
@@ -12,14 +11,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../Components/common_text.dart';
 import '../Style/colors.dart';
 
-class ProfilPage extends StatefulWidget {
-  const ProfilPage({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<ProfilPage> createState() => _ProfilPage();
+  State<ProfilePage> createState() => _ProfilePage();
 }
 
-class _ProfilPage extends State<ProfilPage> {
+class _ProfilePage extends State<ProfilePage> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   bool isLoadingDelete = false;
@@ -132,8 +131,8 @@ class _ProfilPage extends State<ProfilPage> {
                         Padding(
                           padding: const EdgeInsets.only(top: 17.5),
                           child: SizedBox(
-                            height: MediaQuery.of(context).size.width * 0.15,
-                            width: MediaQuery.of(context).size.width * 0.15,
+                            height: 250,
+                            width: 250,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(150),
                               child: Provider.of<AppData>(context, listen: false).user.picturePath == ""
@@ -152,10 +151,10 @@ class _ProfilPage extends State<ProfilPage> {
                         Padding(
                           padding: const EdgeInsets.only(top: 17.5),
                           child: SizedBox(
-                            height: MediaQuery.of(context).size.width * 0.275,
-                            width: MediaQuery.of(context).size.width * 0.275,
+                            height: 125,
+                            width: 125,
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(50),
+                              borderRadius: BorderRadius.circular(75),
                               child: Provider.of<AppData>(context, listen: false).user.picturePath == ""
                                   ? Image.asset(
                                       'assets/avatar.jpg',
@@ -176,7 +175,7 @@ class _ProfilPage extends State<ProfilPage> {
                         color: navy,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 30, left: kIsWeb ? 500 : 0),
+                        padding: EdgeInsets.only(top: 30, left: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : 0),
                         child: Column(
                           children: <Widget>[
                             Row(
@@ -212,42 +211,33 @@ class _ProfilPage extends State<ProfilPage> {
                       if(kIsWeb)
                         Padding(
                           padding: const EdgeInsets.only(top: 50),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.5,
+                          child: Container(
+                            constraints: const BoxConstraints(maxWidth: 800),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
-                                Expanded(
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets.only(left: 40, right: 40),
-                                    child: Button(
-                                      text: "Modifier le profil",
-                                      onPress: () => Navigator.pushNamed(context, '/modif_profil'),
-                                    ),
+                                Container(
+                                  constraints: const BoxConstraints(maxWidth: 200),
+                                  child: Button(
+                                    text: "Modifier le profil",
+                                    onPress: () => Navigator.pushNamed(context, '/modif_profile'),
                                   ),
                                 ),
-                                Expanded(
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets.only(left: 40, right: 40),
-                                    child: Button(
-                                      text: "Déconnexion",
-                                      onPress: _onLogout,
-                                      secondary: true,
-                                    ),
+                                Container(
+                                  constraints: const BoxConstraints(maxWidth: 200),
+                                  child: Button(
+                                    text: "Déconnexion",
+                                    onPress: _onLogout,
+                                    secondary: true,
                                   ),
                                 ),
-                                Expanded(
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets.only(left: 40, right: 40),
-                                    child: Button(
-                                      text: "Supprimer mon compte",
-                                      onPress: _onDeleteAccount,
-                                      important: true,
-                                      isLoading: isLoadingDelete,
-                                    ),
+                                Container(
+                                  constraints: const BoxConstraints(maxWidth: 200),
+                                  child: Button(
+                                    text: "Supprimer mon compte",
+                                    onPress: _onDeleteAccount,
+                                    important: true,
+                                    isLoading: isLoadingDelete,
                                   ),
                                 ),
                               ],
@@ -261,15 +251,7 @@ class _ProfilPage extends State<ProfilPage> {
                               padding: const EdgeInsets.only(top: 25),
                               child: Button(
                                 text: "Modifier le profil",
-                                onPress: () => <Future<ModifProfilPage?>>{
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute<ModifProfilPage>(
-                                      builder: (BuildContext context) =>
-                                          const ModifProfilPage(),
-                                    ),
-                                  )
-                                },
+                                onPress: () => Navigator.pushNamed(context, '/modif_profile'),
                               ),
                             ),
                             Padding(

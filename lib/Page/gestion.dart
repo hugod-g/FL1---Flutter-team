@@ -90,7 +90,7 @@ class _GestionPage extends State<GestionPage> {
         children: <Widget>[
           const Home(),
           const Statistics(),
-          const ProfilPage(),
+          const ProfilePage(),
           if (Provider.of<AppData>(context, listen: false).user.admin)
             const AdminPage(),
         ],

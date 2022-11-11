@@ -156,7 +156,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: SizedBox(
-                        width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.8,
+                        width: kIsWeb ? 500 : 300,
                         child: TextInput(
                           value: mileage,
                           placeholder: "Mile",
@@ -168,7 +168,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                       padding: const EdgeInsets.only(top: 40),
                       child: Container(
                         height: 54,
-                        width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.8,
+                        width: kIsWeb ? 500 : 300,
                         decoration: const BoxDecoration(
                           boxShadow: <BoxShadow>[
                             BoxShadow(blurRadius: 16, color: lightGray)
@@ -235,7 +235,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: SizedBox(
-                        width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.8,
+                        width: kIsWeb ? 500 : 300,
                         child: TextInput(
                           value: price,
                           placeholder: "Price",
@@ -246,7 +246,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: SizedBox(
-                        width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.8,
+                        width: kIsWeb ? 500 : 300,
                         child: TextInput(
                           value: name,
                           placeholder: "Name",
@@ -257,7 +257,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: SizedBox(
-                        width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.8,
+                        width: kIsWeb ? 500 : 300,
                         child: TextInput(
                           value: center,
                           placeholder: "Center",
@@ -268,7 +268,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: SizedBox(
-                        width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.8,
+                        width: kIsWeb ? 500 : 300,
                         child: Button(
                           text: "Sauvegarder",
                           onPress: _callApi,
@@ -278,7 +278,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 25, bottom: 25),
                       child: SizedBox(
-                        width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.8,
+                        width: kIsWeb ? 500 : 300,
                         child: Button(
                           text: "Retour",
                           onPress: () => Navigator.pop(context),

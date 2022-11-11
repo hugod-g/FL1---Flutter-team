@@ -15,14 +15,14 @@ import 'package:provider/provider.dart';
 import '../Components/common_text.dart';
 import '../Style/colors.dart';
 
-class ModifProfilPage extends StatefulWidget {
-  const ModifProfilPage({Key? key}) : super(key: key);
+class ModifProfilePage extends StatefulWidget {
+  const ModifProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<ModifProfilPage> createState() => _ModifProfilPage();
+  State<ModifProfilePage> createState() => _ModifProfilePage();
 }
 
-class _ModifProfilPage extends State<ModifProfilPage> {
+class _ModifProfilePage extends State<ModifProfilePage> {
   late String firstname;
   late String lastname;
   late AppData data;
@@ -365,7 +365,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 50),
                       child: SizedBox(
-                        width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.8,
+                        width: kIsWeb ? 500 : 300,
                         child: TextInput(
                           value: firstname,
                           placeholder: firstname,
@@ -376,7 +376,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: SizedBox(
-                        width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.8,
+                        width: kIsWeb ? 500 : 300,
                         child: TextInput(
                           value: lastname,
                           placeholder: lastname,
@@ -387,7 +387,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 50),
                       child: SizedBox(
-                        width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.8,
+                        width: kIsWeb ? 500 : 300,
                         child: Button(
                           text: "Sauvegarder",
                           onPress: _callApi,
@@ -397,7 +397,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: SizedBox(
-                        width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.8,
+                        width: kIsWeb ? 500 : 300,
                         child: Button(
                           text: "Retour",
                           onPress: () => Navigator.pop(context),
