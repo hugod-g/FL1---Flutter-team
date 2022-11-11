@@ -10,6 +10,7 @@ const String getProfileEndPoint = "$apiUrl/profile";
 
 // Vehicles
 const String vehiclesEndPoint = "$apiUrl/vehicle";
+const String updatekm = "$apiUrl/vehicle/km";
 
 // Admin
 const String getUserListEndPoint = "$apiUrl/admin/users";

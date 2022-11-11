@@ -13,6 +13,7 @@ Future<bool> modifProfil(
   String lastname,
   String image,
   Uint8List pickedFileBytes,
+  bool picture,
   AppData data,
 ) async {
   final http.MultipartRequest request =
@@ -22,25 +23,27 @@ Future<bool> modifProfil(
     "Authorization": "Bearer $authorization",
     "Content-type": "multipart/form-data"
   };
-  if (image != "") {
-    request.files.add(
-      http.MultipartFile(
-        'upload',
-        File(image).readAsBytes().asStream(),
-        File(image).lengthSync(),
-        filename: "filename",
-        contentType: MediaType('image', 'jpeg'),
-      ),
-    );
-  } else {
-    request.files.add(
-      http.MultipartFile.fromBytes(
-        'upload',
-        pickedFileBytes,
-        filename: "filename",
-        contentType: MediaType('image', 'jpeg'),
-      ),
-    );
+  if (picture == true) {
+    if (image != "") {
+      request.files.add(
+        http.MultipartFile(
+          'upload',
+          File(image).readAsBytes().asStream(),
+          File(image).lengthSync(),
+          filename: "filename",
+          contentType: MediaType('image', 'jpeg'),
+        ),
+      );
+    } else {
+      request.files.add(
+        http.MultipartFile.fromBytes(
+          'upload',
+          pickedFileBytes,
+          filename: "filename",
+          contentType: MediaType('image', 'jpeg'),
+        ),
+      );
+    }
   }
   request.headers.addAll(headers);
   request.fields.addAll(<String, String>{

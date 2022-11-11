@@ -105,204 +105,205 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
       backgroundColor: lightBlue,
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.only(top: 15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Center(
-                child: Column(
-                  children: <Widget>[
-                    if (kIsWeb)
-                      const CommonText(
-                        text: 'Ajout d\'un entretient',
-                        fontSizeText: 30,
-                        fontWeight: fontMedium,
-                        paddingBot: 15,
-                        color: navy,
-                      )
-                    else
-                      Column(
-                        children: const <Widget>[
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: CommonText(
-                              text: 'Ajout',
-                              fontSizeText: 30,
-                              fontWeight: fontLight,
-                              paddingTop: 24,
-                              paddingBot: 8,
-                              color: navy,
+        child: ListView(
+          children: <Widget> [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Center(
+                  child: Column(
+                    children: <Widget>[
+                      if (kIsWeb)
+                        const CommonText(
+                          text: 'Ajout d\'un entretient',
+                          fontSizeText: 30,
+                          fontWeight: fontMedium,
+                          paddingBot: 15,
+                          color: navy,
+                        )
+                      else
+                        Column(
+                          children: const <Widget>[
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: CommonText(
+                                text: 'Ajout',
+                                fontSizeText: 30,
+                                fontWeight: fontLight,
+                                paddingTop: 24,
+                                paddingBot: 8,
+                                color: navy,
+                              ),
                             ),
-                          ),
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: CommonText(
-                              text: 'd\'un entretient',
-                              fontSizeText: 30,
-                              fontWeight: fontMedium,
-                              paddingBot: 15,
-                              color: navy,
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: CommonText(
+                                text: 'd\'un entretient',
+                                fontSizeText: 30,
+                                fontWeight: fontMedium,
+                                paddingBot: 15,
+                                color: navy,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    const Align(
-                      alignment: kIsWeb ? Alignment.center : Alignment.topLeft,
-                      child: CommonText(
-                        text: 'Ajouter votre dernier entretient',
-                        fontSizeText: 20,
-                        fontWeight: fontLight,
-                        paddingBot: 20,
-                        color: navy,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40),
-                      child: SizedBox(
-                        width: kIsWeb ? 500 : 300,
-                        child: TextInput(
-                          value: mileage,
-                          placeholder: "Kilométrage (en km)",
-                          onChangeText: _onMileageChange,
-                          keyTest: "maintenance_input_mile",
-                          textinput: TextInputType.number,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40),
-                      child: Container(
-                        height: 54,
-                        width: kIsWeb ? 500 : 300,
-                        decoration: const BoxDecoration(
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(blurRadius: 16, color: lightGray)
                           ],
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
                         ),
+                      const Align(
+                        alignment: kIsWeb ? Alignment.center : Alignment.topLeft,
+                        child: CommonText(
+                          text: 'Ajouter votre dernier entretient',
+                          fontSizeText: 20,
+                          fontWeight: fontLight,
+                          paddingBot: 20,
+                          color: navy,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40),
+                        child: SizedBox(
+                          width: kIsWeb ? 500 : 300,
+                          child: TextInput(
+                            value: mileage,
+                            placeholder: "Kilométrage (en km)",
+                            onChangeText: _onMileageChange,
+                            keyTest: "maintenance_input_mile",
+                            textinput: TextInputType.number,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40),
                         child: Container(
+                          height: 54,
+                          width: kIsWeb ? 500 : 300,
                           decoration: const BoxDecoration(
-                            color: white,
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(blurRadius: 16, color: lightGray)
+                            ],
                             borderRadius: BorderRadius.all(Radius.circular(16)),
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 16,
-                              right: 16,
-                              top: 2,
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              color: white,
+                              borderRadius: BorderRadius.all(Radius.circular(16)),
                             ),
-                            child: Center(
-                              child: TextField(
-                                controller: dateinput,
-                                decoration: const InputDecoration(
-                                  border: InputBorder.none,
-                                  iconColor: navy,
-                                  icon: Icon(Icons.calendar_today),
-                                  labelText: "Date de l'entretient ",
-                                  labelStyle: TextStyle(color: navy),
-                                  hintStyle: TextStyle(
-                                    color: lightGray,
-                                  ),
-                                ),
-                                style: const TextStyle(
-                                  fontFamily: appFont,
-                                  fontWeight: fontRegular,
-                                ),
-                                readOnly: true,
-                                onTap: () async {
-                                  final DateTime? pickedDate =
-                                      await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime(
-                                      2000,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                                top: 2,
+                              ),
+                              child: Center(
+                                child: TextField(
+                                  controller: dateinput,
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    iconColor: navy,
+                                    icon: Icon(Icons.calendar_today),
+                                    labelText: "Date de l'entretient ",
+                                    labelStyle: TextStyle(color: navy),
+                                    hintStyle: TextStyle(
+                                      color: lightGray,
                                     ),
-                                    lastDate: DateTime(2101),
-                                  );
+                                  ),
+                                  style: const TextStyle(
+                                    fontFamily: appFont,
+                                    fontWeight: fontRegular,
+                                  ),
+                                  readOnly: true,
+                                  onTap: () async {
+                                    final DateTime? pickedDate =
+                                        await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(
+                                        2000,
+                                      ),
+                                      lastDate: DateTime(2101),
+                                    );
 
-                                  if (pickedDate != null) {
-                                    final String formattedDate =
-                                        DateFormat('yyyy-MM-dd')
-                                            .format(pickedDate);
+                                    if (pickedDate != null) {
+                                      final String formattedDate =
+                                          DateFormat('yyyy-MM-dd')
+                                              .format(pickedDate);
 
-                                    setState(() {
-                                      dateinput.text = formattedDate;
-                                      _onDateChange(dateinput.text);
-                                    });
-                                  } else {}
-                                },
+                                      setState(() {
+                                        dateinput.text = formattedDate;
+                                        _onDateChange(dateinput.text);
+                                      });
+                                    } else {}
+                                  },
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40),
-                      child: SizedBox(
-                        width: kIsWeb ? 500 : 300,
-                        child: TextInput(
-                          value: price,
-                          placeholder: "Price",
-                          onChangeText: _onPriceChange,
-                          keyTest: "add_maintenance_input_price",
-                          textinput: TextInputType.number,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40),
+                        child: SizedBox(
+                          width: kIsWeb ? 500 : 300,
+                          child: TextInput(
+                            value: price,
+                            placeholder: "Price",
+                            onChangeText: _onPriceChange,
+                            keyTest: "add_maintenance_input_price",
+                            textinput: TextInputType.number,
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40),
-                      child: SizedBox(
-                        width: kIsWeb ? 500 : 300,
-                        child: TextInput(
-                          value: name,
-                          placeholder: "Nom de l'entretien (ex: Courroie)",
-                          onChangeText: _onNameChange,
-                          keyTest: "add_maintenance_input_name",
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40),
+                        child: SizedBox(
+                          width: kIsWeb ? 500 : 300,
+                          child: TextInput(
+                            value: name,
+                            placeholder: "Nom de l'entretien (ex: Courroie)",
+                            onChangeText: _onNameChange,
+                            keyTest: "add_maintenance_input_name",
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40),
-                      child: SizedBox(
-                        width: kIsWeb ? 500 : 300,
-                        child: TextInput(
-                          value: center,
-                          placeholder: "Centre",
-                          onChangeText: _onCenterChange,
-                          keyTest: "add_maintenance_input_center",
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40),
+                        child: SizedBox(
+                          width: kIsWeb ? 500 : 300,
+                          child: TextInput(
+                            value: center,
+                            placeholder: "Centre",
+                            onChangeText: _onCenterChange,
+                            keyTest: "add_maintenance_input_center",
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40),
-                      child: SizedBox(
-                        width: kIsWeb ? 500 : 300,
-                        child: Button(
-                          text: "Ajouter l'entretien",
-                          onPress: _callApi,
-                          keyTest: "add_maintenance_save_button",
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40),
+                        child: SizedBox(
+                          width: kIsWeb ? 500 : 300,
+                          child: Button(
+                            text: "Ajouter l'entretien",
+                            onPress: _callApi,
+                            keyTest: "add_maintenance_save_button",
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 25, bottom: 25),
-                      child: SizedBox(
-                        width: kIsWeb ? 500 : 300,
-                        child: Button(
-                          text: "Retour",
-                          onPress: () => Navigator.pop(context),
-                          secondary: true,
-                          keyTest: "add_maintenance_back_button",
+                      Padding(
+                        padding: const EdgeInsets.only(top: 25, bottom: 25),
+                        child: SizedBox(
+                          width: kIsWeb ? 500 : 300,
+                          child: Button(
+                            text: "Retour",
+                            onPress: () => Navigator.pop(context),
+                            secondary: true,
+                            keyTest: "add_maintenance_back_button",
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
         ),
       ),
     );
