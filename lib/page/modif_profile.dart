@@ -184,15 +184,15 @@ class _ModifProfilePage extends State<ModifProfilePage> {
                                 color: navy,
                               ),
                             ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: CommonText(
-                                text: 'du profil',
-                                fontSizeText: 30,
-                                fontWeight: fontMedium,
-                                paddingBot: 15,
-                                color: navy,
-                              ),
+                          ),
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: CommonText(
+                              text: 'du profil',
+                              fontSizeText: 30,
+                              fontWeight: fontMedium,
+                              paddingBot: 15,
+                              color: navy,
                             ),
                           ],
                         ),
