@@ -36,7 +36,6 @@ class _AddVehicule extends State<AddVehicule> {
   bool isLoadedVehicule = false;
   bool isThereAnImage = false;
   bool? isSecondary;
-  bool isDesktop = false;
 
   void _onKMChange(String newValue) {
     setState(() {
@@ -70,7 +69,7 @@ class _AddVehicule extends State<AddVehicule> {
       data.vehicles.last.updatePicturePath(newPath);
       return 401;
     } else {
-      if (isDesktop) {
+      if (kIsWeb) {
         final Uint8List pickedFileBytes = await file.readAsBytes();
         data.vehicles.last.updatePicketFilesBytes(pickedFileBytes);
       } else {
@@ -427,7 +426,7 @@ class _AddVehicule extends State<AddVehicule> {
                                 child: SizedBox(
                                   width: 200,
                                   height: 200,
-                                  child: isDesktop
+                                  child: kIsWeb
                                       ? Image.memory(
                                           Provider.of<AppData>(
                                             context,
