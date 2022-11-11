@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Class/maintenance_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
+import 'package:mon_petit_entretien/Services/api/deleted_mantenance.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,7 @@ class VehicleView extends StatefulWidget {
 }
 
 class _VehicleView extends State<VehicleView> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,28 +136,18 @@ class _VehicleView extends State<VehicleView> {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(
+              const Padding(
+                padding: EdgeInsets.only(
                   left: 25,
                   right: 25,
                   bottom: 25,
                   top: 25,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const <Widget>[
-                    CommonText(
-                      text: "Mes entretiens",
-                      fontSizeText: 25,
-                      fontWeight: fontBold,
-                      color: navy,
-                    ),
-                    if (!kIsWeb)
-                      Icon(
-                        Icons.car_repair,
-                        size: 35,
-                      ),
-                  ],
+                child: CommonText(
+                  text: "Mes entretiens",
+                  fontSizeText: 25,
+                  fontWeight: fontBold,
+                  color: navy,
                 ),
               ),
               SingleChildScrollView(
@@ -174,6 +166,7 @@ class _VehicleView extends State<VehicleView> {
                           title: info.name,
                           date: info.date.substring(0, 10),
                           km: info.kilometrage.toString(),
+                          maintenanceId: info.id,
                           enterprise: info.center,
                         ),
                       )
@@ -222,13 +215,14 @@ class _VehicleView extends State<VehicleView> {
   }
 }
 
-class CardVehicule extends StatelessWidget {
+class CardVehicule extends StatefulWidget {
   const CardVehicule({
     Key? key,
     required this.prix,
     required this.title,
     required this.date,
     required this.km,
+    required this.maintenanceId,
     required this.enterprise,
   }) : super(key: key);
 
@@ -236,12 +230,70 @@ class CardVehicule extends StatelessWidget {
   final String title;
   final String date;
   final String km;
+  final String maintenanceId;
   final String enterprise;
+
+  @override
+  State<CardVehicule> createState() => _CardVehicule();
+}
+
+class _CardVehicule extends State<CardVehicule> {
+
+  late AppData data;
+
+  @override
+  void initState() {
+    super.initState();
+    data = Provider.of<AppData>(context, listen: false);
+  }
+
+  SnackBar _status(bool status) {
+
+    String message = "";
+    
+    if(status) {
+      message = "Vous avez suprimer un entretiens";
+    } else {
+      message = "Nous n'avons pas réussie à suprimer la maintenance";
+    }
+
+    final SnackBar snackBar = SnackBar(
+      content: Text(
+        message,
+      ),
+      duration: const Duration(seconds: 2),
+      action: SnackBarAction(
+        label: 'Ok',
+        textColor: white,
+        onPressed: () {},
+      ),
+    );
+
+    return snackBar;
+  }
+
+  void _callApi() async {
+    final bool response = await deletedMaintenences(
+      data.token,
+      widget.maintenanceId,
+    );
+
+    if (response == true) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(_status(response));
+        await Navigator.pushNamed(context, '/gestion');
+      }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(_status(response));
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 15),
+      padding: const EdgeInsets.only(left: 7.5, right: 7.5),
       child: Container(
         height: kIsWeb ? 150 : 140,
         width: kIsWeb ? 250 : 200,
@@ -269,7 +321,7 @@ class CardVehicule extends StatelessWidget {
                       RotatedBox(
                         quarterTurns: 3,
                         child: CommonText(
-                          text: '$prix €',
+                          text: '${widget.prix} €',
                           fontSizeText: 17,
                           fontWeight: fontBold,
                           color: navy,
@@ -283,31 +335,47 @@ class CardVehicule extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                CommonText(
-                  text: title,
-                  fontSizeText: 20,
-                  fontWeight: fontBold,
-                  paddingTop: 8,
-                  paddingLeft: 16,
-                  color: white,
+                Row(
+                  children: <Widget> [
+                    CommonText(
+                      text: widget.title,
+                      fontSizeText: 20,
+                      fontWeight: fontBold,
+                      paddingLeft: 16,
+                      color: white,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12.5),
+                      child: IconButton(
+                        alignment: Alignment.centerRight,
+                        padding: EdgeInsets.zero,
+                        onPressed: _callApi,
+                        icon: const Icon(
+                          Icons.delete,
+                          size: 27.5,
+                          color: white,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 CommonText(
-                  text: date,
+                  text: widget.date,
                   fontSizeText: 17.5,
                   fontWeight: fontLight,
-                  paddingTop: 24,
+                  paddingTop: 10,
                   paddingLeft: 16,
                   color: white,
                 ),
                 CommonText(
-                  text: '$km km',
+                  text: '${widget.km} km',
                   fontSizeText: 17.5,
                   fontWeight: fontLight,
                   paddingLeft: 16,
                   color: white,
                 ),
                 CommonText(
-                  text: enterprise,
+                  text: widget.enterprise,
                   fontSizeText: 15,
                   fontWeight: fontLight,
                   paddingTop: 16,

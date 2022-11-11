@@ -19,3 +19,4 @@ const String deleteUserEndpoint = "$apiUrl/admin/user";
 
 // Maintenance
 const String maintenanceEndPoint = "$apiUrl/maintenance";
+const String deletedmaintenences = "$apiUrl/maintenance";
