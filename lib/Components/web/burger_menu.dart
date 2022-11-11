@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/class/app_class.dart';
 import 'package:provider/provider.dart';
 
-import '../../Style/colors.dart';
-import '../../Style/fonts.dart';
+import '../../style/colors.dart';
+import '../../style/fonts.dart';
 import '../common_text.dart';
 
 class BurgerMenu extends StatelessWidget {
