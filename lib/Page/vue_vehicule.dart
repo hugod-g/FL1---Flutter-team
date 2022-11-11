@@ -1,30 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Class/app_class.dart';
 import 'package:mon_petit_entretien/Class/maintenance_class.dart';
 import 'package:mon_petit_entretien/Components/button.dart';
 import 'package:mon_petit_entretien/Page/add_maintenance.dart';
 import 'package:mon_petit_entretien/Style/colors.dart';
 import 'package:mon_petit_entretien/Style/fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../Components/common_text.dart';
 
 class VehicleView extends StatefulWidget {
-  const VehicleView({
-    super.key,
-    required this.name,
-    required this.mileage,
-    required this.pathImage,
-    required this.date,
-    required this.vehicleId,
-    required this.maintenance,
-  });
-
-  final String name;
-  final String mileage;
-  final String pathImage;
-  final String date;
-  final String vehicleId;
-  final List<MaintenanceModel> maintenance;
+  const VehicleView({Key? key}) : super(key: key);
 
   @override
   State<VehicleView> createState() => _VehicleView();
@@ -51,7 +38,7 @@ class _VehicleView extends State<VehicleView> {
                       bottomRight: Radius.circular(50),
                     ),
                     child: Image.network(
-                      "http://152.228.134.93:1339/${widget.pathImage}",
+                      "http://152.228.134.93:1339/${Provider.of<AppData>(context, listen: false).thisVehicles.picturePath}",
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -88,7 +75,7 @@ class _VehicleView extends State<VehicleView> {
                     child: Column(
                       children: <Widget>[
                         CommonText(
-                          text: widget.name,
+                          text: Provider.of<AppData>(context, listen: false).thisVehicles.name,
                           fontSizeText: 25,
                           fontWeight: fontBold,
                           paddingTop: 16,
@@ -110,7 +97,7 @@ class _VehicleView extends State<VehicleView> {
                                     size: 25,
                                   ),
                                   CommonText(
-                                    text: widget.date.substring(0,10),
+                                    text: Provider.of<AppData>(context, listen: false).thisVehicles.date.substring(0,10),
                                     fontSizeText: 17.5,
                                     fontWeight: fontLight,
                                     color: navy,
@@ -124,7 +111,7 @@ class _VehicleView extends State<VehicleView> {
                                     size: 25,
                                   ),
                                   CommonText(
-                                    text: '${widget.mileage} km',
+                                    text: '${Provider.of<AppData>(context, listen: false).thisVehicles.kilometrage} km',
                                     fontSizeText: 17.5,
                                     fontWeight: fontLight,
                                     color: navy,
@@ -173,7 +160,7 @@ class _VehicleView extends State<VehicleView> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:
-                widget.maintenance.map((MaintenanceModel info) =>
+                Provider.of<AppData>(context, listen: false).thisVehicles.maintenances.map((MaintenanceModel info) =>
                   CardVehicule(
                     prix: info.price.toString(),
                     title: info.name,
@@ -190,19 +177,7 @@ class _VehicleView extends State<VehicleView> {
               width: kIsWeb ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.6,
               child: Button(
                 text: "Ajouter un entretient",
-                onPress: () => <Future<AddMaintenancePage?>>{ 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute<AddMaintenancePage>(
-                      builder: (BuildContext context) =>
-                          AddMaintenancePage(
-                            name: widget.name,
-                            mileage: widget.mileage,
-                            vehicleId: widget.vehicleId,
-                          ),
-                    ),
-                  )
-                },
+                onPress: () => Navigator.pushNamed(context, '/addMaintenance'),
               ),
             ),
           ),

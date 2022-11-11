@@ -57,7 +57,6 @@ class _ProfilPage extends State<ProfilPage> {
 
   @override
   Widget build(BuildContext context) {
-    final AppData data = Provider.of<AppData>(context, listen: false);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -137,13 +136,13 @@ class _ProfilPage extends State<ProfilPage> {
                             width: MediaQuery.of(context).size.width * 0.15,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(150),
-                              child: data.user.picturePath == ""
+                              child: Provider.of<AppData>(context, listen: false).user.picturePath == ""
                                   ? Image.asset(
                                       'assets/avatar.jpg',
                                       fit: BoxFit.fill,
                                     )
                                   : Image.network(
-                                      "http://152.228.134.93:1339/${data.user.picturePath}",
+                                      "http://152.228.134.93:1339/${Provider.of<AppData>(context, listen: false).user.picturePath}",
                                       fit: BoxFit.fill,
                                     ),
                             ),
@@ -157,20 +156,20 @@ class _ProfilPage extends State<ProfilPage> {
                             width: MediaQuery.of(context).size.width * 0.275,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(50),
-                              child: data.user.picturePath == ""
+                              child: Provider.of<AppData>(context, listen: false).user.picturePath == ""
                                   ? Image.asset(
                                       'assets/avatar.jpg',
                                       fit: BoxFit.fill,
                                     )
                                   : Image.network(
-                                      "http://152.228.134.93:1339/${data.user.picturePath}",
+                                      "http://152.228.134.93:1339/${Provider.of<AppData>(context, listen: false).user.picturePath}",
                                       fit: BoxFit.fill,
                                     ),
                             ),
                           ),
                         ),
                       CommonText(
-                        text: "${data.user.firstName} ${data.user.lastName}",
+                        text: "${Provider.of<AppData>(context, listen: false).user.firstName} ${Provider.of<AppData>(context, listen: false).user.lastName}",
                         fontSizeText: 22,
                         fontWeight: fontBold,
                         paddingTop: 16,
@@ -200,7 +199,7 @@ class _ProfilPage extends State<ProfilPage> {
                             Align(
                               alignment: Alignment.topLeft,
                               child: CommonText(
-                                text: data.user.username,
+                                text: Provider.of<AppData>(context, listen: false).user.username,
                                 fontSizeText: kIsWeb ? 23 : 16,
                                 fontWeight: fontLight,
                                 paddingTop: 10,

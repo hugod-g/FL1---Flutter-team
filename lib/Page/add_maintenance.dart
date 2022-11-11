@@ -12,16 +12,7 @@ import '../Components/common_text.dart';
 import '../Style/colors.dart';
 
 class AddMaintenancePage extends StatefulWidget {
-  const AddMaintenancePage({
-    super.key,
-    required this.name,
-    required this.mileage,
-    required this.vehicleId,
-  });
-
-  final String name;
-  final String mileage;
-  final String vehicleId;
+  const AddMaintenancePage({Key? key}) : super(key: key);
 
   @override
   State<AddMaintenancePage> createState() => _AddMaintenancePage();
@@ -53,8 +44,8 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
   void initState() {
     super.initState();
     data = Provider.of<AppData>(context, listen: false);
-    name = widget.name;
-    mileage = widget.mileage;
+    name = data.thisVehicles.name;
+    mileage = data.thisVehicles.kilometrage.toString();
   }
 
   void _onMileageChange(String newValue) {
@@ -89,7 +80,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
 
   void _callApi() async {
 
-    final bool response = await addMaintenance(data.token, mileage, date, price, name, center, widget.vehicleId);
+    final bool response = await addMaintenance(data.token, mileage, date, price, name, center, data.thisVehicles.id);
 
     if (response == true) {
       if (mounted) {
