@@ -27,7 +27,6 @@ class AddMaintenanceWebPage extends StatefulWidget {
 }
 
 class _AddMaintenanceWebPage extends State<AddMaintenanceWebPage> {
-  
   late String mileage;
   String date = "";
   String price = "";
@@ -120,6 +119,7 @@ class _AddMaintenanceWebPage extends State<AddMaintenanceWebPage> {
                       value: mileage,
                       placeholder: "Mile",
                       onChangeText: _onMileageChange,
+                      keyTest: "add_maintenance_input_mile_web",
                     ),
                   ),
                   Padding(
@@ -196,6 +196,7 @@ class _AddMaintenanceWebPage extends State<AddMaintenanceWebPage> {
                       value: price,
                       placeholder: "Price",
                       onChangeText: _onPriceChange,
+                      keyTest: "add_maintenance_input_price_web",
                     ),
                   ),
                   Padding(
@@ -204,6 +205,7 @@ class _AddMaintenanceWebPage extends State<AddMaintenanceWebPage> {
                       value: name,
                       placeholder: "Name",
                       onChangeText: _onNameChange,
+                      keyTest: "add_maintenance_input_name_web",
                     ),
                   ),
                   Padding(
@@ -212,6 +214,7 @@ class _AddMaintenanceWebPage extends State<AddMaintenanceWebPage> {
                       value: center,
                       placeholder: "Center",
                       onChangeText: _onCenterChange,
+                      keyTest: "add_maintenance_input_center_web",
                     ),
                   ),
                   Padding(
@@ -227,9 +230,23 @@ class _AddMaintenanceWebPage extends State<AddMaintenanceWebPage> {
                                   const EdgeInsets.only(left: 50, right: 50),
                               child: Button(
                                 text: "Sauvegarder",
-                                onPress: () async => await addMaintenance(data.token, mileage, date, price, name, center, widget.vehicleId) == true
-                                ? Navigator.popAndPushNamed(context, '/home')
-                                : ScaffoldMessenger.of(context).showSnackBar(snackBar),
+                                onPress: () async => await addMaintenance(
+                                          data.token,
+                                          mileage,
+                                          date,
+                                          price,
+                                          name,
+                                          center,
+                                          widget.vehicleId,
+                                        ) ==
+                                        true
+                                    ? Navigator.popAndPushNamed(
+                                        context,
+                                        '/home',
+                                      )
+                                    : ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar),
+                                keyTest: "add_maintenance_save_button_web",
                               ),
                             ),
                           ),
@@ -241,6 +258,7 @@ class _AddMaintenanceWebPage extends State<AddMaintenanceWebPage> {
                                 text: "Retour",
                                 onPress: () => Navigator.pop(context),
                                 secondary: true,
+                                keyTest: "add_maintenance_back_button_web",
                               ),
                             ),
                           ),

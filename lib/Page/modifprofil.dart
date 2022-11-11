@@ -96,9 +96,9 @@ class _ModifProfilPage extends State<ModifProfilPage> {
     }
   }
 
-    void _callApi() async {
-
-    final bool response = await modifProfil(data.token, firstname, lastname, data.user.picturePath, data);
+  void _callApi() async {
+    final bool response = await modifProfil(
+        data.token, firstname, lastname, data.user.picturePath, data);
 
     if (response == true) {
       if (mounted) {
@@ -114,28 +114,22 @@ class _ModifProfilPage extends State<ModifProfilPage> {
   void _camera() async {
     await availableCameras().then(
       (
-        List<CameraDescription>
-            value,
+        List<CameraDescription> value,
       ) =>
           Navigator.push(
         context,
-        MaterialPageRoute<
-            CameraPage>(
-          builder: (_) =>
-              CameraPage(
+        MaterialPageRoute<CameraPage>(
+          builder: (_) => CameraPage(
             cameras: value,
           ),
         ),
       ).then((_) {
         AppData data;
-        data =
-            Provider.of<AppData>(
+        data = Provider.of<AppData>(
           context,
           listen: false,
         );
-        if (data.user
-                .picturePath !=
-            "") {
+        if (data.user.picturePath != "") {
           setState(() {
             isThereAnImage = true;
           });
@@ -239,7 +233,8 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                                                             text: "Camera",
                                                             fontSizeText: 20,
                                                             fontWeight:
-                                                                FontWeight.normal,
+                                                                FontWeight
+                                                                    .normal,
                                                             color: navy,
                                                           ),
                                                         )
@@ -267,7 +262,8 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                                                         size: 30,
                                                       ),
                                                       Padding(
-                                                        padding: EdgeInsets.only(
+                                                        padding:
+                                                            EdgeInsets.only(
                                                           left: 10,
                                                         ),
                                                         child: CommonText(
@@ -300,7 +296,8 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                                   height: 200,
                                   child: Image.file(
                                     File(
-                                      Provider.of<AppData>(context, listen: false)
+                                      Provider.of<AppData>(context,
+                                              listen: false)
                                           .user
                                           .picturePath,
                                     ),
@@ -355,6 +352,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                           value: firstname,
                           placeholder: firstname,
                           onChangeText: _onFirstNameChange,
+                          keyTest: "modif_profile_input_first_name",
                         ),
                       ),
                       Padding(
@@ -363,14 +361,16 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                           value: lastname,
                           placeholder: lastname,
                           onChangeText: _onLastNameChange,
+                          keyTest: "modif_profile_input_last_name",
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 40),
                         child: Button(
-                            text: "Sauvegarder",
-                            onPress: _callApi,
-                          ),
+                          text: "Sauvegarder",
+                          onPress: _callApi,
+                          keyTest: "modif_profile_save_button",
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 25),
@@ -378,6 +378,7 @@ class _ModifProfilPage extends State<ModifProfilPage> {
                           text: "Retour",
                           onPress: () => Navigator.pop(context),
                           secondary: true,
+                          keyTest: "modif_profile_come_back_button",
                         ),
                       ),
                     ],

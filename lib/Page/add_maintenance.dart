@@ -28,7 +28,6 @@ class AddMaintenancePage extends StatefulWidget {
 }
 
 class _AddMaintenancePage extends State<AddMaintenancePage> {
-  
   late String mileage;
   String date = "";
   String price = "";
@@ -88,8 +87,8 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
   }
 
   void _callApi() async {
-
-    final bool response = await addMaintenance(data.token, mileage, date, price, name, center, widget.vehicleId);
+    final bool response = await addMaintenance(
+        data.token, mileage, date, price, name, center, widget.vehicleId);
 
     if (response == true) {
       if (mounted) {
@@ -157,6 +156,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                           value: mileage,
                           placeholder: "Mile",
                           onChangeText: _onMileageChange,
+                          keyTest: "maintenance_input_mile",
                         ),
                       ),
                       Padding(
@@ -173,7 +173,8 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                           child: Container(
                             decoration: const BoxDecoration(
                               color: white,
-                              borderRadius: BorderRadius.all(Radius.circular(16)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16)),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.only(
@@ -233,6 +234,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                           value: price,
                           placeholder: "Price",
                           onChangeText: _onPriceChange,
+                          keyTest: "add_maintenance_input_price",
                         ),
                       ),
                       Padding(
@@ -241,6 +243,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                           value: name,
                           placeholder: "Name",
                           onChangeText: _onNameChange,
+                          keyTest: "add_maintenance_input_name",
                         ),
                       ),
                       Padding(
@@ -249,6 +252,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                           value: center,
                           placeholder: "Center",
                           onChangeText: _onCenterChange,
+                          keyTest: "add_maintenance_input_center",
                         ),
                       ),
                       Padding(
@@ -256,6 +260,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                         child: Button(
                           text: "Sauvegarder",
                           onPress: _callApi,
+                          keyTest: "add_maintenance_save_button",
                         ),
                       ),
                       Padding(
@@ -264,6 +269,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                           text: "Retour",
                           onPress: () => Navigator.pop(context),
                           secondary: true,
+                          keyTest: "add_maintenance_back_button",
                         ),
                       ),
                     ],

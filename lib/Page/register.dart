@@ -148,6 +148,7 @@ class _RegisterPage extends State<RegisterPage> {
                                     value: firstname,
                                     placeholder: "Prénom",
                                     onChangeText: _onFirstnameChange,
+                                    keyTest: "sign_up_input_first_name",
                                   ),
                                 ),
                                 const Align(
@@ -169,6 +170,7 @@ class _RegisterPage extends State<RegisterPage> {
                                     value: lastname,
                                     placeholder: "Nom",
                                     onChangeText: _onLastnameChange,
+                                    keyTest: "sign_up_input_last_name",
                                   ),
                                 ),
                                 const Align(
@@ -190,6 +192,7 @@ class _RegisterPage extends State<RegisterPage> {
                                     value: email,
                                     placeholder: "Adresse E-mail",
                                     onChangeText: _onEmailChange,
+                                    keyTest: "sign_up_input_email",
                                   ),
                                 ),
                                 const Align(
@@ -212,6 +215,7 @@ class _RegisterPage extends State<RegisterPage> {
                                     placeholder: "Mot de passe",
                                     onChangeText: _onPasswordChange,
                                     secure: true,
+                                    keyTest: "sign_up_input_pw",
                                   ),
                                 ),
                                 Padding(
@@ -234,6 +238,7 @@ class _RegisterPage extends State<RegisterPage> {
                                     text: "S'inscrire",
                                     onPress: _registerPress,
                                     isLoading: isLoading,
+                                    keyTest: "sign_up_button",
                                   ),
                                 )
                               ],
