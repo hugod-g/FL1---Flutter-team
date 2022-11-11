@@ -20,6 +20,7 @@ void main() {
       await driver.close();
     });
     test("check health", () async {
+      await driver.checkHealth();
     });
 
     test("ACCOUNT SIGN IN", () async {

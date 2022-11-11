@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/class/app_class.dart';
 import 'package:mon_petit_entretien/components/button.dart';
 import 'package:mon_petit_entretien/components/web/burger_menu.dart';
+import 'package:mon_petit_entretien/config/constants.dart';
 import 'package:mon_petit_entretien/services/api/auth.dart';
 import 'package:mon_petit_entretien/style/fonts.dart';
 import 'package:provider/provider.dart';
@@ -146,7 +147,7 @@ class _ProfilePage extends State<ProfilePage> {
                                           fit: BoxFit.fill,
                                         )
                                       :  Image.network(
-                                          "http://152.228.134.93:1339/${data.user.picturePath}",
+                                          "$apiUrl/${data.user.picturePath}",
                                           fit: BoxFit.fill,
                                         ),
                             ),
@@ -170,7 +171,7 @@ class _ProfilePage extends State<ProfilePage> {
                                           fit: BoxFit.fill,
                                         )
                                       : Image.network(
-                                          "http://152.228.134.93:1339/${data.user.picturePath}",
+                                          "$apiUrl/${data.user.picturePath}",
                                           fit: BoxFit.fill,
                                         ),
                             ),

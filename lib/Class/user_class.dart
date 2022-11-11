@@ -26,7 +26,14 @@ class UserModel extends ChangeNotifier {
         .toList();
 
     return UserModel(
-        id, firstName, lastName, username, admin, picturePath ?? "", centers,);
+      id,
+      firstName,
+      lastName,
+      username,
+      admin,
+      picturePath ?? "",
+      centers,
+    );
   }
 
   String lastName = "";

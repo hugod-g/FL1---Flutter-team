@@ -8,7 +8,7 @@ import 'package:mon_petit_entretien/page/modif_profile.dart';
 import 'package:mon_petit_entretien/page/profile.dart';
 import 'package:mon_petit_entretien/page/statistics.dart';
 import 'package:mon_petit_entretien/page/update_kilometrage.dart';
-import 'package:mon_petit_entretien/page/vue_vehicule.dart';
+import 'package:mon_petit_entretien/page/vehicle_view.dart';
 import 'package:provider/provider.dart';
 
 import 'class/app_class.dart';
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
           '/modif_profile': (BuildContext context) => const ModifProfilePage(),
           '/addMaintenance': (BuildContext context) =>
               const AddMaintenancePage(),
-          '/vue_vehicle': (BuildContext context) => const VehicleView(),
+          '/vehicle_view': (BuildContext context) => const VehicleView(),
           '/add_vehicle': (BuildContext constext) => const AddVehicule(),
           '/update_km': (BuildContext constext) => const UpdateKilometrage(),
         },

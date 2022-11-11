@@ -12,7 +12,7 @@ Future<bool> addMaintenance(
   String name,
   String center,
   String vehicleId,
-  ) async {
+) async {
   final http.Response response = await http.post(
     Uri.parse(maintenanceEndPoint),
     headers: <String, String>{

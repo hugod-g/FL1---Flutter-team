@@ -21,9 +21,18 @@ class VehiculeModel extends ChangeNotifier {
     final String id = data['_id'] as String;
     final List<dynamic> maintenances = data['maintenances'] as List<dynamic>;
     final List<MaintenanceModel> tmpMaintenances = maintenances
-        .map<MaintenanceModel>((dynamic json) => MaintenanceModel.fromJson(json))
+        .map<MaintenanceModel>(
+          (dynamic json) => MaintenanceModel.fromJson(json),
+        )
         .toList();
-    return VehiculeModel(name, kilometrage, picturePath, date, id, tmpMaintenances);
+    return VehiculeModel(
+      name,
+      kilometrage,
+      picturePath,
+      date,
+      id,
+      tmpMaintenances,
+    );
   }
 
   String name;
@@ -65,7 +74,7 @@ class VehiculeModel extends ChangeNotifier {
     notifyListeners();
   }
 
-    void updateMaintenance(List<MaintenanceModel> newVar) {
+  void updateMaintenance(List<MaintenanceModel> newVar) {
     maintenances = newVar;
     notifyListeners();
   }

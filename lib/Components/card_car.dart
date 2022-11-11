@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/class/app_class.dart';
 import 'package:mon_petit_entretien/class/maintenance_class.dart';
+import 'package:mon_petit_entretien/config/constants.dart';
 import 'package:mon_petit_entretien/style/colors.dart';
 import 'package:mon_petit_entretien/style/fonts.dart';
 import 'package:provider/provider.dart';
+
 class CardCar extends StatefulWidget {
   const CardCar({
     super.key,
@@ -38,8 +40,15 @@ class CardCarState extends State<CardCar> {
       child: InkWell(
         onTap: () {
           final AppData data = Provider.of<AppData>(context, listen: false);
-          data.updateDataThisVehicle(widget.name, int.parse(widget.mileage), widget.pathImage, widget.date, widget.id, widget.maintenance);
-          Navigator.pushNamed(context, '/vue_vehicle');
+          data.updateDataThisVehicle(
+            widget.name,
+            int.parse(widget.mileage),
+            widget.pathImage,
+            widget.date,
+            widget.id,
+            widget.maintenance,
+          );
+          Navigator.pushNamed(context, '/vehicle_view');
         },
         child: Ink(
           child: Stack(
@@ -51,7 +60,7 @@ class CardCarState extends State<CardCar> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(
-                      "http://152.228.134.93:1339/${widget.pathImage}",
+                      "$apiUrl/${widget.pathImage}",
                       loadingBuilder: (
                         BuildContext context,
                         Widget child,

@@ -1,1 +1,1 @@
-const String apiUrl = "http://152.228.134.93:1339";
+const String apiUrl = "https://api-hugo.stocky-agency.fr";
