@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/class/app_class.dart';
 import 'package:mon_petit_entretien/class/maintenance_class.dart';
 import 'package:mon_petit_entretien/components/button.dart';
-import 'package:mon_petit_entretien/services/api/deleted_mantenance.dart';
 import 'package:mon_petit_entretien/config/constants.dart';
+import 'package:mon_petit_entretien/services/api/deleted_mantenance.dart';
 import 'package:mon_petit_entretien/style/colors.dart';
 import 'package:mon_petit_entretien/style/fonts.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +19,6 @@ class VehicleView extends StatefulWidget {
 }
 
 class _VehicleView extends State<VehicleView> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -179,7 +178,8 @@ class _VehicleView extends State<VehicleView> {
                 width: kIsWeb ? 500 : 300,
                 child: Button(
                   text: "Ajouter un entretien",
-                  onPress: () => Navigator.pushNamed(context, '/addMaintenance'),
+                  onPress: () =>
+                      Navigator.pushNamed(context, '/addMaintenance'),
                   keyTest: "add_maintenance_button",
                 ),
               ),
@@ -237,7 +237,6 @@ class CardVehicule extends StatefulWidget {
 }
 
 class _CardVehicule extends State<CardVehicule> {
-
   late AppData data;
 
   @override
@@ -247,10 +246,9 @@ class _CardVehicule extends State<CardVehicule> {
   }
 
   SnackBar _status(bool status) {
-
     String message = "";
-    
-    if(status) {
+
+    if (status) {
       message = "Vous avez suprimer un entretiens";
     } else {
       message = "Nous n'avons pas réussie à suprimer la maintenance";
@@ -335,9 +333,11 @@ class _CardVehicule extends State<CardVehicule> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Row(
-                  children: <Widget> [
+                  children: <Widget>[
                     CommonText(
-                      text: widget.title.length >= 10 ? '${widget.title.substring(0, 6)}...' : widget.title,
+                      text: widget.title.length >= 10
+                          ? '${widget.title.substring(0, 6)}...'
+                          : widget.title,
                       fontSizeText: 19,
                       fontWeight: fontBold,
                       paddingLeft: 16,
@@ -374,7 +374,9 @@ class _CardVehicule extends State<CardVehicule> {
                   color: white,
                 ),
                 CommonText(
-                  text: widget.enterprise.length >= 10 ? '${widget.enterprise.substring(0, 6)}...' : widget.enterprise,
+                  text: widget.enterprise.length >= 10
+                      ? '${widget.enterprise.substring(0, 6)}...'
+                      : widget.enterprise,
                   fontSizeText: 15,
                   fontWeight: fontLight,
                   paddingTop: 16,
