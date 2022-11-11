@@ -98,9 +98,9 @@ class _ModifProfilePage extends State<ModifProfilePage> {
     }
   }
 
-    void _callApi() async {
-
-    final bool response = await modifProfil(data.token, firstname, lastname, data.user.picturePath, data.user.pickedFileBytes, data);
+  void _callApi() async {
+    final bool response = await modifProfil(data.token, firstname, lastname,
+        data.user.picturePath, data.user.pickedFileBytes, data);
 
     if (response == true) {
       if (mounted) {
@@ -116,28 +116,22 @@ class _ModifProfilePage extends State<ModifProfilePage> {
   void _camera() async {
     await availableCameras().then(
       (
-        List<CameraDescription>
-            value,
+        List<CameraDescription> value,
       ) =>
           Navigator.push(
         context,
-        MaterialPageRoute<
-            CameraPage>(
-          builder: (_) =>
-              CameraPage(
+        MaterialPageRoute<CameraPage>(
+          builder: (_) => CameraPage(
             cameras: value,
           ),
         ),
       ).then((_) {
         AppData data;
-        data =
-            Provider.of<AppData>(
+        data = Provider.of<AppData>(
           context,
           listen: false,
         );
-        if (data.user
-                .picturePath !=
-            "") {
+        if (data.user.picturePath != "") {
           setState(() {
             isThereAnImage = true;
           });
@@ -149,7 +143,6 @@ class _ModifProfilePage extends State<ModifProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: lightBlue,
@@ -163,40 +156,40 @@ class _ModifProfilePage extends State<ModifProfilePage> {
               Center(
                 child: Column(
                   children: <Widget>[
-                    if(kIsWeb)
-                        const CommonText(
-                          text: 'Modification du profil',
-                          fontSizeText: 30,
-                          fontWeight: fontMedium,
-                          paddingBot: 15,
-                          color: navy,
-                        )
-                      else
-                        Column(
-                          children: const <Widget> [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: CommonText(
-                                text: 'Modification',
-                                fontSizeText: 30,
-                                fontWeight: fontLight,
-                                paddingTop: 24,
-                                paddingBot: 8,
-                                color: navy,
-                              ),
+                    if (kIsWeb)
+                      const CommonText(
+                        text: 'Modification du profil',
+                        fontSizeText: 30,
+                        fontWeight: fontMedium,
+                        paddingBot: 15,
+                        color: navy,
+                      )
+                    else
+                      Column(
+                        children: const <Widget>[
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: CommonText(
+                              text: 'Modification',
+                              fontSizeText: 30,
+                              fontWeight: fontLight,
+                              paddingTop: 24,
+                              paddingBot: 8,
+                              color: navy,
                             ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: CommonText(
-                                text: 'du profil',
-                                fontSizeText: 30,
-                                fontWeight: fontMedium,
-                                paddingBot: 15,
-                                color: navy,
-                              ),
+                          ),
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: CommonText(
+                              text: 'du profil',
+                              fontSizeText: 30,
+                              fontWeight: fontMedium,
+                              paddingBot: 15,
+                              color: navy,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
+                      ),
                     const Align(
                       alignment: kIsWeb ? Alignment.center : Alignment.topLeft,
                       child: CommonText(
@@ -230,37 +223,39 @@ class _ModifProfilePage extends State<ModifProfilePage> {
                                         ),
                                         child: Column(
                                           children: <Widget>[
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                bottom: 10,
-                                              ),
-                                              child: InkWell(
-                                                onTap: _camera,
-                                                child: Ink(
-                                                  child: Row(
-                                                    children: const <Widget>[
-                                                      Icon(
-                                                        Icons.camera_alt,
-                                                        size: 30,
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                          left: 10,
+                                            if (!kIsWeb)
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  bottom: 10,
+                                                ),
+                                                child: InkWell(
+                                                  onTap: _camera,
+                                                  child: Ink(
+                                                    child: Row(
+                                                      children: const <Widget>[
+                                                        Icon(
+                                                          Icons.camera_alt,
+                                                          size: 30,
                                                         ),
-                                                        child: CommonText(
-                                                          text: "Camera",
-                                                          fontSizeText: 20,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: navy,
-                                                        ),
-                                                      )
-                                                    ],
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                            left: 10,
+                                                          ),
+                                                          child: CommonText(
+                                                            text: "Camera",
+                                                            fontSizeText: 20,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                            color: navy,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
                                             InkWell(
                                               onTap: () {
                                                 takePictureGaleryLoaded()
