@@ -288,6 +288,7 @@ class _AddVehicule extends State<AddVehicule> {
                         color: navy,
                       ),
                       GestureDetector(
+                        key: const Key("add_image_button"),
                         onTap: () {
                           showModalBottomSheet<void>(
                             context: context,
@@ -315,6 +316,9 @@ class _AddVehicule extends State<AddVehicule> {
                                                   bottom: 10,
                                                 ),
                                                 child: InkWell(
+                                                  key: const Key(
+                                                    "camera_button",
+                                                  ),
                                                   onTap: () async {
                                                     await availableCameras()
                                                         .then(
@@ -498,6 +502,7 @@ class _AddVehicule extends State<AddVehicule> {
                                 value: name,
                                 placeholder: "Nom",
                                 onChangeText: _onNameChange,
+                                keyTest: "add_vehicule_input_name",
                               ),
                             ),
                           ),
@@ -509,6 +514,7 @@ class _AddVehicule extends State<AddVehicule> {
                             value: name,
                             placeholder: "Nom",
                             onChangeText: _onNameChange,
+                            keyTest: "add_vehicule_input_name",
                           ),
                         ),
                       if (kIsWeb)
@@ -521,6 +527,7 @@ class _AddVehicule extends State<AddVehicule> {
                                 value: kilometer,
                                 placeholder: "Kilométrage (en km)",
                                 onChangeText: _onKMChange,
+                                keyTest: "add_vehicule_input_km",
                               ),
                             ),
                           ),
@@ -533,6 +540,7 @@ class _AddVehicule extends State<AddVehicule> {
                             placeholder: "Kilométrage (en km)",
                             onChangeText: _onKMChange,
                             textinput: TextInputType.number,
+                            keyTest: "add_vehicule_input_km",
                           ),
                         ),
                       if (kIsWeb)
@@ -565,6 +573,9 @@ class _AddVehicule extends State<AddVehicule> {
                                     ),
                                     child: Center(
                                       child: TextField(
+                                        key: const Key(
+                                          "add_vehicule_input_date",
+                                        ),
                                         controller: dateinput,
                                         decoration: const InputDecoration(
                                           border: InputBorder.none,
@@ -584,6 +595,8 @@ class _AddVehicule extends State<AddVehicule> {
                                         onTap: () async {
                                           final DateTime? pickedDate =
                                               await showDatePicker(
+                                            initialEntryMode:
+                                                DatePickerEntryMode.input,
                                             context: context,
                                             initialDate: DateTime.now(),
                                             firstDate: DateTime(
@@ -703,6 +716,7 @@ class _AddVehicule extends State<AddVehicule> {
                                   text: "Ajouter véhicule",
                                   onPress: _onAddVehicule,
                                   isLoading: isLoadedVehicule,
+                                  keyTest: "add_vehicule_button",
                                 ),
                               ),
                             ),
@@ -726,6 +740,7 @@ class _AddVehicule extends State<AddVehicule> {
                               text: "Ajouter véhicule",
                               onPress: _onAddVehicule,
                               isLoading: isLoadedVehicule,
+                              keyTest: "add_vehicule_button",
                             ),
                           ),
                         ),

@@ -7,7 +7,7 @@ import 'package:mon_petit_entretien/Page/gestion.dart';
 import 'package:mon_petit_entretien/Page/modif_profile.dart';
 import 'package:mon_petit_entretien/Page/profile.dart';
 import 'package:mon_petit_entretien/Page/statistics.dart';
-import 'package:mon_petit_entretien/Page/vehicle_view.dart';
+import 'package:mon_petit_entretien/Page/vue_vehicule.dart';
 import 'package:provider/provider.dart';
 
 import 'Class/app_class.dart';
@@ -38,7 +38,8 @@ class MyApp extends StatelessWidget {
           '/admin': (BuildContext context) => const AdminPage(),
           '/profile': (BuildContext context) => const ProfilePage(),
           '/modif_profile': (BuildContext context) => const ModifProfilePage(),
-          '/addMaintenance': (BuildContext context) => const AddMaintenancePage(),
+          '/addMaintenance': (BuildContext context) =>
+              const AddMaintenancePage(),
           '/vue_vehicle': (BuildContext context) => const VehicleView(),
           '/add_vehicle': (BuildContext constext) => const AddVehicule(),
         },

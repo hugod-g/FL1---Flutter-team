@@ -170,6 +170,7 @@ class _LoginPage extends State<LoginPage> {
                                 value: email,
                                 placeholder: "Adresse E-mail",
                                 onChangeText: _onEmailChange,
+                                keyTest: "sign_in_input_email",
                               ),
                             ),
                             const Text(
@@ -189,6 +190,7 @@ class _LoginPage extends State<LoginPage> {
                                 placeholder: "Mot de passe",
                                 secure: true,
                                 onChangeText: _onPasswordChange,
+                                keyTest: "sign_in_input_pw",
                               ),
                             ),
                             Padding(
@@ -226,6 +228,7 @@ class _LoginPage extends State<LoginPage> {
                                 text: "Se Connecter",
                                 onPress: _onConnectPress,
                                 isLoading: isLoading,
+                                keyTest: "sign_in_button",
                               ),
                             ),
                             Padding(
@@ -234,6 +237,7 @@ class _LoginPage extends State<LoginPage> {
                                 text: "S'inscrire",
                                 onPress: _onSignUpPress,
                                 secondary: true,
+                                keyTest: "go_to_sign_up_page",
                               ),
                             )
                           ],

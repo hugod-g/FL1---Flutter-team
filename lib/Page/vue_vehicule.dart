@@ -19,7 +19,6 @@ class VehicleView extends StatefulWidget {
 class _VehicleView extends State<VehicleView> {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: lightBlue,
@@ -43,7 +42,7 @@ class _VehicleView extends State<VehicleView> {
                   ),
                 ),
               ),
-              if(!kIsWeb)
+              if (!kIsWeb)
                 Padding(
                   padding:
                       const EdgeInsets.only(top: 40, left: 12.5, right: 12.5),
@@ -74,7 +73,9 @@ class _VehicleView extends State<VehicleView> {
                     child: Column(
                       children: <Widget>[
                         CommonText(
-                          text: Provider.of<AppData>(context, listen: false).thisVehicles.name,
+                          text: Provider.of<AppData>(context, listen: false)
+                              .thisVehicles
+                              .name,
                           fontSizeText: 25,
                           fontWeight: fontBold,
                           paddingTop: 16,
@@ -96,7 +97,10 @@ class _VehicleView extends State<VehicleView> {
                                     size: 25,
                                   ),
                                   CommonText(
-                                    text: Provider.of<AppData>(context, listen: false).thisVehicles.date.substring(0,10),
+                                    text: Provider.of<AppData>(
+                                      context,
+                                      listen: false,
+                                    ).thisVehicles.date.substring(0, 10),
                                     fontSizeText: 17.5,
                                     fontWeight: fontLight,
                                     color: navy,
@@ -110,7 +114,8 @@ class _VehicleView extends State<VehicleView> {
                                     size: 25,
                                   ),
                                   CommonText(
-                                    text: '${Provider.of<AppData>(context, listen: false).thisVehicles.kilometrage} km',
+                                    text:
+                                        '${Provider.of<AppData>(context, listen: false).thisVehicles.kilometrage} km',
                                     fontSizeText: 17.5,
                                     fontWeight: fontLight,
                                     color: navy,
@@ -143,11 +148,11 @@ class _VehicleView extends State<VehicleView> {
                   fontWeight: fontBold,
                   color: navy,
                 ),
-                if(!kIsWeb)
-                Icon(
-                  Icons.car_repair,
-                  size: 35,
-                ),
+                if (!kIsWeb)
+                  Icon(
+                    Icons.car_repair,
+                    size: 35,
+                  ),
               ],
             ),
           ),
@@ -158,16 +163,19 @@ class _VehicleView extends State<VehicleView> {
             scrollDirection: Axis.horizontal,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children:
-                Provider.of<AppData>(context, listen: false).thisVehicles.maintenances.map((MaintenanceModel info) =>
-                  CardVehicule(
-                    prix: info.price.toString(),
-                    title: info.name,
-                    date: info.date.substring(0, 10),
-                    km: info.kilometrage.toString(),
-                    enterprise: info.center,
-                  ),
-                ).toList(),
+              children: Provider.of<AppData>(context, listen: false)
+                  .thisVehicles
+                  .maintenances
+                  .map(
+                    (MaintenanceModel info) => CardVehicule(
+                      prix: info.price.toString(),
+                      title: info.name,
+                      date: info.date.substring(0, 10),
+                      km: info.kilometrage.toString(),
+                      enterprise: info.center,
+                    ),
+                  )
+                  .toList(),
             ),
           ),
           Padding(
@@ -175,12 +183,13 @@ class _VehicleView extends State<VehicleView> {
             child: SizedBox(
               width: kIsWeb ? 500 : 300,
               child: Button(
-                text: "Ajouter un entretient",
+                text: "Ajouter un entretien",
                 onPress: () => Navigator.pushNamed(context, '/addMaintenance'),
+                keyTest: "add_maintenance_button",
               ),
             ),
           ),
-          if(kIsWeb)
+          if (kIsWeb)
             Padding(
               padding: const EdgeInsets.only(top: 40),
               child: SizedBox(
@@ -188,6 +197,7 @@ class _VehicleView extends State<VehicleView> {
                 child: Button(
                   text: "Retour",
                   onPress: () => Navigator.pop(context),
+                  keyTest: "vue_vehicule_back_button",
                 ),
               ),
             ),

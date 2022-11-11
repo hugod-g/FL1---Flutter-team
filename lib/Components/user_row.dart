@@ -10,11 +10,15 @@ class UserRow extends StatefulWidget {
     required this.user,
     required this.onPress,
     required this.onDeletePress,
+    required this.keyTestUpAdmin,
+    required this.keyTestDelete,
   });
 
   final UserModel user;
   final void Function(String userId)? onPress;
   final void Function(String userId)? onDeletePress;
+  final String keyTestUpAdmin;
+  final String keyTestDelete;
 
   @override
   UserRowState createState() => UserRowState();
@@ -71,10 +75,12 @@ class UserRowState extends State<UserRow> {
               Row(
                 children: <Widget>[
                   IconButton(
+                    key: Key(widget.keyTestUpAdmin),
                     onPressed: _onButtonPress,
                     icon: const Icon(Icons.upgrade),
                   ),
                   IconButton(
+                    key: Key(widget.keyTestDelete),
                     onPressed: _onDeletePress,
                     icon: const Icon(Icons.delete),
                   ),

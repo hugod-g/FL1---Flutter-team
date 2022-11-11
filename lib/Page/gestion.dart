@@ -40,23 +40,35 @@ class _GestionPage extends State<GestionPage> {
   List<BottomNavigationBarItem> buildBottomNavBarItems() {
     return <BottomNavigationBarItem>[
       const BottomNavigationBarItem(
-        icon: Icon(Icons.car_repair),
+        icon: Icon(
+          Icons.car_repair,
+          key: Key("nav_bar_vehicule"),
+        ),
         label: 'Véhicules',
         backgroundColor: lightBlue,
       ),
       const BottomNavigationBarItem(
-        icon: Icon(Icons.query_stats_sharp),
+        icon: Icon(
+          Icons.query_stats_sharp,
+          key: Key("nav_bar_stat"),
+        ),
         label: 'Statistiques',
         backgroundColor: lightBlue,
       ),
       const BottomNavigationBarItem(
-        icon: Icon(Icons.people),
+        icon: Icon(
+          Icons.people,
+          key: Key("nav_bar_profil"),
+        ),
         label: 'Profil',
         backgroundColor: lightBlue,
       ),
       if (Provider.of<AppData>(context, listen: false).user.admin)
         const BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
+          icon: Icon(
+            Icons.settings,
+            key: Key("nav_bar_admin"),
+          ),
           label: 'Admin',
           backgroundColor: lightBlue,
         )

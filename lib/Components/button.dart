@@ -7,6 +7,7 @@ class Button extends StatefulWidget {
     super.key,
     required this.text,
     required this.onPress,
+    required this.keyTest,
     this.secondary,
     this.important,
     this.isLoading,
@@ -17,6 +18,7 @@ class Button extends StatefulWidget {
   final bool? secondary;
   final bool? important;
   final bool? isLoading;
+  final String keyTest;
 
   @override
   ButtonState createState() => ButtonState();
@@ -35,6 +37,7 @@ class ButtonState extends State<Button> {
       color: white,
       borderRadius: const BorderRadius.all(Radius.circular(16)),
       child: Container(
+        key: Key(widget.keyTest),
         width: double.infinity,
         height: 54,
         decoration: BoxDecoration(
