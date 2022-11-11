@@ -171,6 +171,7 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                                     ),
                                   )
                                 },
+                                keyTest: "go_to_modif_profile_web",
                               ),
                             ),
                           ),
@@ -182,6 +183,7 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                                 text: "Déconnexion",
                                 onPress: _onLogout,
                                 secondary: true,
+                                keyTest: "go_to_disconnect_web",
                               ),
                             ),
                           ),
@@ -194,6 +196,7 @@ class _ProfilWebPage extends State<ProfilWebPage> {
                                 onPress: _onDeleteAccount,
                                 important: true,
                                 isLoading: isLoadingDelete,
+                                keyTest: "go_to_delete_web",
                               ),
                             ),
                           ),

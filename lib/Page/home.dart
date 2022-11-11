@@ -248,6 +248,7 @@ class _Home extends State<Home> {
                             value: search,
                             placeholder: "Rechercher",
                             onChangeText: _onSearchChange,
+                            keyTest: "home_input_search",
                           ),
                         ),
                       )
@@ -258,6 +259,7 @@ class _Home extends State<Home> {
                           value: search,
                           placeholder: "Rechercher",
                           onChangeText: _onSearchChange,
+                          keyTest: "home_input_search",
                         ),
                       ),
                     const CommonText(
@@ -277,6 +279,7 @@ class _Home extends State<Home> {
                               text: "A-Z",
                               onPress: _onSelectAlph,
                               isSelect: select["A-Z"],
+                              keyTest: "alph_sort_button",
                             ),
                           ),
                           Padding(
@@ -285,6 +288,7 @@ class _Home extends State<Home> {
                               text: "KM",
                               onPress: _onSelectKM,
                               isSelect: select["KM"],
+                              keyTest: "km_sort_button",
                             ),
                           ),
                           Padding(
@@ -293,6 +297,7 @@ class _Home extends State<Home> {
                               text: "DATE",
                               onPress: _onSelectDate,
                               isSelect: select["DATE"],
+                              keyTest: "date_sort_button",
                             ),
                           ),
                         ],
@@ -307,16 +312,19 @@ class _Home extends State<Home> {
                               text: "A-Z",
                               onPress: _onSelectAlph,
                               isSelect: select["A-Z"],
+                              keyTest: "alph_sort_button",
                             ),
                             ButtonSelect(
                               text: "KM",
                               onPress: _onSelectKM,
                               isSelect: select["KM"],
+                              keyTest: "km_sort_button",
                             ),
                             ButtonSelect(
                               text: "DATE",
                               onPress: _onSelectDate,
                               isSelect: select["DATE"],
+                              keyTest: "date_sort_button",
                             ),
                           ],
                         ),
@@ -332,6 +340,7 @@ class _Home extends State<Home> {
                             Padding(
                               padding: const EdgeInsets.only(right: 20),
                               child: InkWell(
+                                key: const Key("go_to_add_vehicule_page"),
                                 onTap: () {
                                   Navigator.push(
                                     context,

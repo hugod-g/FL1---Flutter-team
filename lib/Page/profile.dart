@@ -177,6 +177,7 @@ class _ProfilPage extends State<ProfilPage> {
                                 ),
                               )
                             },
+                            keyTest: "go_to_modif_profile",
                           ),
                         ),
                         Padding(
@@ -185,6 +186,7 @@ class _ProfilPage extends State<ProfilPage> {
                             text: "Déconnexion",
                             onPress: _onLogout,
                             secondary: true,
+                            keyTest: "go_to_disconnect",
                           ),
                         ),
                         Padding(
@@ -194,6 +196,7 @@ class _ProfilPage extends State<ProfilPage> {
                             onPress: _onDeleteAccount,
                             important: true,
                             isLoading: isLoadingDelete,
+                            keyTest: "go_to_delete_account",
                           ),
                         ),
                       ],
