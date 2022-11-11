@@ -7,12 +7,14 @@ class ButtonSelect extends StatefulWidget {
     super.key,
     required this.text,
     required this.onPress,
+    required this.keyTest,
     this.isSelect,
   });
 
   final String text;
   final void Function()? onPress;
   final bool? isSelect;
+  final String keyTest;
 
   @override
   ButtonSelectState createState() => ButtonSelectState();
@@ -31,6 +33,7 @@ class ButtonSelectState extends State<ButtonSelect> {
       color: white,
       borderRadius: const BorderRadius.all(Radius.circular(16)),
       child: Container(
+        key: Key(widget.keyTest),
         width: 85,
         height: 35,
         decoration: BoxDecoration(

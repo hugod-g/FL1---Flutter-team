@@ -19,7 +19,6 @@ class AddMaintenancePage extends StatefulWidget {
 }
 
 class _AddMaintenancePage extends State<AddMaintenancePage> {
-  
   late String mileage;
   String date = "";
   String price = "";
@@ -79,6 +78,8 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
   }
 
   void _callApi() async {
+    final bool response = await addMaintenance(
+        data.token, mileage, date, price, name, center, widget.vehicleId);
 
     final bool response = await addMaintenance(data.token, mileage, date, price, name, center, data.thisVehicles.id);
 
@@ -161,6 +162,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                           value: mileage,
                           placeholder: "Mile",
                           onChangeText: _onMileageChange,
+                          keyTest: "maintenance_input_mile",
                         ),
                       ),
                     ),
@@ -240,6 +242,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                           value: price,
                           placeholder: "Price",
                           onChangeText: _onPriceChange,
+                          keyTest: "add_maintenance_input_price",
                         ),
                       ),
                     ),
@@ -251,6 +254,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                           value: name,
                           placeholder: "Name",
                           onChangeText: _onNameChange,
+                          keyTest: "add_maintenance_input_name",
                         ),
                       ),
                     ),
@@ -262,6 +266,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                           value: center,
                           placeholder: "Center",
                           onChangeText: _onCenterChange,
+                          keyTest: "add_maintenance_input_center",
                         ),
                       ),
                     ),
@@ -272,6 +277,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                         child: Button(
                           text: "Sauvegarder",
                           onPress: _callApi,
+                          keyTest: "add_maintenance_save_button",
                         ),
                       ),
                     ),
@@ -283,6 +289,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                           text: "Retour",
                           onPress: () => Navigator.pop(context),
                           secondary: true,
+                          keyTest: "add_maintenance_back_button",
                         ),
                       ),
                     ),

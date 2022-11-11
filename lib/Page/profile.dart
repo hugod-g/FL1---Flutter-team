@@ -217,6 +217,7 @@ class _ProfilePage extends State<ProfilePage> {
                                 child: Button(
                                   text: "Modifier le profil",
                                   onPress: () => Navigator.pushNamed(context, '/modif_profile'),
+                                  keyTest: "go_to_modif_profile",
                                 ),
                               ),
                             ),
@@ -228,6 +229,7 @@ class _ProfilePage extends State<ProfilePage> {
                                   text: "Déconnexion",
                                   onPress: _onLogout,
                                   secondary: true,
+                                  keyTest: "go_to_disconnect",
                                 ),
                               ),
                             ),
@@ -240,15 +242,14 @@ class _ProfilePage extends State<ProfilePage> {
                                   onPress: _onDeleteAccount,
                                   important: true,
                                   isLoading: isLoadingDelete,
+                                   keyTest: "go_to_delete_account",
                                 ),
                               ),
                             ),
                           ],
                         ),
-                    ],
-                  ),
-                )
-              ],
+                            
+                           
             ),
           ),
         ],

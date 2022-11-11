@@ -8,6 +8,7 @@ class TextInput extends StatefulWidget {
     required this.value,
     required this.placeholder,
     required this.onChangeText,
+    required this.keyTest,
     this.textinput,
     this.secure = false,
   });
@@ -17,6 +18,7 @@ class TextInput extends StatefulWidget {
   final bool secure;
   final void Function(String)? onChangeText;
   final TextInputType? textinput;
+  final String keyTest;
 
   @override
   TextInputState createState() => TextInputState();
@@ -33,6 +35,7 @@ class TextInputState extends State<TextInput> {
         borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
       child: Container(
+        key: Key(widget.keyTest),
         decoration: const BoxDecoration(
           color: white,
           borderRadius: BorderRadius.all(Radius.circular(16)),

@@ -100,6 +100,7 @@ class _CameraPageState extends State<CameraPage> {
                   children: <Widget>[
                     Expanded(
                       child: IconButton(
+                        key: const Key("turn_camera_button"),
                         padding: EdgeInsets.zero,
                         iconSize: 30,
                         icon: Icon(
@@ -121,6 +122,7 @@ class _CameraPageState extends State<CameraPage> {
                     ),
                     Expanded(
                       child: IconButton(
+                        key: const Key("take_picture_button"),
                         onPressed: takePictureLoaded,
                         iconSize: 50,
                         padding: EdgeInsets.zero,

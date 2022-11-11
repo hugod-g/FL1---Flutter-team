@@ -130,6 +130,8 @@ class _AdminPage extends State<AdminPage> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10),
                           child: UserRow(
+                            keyTestDelete: "$user delete_button",
+                            keyTestUpAdmin: "$user up_admin_button",
                             user: user,
                             onPress: onUserPress,
                             onDeletePress: onDeleteUserPress,
