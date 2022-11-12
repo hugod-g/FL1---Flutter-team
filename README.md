@@ -32,12 +32,12 @@ At the root of the project, you will find different folders:
 
 In the lib folder, you will find the content of the application in this architecture:
 
-- **Class**: all the class in the apps.
-- **Components**: all the components composing the app. You will find shared and feature specific components.
-- **Config**: constants and configurations of the app such as endpoints url...
-- **Page**: contains all the different pages of the application, for the mobile and web also.
-- **Services**: contains all the api calls to the api.
-- **Style**: contains some global app style variables such as colors, fonts...
+- **class**: all the class in the apps.
+- **components**: all the components composing the app. You will find shared and feature specific components.
+- **config**: constants and configurations of the app such as endpoints url...
+- **page**: contains all the different pages of the application, for the mobile and web also.
+- **services**: contains all the api calls to the api.
+- **style**: contains some global app style variables such as colors, fonts...
 
 ## Library used
 

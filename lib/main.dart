@@ -1,16 +1,20 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:mon_petit_entretien/Page/add_vehicule.dart';
-import 'package:mon_petit_entretien/Page/admin.dart';
-import 'package:mon_petit_entretien/Page/gestion.dart';
-import 'package:mon_petit_entretien/Page/profile.dart';
-import 'package:mon_petit_entretien/Page/statistics.dart';
+import 'package:mon_petit_entretien/page/add_maintenance.dart';
+import 'package:mon_petit_entretien/page/add_vehicle.dart';
+import 'package:mon_petit_entretien/page/admin.dart';
+import 'package:mon_petit_entretien/page/gestion.dart';
+import 'package:mon_petit_entretien/page/modif_profile.dart';
+import 'package:mon_petit_entretien/page/profile.dart';
+import 'package:mon_petit_entretien/page/statistics.dart';
+import 'package:mon_petit_entretien/page/update_kilometrage.dart';
+import 'package:mon_petit_entretien/page/vehicle_view.dart';
 import 'package:provider/provider.dart';
 
-import 'Class/app_class.dart';
-import 'Page/home.dart';
-import 'Page/login.dart';
-import 'Page/register.dart';
+import 'class/app_class.dart';
+import 'page/home.dart';
+import 'page/login.dart';
+import 'page/register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,18 +29,22 @@ class MyApp extends StatelessWidget {
       create: (BuildContext context) => AppData(),
       child: MaterialApp(
         scrollBehavior: MyCustomScrollBehavior(),
+        initialRoute: '/',
         routes: <String, Widget Function(BuildContext)>{
-          '/login': (BuildContext context) => const LoginPage(),
+          '/': (BuildContext context) => const LoginPage(),
           '/register': (BuildContext context) => const RegisterPage(),
           '/home': (BuildContext context) => const Home(),
-          '/addVehicule': (BuildContext context) => const AddVehicule(),
           '/stats': (BuildContext context) => const Statistics(),
           '/gestion': (BuildContext context) => const GestionPage(),
           '/admin': (BuildContext context) => const AdminPage(),
-          '/profil': (BuildContext context) => const ProfilPage(),
+          '/profile': (BuildContext context) => const ProfilePage(),
+          '/modif_profile': (BuildContext context) => const ModifProfilePage(),
+          '/addMaintenance': (BuildContext context) =>
+              const AddMaintenancePage(),
+          '/vehicle_view': (BuildContext context) => const VehicleView(),
           '/add_vehicle': (BuildContext constext) => const AddVehicule(),
+          '/update_km': (BuildContext constext) => const UpdateKilometrage(),
         },
-        home: const LoginPage(),
       ),
     );
   }
