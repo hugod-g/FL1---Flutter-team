@@ -23,7 +23,7 @@ class BurgerMenu extends StatelessWidget {
               color: navy,
             ),
             child: CommonText(
-              text: "Bonjour Hugo",
+              text: "Bonjour",
               fontSizeText: 25,
               fontWeight: fontBold,
               color: white,
