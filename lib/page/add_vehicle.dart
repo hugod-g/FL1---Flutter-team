@@ -331,6 +331,7 @@ class _AddVehicule extends State<AddVehicule> {
                                                             builder: (_) =>
                                                                 CameraPage(
                                                               cameras: value,
+                                                              isVehicle: true,
                                                             ),
                                                           ),
                                                         ).then((_) {
