@@ -33,6 +33,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
 
   camera: ^0.10.0+4
+  cupertino_icons: ^1.0.5
   flutter:
     sdk: flutter
   flutter_driver:

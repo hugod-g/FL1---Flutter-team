@@ -77,7 +77,7 @@ class _ModifProfilePage extends State<ModifProfilePage> {
     final XFile? file =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (file == null) {
-      data.user.updatePicturePath(newPath);
+      data.user.updatePicturePathModif(newPath);
       return 401;
     } else {
       if (kIsWeb) {
@@ -88,7 +88,7 @@ class _ModifProfilePage extends State<ModifProfilePage> {
         });
       } else {
         newPath = file.path;
-        data.user.updatePicturePath(newPath);
+        data.user.updatePicturePathModif(newPath);
         setState(() {
           isThereAnImage = true;
         });
@@ -102,7 +102,7 @@ class _ModifProfilePage extends State<ModifProfilePage> {
       data.token,
       firstname,
       lastname,
-      data.user.picturePath,
+      data.user.picturePathModif,
       data.user.pickedFileBytes,
       isThereAnImage,
       data,
@@ -110,7 +110,7 @@ class _ModifProfilePage extends State<ModifProfilePage> {
 
     if (response == true) {
       if (mounted) {
-        await Navigator.pushNamed(context, "/gestion");
+        Navigator.pop(context);
       }
     } else {
       if (mounted) {
@@ -129,6 +129,7 @@ class _ModifProfilePage extends State<ModifProfilePage> {
         MaterialPageRoute<CameraPage>(
           builder: (_) => CameraPage(
             cameras: value,
+            isVehicle: false,
           ),
         ),
       ).then((_) {
@@ -137,7 +138,8 @@ class _ModifProfilePage extends State<ModifProfilePage> {
           context,
           listen: false,
         );
-        if (data.user.picturePath != "") {
+        print("le chemin est ${data.user.picturePathModif}");
+        if (data.user.picturePathModif != "") {
           setState(() {
             isThereAnImage = true;
           });
@@ -328,7 +330,7 @@ class _ModifProfilePage extends State<ModifProfilePage> {
                                             Provider.of<AppData>(
                                               context,
                                               listen: false,
-                                            ).user.picturePath,
+                                            ).user.picturePathModif,
                                           ),
                                           fit: BoxFit.cover,
                                           frameBuilder: (
