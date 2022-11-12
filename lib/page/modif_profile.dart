@@ -110,7 +110,7 @@ class _ModifProfilePage extends State<ModifProfilePage> {
 
     if (response == true) {
       if (mounted) {
-        await Navigator.pushNamed(context, "/gestion");
+        Navigator.pop(context);
       }
     } else {
       if (mounted) {
