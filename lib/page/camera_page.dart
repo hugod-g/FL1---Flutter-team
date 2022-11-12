@@ -41,9 +41,11 @@ class _CameraPageState extends State<CameraPage> {
 
   void takePicture(AppData data) async {
     if (!_cameraController.value.isInitialized) {
+      print("camera is init");
       return;
     }
     if (_cameraController.value.isTakingPicture) {
+      print("is taking picture");
       return;
     }
     try {
@@ -60,10 +62,14 @@ class _CameraPageState extends State<CameraPage> {
         if (widget.isVehicle) {
           data.vehicles.last.updatePicturePath(picture.path);
         } else {
-          data.user.updatePicturePath(picture.path);
+          print("le chemin avant est ${data.user.picturePathModif}");
+
+          data.user.updatePicturePathModif(picture.path);
+          print("le chemin apres est ${data.user.picturePathModif}");
         }
       }
       if (mounted) {
+        print("le chemin avant nav pop est ${data.user.picturePathModif}");
         Navigator.pop(context);
       }
     } on CameraException catch (e) {

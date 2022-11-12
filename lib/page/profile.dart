@@ -152,21 +152,20 @@ class _ProfilePage extends State<ProfilePage> {
                             width: 250,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(150),
-                              child: data.user.picturePath == ""
+                              child: data.user.picturePathAPI == ""
                                   ? Image.asset(
                                       'assets/avatar.jpg',
                                       fit: BoxFit.fill,
                                     )
-                                  : isLoaded ?
-                                      Image.network(
-                                          "$apiUrl/${data.user.picturePath}",
+                                  : isLoaded
+                                      ? Image.network(
+                                          "$apiUrl/${data.user.picturePathAPI}",
                                           fit: BoxFit.fill,
                                         )
-                                      :
-                                      Image.asset(
-                                      'assets/avatar.jpg',
-                                      fit: BoxFit.fill,
-                                    ),
+                                      : Image.asset(
+                                          'assets/avatar.jpg',
+                                          fit: BoxFit.fill,
+                                        ),
                             ),
                           ),
                         )
@@ -178,26 +177,26 @@ class _ProfilePage extends State<ProfilePage> {
                             width: 125,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(75),
-                              child: data.user.picturePath == ""
+                              child: data.user.picturePathAPI == ""
                                   ? Image.asset(
                                       'assets/avatar.jpg',
                                       fit: BoxFit.fill,
                                     )
-                                  : isLoaded ?
-                                      Image.network(
-                                          "$apiUrl/${data.user.picturePath}",
+                                  : isLoaded
+                                      ? Image.network(
+                                          "$apiUrl/${data.user.picturePathAPI}",
                                           fit: BoxFit.fill,
                                         )
-                                      :
-                                      Image.asset(
-                                      'assets/avatar.jpg',
-                                      fit: BoxFit.fill,
-                                    ),
+                                      : Image.asset(
+                                          'assets/avatar.jpg',
+                                          fit: BoxFit.fill,
+                                        ),
                             ),
                           ),
                         ),
                       CommonText(
-                        text: "${Provider.of<AppData>(context, listen: false).user.firstName} ${Provider.of<AppData>(context, listen: false).user.lastName}",
+                        text:
+                            "${Provider.of<AppData>(context, listen: false).user.firstName} ${Provider.of<AppData>(context, listen: false).user.lastName}",
                         fontSizeText: 22,
                         fontWeight: fontBold,
                         paddingTop: 16,
@@ -232,7 +231,10 @@ class _ProfilePage extends State<ProfilePage> {
                             Align(
                               alignment: Alignment.topLeft,
                               child: CommonText(
-                                text: Provider.of<AppData>(context, listen: false).user.username,
+                                text:
+                                    Provider.of<AppData>(context, listen: false)
+                                        .user
+                                        .username,
                                 fontSizeText: kIsWeb ? 23 : 16,
                                 fontWeight: fontLight,
                                 paddingTop: 10,
@@ -253,12 +255,13 @@ class _ProfilePage extends State<ProfilePage> {
                                 onPress: () => Navigator.pushNamed(
                                   context,
                                   '/modif_profile',
-                                ).then((_) {
-                                setState(() {
-                                  isLoaded = false;
-                                });
-                                getUserProfile();
-                                },
+                                ).then(
+                                  (_) {
+                                    setState(() {
+                                      isLoaded = false;
+                                    });
+                                    getUserProfile();
+                                  },
                                 ),
                                 keyTest: "go_to_modif_profile",
                               ),
