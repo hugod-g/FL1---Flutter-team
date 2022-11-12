@@ -68,8 +68,6 @@ class _ProfilePage extends State<ProfilePage> {
     setState(() {
       isLoaded = true;
     });
-
-    print(data.user.picturePath);
   }
 
   @override
