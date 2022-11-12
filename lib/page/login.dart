@@ -114,7 +114,7 @@ class _LoginPage extends State<LoginPage> {
                             ),
                           ),
                           Text(
-                            "Garage",
+                            "Entretien",
                             style: TextStyle(
                               color: navy,
                               fontSize: 50,
@@ -133,7 +133,7 @@ class _LoginPage extends State<LoginPage> {
                           bottom: MediaQuery.of(context).size.height * 0.1,
                         ),
                         child: const Text(
-                          "Mon Petit Garage",
+                          "Mon Petit Entretien",
                           style: TextStyle(
                             color: navy,
                             fontSize: 50,
