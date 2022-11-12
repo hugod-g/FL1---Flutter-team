@@ -2,9 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/class/app_class.dart';
 import 'package:mon_petit_entretien/class/maintenance_class.dart';
+import 'package:mon_petit_entretien/class/vehicle_class.dart';
 import 'package:mon_petit_entretien/components/button.dart';
 import 'package:mon_petit_entretien/config/constants.dart';
 import 'package:mon_petit_entretien/services/api/deleted_mantenance.dart';
+import 'package:mon_petit_entretien/services/api/vehicle_spe.dart';
 import 'package:mon_petit_entretien/style/colors.dart';
 import 'package:mon_petit_entretien/style/fonts.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +21,77 @@ class VehicleView extends StatefulWidget {
 }
 
 class _VehicleView extends State<VehicleView> {
+
+  bool isLoaded = true;
+
+  void getVehicle() async {
+    final AppData data = Provider.of<AppData>(context, listen: false);
+
+    print(data.thisVehicles.kilometrage);
+
+    final VehiculeModel thisVehicle = await getSpeVehicle(data.token, data.thisVehicles.id);
+    
+    data.updateDataThisVehicle(
+      thisVehicle.name,
+      thisVehicle.kilometrage,
+      thisVehicle.picturePath,
+      thisVehicle.date,
+      thisVehicle.id,
+      thisVehicle.maintenances,
+    );
+
+    setState(() {
+      isLoaded = true;
+    });
+
+    print(data.thisVehicles.kilometrage);
+  }
+
+    SnackBar _status(bool status) {
+    String message = "";
+
+    if (status) {
+      message = "Vous avez supprimé un entretien";
+    } else {
+      message = "Nous n'avons pas réussi à supprimer l'entretien";
+    }
+
+    final SnackBar snackBar = SnackBar(
+      content: Text(
+        message,
+      ),
+      duration: const Duration(seconds: 2),
+      action: SnackBarAction(
+        label: 'Ok',
+        textColor: white,
+        onPressed: () {},
+      ),
+    );
+
+    return snackBar;
+  }
+
+  Future<int> _callApi(String id) async {
+
+    final AppData data = Provider.of<AppData>(context, listen: false);
+    final bool response = await deletedMaintenences(
+      data.token,
+      id,
+    );
+
+    if (response == true) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(_status(response));
+      }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(_status(response));
+      }
+    }
+
+    return 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +123,10 @@ class _VehicleView extends State<VehicleView> {
                     padding:
                         const EdgeInsets.only(top: 40, left: 12.5, right: 12.5),
                     child: IconButton(
-                      icon: const Icon(Icons.arrow_back_ios_new),
+                      icon: const Icon(
+                        Icons.arrow_back_ios_new,
+                        color: navy,
+                        ),
                       iconSize: 35,
                       onPressed: () => Navigator.pop(context),
                     ),
@@ -118,7 +194,7 @@ class _VehicleView extends State<VehicleView> {
                                     ),
                                     CommonText(
                                       text:
-                                          '${Provider.of<AppData>(context, listen: false).thisVehicles.kilometrage} km',
+                                        isLoaded ? '${Provider.of<AppData>(context, listen: false).thisVehicles.kilometrage} km' : 'Chargement',
                                       fontSizeText: 17.5,
                                       fontWeight: fontLight,
                                       color: navy,
@@ -154,23 +230,128 @@ class _VehicleView extends State<VehicleView> {
                 top: MediaQuery.of(context).size.height * 0.0125,
               ),
               scrollDirection: Axis.horizontal,
-              child: Row(
+              child: 
+              isLoaded ? 
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: Provider.of<AppData>(context, listen: false)
                     .thisVehicles
                     .maintenances
                     .map(
-                      (MaintenanceModel info) => CardVehicule(
-                        prix: info.price.toString(),
-                        title: info.name,
-                        date: info.date.substring(0, 10),
-                        km: info.kilometrage.toString(),
-                        maintenanceId: info.id,
-                        enterprise: info.center,
-                      ),
-                    )
+                      (MaintenanceModel info) => 
+                        Padding(
+                          padding: const EdgeInsets.only(left: 7.5, right: 7.5),
+                          child: Container(
+                            height: kIsWeb ? 150 : 140,
+                            width: kIsWeb ? 250 : 225,
+                            decoration: BoxDecoration(
+                              color: blue,
+                              borderRadius: BorderRadius.circular(12.5),
+                            ),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 24),
+                                  child: Container(
+                                    height: kIsWeb ? 150 : 140,
+                                    width: kIsWeb ? 50 : 40,
+                                    color: white,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 8, bottom: 8),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          const Icon(
+                                            Icons.car_repair,
+                                            size: 30,
+                                          ),
+                                          RotatedBox(
+                                            quarterTurns: 3,
+                                            child: CommonText(
+                                              text: '${info.price.toString()} €',
+                                              fontSizeText: 17,
+                                              fontWeight: fontBold,
+                                              color: navy,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    SizedBox(
+                                      width: kIsWeb ? 190 : 155,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          CommonText(
+                                            text: info.name.length >= 10
+                                                ? '${info.name.substring(0, 6)}...'
+                                                : info.name,
+                                            fontSizeText: 19,
+                                            fontWeight: fontBold,
+                                            paddingLeft: 16,
+                                            color: white,
+                                          ),
+                                          IconButton(
+                                            alignment: Alignment.centerRight,
+                                            padding: EdgeInsets.zero,
+                                            onPressed: () => _callApi(info.id)
+                                            .then((_) {
+                                              setState(() {
+                                                isLoaded = false;
+                                              });
+                                              getVehicle();
+                                            }),
+                                            icon: const Icon(
+                                              Icons.delete,
+                                              size: 27.5,
+                                              color: white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    CommonText(
+                                      text: info.date.substring(0, 10),
+                                      fontSizeText: 17.5,
+                                      fontWeight: fontLight,
+                                      paddingTop: 10,
+                                      paddingLeft: 16,
+                                      color: white,
+                                    ),
+                                    CommonText(
+                                      text: '${info.kilometrage.toString()} km',
+                                      fontSizeText: 17.5,
+                                      fontWeight: fontLight,
+                                      paddingLeft: 16,
+                                      color: white,
+                                    ),
+                                    CommonText(
+                                      text: info.center.length >= 10
+                                          ? '${info.center.substring(0, 6)}...'
+                                          : info.center,
+                                      fontSizeText: 15,
+                                      fontWeight: fontLight,
+                                      paddingTop: 10,
+                                      paddingLeft: 16,
+                                      paddingBot: 5,
+                                      color: white,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
                     .toList(),
-              ),
+              )
+              : 
+              Container(),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 40),
@@ -179,7 +360,13 @@ class _VehicleView extends State<VehicleView> {
                 child: Button(
                   text: "Ajouter un entretien",
                   onPress: () =>
-                      Navigator.pushNamed(context, '/addMaintenance'),
+                      Navigator.pushNamed(context, '/addMaintenance')
+                      .then((_) {
+                        setState(() {
+                          isLoaded = false;
+                        });
+                        getVehicle();
+                      }),
                   keyTest: "add_maintenance_button",
                 ),
               ),
@@ -190,7 +377,13 @@ class _VehicleView extends State<VehicleView> {
                 width: kIsWeb ? 500 : 300,
                 child: Button(
                   text: "Modifier les kilomètres de la voiture",
-                  onPress: () => Navigator.pushNamed(context, '/update_km'),
+                  onPress: () => Navigator.pushNamed(context, '/update_km')
+                      .then((_) {
+                        setState(() {
+                          isLoaded = false;
+                        });
+                        getVehicle();
+                      }),
                   keyTest: "add_maintenance_button",
                 ),
               ),
@@ -207,185 +400,6 @@ class _VehicleView extends State<VehicleView> {
                   ),
                 ),
               ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class CardVehicule extends StatefulWidget {
-  const CardVehicule({
-    Key? key,
-    required this.prix,
-    required this.title,
-    required this.date,
-    required this.km,
-    required this.maintenanceId,
-    required this.enterprise,
-  }) : super(key: key);
-
-  final String prix;
-  final String title;
-  final String date;
-  final String km;
-  final String maintenanceId;
-  final String enterprise;
-
-  @override
-  State<CardVehicule> createState() => _CardVehicule();
-}
-
-class _CardVehicule extends State<CardVehicule> {
-  late AppData data;
-
-  @override
-  void initState() {
-    super.initState();
-    data = Provider.of<AppData>(context, listen: false);
-  }
-
-  SnackBar _status(bool status) {
-    String message = "";
-
-    if (status) {
-      message = "Vous avez supprimé un entretien";
-    } else {
-      message = "Nous n'avons pas réussi à supprimer l'entretien";
-    }
-
-    final SnackBar snackBar = SnackBar(
-      content: Text(
-        message,
-      ),
-      duration: const Duration(seconds: 2),
-      action: SnackBarAction(
-        label: 'Ok',
-        textColor: white,
-        onPressed: () {},
-      ),
-    );
-
-    return snackBar;
-  }
-
-  void _callApi() async {
-    final bool response = await deletedMaintenences(
-      data.token,
-      widget.maintenanceId,
-    );
-
-    if (response == true) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(_status(response));
-        await Navigator.pushNamed(context, '/gestion');
-      }
-    } else {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(_status(response));
-      }
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 7.5, right: 7.5),
-      child: Container(
-        height: kIsWeb ? 150 : 140,
-        width: kIsWeb ? 250 : 225,
-        decoration: BoxDecoration(
-          color: blue,
-          borderRadius: BorderRadius.circular(12.5),
-        ),
-        child: Row(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 24),
-              child: Container(
-                height: kIsWeb ? 150 : 140,
-                width: kIsWeb ? 50 : 40,
-                color: white,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8, bottom: 8),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      const Icon(
-                        Icons.car_repair,
-                        size: 30,
-                      ),
-                      RotatedBox(
-                        quarterTurns: 3,
-                        child: CommonText(
-                          text: '${widget.prix} €',
-                          fontSizeText: 17,
-                          fontWeight: fontBold,
-                          color: navy,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    CommonText(
-                      text: widget.title.length >= 10
-                          ? '${widget.title.substring(0, 6)}...'
-                          : widget.title,
-                      fontSizeText: 19,
-                      fontWeight: fontBold,
-                      paddingLeft: 16,
-                      color: white,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 12.5),
-                      child: IconButton(
-                        alignment: Alignment.centerRight,
-                        padding: EdgeInsets.zero,
-                        onPressed: _callApi,
-                        icon: const Icon(
-                          Icons.delete,
-                          size: 27.5,
-                          color: white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                CommonText(
-                  text: widget.date,
-                  fontSizeText: 17.5,
-                  fontWeight: fontLight,
-                  paddingTop: 10,
-                  paddingLeft: 16,
-                  color: white,
-                ),
-                CommonText(
-                  text: '${widget.km} km',
-                  fontSizeText: 17.5,
-                  fontWeight: fontLight,
-                  paddingLeft: 16,
-                  color: white,
-                ),
-                CommonText(
-                  text: widget.enterprise.length >= 10
-                      ? '${widget.enterprise.substring(0, 6)}...'
-                      : widget.enterprise,
-                  fontSizeText: 15,
-                  fontWeight: fontLight,
-                  paddingTop: 10,
-                  paddingLeft: 16,
-                  paddingBot: 5,
-                  color: white,
-                ),
-              ],
-            ),
           ],
         ),
       ),

@@ -56,7 +56,7 @@ class _UpdateKilometrage extends State<UpdateKilometrage> {
 
     if (response == true) {
       if (mounted) {
-        await Navigator.popAndPushNamed(context, '/gestion');
+        Navigator.pop(context);
       }
     } else {
       if (mounted) {
