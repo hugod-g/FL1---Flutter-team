@@ -25,6 +25,7 @@ class _ProfilePage extends State<ProfilePage> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   bool isLoadingDelete = false;
+  bool isLoaded = true;
 
   void _onLogout() async {
     final SharedPreferences prefs = await _prefs;
@@ -63,6 +64,12 @@ class _ProfilePage extends State<ProfilePage> {
     final UserModel profile = await getProfileCall(data.token);
 
     data.user = profile;
+
+    setState(() {
+      isLoaded = true;
+    });
+
+    print(data.user.picturePath);
   }
 
   @override
@@ -147,19 +154,21 @@ class _ProfilePage extends State<ProfilePage> {
                             width: 250,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(150),
-                              child:
-                                  Provider.of<AppData>(context, listen: false)
-                                              .user
-                                              .picturePath ==
-                                          ""
-                                      ? Image.asset(
-                                          'assets/avatar.jpg',
-                                          fit: BoxFit.fill,
-                                        )
-                                      : Image.network(
+                              child: data.user.picturePath == ""
+                                  ? Image.asset(
+                                      'assets/avatar.jpg',
+                                      fit: BoxFit.fill,
+                                    )
+                                  : isLoaded ?
+                                      Image.network(
                                           "$apiUrl/${data.user.picturePath}",
                                           fit: BoxFit.fill,
-                                        ),
+                                        )
+                                      :
+                                      Image.asset(
+                                      'assets/avatar.jpg',
+                                      fit: BoxFit.fill,
+                                    ),
                             ),
                           ),
                         )
@@ -176,8 +185,14 @@ class _ProfilePage extends State<ProfilePage> {
                                       'assets/avatar.jpg',
                                       fit: BoxFit.fill,
                                     )
-                                  : Image.network(
-                                      "$apiUrl/${data.user.picturePath}",
+                                  : isLoaded ?
+                                      Image.network(
+                                          "$apiUrl/${data.user.picturePath}",
+                                          fit: BoxFit.fill,
+                                        )
+                                      :
+                                      Image.asset(
+                                      'assets/avatar.jpg',
                                       fit: BoxFit.fill,
                                     ),
                             ),
@@ -240,10 +255,12 @@ class _ProfilePage extends State<ProfilePage> {
                                 onPress: () => Navigator.pushNamed(
                                   context,
                                   '/modif_profile',
-                                ).then((_) =>
+                                ).then((_) {
                                 setState(() {
-                                  getUserProfile();
-                                }),
+                                  isLoaded = false;
+                                });
+                                getUserProfile();
+                                },
                                 ),
                                 keyTest: "go_to_modif_profile",
                               ),

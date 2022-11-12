@@ -27,8 +27,6 @@ class _VehicleView extends State<VehicleView> {
   void getVehicle() async {
     final AppData data = Provider.of<AppData>(context, listen: false);
 
-    print(data.thisVehicles.kilometrage);
-
     final VehiculeModel thisVehicle = await getSpeVehicle(data.token, data.thisVehicles.id);
     
     data.updateDataThisVehicle(
@@ -43,8 +41,6 @@ class _VehicleView extends State<VehicleView> {
     setState(() {
       isLoaded = true;
     });
-
-    print(data.thisVehicles.kilometrage);
   }
 
     SnackBar _status(bool status) {
