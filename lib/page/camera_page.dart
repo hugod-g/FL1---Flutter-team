@@ -7,9 +7,10 @@ import 'package:mon_petit_entretien/style/colors.dart';
 import 'package:provider/provider.dart';
 
 class CameraPage extends StatefulWidget {
-  const CameraPage({Key? key, required this.cameras}) : super(key: key);
+  const CameraPage({Key? key, required this.cameras, required this.isVehicle}) : super(key: key);
 
   final List<CameraDescription>? cameras;
+  final bool isVehicle;
 
   @override
   State<CameraPage> createState() => _CameraPageState();
@@ -49,9 +50,17 @@ class _CameraPageState extends State<CameraPage> {
       final XFile picture = await _cameraController.takePicture();
       if (kIsWeb) {
         final Uint8List pickedFileBytes = await picture.readAsBytes();
-        data.vehicles.last.updatePicketFilesBytes(pickedFileBytes);
+        if(widget.isVehicle) {
+          data.vehicles.last.updatePicketFilesBytes(pickedFileBytes);
+        } else {
+          data.user.updatePicketFilesBytes(pickedFileBytes);
+        }
       } else {
-        data.vehicles.last.updatePicturePath(picture.path);
+        if(widget.isVehicle) {
+          data.vehicles.last.updatePicturePath(picture.path);
+        } else {
+          data.user.updatePicturePath(picture.path);
+        }
       }
       if (mounted) {
         Navigator.pop(context);

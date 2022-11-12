@@ -129,6 +129,7 @@ class _ModifProfilePage extends State<ModifProfilePage> {
         MaterialPageRoute<CameraPage>(
           builder: (_) => CameraPage(
             cameras: value,
+            isVehicle: false,
           ),
         ),
       ).then((_) {
