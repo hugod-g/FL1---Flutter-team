@@ -29,11 +29,11 @@ class MyApp extends StatelessWidget {
       create: (BuildContext context) => AppData(),
       child: MaterialApp(
         scrollBehavior: MyCustomScrollBehavior(),
+        initialRoute: '/',
         routes: <String, Widget Function(BuildContext)>{
-          '/login': (BuildContext context) => const LoginPage(),
+          '/': (BuildContext context) => const LoginPage(),
           '/register': (BuildContext context) => const RegisterPage(),
           '/home': (BuildContext context) => const Home(),
-          '/addVehicule': (BuildContext context) => const AddVehicule(),
           '/stats': (BuildContext context) => const Statistics(),
           '/gestion': (BuildContext context) => const GestionPage(),
           '/admin': (BuildContext context) => const AdminPage(),
@@ -45,7 +45,6 @@ class MyApp extends StatelessWidget {
           '/add_vehicle': (BuildContext constext) => const AddVehicule(),
           '/update_km': (BuildContext constext) => const UpdateKilometrage(),
         },
-        home: const LoginPage(),
       ),
     );
   }

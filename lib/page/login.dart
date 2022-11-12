@@ -168,7 +168,7 @@ class _LoginPage extends State<LoginPage> {
                                   const EdgeInsets.only(top: 8, bottom: 16),
                               child: TextInput(
                                 value: email,
-                                placeholder: "Adresse E-mail",
+                                placeholder: "Adresse Email",
                                 onChangeText: _onEmailChange,
                                 keyTest: "sign_in_input_email",
                               ),

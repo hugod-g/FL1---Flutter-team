@@ -68,7 +68,7 @@ class _AdminPage extends State<AdminPage> {
     return Scaffold(
       appBar: kIsWeb
           ? AppBar(
-              title: const Text('Mon Petit Entretient'),
+              title: const Text('Mon Petit Entretien'),
               backgroundColor: blue,
             )
           : null,

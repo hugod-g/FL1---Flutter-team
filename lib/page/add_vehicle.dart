@@ -36,7 +36,6 @@ class _AddVehicule extends State<AddVehicule> {
   bool isLoadedVehicule = false;
   bool isThereAnImage = false;
   bool? isSecondary;
-  bool isDesktop = false;
 
   void _onKMChange(String newValue) {
     setState(() {
@@ -70,7 +69,7 @@ class _AddVehicule extends State<AddVehicule> {
       data.vehicles.last.updatePicturePath(newPath);
       return 401;
     } else {
-      if (isDesktop) {
+      if (kIsWeb) {
         final Uint8List pickedFileBytes = await file.readAsBytes();
         data.vehicles.last.updatePicketFilesBytes(pickedFileBytes);
       } else {
@@ -311,75 +310,77 @@ class _AddVehicule extends State<AddVehicule> {
                                           ),
                                           child: Column(
                                             children: <Widget>[
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                  bottom: 10,
-                                                ),
-                                                child: InkWell(
-                                                  key: const Key(
-                                                    "camera_button",
+                                              if (!kIsWeb)
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                    bottom: 10,
                                                   ),
-                                                  onTap: () async {
-                                                    await availableCameras()
-                                                        .then(
-                                                      (
-                                                        List<CameraDescription>
-                                                            value,
-                                                      ) =>
-                                                          Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute<
-                                                            CameraPage>(
-                                                          builder: (_) =>
-                                                              CameraPage(
-                                                            cameras: value,
-                                                          ),
-                                                        ),
-                                                      ).then((_) {
-                                                        AppData data;
-                                                        data = Provider.of<
-                                                            AppData>(
+                                                  child: InkWell(
+                                                    onTap: () async {
+                                                      await availableCameras()
+                                                          .then(
+                                                        (
+                                                          List<CameraDescription>
+                                                              value,
+                                                        ) =>
+                                                            Navigator.push(
                                                           context,
-                                                          listen: false,
-                                                        );
-                                                        if (data.vehicles.last
-                                                                .picturePath !=
-                                                            "") {
-                                                          setState(() {
-                                                            isThereAnImage =
-                                                                true;
-                                                          });
-                                                        }
-                                                        Navigator.pop(context);
-                                                      }),
-                                                    );
-                                                  },
-                                                  child: Ink(
-                                                    child: Row(
-                                                      children: const <Widget>[
-                                                        Icon(
-                                                          Icons.camera_alt,
-                                                          size: 30,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                            left: 10,
+                                                          MaterialPageRoute<
+                                                              CameraPage>(
+                                                            builder: (_) =>
+                                                                CameraPage(
+                                                              cameras: value,
+                                                            ),
                                                           ),
-                                                          child: CommonText(
-                                                            text: "Camera",
-                                                            fontSizeText: 20,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
-                                                            color: navy,
+                                                        ).then((_) {
+                                                          AppData data;
+                                                          data = Provider.of<
+                                                              AppData>(
+                                                            context,
+                                                            listen: false,
+                                                          );
+                                                          if (data.vehicles.last
+                                                                  .picturePath !=
+                                                              "") {
+                                                            setState(() {
+                                                              isThereAnImage =
+                                                                  true;
+                                                            });
+                                                          }
+                                                          Navigator.pop(
+                                                            context,
+                                                          );
+                                                        }),
+                                                      );
+                                                    },
+                                                    child: Ink(
+                                                      child: Row(
+                                                        children: const <
+                                                            Widget>[
+                                                          Icon(
+                                                            Icons.camera_alt,
+                                                            size: 30,
                                                           ),
-                                                        )
-                                                      ],
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                              left: 10,
+                                                            ),
+                                                            child: CommonText(
+                                                              text: "Caméra",
+                                                              fontSizeText: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .normal,
+                                                              color: navy,
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
                                               InkWell(
                                                 onTap: () {
                                                   takePictureGaleryLoaded()
@@ -431,7 +432,7 @@ class _AddVehicule extends State<AddVehicule> {
                                 child: SizedBox(
                                   width: 200,
                                   height: 200,
-                                  child: isDesktop
+                                  child: kIsWeb
                                       ? Image.memory(
                                           Provider.of<AppData>(
                                             context,
@@ -480,7 +481,7 @@ class _AddVehicule extends State<AddVehicule> {
                                   ),
                                   child: const Align(
                                     child: Text(
-                                      "Ajoutez une image",
+                                      "Ajouter une image",
                                       style: TextStyle(
                                         color: white,
                                         fontSize: 16,
@@ -713,7 +714,7 @@ class _AddVehicule extends State<AddVehicule> {
                                   ],
                                 ),
                                 child: Button(
-                                  text: "Ajouter véhicule",
+                                  text: "Ajouter le véhicule",
                                   onPress: _onAddVehicule,
                                   isLoading: isLoadedVehicule,
                                   keyTest: "add_vehicule_button",
@@ -737,7 +738,7 @@ class _AddVehicule extends State<AddVehicule> {
                               ],
                             ),
                             child: Button(
-                              text: "Ajouter véhicule",
+                              text: "Ajouter le véhicule",
                               onPress: _onAddVehicule,
                               isLoading: isLoadedVehicule,
                               keyTest: "add_vehicule_button",

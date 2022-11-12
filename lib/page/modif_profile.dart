@@ -36,7 +36,7 @@ class _ModifProfilePage extends State<ModifProfilePage> {
 
   final SnackBar snackBar = SnackBar(
     content: const Text(
-      "Tout les champs ne sont pas remplis !",
+      "Tous les champs ne sont pas remplis !",
     ),
     duration: const Duration(seconds: 2),
     action: SnackBarAction(
@@ -150,12 +150,11 @@ class _ModifProfilePage extends State<ModifProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: lightBlue,
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: ListView(
-          children: <Widget> [
+          children: <Widget>[
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -197,7 +196,8 @@ class _ModifProfilePage extends State<ModifProfilePage> {
                           ],
                         ),
                       const Align(
-                        alignment: kIsWeb ? Alignment.center : Alignment.topLeft,
+                        alignment:
+                            kIsWeb ? Alignment.center : Alignment.topLeft,
                         child: CommonText(
                           text: 'Modifier mes informations',
                           fontSizeText: 20,
@@ -231,14 +231,16 @@ class _ModifProfilePage extends State<ModifProfilePage> {
                                             children: <Widget>[
                                               if (!kIsWeb)
                                                 Padding(
-                                                  padding: const EdgeInsets.only(
+                                                  padding:
+                                                      const EdgeInsets.only(
                                                     bottom: 10,
                                                   ),
                                                   child: InkWell(
                                                     onTap: _camera,
                                                     child: Ink(
                                                       child: Row(
-                                                        children: const <Widget>[
+                                                        children: const <
+                                                            Widget>[
                                                           Icon(
                                                             Icons.camera_alt,
                                                             size: 30,
@@ -249,10 +251,11 @@ class _ModifProfilePage extends State<ModifProfilePage> {
                                                               left: 10,
                                                             ),
                                                             child: CommonText(
-                                                              text: "Camera",
+                                                              text: "Caméra",
                                                               fontSizeText: 20,
                                                               fontWeight:
-                                                                  FontWeight.normal,
+                                                                  FontWeight
+                                                                      .normal,
                                                               color: navy,
                                                             ),
                                                           )
@@ -280,7 +283,8 @@ class _ModifProfilePage extends State<ModifProfilePage> {
                                                         size: 30,
                                                       ),
                                                       Padding(
-                                                        padding: EdgeInsets.only(
+                                                        padding:
+                                                            EdgeInsets.only(
                                                           left: 10,
                                                         ),
                                                         child: CommonText(
@@ -319,31 +323,33 @@ class _ModifProfilePage extends State<ModifProfilePage> {
                                           ).user.pickedFileBytes,
                                           fit: BoxFit.cover,
                                         )
-                                  : Image.file(
-                                    File(
-                                      Provider.of<AppData>(context, listen: false)
-                                          .user
-                                          .picturePath,
-                                    ),
-                                    fit: BoxFit.cover,
-                                    frameBuilder: (
-                                      BuildContext context,
-                                      Widget child,
-                                      int? frame,
-                                      bool wasSynchronouslyLoaded,
-                                    ) {
-                                      if (wasSynchronouslyLoaded) {
-                                        return const SizedBox(
-                                          width: 20,
-                                          height: 20,
-                                          child: CircularProgressIndicator(
-                                            color: navy,
+                                      : Image.file(
+                                          File(
+                                            Provider.of<AppData>(
+                                              context,
+                                              listen: false,
+                                            ).user.picturePath,
                                           ),
-                                        );
-                                      }
-                                      return child;
-                                    },
-                                  ),
+                                          fit: BoxFit.cover,
+                                          frameBuilder: (
+                                            BuildContext context,
+                                            Widget child,
+                                            int? frame,
+                                            bool wasSynchronouslyLoaded,
+                                          ) {
+                                            if (wasSynchronouslyLoaded) {
+                                              return const SizedBox(
+                                                width: 20,
+                                                height: 20,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  color: navy,
+                                                ),
+                                              );
+                                            }
+                                            return child;
+                                          },
+                                        ),
                                 ),
                               )
                             : Align(
@@ -358,7 +364,7 @@ class _ModifProfilePage extends State<ModifProfilePage> {
                                   ),
                                   child: const Align(
                                     child: Text(
-                                      "Ajoutez une image",
+                                      "Ajouter une image",
                                       style: TextStyle(
                                         color: white,
                                         fontSize: 16,
@@ -419,7 +425,7 @@ class _ModifProfilePage extends State<ModifProfilePage> {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ],

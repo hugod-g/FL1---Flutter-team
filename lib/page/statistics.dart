@@ -44,7 +44,7 @@ class _Statistique extends State<Statistics> {
     return Scaffold(
       appBar: kIsWeb
           ? AppBar(
-              title: const Text('Mon Petit Entretient'),
+              title: const Text('Mon Petit Entretien'),
               backgroundColor: blue,
             )
           : null,
