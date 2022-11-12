@@ -184,15 +184,15 @@ class _ModifProfilePage extends State<ModifProfilePage> {
                                 color: navy,
                               ),
                             ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: CommonText(
-                                text: 'du profil',
-                                fontSizeText: 30,
-                                fontWeight: fontMedium,
-                                paddingBot: 15,
-                                color: navy,
-                              ),
+                          ),
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: CommonText(
+                              text: 'du profil',
+                              fontSizeText: 30,
+                              fontWeight: fontMedium,
+                              paddingBot: 15,
+                              color: navy,
                             ),
                           ],
                         ),
@@ -252,7 +252,7 @@ class _ModifProfilePage extends State<ModifProfilePage> {
                                                               left: 10,
                                                             ),
                                                             child: CommonText(
-                                                              text: "Camera",
+                                                              text: "Caméra",
                                                               fontSizeText: 20,
                                                               fontWeight:
                                                                   FontWeight
