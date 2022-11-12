@@ -35,7 +35,7 @@ class _ProfilePage extends State<ProfilePage> {
     if (mounted) {
       await Navigator.pushNamedAndRemoveUntil(
         context,
-        '/login',
+        '/',
         (Route<dynamic> route) => false,
       );
     }
