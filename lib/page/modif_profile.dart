@@ -150,7 +150,6 @@ class _ModifProfilePage extends State<ModifProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: lightBlue,
       body: Padding(
         padding: const EdgeInsets.all(20),

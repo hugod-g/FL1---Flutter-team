@@ -69,99 +69,104 @@ class _UpdateKilometrage extends State<UpdateKilometrage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: lightBlue,
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Center(
-              child: Column(
-                children: <Widget>[
-                  if (kIsWeb)
-                    const CommonText(
-                      text: 'Modifier vos kilomètres',
-                      fontSizeText: 30,
-                      fontWeight: fontMedium,
-                      paddingBot: 15,
-                      color: navy,
-                    )
-                  else
-                    Column(
-                      children: const <Widget>[
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: CommonText(
-                            text: 'Modifier',
-                            fontSizeText: 30,
-                            fontWeight: fontLight,
-                            paddingTop: 24,
-                            paddingBot: 8,
-                            color: navy,
+      body: ListView(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Center(
+                  child: Column(
+                    children: <Widget>[
+                      if (kIsWeb)
+                        const CommonText(
+                          text: 'Modifier vos kilomètres',
+                          fontSizeText: 30,
+                          fontWeight: fontMedium,
+                          paddingBot: 15,
+                          color: navy,
+                        )
+                      else
+                        Column(
+                          children: const <Widget>[
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: CommonText(
+                                text: 'Modifier',
+                                fontSizeText: 30,
+                                fontWeight: fontLight,
+                                paddingTop: 24,
+                                paddingBot: 8,
+                                color: navy,
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: CommonText(
+                                text: 'vos kilomètres',
+                                fontSizeText: 30,
+                                fontWeight: fontMedium,
+                                paddingBot: 15,
+                                color: navy,
+                              ),
+                            ),
+                          ],
+                        ),
+                      const Align(
+                        alignment:
+                            kIsWeb ? Alignment.center : Alignment.topLeft,
+                        child: CommonText(
+                          text: 'Modifier les kilomètres de votre voiture',
+                          fontSizeText: kIsWeb ? 20 : 19.5,
+                          fontWeight: fontLight,
+                          paddingBot: 20,
+                          color: navy,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40),
+                        child: SizedBox(
+                          width: kIsWeb ? 500 : 300,
+                          child: TextInput(
+                            value: mileage,
+                            placeholder: "Kilométrage (en km)",
+                            onChangeText: _onMileageChange,
+                            keyTest: "maintenance_input_mile",
+                            textinput: TextInputType.number,
                           ),
                         ),
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: CommonText(
-                            text: 'vos kilomètres',
-                            fontSizeText: 30,
-                            fontWeight: fontMedium,
-                            paddingBot: 15,
-                            color: navy,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40),
+                        child: SizedBox(
+                          width: kIsWeb ? 500 : 300,
+                          child: Button(
+                            text: "Sauvegarder",
+                            onPress: _callApi,
+                            keyTest: "add_maintenance_save_button",
                           ),
                         ),
-                      ],
-                    ),
-                  const Align(
-                    alignment: kIsWeb ? Alignment.center : Alignment.topLeft,
-                    child: CommonText(
-                      text: 'Modifier les kilomètres de votre voiture',
-                      fontSizeText: kIsWeb ? 20 : 19.5,
-                      fontWeight: fontLight,
-                      paddingBot: 20,
-                      color: navy,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: SizedBox(
-                      width: kIsWeb ? 500 : 300,
-                      child: TextInput(
-                        value: mileage,
-                        placeholder: "Kilométrage (en km)",
-                        onChangeText: _onMileageChange,
-                        keyTest: "maintenance_input_mile",
-                        textinput: TextInputType.number,
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: SizedBox(
-                      width: kIsWeb ? 500 : 300,
-                      child: Button(
-                        text: "Sauvegarder",
-                        onPress: _callApi,
-                        keyTest: "add_maintenance_save_button",
+                      Padding(
+                        padding: const EdgeInsets.only(top: 25, bottom: 25),
+                        child: SizedBox(
+                          width: kIsWeb ? 500 : 300,
+                          child: Button(
+                            text: "Retour",
+                            onPress: () => Navigator.pop(context),
+                            secondary: true,
+                            keyTest: "add_maintenance_back_button",
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 25, bottom: 25),
-                    child: SizedBox(
-                      width: kIsWeb ? 500 : 300,
-                      child: Button(
-                        text: "Retour",
-                        onPress: () => Navigator.pop(context),
-                        secondary: true,
-                        keyTest: "add_maintenance_back_button",
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
