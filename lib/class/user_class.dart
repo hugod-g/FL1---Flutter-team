@@ -8,7 +8,8 @@ class UserModel extends ChangeNotifier {
     this.lastName,
     this.username,
     this.admin,
-    this.picturePath,
+    this.picturePathAPI,
+    this.picturePathModif,
     this.centers,
   );
 
@@ -18,8 +19,9 @@ class UserModel extends ChangeNotifier {
     final String lastName = data['lastname'] as String;
     final String username = data['username'] as String;
     final bool admin = data['admin'] as bool;
-    final String? picturePath = data['image'] as String?;
+    final String? picturePathAPI = data['image'] as String?;
     final List<dynamic> centersTmp = data['centers'] as List<dynamic>;
+    const String picturePathModif = "";
 
     final List<CenterModel> centers = centersTmp
         .map<CenterModel>((dynamic json) => CenterModel.fromJson(json))
@@ -31,7 +33,8 @@ class UserModel extends ChangeNotifier {
       lastName,
       username,
       admin,
-      picturePath ?? "",
+      picturePathAPI ?? "",
+      picturePathModif,
       centers,
     );
   }
@@ -40,7 +43,8 @@ class UserModel extends ChangeNotifier {
   String firstName = "";
   String username = "";
   bool admin = false;
-  String picturePath;
+  String picturePathAPI = "";
+  String picturePathModif = "";
   String id = "";
   List<CenterModel> centers = List<CenterModel>.empty();
   Uint8List pickedFileBytes = Uint8List.fromList(<int>[0]);
@@ -55,8 +59,13 @@ class UserModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updatePicturePath(String newVar) {
-    picturePath = newVar;
+  void updatePicturePathAPI(String newVar) {
+    picturePathAPI = newVar;
+    notifyListeners();
+  }
+
+  void updatePicturePathModif(String newVar) {
+    picturePathModif = newVar;
     notifyListeners();
   }
 

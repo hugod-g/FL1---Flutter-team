@@ -7,7 +7,8 @@ import 'package:mon_petit_entretien/style/colors.dart';
 import 'package:provider/provider.dart';
 
 class CameraPage extends StatefulWidget {
-  const CameraPage({Key? key, required this.cameras, required this.isVehicle}) : super(key: key);
+  const CameraPage({Key? key, required this.cameras, required this.isVehicle})
+      : super(key: key);
 
   final List<CameraDescription>? cameras;
   final bool isVehicle;
@@ -40,9 +41,11 @@ class _CameraPageState extends State<CameraPage> {
 
   void takePicture(AppData data) async {
     if (!_cameraController.value.isInitialized) {
+      print("camera is init");
       return;
     }
     if (_cameraController.value.isTakingPicture) {
+      print("is taking picture");
       return;
     }
     try {
@@ -50,19 +53,23 @@ class _CameraPageState extends State<CameraPage> {
       final XFile picture = await _cameraController.takePicture();
       if (kIsWeb) {
         final Uint8List pickedFileBytes = await picture.readAsBytes();
-        if(widget.isVehicle) {
+        if (widget.isVehicle) {
           data.vehicles.last.updatePicketFilesBytes(pickedFileBytes);
         } else {
           data.user.updatePicketFilesBytes(pickedFileBytes);
         }
       } else {
-        if(widget.isVehicle) {
+        if (widget.isVehicle) {
           data.vehicles.last.updatePicturePath(picture.path);
         } else {
-          data.user.updatePicturePath(picture.path);
+          print("le chemin avant est ${data.user.picturePathModif}");
+
+          data.user.updatePicturePathModif(picture.path);
+          print("le chemin apres est ${data.user.picturePathModif}");
         }
       }
       if (mounted) {
+        print("le chemin avant nav pop est ${data.user.picturePathModif}");
         Navigator.pop(context);
       }
     } on CameraException catch (e) {

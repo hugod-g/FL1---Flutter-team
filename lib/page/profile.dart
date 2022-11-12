@@ -152,14 +152,14 @@ class _ProfilePage extends State<ProfilePage> {
                             width: 250,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(150),
-                              child: data.user.picturePath == ""
+                              child: data.user.picturePathAPI == ""
                                   ? Image.asset(
                                       'assets/avatar.jpg',
                                       fit: BoxFit.fill,
                                     )
                                   : isLoaded
                                       ? Image.network(
-                                          "$apiUrl/${data.user.picturePath}",
+                                          "$apiUrl/${data.user.picturePathAPI}",
                                           fit: BoxFit.fill,
                                         )
                                       : Image.asset(
@@ -177,14 +177,14 @@ class _ProfilePage extends State<ProfilePage> {
                             width: 125,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(75),
-                              child: data.user.picturePath == ""
+                              child: data.user.picturePathAPI == ""
                                   ? Image.asset(
                                       'assets/avatar.jpg',
                                       fit: BoxFit.fill,
                                     )
                                   : isLoaded
                                       ? Image.network(
-                                          "$apiUrl/${data.user.picturePath}",
+                                          "$apiUrl/${data.user.picturePathAPI}",
                                           fit: BoxFit.fill,
                                         )
                                       : Image.asset(

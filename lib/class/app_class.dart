@@ -22,6 +22,7 @@ class AppData extends ChangeNotifier {
     "",
     false,
     "",
+    "",
     List<CenterModel>.empty(growable: true),
   );
   List<UserModel> usersList = List<UserModel>.empty();
