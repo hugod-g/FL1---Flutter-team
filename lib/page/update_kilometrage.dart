@@ -24,7 +24,7 @@ class _UpdateKilometrage extends State<UpdateKilometrage> {
 
   final SnackBar snackBar = SnackBar(
     content: const Text(
-      "Tout les champs ne sont pas remplis !",
+      "Tous les champs ne sont pas remplis !",
     ),
     duration: const Duration(seconds: 2),
     action: SnackBarAction(
@@ -139,7 +139,7 @@ class _UpdateKilometrage extends State<UpdateKilometrage> {
                     child: SizedBox(
                       width: kIsWeb ? 500 : 300,
                       child: Button(
-                        text: "Modifier les kilomètres",
+                        text: "Sauvegarder",
                         onPress: _callApi,
                         keyTest: "add_maintenance_save_button",
                       ),

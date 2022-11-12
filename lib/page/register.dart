@@ -190,7 +190,7 @@ class _RegisterPage extends State<RegisterPage> {
                                       const EdgeInsets.only(top: 8, bottom: 24),
                                   child: TextInput(
                                     value: email,
-                                    placeholder: "Adresse E-mail",
+                                    placeholder: "Adresse Email",
                                     onChangeText: _onEmailChange,
                                     keyTest: "sign_up_input_email",
                                   ),

@@ -106,7 +106,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: ListView(
-          children: <Widget> [
+          children: <Widget>[
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -138,7 +138,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                             Align(
                               alignment: Alignment.topLeft,
                               child: CommonText(
-                                text: 'd\'un entretient',
+                                text: 'd\'un entretien',
                                 fontSizeText: 30,
                                 fontWeight: fontMedium,
                                 paddingBot: 15,
@@ -148,9 +148,10 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                           ],
                         ),
                       const Align(
-                        alignment: kIsWeb ? Alignment.center : Alignment.topLeft,
+                        alignment:
+                            kIsWeb ? Alignment.center : Alignment.topLeft,
                         child: CommonText(
-                          text: 'Ajouter votre dernier entretient',
+                          text: 'Ajouter votre dernier entretien',
                           fontSizeText: 20,
                           fontWeight: fontLight,
                           paddingBot: 20,
@@ -184,7 +185,8 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                           child: Container(
                             decoration: const BoxDecoration(
                               color: white,
-                              borderRadius: BorderRadius.all(Radius.circular(16)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16)),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.only(
@@ -199,7 +201,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                                     border: InputBorder.none,
                                     iconColor: navy,
                                     icon: Icon(Icons.calendar_today),
-                                    labelText: "Date de l'entretient ",
+                                    labelText: "Date de l'entretien",
                                     labelStyle: TextStyle(color: navy),
                                     hintStyle: TextStyle(
                                       color: lightGray,
@@ -244,7 +246,7 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                           width: kIsWeb ? 500 : 300,
                           child: TextInput(
                             value: price,
-                            placeholder: "Price",
+                            placeholder: "Prix",
                             onChangeText: _onPriceChange,
                             keyTest: "add_maintenance_input_price",
                             textinput: TextInputType.number,

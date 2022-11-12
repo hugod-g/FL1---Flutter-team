@@ -249,9 +249,9 @@ class _CardVehicule extends State<CardVehicule> {
     String message = "";
 
     if (status) {
-      message = "Vous avez suprimer un entretiens";
+      message = "Vous avez supprimé un entretien";
     } else {
-      message = "Nous n'avons pas réussie à suprimer la maintenance";
+      message = "Nous n'avons pas réussi à supprimer l'entretien";
     }
 
     final SnackBar snackBar = SnackBar(

@@ -349,7 +349,8 @@ class _AddVehicule extends State<AddVehicule> {
                                                             });
                                                           }
                                                           Navigator.pop(
-                                                              context);
+                                                            context,
+                                                          );
                                                         }),
                                                       );
                                                     },
@@ -367,7 +368,7 @@ class _AddVehicule extends State<AddVehicule> {
                                                               left: 10,
                                                             ),
                                                             child: CommonText(
-                                                              text: "Camera",
+                                                              text: "Caméra",
                                                               fontSizeText: 20,
                                                               fontWeight:
                                                                   FontWeight
@@ -480,7 +481,7 @@ class _AddVehicule extends State<AddVehicule> {
                                   ),
                                   child: const Align(
                                     child: Text(
-                                      "Ajoutez une image",
+                                      "Ajouter une image",
                                       style: TextStyle(
                                         color: white,
                                         fontSize: 16,
@@ -713,7 +714,7 @@ class _AddVehicule extends State<AddVehicule> {
                                   ],
                                 ),
                                 child: Button(
-                                  text: "Ajouter véhicule",
+                                  text: "Ajouter le véhicule",
                                   onPress: _onAddVehicule,
                                   isLoading: isLoadedVehicule,
                                   keyTest: "add_vehicule_button",
@@ -737,7 +738,7 @@ class _AddVehicule extends State<AddVehicule> {
                               ],
                             ),
                             child: Button(
-                              text: "Ajouter véhicule",
+                              text: "Ajouter le véhicule",
                               onPress: _onAddVehicule,
                               isLoading: isLoadedVehicule,
                               keyTest: "add_vehicule_button",

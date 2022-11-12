@@ -57,7 +57,6 @@ class _ProfilePage extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-
     final AppData data = Provider.of<AppData>(context, listen: false);
 
     return Scaffold(
@@ -65,7 +64,7 @@ class _ProfilePage extends State<ProfilePage> {
       backgroundColor: lightBlue,
       appBar: kIsWeb
           ? AppBar(
-              title: const Text('Mon Petit Entretient'),
+              title: const Text('Mon Petit Entretien'),
               backgroundColor: blue,
             )
           : null,
@@ -141,12 +140,13 @@ class _ProfilePage extends State<ProfilePage> {
                               child:
                                   Provider.of<AppData>(context, listen: false)
                                               .user
-                                              .picturePath == ""
+                                              .picturePath ==
+                                          ""
                                       ? Image.asset(
                                           'assets/avatar.jpg',
                                           fit: BoxFit.fill,
                                         )
-                                      :  Image.network(
+                                      : Image.network(
                                           "$apiUrl/${data.user.picturePath}",
                                           fit: BoxFit.fill,
                                         ),
@@ -161,25 +161,20 @@ class _ProfilePage extends State<ProfilePage> {
                             width: 125,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(75),
-                              child:
-                                  data
-                                              .user
-                                              .picturePath ==
-                                          ""
-                                      ? Image.asset(
-                                          'assets/avatar.jpg',
-                                          fit: BoxFit.fill,
-                                        )
-                                      : Image.network(
-                                          "$apiUrl/${data.user.picturePath}",
-                                          fit: BoxFit.fill,
-                                        ),
+                              child: data.user.picturePath == ""
+                                  ? Image.asset(
+                                      'assets/avatar.jpg',
+                                      fit: BoxFit.fill,
+                                    )
+                                  : Image.network(
+                                      "$apiUrl/${data.user.picturePath}",
+                                      fit: BoxFit.fill,
+                                    ),
                             ),
                           ),
                         ),
                       CommonText(
-                        text:
-                            "${data.user.firstName} ${data.user.lastName}",
+                        text: "${data.user.firstName} ${data.user.lastName}",
                         fontSizeText: 22,
                         fontWeight: fontBold,
                         paddingTop: 16,
@@ -214,10 +209,7 @@ class _ProfilePage extends State<ProfilePage> {
                             Align(
                               alignment: Alignment.topLeft,
                               child: CommonText(
-                                text:
-                                    data
-                                        .user
-                                        .username,
+                                text: data.user.username,
                                 fontSizeText: kIsWeb ? 23 : 16,
                                 fontWeight: fontLight,
                                 paddingTop: 10,

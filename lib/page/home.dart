@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:mon_petit_entretien/Components/transition_widgets.dart';
 import 'package:mon_petit_entretien/class/app_class.dart';
 import 'package:mon_petit_entretien/class/vehicle_class.dart';
 import 'package:mon_petit_entretien/components/button_select.dart';
@@ -7,10 +8,8 @@ import 'package:mon_petit_entretien/components/card_car.dart';
 import 'package:mon_petit_entretien/components/common_text.dart';
 import 'package:mon_petit_entretien/components/text_input.dart';
 import 'package:mon_petit_entretien/components/web/burger_menu.dart';
-import 'package:mon_petit_entretien/page/add_vehicle.dart';
 import 'package:mon_petit_entretien/services/api/vehicule.dart';
 import 'package:mon_petit_entretien/style/fonts.dart';
-import 'package:mon_petit_entretien/Components/transition_widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../style/colors.dart';
@@ -220,7 +219,7 @@ class _Home extends State<Home> with TickerProviderStateMixin {
     return Scaffold(
       appBar: kIsWeb
           ? AppBar(
-              title: const Text('Mon Petit Entretient'),
+              title: const Text('Mon Petit Entretien'),
               backgroundColor: blue,
             )
           : null,
@@ -257,7 +256,7 @@ class _Home extends State<Home> with TickerProviderStateMixin {
                       color: navy,
                     ),
                     const CommonText(
-                      text: "Gérez vos véhicules",
+                      text: "Gérer vos véhicules",
                       fontSizeText: 20,
                       fontWeight: fontLight,
                       paddingBot: 20,
@@ -339,6 +338,7 @@ class _Home extends State<Home> with TickerProviderStateMixin {
                                 text: "A-Z",
                                 onPress: _onSelectAlph,
                                 isSelect: select["A-Z"],
+                                keyTest: "alph_sort_button",
                               ),
                             ),
                             RotationTransition(
@@ -348,6 +348,7 @@ class _Home extends State<Home> with TickerProviderStateMixin {
                                 text: "KM",
                                 onPress: _onSelectKM,
                                 isSelect: select["KM"],
+                                keyTest: "km_sort_button",
                               ),
                             ),
                             RotationTransition(
@@ -357,6 +358,7 @@ class _Home extends State<Home> with TickerProviderStateMixin {
                                 text: "DATE",
                                 onPress: _onSelectDate,
                                 isSelect: select["DATE"],
+                                keyTest: "date_sort_button",
                               ),
                             ),
                           ],
@@ -408,7 +410,7 @@ class _Home extends State<Home> with TickerProviderStateMixin {
                                                 bottom: 10,
                                               ),
                                               child: Text(
-                                                "Ajoutez\n un\n véhicule",
+                                                "Ajouter\n un\n véhicule",
                                                 style: TextStyle(
                                                   color: white,
                                                   fontSize: 30,
