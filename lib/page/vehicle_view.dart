@@ -7,6 +7,7 @@ import 'package:mon_petit_entretien/components/button.dart';
 import 'package:mon_petit_entretien/config/constants.dart';
 import 'package:mon_petit_entretien/services/api/deleted_mantenance.dart';
 import 'package:mon_petit_entretien/services/api/vehicle_spe.dart';
+import 'package:mon_petit_entretien/services/api/vehicule.dart';
 import 'package:mon_petit_entretien/style/colors.dart';
 import 'package:mon_petit_entretien/style/fonts.dart';
 import 'package:provider/provider.dart';
@@ -21,14 +22,14 @@ class VehicleView extends StatefulWidget {
 }
 
 class _VehicleView extends State<VehicleView> {
-
   bool isLoaded = true;
 
   void getVehicle() async {
     final AppData data = Provider.of<AppData>(context, listen: false);
 
-    final VehiculeModel thisVehicle = await getSpeVehicle(data.token, data.thisVehicles.id);
-    
+    final VehiculeModel thisVehicle =
+        await getSpeVehicle(data.token, data.thisVehicles.id);
+
     data.updateDataThisVehicle(
       thisVehicle.name,
       thisVehicle.kilometrage,
@@ -43,7 +44,7 @@ class _VehicleView extends State<VehicleView> {
     });
   }
 
-    SnackBar _status(bool status) {
+  SnackBar _status(bool status) {
     String message = "";
 
     if (status) {
@@ -68,7 +69,6 @@ class _VehicleView extends State<VehicleView> {
   }
 
   Future<int> _callApi(String id) async {
-
     final AppData data = Provider.of<AppData>(context, listen: false);
     final bool response = await deletedMaintenences(
       data.token,
@@ -122,7 +122,7 @@ class _VehicleView extends State<VehicleView> {
                       icon: const Icon(
                         Icons.arrow_back_ios_new,
                         color: navy,
-                        ),
+                      ),
                       iconSize: 35,
                       onPressed: () => Navigator.pop(context),
                     ),
@@ -189,8 +189,9 @@ class _VehicleView extends State<VehicleView> {
                                       size: 25,
                                     ),
                                     CommonText(
-                                      text:
-                                        isLoaded ? '${Provider.of<AppData>(context, listen: false).thisVehicles.kilometrage} km' : 'Chargement',
+                                      text: isLoaded
+                                          ? '${Provider.of<AppData>(context, listen: false).thisVehicles.kilometrage} km'
+                                          : 'Chargement',
                                       fontSizeText: 17.5,
                                       fontWeight: fontLight,
                                       color: navy,
@@ -226,128 +227,135 @@ class _VehicleView extends State<VehicleView> {
                 top: MediaQuery.of(context).size.height * 0.0125,
               ),
               scrollDirection: Axis.horizontal,
-              child: 
-              isLoaded ? 
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: Provider.of<AppData>(context, listen: false)
-                    .thisVehicles
-                    .maintenances
-                    .map(
-                      (MaintenanceModel info) => 
-                        Padding(
-                          padding: const EdgeInsets.only(left: 7.5, right: 7.5),
-                          child: Container(
-                            height: kIsWeb ? 150 : 140,
-                            width: kIsWeb ? 250 : 225,
-                            decoration: BoxDecoration(
-                              color: blue,
-                              borderRadius: BorderRadius.circular(12.5),
-                            ),
-                            child: Row(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 24),
-                                  child: Container(
-                                    height: kIsWeb ? 150 : 140,
-                                    width: kIsWeb ? 50 : 40,
-                                    color: white,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(top: 8, bottom: 8),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          const Icon(
-                                            Icons.car_repair,
-                                            size: 30,
-                                          ),
-                                          RotatedBox(
-                                            quarterTurns: 3,
-                                            child: CommonText(
-                                              text: '${info.price.toString()} €',
-                                              fontSizeText: 17,
-                                              fontWeight: fontBold,
-                                              color: navy,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+              child: isLoaded
+                  ? Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: Provider.of<AppData>(context, listen: false)
+                          .thisVehicles
+                          .maintenances
+                          .map(
+                            (MaintenanceModel info) => Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 7.5, right: 7.5),
+                              child: Container(
+                                height: kIsWeb ? 150 : 140,
+                                width: kIsWeb ? 250 : 225,
+                                decoration: BoxDecoration(
+                                  color: blue,
+                                  borderRadius: BorderRadius.circular(12.5),
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                child: Row(
                                   children: <Widget>[
-                                    SizedBox(
-                                      width: kIsWeb ? 190 : 155,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          CommonText(
-                                            text: info.name.length >= 10
-                                                ? '${info.name.substring(0, 6)}...'
-                                                : info.name,
-                                            fontSizeText: 19,
-                                            fontWeight: fontBold,
-                                            paddingLeft: 16,
-                                            color: white,
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 24),
+                                      child: Container(
+                                        height: kIsWeb ? 150 : 140,
+                                        width: kIsWeb ? 50 : 40,
+                                        color: white,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                            top: 8,
+                                            bottom: 8,
                                           ),
-                                          IconButton(
-                                            alignment: Alignment.centerRight,
-                                            padding: EdgeInsets.zero,
-                                            onPressed: () => _callApi(info.id)
-                                            .then((_) {
-                                              setState(() {
-                                                isLoaded = false;
-                                              });
-                                              getVehicle();
-                                            }),
-                                            icon: const Icon(
-                                              Icons.delete,
-                                              size: 27.5,
-                                              color: white,
-                                            ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: <Widget>[
+                                              const Icon(
+                                                Icons.car_repair,
+                                                size: 30,
+                                              ),
+                                              RotatedBox(
+                                                quarterTurns: 3,
+                                                child: CommonText(
+                                                  text:
+                                                      '${info.price.toString()} €',
+                                                  fontSizeText: 17,
+                                                  fontWeight: fontBold,
+                                                  color: navy,
+                                                ),
+                                              )
+                                            ],
                                           ),
-                                        ],
+                                        ),
                                       ),
                                     ),
-                                    CommonText(
-                                      text: info.date.substring(0, 10),
-                                      fontSizeText: 17.5,
-                                      fontWeight: fontLight,
-                                      paddingTop: 10,
-                                      paddingLeft: 16,
-                                      color: white,
-                                    ),
-                                    CommonText(
-                                      text: '${info.kilometrage.toString()} km',
-                                      fontSizeText: 17.5,
-                                      fontWeight: fontLight,
-                                      paddingLeft: 16,
-                                      color: white,
-                                    ),
-                                    CommonText(
-                                      text: info.center.length >= 10
-                                          ? '${info.center.substring(0, 6)}...'
-                                          : info.center,
-                                      fontSizeText: 15,
-                                      fontWeight: fontLight,
-                                      paddingTop: 10,
-                                      paddingLeft: 16,
-                                      paddingBot: 5,
-                                      color: white,
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        SizedBox(
+                                          width: kIsWeb ? 190 : 155,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: <Widget>[
+                                              CommonText(
+                                                text: info.name.length >= 10
+                                                    ? '${info.name.substring(0, 6)}...'
+                                                    : info.name,
+                                                fontSizeText: 19,
+                                                fontWeight: fontBold,
+                                                paddingLeft: 16,
+                                                color: white,
+                                              ),
+                                              IconButton(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                padding: EdgeInsets.zero,
+                                                onPressed: () =>
+                                                    _callApi(info.id).then((_) {
+                                                  setState(() {
+                                                    isLoaded = false;
+                                                  });
+                                                  getVehicle();
+                                                }),
+                                                icon: const Icon(
+                                                  Icons.delete,
+                                                  size: 27.5,
+                                                  color: white,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        CommonText(
+                                          text: info.date.substring(0, 10),
+                                          fontSizeText: 17.5,
+                                          fontWeight: fontLight,
+                                          paddingTop: 10,
+                                          paddingLeft: 16,
+                                          color: white,
+                                        ),
+                                        CommonText(
+                                          text:
+                                              '${info.kilometrage.toString()} km',
+                                          fontSizeText: 17.5,
+                                          fontWeight: fontLight,
+                                          paddingLeft: 16,
+                                          color: white,
+                                        ),
+                                        CommonText(
+                                          text: info.center.length >= 10
+                                              ? '${info.center.substring(0, 6)}...'
+                                              : info.center,
+                                          fontSizeText: 15,
+                                          fontWeight: fontLight,
+                                          paddingTop: 10,
+                                          paddingLeft: 16,
+                                          paddingBot: 5,
+                                          color: white,
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
-                      )
-                    .toList(),
-              )
-              : 
-              Container(),
+                          )
+                          .toList(),
+                    )
+                  : Container(),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 40),
@@ -356,13 +364,12 @@ class _VehicleView extends State<VehicleView> {
                 child: Button(
                   text: "Ajouter un entretien",
                   onPress: () =>
-                      Navigator.pushNamed(context, '/addMaintenance')
-                      .then((_) {
-                        setState(() {
-                          isLoaded = false;
-                        });
-                        getVehicle();
-                      }),
+                      Navigator.pushNamed(context, '/addMaintenance').then((_) {
+                    setState(() {
+                      isLoaded = false;
+                    });
+                    getVehicle();
+                  }),
                   keyTest: "add_maintenance_button",
                 ),
               ),
@@ -373,13 +380,13 @@ class _VehicleView extends State<VehicleView> {
                 width: kIsWeb ? 500 : 300,
                 child: Button(
                   text: "Modifier les kilomètres de la voiture",
-                  onPress: () => Navigator.pushNamed(context, '/update_km')
-                      .then((_) {
-                        setState(() {
-                          isLoaded = false;
-                        });
-                        getVehicle();
-                      }),
+                  onPress: () =>
+                      Navigator.pushNamed(context, '/update_km').then((_) {
+                    setState(() {
+                      isLoaded = false;
+                    });
+                    getVehicle();
+                  }),
                   keyTest: "add_maintenance_button",
                 ),
               ),

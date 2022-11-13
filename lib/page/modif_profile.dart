@@ -138,7 +138,6 @@ class _ModifProfilePage extends State<ModifProfilePage> {
           context,
           listen: false,
         );
-        print("le chemin est ${data.user.picturePathModif}");
         if (data.user.picturePathModif != "") {
           setState(() {
             isThereAnImage = true;
