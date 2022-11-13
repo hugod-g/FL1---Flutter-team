@@ -144,56 +144,30 @@ class _ProfilePage extends State<ProfilePage> {
                           color: navy,
                         ),
                       ),
-                      if (kIsWeb)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 17.5),
-                          child: SizedBox(
-                            height: 250,
-                            width: 250,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(150),
-                              child: data.user.picturePathAPI == ""
-                                  ? Image.asset(
-                                      'assets/avatar.jpg',
-                                      fit: BoxFit.fill,
-                                    )
-                                  : isLoaded
-                                      ? Image.network(
-                                          "$apiUrl/${data.user.picturePathAPI}",
-                                          fit: BoxFit.fill,
-                                        )
-                                      : Image.asset(
-                                          'assets/avatar.jpg',
-                                          fit: BoxFit.fill,
-                                        ),
-                            ),
-                          ),
-                        )
-                      else
-                        Padding(
-                          padding: const EdgeInsets.only(top: 17.5),
-                          child: SizedBox(
-                            height: 125,
-                            width: 125,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(75),
-                              child: data.user.picturePathAPI == ""
-                                  ? Image.asset(
-                                      'assets/avatar.jpg',
-                                      fit: BoxFit.fill,
-                                    )
-                                  : isLoaded
-                                      ? Image.network(
-                                          "$apiUrl/${data.user.picturePathAPI}",
-                                          fit: BoxFit.fill,
-                                        )
-                                      : Image.asset(
-                                          'assets/avatar.jpg',
-                                          fit: BoxFit.fill,
-                                        ),
-                            ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 17.5),
+                        child: SizedBox(
+                          height: kIsWeb ? 250 : 125,
+                          width: kIsWeb ? 250 : 125,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(kIsWeb ? 150 : 75),
+                            child: data.user.picturePathAPI == ""
+                                ? Image.asset(
+                                    'assets/avatar.jpg',
+                                    fit: BoxFit.fill,
+                                  )
+                                : isLoaded
+                                    ? Image.network(
+                                        "$apiUrl/${data.user.picturePathAPI}",
+                                        fit: BoxFit.fill,
+                                      )
+                                    : Image.asset(
+                                        'assets/avatar.jpg',
+                                        fit: BoxFit.fill,
+                                      ),
                           ),
                         ),
+                      ),
                       CommonText(
                         text:
                             "${Provider.of<AppData>(context, listen: false).user.firstName} ${Provider.of<AppData>(context, listen: false).user.lastName}",
@@ -244,12 +218,12 @@ class _ProfilePage extends State<ProfilePage> {
                           ],
                         ),
                       ),
-                      Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(top: 25),
-                            child: SizedBox(
-                              width: kIsWeb ? 250 : 300,
+                      Container(
+                        constraints: const BoxConstraints(maxWidth: 800),
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(top: 25),
                               child: Button(
                                 text: "Modifier le profil",
                                 onPress: () => Navigator.pushNamed(
@@ -266,11 +240,8 @@ class _ProfilePage extends State<ProfilePage> {
                                 keyTest: "go_to_modif_profile",
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 25),
-                            child: SizedBox(
-                              width: kIsWeb ? 250 : 300,
+                            Padding(
+                              padding: const EdgeInsets.only(top: 25),
                               child: Button(
                                 text: "Déconnexion",
                                 onPress: _onLogout,
@@ -278,11 +249,8 @@ class _ProfilePage extends State<ProfilePage> {
                                 keyTest: "go_to_disconnect",
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 25),
-                            child: SizedBox(
-                              width: kIsWeb ? 250 : 300,
+                            Padding(
+                              padding: const EdgeInsets.only(top: 25),
                               child: Button(
                                 text: "Supprimer mon compte",
                                 onPress: _onDeleteAccount,
@@ -291,8 +259,8 @@ class _ProfilePage extends State<ProfilePage> {
                                 keyTest: "go_to_delete_account",
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),

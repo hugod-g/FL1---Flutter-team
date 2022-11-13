@@ -7,7 +7,6 @@ import 'package:mon_petit_entretien/components/button.dart';
 import 'package:mon_petit_entretien/config/constants.dart';
 import 'package:mon_petit_entretien/services/api/deleted_mantenance.dart';
 import 'package:mon_petit_entretien/services/api/vehicle_spe.dart';
-import 'package:mon_petit_entretien/services/api/vehicule.dart';
 import 'package:mon_petit_entretien/style/colors.dart';
 import 'package:mon_petit_entretien/style/fonts.dart';
 import 'package:provider/provider.dart';
@@ -285,7 +284,7 @@ class _VehicleView extends State<VehicleView> {
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
                                         SizedBox(
-                                          width: kIsWeb ? 190 : 155,
+                                          width: kIsWeb ? 175 : 155,
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -357,52 +356,53 @@ class _VehicleView extends State<VehicleView> {
                     )
                   : Container(),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 40),
-              child: SizedBox(
-                width: kIsWeb ? 500 : 300,
-                child: Button(
-                  text: "Ajouter un entretien",
-                  onPress: () =>
-                      Navigator.pushNamed(context, '/addMaintenance').then((_) {
-                    setState(() {
-                      isLoaded = false;
-                    });
-                    getVehicle();
-                  }),
-                  keyTest: "add_maintenance_button",
+            Container(
+              constraints: const BoxConstraints(maxWidth: 800),
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  children: <Widget> [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 40),
+                      child: Button(
+                        text: "Ajouter un entretien",
+                        onPress: () =>
+                            Navigator.pushNamed(context, '/addMaintenance').then((_) {
+                          setState(() {
+                            isLoaded = false;
+                          });
+                          getVehicle();
+                        }),
+                        keyTest: "add_maintenance_button",
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30, bottom: 10),
+                      child: Button(
+                        text: "Modifier les kilomètres de la voiture",
+                        onPress: () =>
+                            Navigator.pushNamed(context, '/update_km').then((_) {
+                          setState(() {
+                            isLoaded = false;
+                          });
+                          getVehicle();
+                        }),
+                        keyTest: "add_maintenance_button",
+                      ),
+                    ),
+                    if (kIsWeb)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30),
+                        child: Button(
+                          text: "Retour",
+                          onPress: () => Navigator.pop(context),
+                          keyTest: "vue_vehicule_back_button",
+                        ),
+                      ),
+                  ],
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 30, bottom: 10),
-              child: SizedBox(
-                width: kIsWeb ? 500 : 300,
-                child: Button(
-                  text: "Modifier les kilomètres de la voiture",
-                  onPress: () =>
-                      Navigator.pushNamed(context, '/update_km').then((_) {
-                    setState(() {
-                      isLoaded = false;
-                    });
-                    getVehicle();
-                  }),
-                  keyTest: "add_maintenance_button",
-                ),
-              ),
-            ),
-            if (kIsWeb)
-              Padding(
-                padding: const EdgeInsets.only(top: 30),
-                child: SizedBox(
-                  width: 500,
-                  child: Button(
-                    text: "Retour",
-                    onPress: () => Navigator.pop(context),
-                    keyTest: "vue_vehicule_back_button",
-                  ),
-                ),
-              ),
           ],
         ),
       ),
