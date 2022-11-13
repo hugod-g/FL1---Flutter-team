@@ -103,11 +103,11 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: lightBlue,
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: ListView(
-          children: <Widget>[
-            Column(
+      body: ListView(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Center(
@@ -158,155 +158,134 @@ class _AddMaintenancePage extends State<AddMaintenancePage> {
                           color: navy,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: SizedBox(
-                          width: kIsWeb ? 500 : 300,
-                          child: TextInput(
-                            value: mileage,
-                            placeholder: "Kilométrage (en km)",
-                            onChangeText: _onMileageChange,
-                            keyTest: "maintenance_input_mile",
-                            textinput: TextInputType.number,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: Container(
-                          height: 54,
-                          width: kIsWeb ? 500 : 300,
-                          decoration: const BoxDecoration(
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(blurRadius: 16, color: lightGray)
-                            ],
-                            borderRadius: BorderRadius.all(Radius.circular(16)),
-                          ),
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              color: white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16)),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                left: 16,
-                                right: 16,
-                                top: 2,
+                      Container(
+                        constraints: const BoxConstraints(maxWidth: 800),
+                        child: Column(
+                          children: <Widget> [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 40),
+                              child: TextInput(
+                                value: mileage,
+                                placeholder: "Kilométrage (en km)",
+                                onChangeText: _onMileageChange,
+                                keyTest: "maintenance_input_mile",
+                                textinput: TextInputType.number,
                               ),
-                              child: Center(
-                                child: TextField(
-                                  controller: dateinput,
-                                  decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                    iconColor: navy,
-                                    icon: Icon(Icons.calendar_today),
-                                    labelText: "Date de l'entretien",
-                                    labelStyle: TextStyle(color: navy),
-                                    hintStyle: TextStyle(
-                                      color: lightGray,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 40),
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  color: white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 16,
+                                    right: 16,
+                                    top: 2,
+                                  ),
+                                  child: Center(
+                                    child: TextField(
+                                      controller: dateinput,
+                                      decoration: const InputDecoration(
+                                        border: InputBorder.none,
+                                        iconColor: navy,
+                                        icon: Icon(Icons.calendar_today),
+                                        labelText: "Date de l'entretien",
+                                        labelStyle: TextStyle(color: navy),
+                                        hintStyle: TextStyle(
+                                          color: lightGray,
+                                        ),
+                                      ),
+                                      style: const TextStyle(
+                                        fontFamily: appFont,
+                                        fontWeight: fontRegular,
+                                      ),
+                                      readOnly: true,
+                                      onTap: () async {
+                                        final DateTime? pickedDate =
+                                            await showDatePicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                          firstDate: DateTime(
+                                            2000,
+                                          ),
+                                          lastDate: DateTime(2101),
+                                        );
+
+                                        if (pickedDate != null) {
+                                          final String formattedDate =
+                                              DateFormat('yyyy-MM-dd')
+                                                  .format(pickedDate);
+
+                                          setState(() {
+                                            dateinput.text = formattedDate;
+                                            _onDateChange(dateinput.text);
+                                          });
+                                        } else {}
+                                      },
                                     ),
                                   ),
-                                  style: const TextStyle(
-                                    fontFamily: appFont,
-                                    fontWeight: fontRegular,
-                                  ),
-                                  readOnly: true,
-                                  onTap: () async {
-                                    final DateTime? pickedDate =
-                                        await showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime(
-                                        2000,
-                                      ),
-                                      lastDate: DateTime(2101),
-                                    );
-
-                                    if (pickedDate != null) {
-                                      final String formattedDate =
-                                          DateFormat('yyyy-MM-dd')
-                                              .format(pickedDate);
-
-                                      setState(() {
-                                        dateinput.text = formattedDate;
-                                        _onDateChange(dateinput.text);
-                                      });
-                                    } else {}
-                                  },
                                 ),
                               ),
                             ),
-                          ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 40),
+                              child: TextInput(
+                                value: price,
+                                placeholder: "Prix",
+                                onChangeText: _onPriceChange,
+                                keyTest: "add_maintenance_input_price",
+                                textinput: TextInputType.number,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 40),
+                              child: TextInput(
+                                value: name,
+                                placeholder: "Nom de l'entretien (ex: Courroie)",
+                                onChangeText: _onNameChange,
+                                keyTest: "add_maintenance_input_name",
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 40),
+                              child: TextInput(
+                                value: center,
+                                placeholder: "Centre",
+                                onChangeText: _onCenterChange,
+                                keyTest: "add_maintenance_input_center",
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 40),
+                              child: Button(
+                                text: "Ajouter l'entretien",
+                                onPress: _callApi,
+                                keyTest: "add_maintenance_save_button",
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 25, bottom: 25),
+                              child: Button(
+                                text: "Retour",
+                                onPress: () => Navigator.pop(context),
+                                secondary: true,
+                                keyTest: "add_maintenance_back_button",
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: SizedBox(
-                          width: kIsWeb ? 500 : 300,
-                          child: TextInput(
-                            value: price,
-                            placeholder: "Prix",
-                            onChangeText: _onPriceChange,
-                            keyTest: "add_maintenance_input_price",
-                            textinput: TextInputType.number,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: SizedBox(
-                          width: kIsWeb ? 500 : 300,
-                          child: TextInput(
-                            value: name,
-                            placeholder: "Nom de l'entretien (ex: Courroie)",
-                            onChangeText: _onNameChange,
-                            keyTest: "add_maintenance_input_name",
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: SizedBox(
-                          width: kIsWeb ? 500 : 300,
-                          child: TextInput(
-                            value: center,
-                            placeholder: "Centre",
-                            onChangeText: _onCenterChange,
-                            keyTest: "add_maintenance_input_center",
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: SizedBox(
-                          width: kIsWeb ? 500 : 300,
-                          child: Button(
-                            text: "Ajouter l'entretien",
-                            onPress: _callApi,
-                            keyTest: "add_maintenance_save_button",
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 25, bottom: 25),
-                        child: SizedBox(
-                          width: kIsWeb ? 500 : 300,
-                          child: Button(
-                            text: "Retour",
-                            onPress: () => Navigator.pop(context),
-                            secondary: true,
-                            keyTest: "add_maintenance_back_button",
-                          ),
-                        ),
-                      ),
+                      )
                     ],
                   ),
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

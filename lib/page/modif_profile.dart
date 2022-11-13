@@ -138,7 +138,6 @@ class _ModifProfilePage extends State<ModifProfilePage> {
           context,
           listen: false,
         );
-        print("le chemin est ${data.user.picturePathModif}");
         if (data.user.picturePathModif != "") {
           setState(() {
             isThereAnImage = true;
@@ -153,11 +152,11 @@ class _ModifProfilePage extends State<ModifProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: lightBlue,
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: ListView(
-          children: <Widget>[
-            Column(
+      body: ListView(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Center(
@@ -378,51 +377,46 @@ class _ModifProfilePage extends State<ModifProfilePage> {
                                 ),
                               ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 50),
-                        child: SizedBox(
-                          width: kIsWeb ? 500 : 300,
-                          child: TextInput(
-                            value: firstname,
-                            placeholder: firstname,
-                            onChangeText: _onFirstNameChange,
-                            keyTest: "modif_profile_input_first_name",
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: SizedBox(
-                          width: kIsWeb ? 500 : 300,
-                          child: TextInput(
-                            value: lastname,
-                            placeholder: lastname,
-                            onChangeText: _onLastNameChange,
-                            keyTest: "modif_profile_input_last_name",
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 50),
-                        child: SizedBox(
-                          width: kIsWeb ? 500 : 300,
-                          child: Button(
-                            text: "Sauvegarder",
-                            onPress: _callApi,
-                            keyTest: "modif_profile_save_button",
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: SizedBox(
-                          width: kIsWeb ? 500 : 300,
-                          child: Button(
-                            text: "Retour",
-                            onPress: () => Navigator.pop(context),
-                            secondary: true,
-                            keyTest: "modif_profile_come_back_button",
-                          ),
+                      Container(
+                        constraints: const BoxConstraints(maxWidth: 800),
+                        child: Column(
+                          children: <Widget> [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 50),
+                              child: TextInput(
+                                value: firstname,
+                                placeholder: firstname,
+                                onChangeText: _onFirstNameChange,
+                                keyTest: "modif_profile_input_first_name",
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 40),
+                              child: TextInput(
+                                value: lastname,
+                                placeholder: lastname,
+                                onChangeText: _onLastNameChange,
+                                keyTest: "modif_profile_input_last_name",
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 50),
+                              child: Button(
+                                text: "Sauvegarder",
+                                onPress: _callApi,
+                                keyTest: "modif_profile_save_button",
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 40),
+                              child: Button(
+                                text: "Retour",
+                                onPress: () => Navigator.pop(context),
+                                secondary: true,
+                                keyTest: "modif_profile_come_back_button",
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -430,8 +424,8 @@ class _ModifProfilePage extends State<ModifProfilePage> {
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

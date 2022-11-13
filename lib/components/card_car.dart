@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/class/app_class.dart';
 import 'package:mon_petit_entretien/class/maintenance_class.dart';
@@ -17,12 +19,14 @@ class CardCar extends StatefulWidget {
     required this.date,
     required this.id,
     required this.maintenance,
+    required this.onGoBack,
   });
 
   final String name;
   final String mileage;
   final String nbMaintenance;
   final String pathImage;
+  final FutureOr<dynamic> Function(dynamic value) onGoBack;
   final bool isLoaded;
   final String date;
   final String id;
@@ -48,7 +52,7 @@ class CardCarState extends State<CardCar> {
             widget.id,
             widget.maintenance,
           );
-          Navigator.pushNamed(context, '/vehicle_view');
+          Navigator.pushNamed(context, '/vehicle_view').then(widget.onGoBack);
         },
         child: Ink(
           child: Stack(
