@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mon_petit_entretien/class/app_class.dart';
@@ -37,6 +39,10 @@ class _Home extends State<Home> with TickerProviderStateMixin {
   bool isSearching = false;
   final List<VehiculeModel> _searchVehicules =
       List<VehiculeModel>.empty(growable: true);
+
+  FutureOr<dynamic> onGoBack(dynamic value) {
+    getEveryVehicules();
+  }
 
   void _onSearchChange(String newValue) {
     setState(() {
@@ -462,6 +468,7 @@ class _Home extends State<Home> with TickerProviderStateMixin {
                                   date: vehicule.date,
                                   id: vehicule.id,
                                   maintenance: vehicule.maintenances,
+                                  onGoBack: onGoBack,
                                 )
                             else
                               for (VehiculeModel vehicule
@@ -479,6 +486,7 @@ class _Home extends State<Home> with TickerProviderStateMixin {
                                   date: vehicule.date,
                                   id: vehicule.id,
                                   maintenance: vehicule.maintenances,
+                                  onGoBack: onGoBack,
                                 ),
                           ],
                         ),
